@@ -6,6 +6,7 @@ import ResultCard from '@/components/ResultCard';
 import Button from '@/components/Button';
 import ShareButton from '@/components/ShareButton';
 import { calculateResult, calculateRelativeScores } from '@/lib/calculate';
+import DetailModal from '@/components/DetailModal';
 
 interface ResultPageClientProps {
   type: string;
@@ -13,6 +14,8 @@ interface ResultPageClientProps {
 
 export default function ResultPageClient({ type }: ResultPageClientProps) {
   const [data, setData] = useState(results[type]);
+  const [showDetailModal, setShowDetailModal] = useState(false);
+  const [selectedSection, setSelectedSection] = useState<string | null>(null);
   
   useEffect(() => {
     if (!results[type]) return;
@@ -59,6 +62,11 @@ export default function ResultPageClient({ type }: ResultPageClientProps) {
 
   const otherType = getOtherTypeResult();
 
+  const handleSectionClick = (section: string) => {
+    setSelectedSection(section);
+    setShowDetailModal(true);
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 py-12">
       <div className="max-w-4xl mx-auto px-4">
@@ -75,118 +83,243 @@ export default function ResultPageClient({ type }: ResultPageClientProps) {
           category={data.category}
         />
 
-        {/* 경제 유형 상세 정보 */}
+        {/* 정치 성향 자세히보기 버튼 - 설명 아래에 위치 */}
+        {data.category === 'political' && (
+          <div className="mt-8 text-center">
+            <Button href="/political-detail" variant="primary">
+              정치 성향 자세히 보기 →
+            </Button>
+          </div>
+        )}
+
+        {/* 경제 유형 상세 정보 - 모바일에서는 클릭 가능한 카드로 표시 */}
         {data.category === 'economic' && (
-          <div className="mt-8 space-y-6">
-            {data.nickname && (
-              <div className="bg-white p-6 rounded-xl shadow-md">
-                <h3 className="text-xl font-semibold mb-4">별칭</h3>
-                <p className="text-lg font-medium text-accent">{data.nickname}</p>
-              </div>
-            )}
-            
-            {data.keywords && (
-              <div className="bg-white p-6 rounded-xl shadow-md">
-                <h3 className="text-xl font-semibold mb-4">키워드</h3>
-                <div className="flex flex-wrap gap-2">
-                  {data.keywords.map((keyword, i) => (
-                    <span key={i} className="px-3 py-1 bg-accent/10 text-accent rounded-full text-sm">
-                      {keyword}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            )}
-            
-            {data.spectrum_analysis && (
-              <div className="bg-white p-6 rounded-xl shadow-md">
-                <h3 className="text-xl font-semibold mb-4">스펙트럼 분석</h3>
-                <p className="text-gray-700 whitespace-pre-line">{data.spectrum_analysis}</p>
-              </div>
-            )}
-            
-            {data.detailed_analysis && (
-              <div className="bg-white p-6 rounded-xl shadow-md">
-                <h3 className="text-xl font-semibold mb-4">상세 분석</h3>
-                <p className="text-gray-700 whitespace-pre-line">{data.detailed_analysis}</p>
-              </div>
-            )}
-            
-            {data.coaching && (
-              <div className="bg-white p-6 rounded-xl shadow-md">
-                <h3 className="text-xl font-semibold mb-4">코칭</h3>
-                <p className="text-gray-700 whitespace-pre-line">{data.coaching}</p>
-              </div>
-            )}
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <>
+            {/* 모바일용 클릭 가능한 카드들 */}
+            <div className="md:hidden mt-8 grid grid-cols-2 gap-3">
+              {data.nickname && (
+                <button
+                  onClick={() => handleSectionClick('nickname')}
+                  className="bg-white p-4 rounded-xl shadow-md text-left hover:shadow-lg transition-shadow"
+                >
+                  <h3 className="text-base font-semibold mb-1">별칭</h3>
+                  <p className="text-sm text-accent line-clamp-2">{data.nickname}</p>
+                </button>
+              )}
+              
+              {data.keywords && (
+                <button
+                  onClick={() => handleSectionClick('keywords')}
+                  className="bg-white p-4 rounded-xl shadow-md text-left hover:shadow-lg transition-shadow"
+                >
+                  <h3 className="text-base font-semibold mb-1">키워드</h3>
+                  <p className="text-sm text-gray-600">터치하여 확인</p>
+                </button>
+              )}
+              
+              {data.spectrum_analysis && (
+                <button
+                  onClick={() => handleSectionClick('spectrum_analysis')}
+                  className="bg-white p-4 rounded-xl shadow-md text-left hover:shadow-lg transition-shadow"
+                >
+                  <h3 className="text-base font-semibold mb-1">스펙트럼 분석</h3>
+                  <p className="text-sm text-gray-600">터치하여 확인</p>
+                </button>
+              )}
+              
+              {data.detailed_analysis && (
+                <button
+                  onClick={() => handleSectionClick('detailed_analysis')}
+                  className="bg-white p-4 rounded-xl shadow-md text-left hover:shadow-lg transition-shadow"
+                >
+                  <h3 className="text-base font-semibold mb-1">상세 분석</h3>
+                  <p className="text-sm text-gray-600">터치하여 확인</p>
+                </button>
+              )}
+              
+              {data.coaching && (
+                <button
+                  onClick={() => handleSectionClick('coaching')}
+                  className="bg-white p-4 rounded-xl shadow-md text-left hover:shadow-lg transition-shadow"
+                >
+                  <h3 className="text-base font-semibold mb-1">코칭</h3>
+                  <p className="text-sm text-gray-600">터치하여 확인</p>
+                </button>
+              )}
+              
               {data.synergy_partner && (
-                <div className="bg-white p-6 rounded-xl shadow-md">
-                  <h3 className="text-xl font-semibold mb-4 text-green-600">시너지 파트너</h3>
-                  <p className="text-gray-700">{data.synergy_partner}</p>
-                </div>
+                <button
+                  onClick={() => handleSectionClick('synergy_partner')}
+                  className="bg-white p-4 rounded-xl shadow-md text-left hover:shadow-lg transition-shadow"
+                >
+                  <h3 className="text-base font-semibold mb-1 text-green-600">시너지 파트너</h3>
+                  <p className="text-sm text-gray-600 line-clamp-2">{data.synergy_partner}</p>
+                </button>
               )}
               
               {data.risk_partner && (
-                <div className="bg-white p-6 rounded-xl shadow-md">
-                  <h3 className="text-xl font-semibold mb-4 text-red-600">리스크 파트너</h3>
-                  <p className="text-gray-700">{data.risk_partner}</p>
-                </div>
+                <button
+                  onClick={() => handleSectionClick('risk_partner')}
+                  className="bg-white p-4 rounded-xl shadow-md text-left hover:shadow-lg transition-shadow"
+                >
+                  <h3 className="text-base font-semibold mb-1 text-red-600">리스크 파트너</h3>
+                  <p className="text-sm text-gray-600 line-clamp-2">{data.risk_partner}</p>
+                </button>
               )}
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              
               {data.success_formula && (
-                <div className="bg-white p-6 rounded-xl shadow-md">
-                  <h3 className="text-xl font-semibold mb-4 text-blue-600">성공 공식</h3>
-                  <p className="text-gray-700">{data.success_formula}</p>
-                </div>
+                <button
+                  onClick={() => handleSectionClick('success_formula')}
+                  className="bg-white p-4 rounded-xl shadow-md text-left hover:shadow-lg transition-shadow"
+                >
+                  <h3 className="text-base font-semibold mb-1 text-blue-600">성공 공식</h3>
+                  <p className="text-sm text-gray-600">터치하여 확인</p>
+                </button>
               )}
               
               {data.failure_formula && (
+                <button
+                  onClick={() => handleSectionClick('failure_formula')}
+                  className="bg-white p-4 rounded-xl shadow-md text-left hover:shadow-lg transition-shadow"
+                >
+                  <h3 className="text-base font-semibold mb-1 text-orange-600">실패 공식</h3>
+                  <p className="text-sm text-gray-600">터치하여 확인</p>
+                </button>
+              )}
+              
+              {data.benchmarking && (
+                <button
+                  onClick={() => handleSectionClick('benchmarking')}
+                  className="bg-white p-4 rounded-xl shadow-md text-left hover:shadow-lg transition-shadow"
+                >
+                  <h3 className="text-base font-semibold mb-1">벤치마킹</h3>
+                  <p className="text-sm text-gray-600">터치하여 확인</p>
+                </button>
+              )}
+              
+              {data.career_navigation && (
+                <button
+                  onClick={() => handleSectionClick('career_navigation')}
+                  className="bg-white p-4 rounded-xl shadow-md text-left hover:shadow-lg transition-shadow col-span-2"
+                >
+                  <h3 className="text-base font-semibold mb-1">커리어 내비게이션</h3>
+                  <p className="text-sm text-gray-600">터치하여 확인</p>
+                </button>
+              )}
+            </div>
+
+            {/* 데스크톱용 기존 레이아웃 */}
+            <div className="hidden md:block mt-8 space-y-6">
+              {data.nickname && (
                 <div className="bg-white p-6 rounded-xl shadow-md">
-                  <h3 className="text-xl font-semibold mb-4 text-orange-600">실패 공식</h3>
-                  <p className="text-gray-700">{data.failure_formula}</p>
+                  <h3 className="text-xl font-semibold mb-4">별칭</h3>
+                  <p className="text-lg font-medium text-accent">{data.nickname}</p>
+                </div>
+              )}
+              
+              {data.keywords && (
+                <div className="bg-white p-6 rounded-xl shadow-md">
+                  <h3 className="text-xl font-semibold mb-4">키워드</h3>
+                  <div className="flex flex-wrap gap-2">
+                    {data.keywords.map((keyword, i) => (
+                      <span key={i} className="px-3 py-1 bg-accent/10 text-accent rounded-full text-sm">
+                        {keyword}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+              
+              {data.spectrum_analysis && (
+                <div className="bg-white p-6 rounded-xl shadow-md">
+                  <h3 className="text-xl font-semibold mb-4">스펙트럼 분석</h3>
+                  <p className="text-gray-700 whitespace-pre-line">{data.spectrum_analysis}</p>
+                </div>
+              )}
+              
+              {data.detailed_analysis && (
+                <div className="bg-white p-6 rounded-xl shadow-md">
+                  <h3 className="text-xl font-semibold mb-4">상세 분석</h3>
+                  <p className="text-gray-700 whitespace-pre-line">{data.detailed_analysis}</p>
+                </div>
+              )}
+              
+              {data.coaching && (
+                <div className="bg-white p-6 rounded-xl shadow-md">
+                  <h3 className="text-xl font-semibold mb-4">코칭</h3>
+                  <p className="text-gray-700 whitespace-pre-line">{data.coaching}</p>
+                </div>
+              )}
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {data.synergy_partner && (
+                  <div className="bg-white p-6 rounded-xl shadow-md">
+                    <h3 className="text-xl font-semibold mb-4 text-green-600">시너지 파트너</h3>
+                    <p className="text-gray-700">{data.synergy_partner}</p>
+                  </div>
+                )}
+                
+                {data.risk_partner && (
+                  <div className="bg-white p-6 rounded-xl shadow-md">
+                    <h3 className="text-xl font-semibold mb-4 text-red-600">리스크 파트너</h3>
+                    <p className="text-gray-700">{data.risk_partner}</p>
+                  </div>
+                )}
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {data.success_formula && (
+                  <div className="bg-white p-6 rounded-xl shadow-md">
+                    <h3 className="text-xl font-semibold mb-4 text-blue-600">성공 공식</h3>
+                    <p className="text-gray-700">{data.success_formula}</p>
+                  </div>
+                )}
+                
+                {data.failure_formula && (
+                  <div className="bg-white p-6 rounded-xl shadow-md">
+                    <h3 className="text-xl font-semibold mb-4 text-orange-600">실패 공식</h3>
+                    <p className="text-gray-700">{data.failure_formula}</p>
+                  </div>
+                )}
+              </div>
+              
+              {data.benchmarking && (
+                <div className="bg-white p-6 rounded-xl shadow-md">
+                  <h3 className="text-xl font-semibold mb-4">벤치마킹</h3>
+                  <p className="text-gray-700 whitespace-pre-line">{data.benchmarking}</p>
+                </div>
+              )}
+              
+              {data.career_navigation && (
+                <div className="bg-white p-6 rounded-xl shadow-md">
+                  <h3 className="text-xl font-semibold mb-4">커리어 내비게이션</h3>
+                  <p className="text-gray-700 whitespace-pre-line">{data.career_navigation}</p>
                 </div>
               )}
             </div>
-            
-            {data.benchmarking && (
-              <div className="bg-white p-6 rounded-xl shadow-md">
-                <h3 className="text-xl font-semibold mb-4">벤치마킹</h3>
-                <p className="text-gray-700 whitespace-pre-line">{data.benchmarking}</p>
-              </div>
-            )}
-            
-            {data.career_navigation && (
-              <div className="bg-white p-6 rounded-xl shadow-md">
-                <h3 className="text-xl font-semibold mb-4">커리어 내비게이션</h3>
-                <p className="text-gray-700 whitespace-pre-line">{data.career_navigation}</p>
-              </div>
-            )}
-          </div>
+          </>
         )}
         
-        {/* 강점과 약점 */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
-          <div className="bg-white p-6 rounded-xl shadow-md">
-            <h3 className="text-xl font-semibold mb-4 text-green-600">강점</h3>
-            <ul className="space-y-2">
+        {/* 강점과 약점 - 모바일에서도 2열로 표시 */}
+        <div className="grid grid-cols-2 gap-4 mt-8">
+          <div className="bg-white p-4 md:p-6 rounded-xl shadow-md">
+            <h3 className="text-base md:text-xl font-semibold mb-2 md:mb-4 text-green-600">강점</h3>
+            <ul className="space-y-1 md:space-y-2">
               {data.strengths.map((strength, i) => (
-                <li key={i} className="flex items-start">
-                  <span className="text-green-600 mr-2">•</span>
+                <li key={i} className="flex items-start text-sm md:text-base">
+                  <span className="text-green-600 mr-1 md:mr-2">•</span>
                   <span>{strength}</span>
                 </li>
               ))}
             </ul>
           </div>
           
-          <div className="bg-white p-6 rounded-xl shadow-md">
-            <h3 className="text-xl font-semibold mb-4 text-red-600">약점</h3>
-            <ul className="space-y-2">
+          <div className="bg-white p-4 md:p-6 rounded-xl shadow-md">
+            <h3 className="text-base md:text-xl font-semibold mb-2 md:mb-4 text-red-600">약점</h3>
+            <ul className="space-y-1 md:space-y-2">
               {data.weaknesses.map((weakness, i) => (
-                <li key={i} className="flex items-start">
-                  <span className="text-red-600 mr-2">•</span>
+                <li key={i} className="flex items-start text-sm md:text-base">
+                  <span className="text-red-600 mr-1 md:mr-2">•</span>
                   <span>{weakness}</span>
                 </li>
               ))}
@@ -213,6 +346,32 @@ export default function ResultPageClient({ type }: ResultPageClientProps) {
           <ShareButton shareUrl={shareUrl} shareText={shareText} />
         </div>
       </div>
+      
+      {/* 모바일 상세 정보 모달 */}
+      {showDetailModal && selectedSection && data.category === 'economic' && (
+        <DetailModal
+          isOpen={showDetailModal}
+          onClose={() => setShowDetailModal(false)}
+          title={{
+            nickname: '별칭',
+            keywords: '키워드',
+            spectrum_analysis: '스펙트럼 분석',
+            detailed_analysis: '상세 분석',
+            coaching: '코칭',
+            synergy_partner: '시너지 파트너',
+            risk_partner: '리스크 파트너',
+            success_formula: '성공 공식',
+            failure_formula: '실패 공식',
+            benchmarking: '벤치마킹',
+            career_navigation: '커리어 내비게이션'
+          }[selectedSection] || ''}
+          content={
+            selectedSection === 'keywords' && data.keywords
+              ? data.keywords.join(', ')
+              : (data as any)[selectedSection] || ''
+          }
+        />
+      )}
     </div>
   );
 }
