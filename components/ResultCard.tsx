@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import SpectrumChart from './SpectrumChart';
+import Button from './Button';
 
 interface ResultCardProps {
   type: string;
@@ -44,6 +45,15 @@ export default function ResultCard({
       <p className="text-lg leading-relaxed text-gray-700">
         {description}
       </p>
+      
+      {/* 정치 성향 자세히보기 버튼 - 카드 내부 하단에 위치 */}
+      {category === 'political' && (
+        <div className="mt-8 text-center">
+          <Button href="/political-detail" variant="primary">
+            정치 성향 자세히 보기 →
+          </Button>
+        </div>
+      )}
     </div>
   );
 }

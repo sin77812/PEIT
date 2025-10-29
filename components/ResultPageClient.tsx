@@ -83,15 +83,6 @@ export default function ResultPageClient({ type }: ResultPageClientProps) {
           category={data.category}
         />
 
-        {/* 정치 성향 자세히보기 버튼 - 설명 아래에 위치 */}
-        {data.category === 'political' && (
-          <div className="mt-8 text-center">
-            <Button href="/political-detail" variant="primary">
-              정치 성향 자세히 보기 →
-            </Button>
-          </div>
-        )}
-
         {/* 경제 유형 상세 정보 - 모바일에서는 클릭 가능한 카드로 표시 */}
         {data.category === 'economic' && (
           <>
