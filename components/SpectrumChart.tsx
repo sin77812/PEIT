@@ -49,27 +49,30 @@ export default function SpectrumChart({ data, category = 'political' }: Spectrum
                 {/* 중앙 구분선 */}
                 <div className="absolute left-1/2 top-0 h-full w-0.5 bg-gray-400 z-10"></div>
                 
-                {/* 왼쪽 영역 (첫 번째 성향) */}
-                <div 
-                  className={`absolute left-0 top-0 h-full transition-all duration-500 ${
-                    category === 'political' ? 'bg-purple-500' : 'bg-blue-500'
-                  }`}
-                  style={{ 
-                    width: `${leftPercentage}%`,
-                    opacity: isLeftDominant ? 0.8 : 0.3
-                  }}
-                ></div>
-                
-                {/* 오른쪽 영역 (두 번째 성향) */}
-                <div 
-                  className={`absolute right-0 top-0 h-full transition-all duration-500 ${
-                    category === 'political' ? 'bg-purple-500' : 'bg-blue-500'
-                  }`}
-                  style={{ 
-                    width: `${rightPercentage}%`,
-                    opacity: !isLeftDominant ? 0.8 : 0.3
-                  }}
-                ></div>
+                {/* 채워진 영역 - 더 강한 성향을 표시 */}
+                {leftPercentage >= 50 ? (
+                  // 왼쪽이 더 강할 때: 중앙에서 왼쪽으로
+                  <div 
+                    className={`absolute top-0 h-full transition-all duration-500 ${
+                      category === 'political' ? 'bg-purple-500' : 'bg-blue-500'
+                    }`}
+                    style={{ 
+                      left: `${100 - leftPercentage}%`,
+                      width: `${leftPercentage - 50}%`,
+                    }}
+                  ></div>
+                ) : (
+                  // 오른쪽이 더 강할 때: 중앙에서 오른쪽으로
+                  <div 
+                    className={`absolute top-0 h-full transition-all duration-500 ${
+                      category === 'political' ? 'bg-purple-500' : 'bg-blue-500'
+                    }`}
+                    style={{ 
+                      left: '50%',
+                      width: `${rightPercentage - 50}%`,
+                    }}
+                  ></div>
+                )}
                 
               </div>
               
