@@ -26,7 +26,7 @@ export default function SpectrumChart({ data, category = 'political' }: Spectrum
   return (
     <div className="w-full space-y-6">
       {Object.entries(data).map(([key, value]) => {
-        const label = labels[key as keyof typeof labels];
+        const label = labels[key as keyof typeof labels] as { left: string; right: string } | undefined;
         if (!label) return null;
 
         // 50%를 기준으로 좌우 계산
