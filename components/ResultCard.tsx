@@ -46,14 +46,18 @@ export default function ResultCard({
         {description}
       </p>
       
-      {/* 정치 성향 자세히보기 버튼 - 카드 내부 하단에 위치 */}
-      {category === 'political' && (
-        <div className="mt-8 text-center">
-          <Button href="/political-detail" variant="primary">
+      {/* 자세히보기 버튼 - 카드 내부 하단에 위치 */}
+      <div className="mt-8 text-center">
+        {category === 'political' ? (
+          <Button href="/political-detail" variant="outline">
             정치 성향 자세히 보기 →
           </Button>
-        </div>
-      )}
+        ) : (
+          <Button href="/economic-detail" variant="outline">
+            경제 성향 자세히 보기 →
+          </Button>
+        )}
+      </div>
     </div>
   );
 }

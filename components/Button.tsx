@@ -22,7 +22,7 @@ export default function Button({
   const variantStyles = {
     primary: 'bg-accent text-white hover:bg-accent-dark shadow-lg hover:shadow-xl',
     secondary: 'bg-gray-200 text-gray-800 hover:bg-gray-300',
-    outline: 'border-2 border-accent text-accent hover:bg-accent hover:text-white'
+    outline: 'border-2 border-black text-black hover:bg-black hover:text-white'
   };
   
   const sizeStyles = {
