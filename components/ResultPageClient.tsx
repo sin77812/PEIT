@@ -36,8 +36,10 @@ export default function ResultPageClient({ type }: ResultPageClientProps) {
     return <div>결과를 찾을 수 없습니다.</div>;
   }
 
+  // IPUE는 PNG 파일이므로 특별 처리
+  const imageExtension = type === 'IPUE' ? 'png' : 'jpg';
   const imagePath = data.category === 'political' 
-    ? `/images/political/${type}.jpg`
+    ? `/images/political/${type}.${imageExtension}`
     : `/images/economic/${type}.jpg`;
 
   const shareUrl = `https://peit.kr/result/${type}`;

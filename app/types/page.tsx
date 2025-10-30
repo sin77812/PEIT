@@ -30,7 +30,7 @@ export default function TypesPage() {
               >
                 <div className="relative w-full h-32 mb-3">
                   <Image
-                    src={`/images/political/${code}.jpg`}
+                    src={`/images/political/${code}.${code === 'IPUE' ? 'png' : 'jpg'}`}
                     alt={name}
                     fill
                     className="object-contain rounded"
