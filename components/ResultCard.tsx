@@ -48,7 +48,7 @@ export default function ResultCard({
       
       {/* 자세히보기 버튼 - 카드 내부 하단에 위치 */}
       <div className="mt-8 text-center">
-        <Button href="/types" variant="outline">
+        <Button href={`/result/${type}`} variant="outline">
           {category === 'political' ? '정치' : '경제'} 성향 자세히 보기 →
         </Button>
       </div>
