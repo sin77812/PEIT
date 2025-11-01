@@ -12,6 +12,25 @@ interface ResultPageClientProps {
   type: string;
 }
 
+// 마크다운 스타일 텍스트를 HTML로 변환하는 함수
+function renderMarkdownText(text: string) {
+  // **텍스트** -> <strong>텍스트</strong>
+  let html = text.replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold text-gray-900">$1</strong>');
+  
+  // '텍스트' -> <span class="text-accent">텍스트</span>
+  html = html.replace(/'([^']+)'/g, '<span class="text-accent font-medium">\'$1\'</span>');
+  
+  // 줄바꿈 처리
+  html = html.split('\n').map(paragraph => {
+    if (paragraph.trim()) {
+      return `<p class="mb-4 last:mb-0">${paragraph}</p>`;
+    }
+    return '';
+  }).join('');
+  
+  return html;
+}
+
 export default function ResultPageClient({ type }: ResultPageClientProps) {
   const [data, setData] = useState(results[type]);
   const [showDetailModal, setShowDetailModal] = useState(false);
@@ -89,204 +108,251 @@ export default function ResultPageClient({ type }: ResultPageClientProps) {
         {data.category === 'economic' && (
           <>
             {/* 모바일용 클릭 가능한 카드들 */}
-            <div className="md:hidden mt-8 grid grid-cols-2 gap-3">
-              {data.nickname && (
-                <button
-                  onClick={() => handleSectionClick('nickname')}
-                  className="bg-white p-4 rounded-xl shadow-md text-left hover:shadow-lg transition-shadow"
-                >
-                  <h3 className="text-base font-semibold mb-1">별칭</h3>
-                  <p className="text-sm text-accent line-clamp-2">{data.nickname}</p>
-                </button>
-              )}
-              
+            <div className="md:hidden mt-8 space-y-4">
+              {/* 핵심 키워드 */}
               {data.keywords && (
                 <button
                   onClick={() => handleSectionClick('keywords')}
-                  className="bg-white p-4 rounded-xl shadow-md text-left hover:shadow-lg transition-shadow"
+                  className="bg-white p-4 rounded-xl shadow-md text-left hover:shadow-lg transition-shadow w-full border-l-4 border-accent"
                 >
-                  <h3 className="text-base font-semibold mb-1">키워드</h3>
-                  <p className="text-sm text-gray-600">터치하여 확인</p>
+                  <h3 className="text-base font-semibold mb-1">#{data.nickname || data.name}</h3>
+                  <div className="flex gap-2 flex-wrap">
+                    {data.keywords.slice(0, 3).map((keyword, i) => (
+                      <span key={i} className="text-xs text-accent">#{keyword}</span>
+                    ))}
+                    {data.keywords.length > 3 && <span className="text-xs text-gray-500">...</span>}
+                  </div>
                 </button>
               )}
               
-              {data.spectrum_analysis && (
-                <button
-                  onClick={() => handleSectionClick('spectrum_analysis')}
-                  className="bg-white p-4 rounded-xl shadow-md text-left hover:shadow-lg transition-shadow"
-                >
-                  <h3 className="text-base font-semibold mb-1">스펙트럼 분석</h3>
-                  <p className="text-sm text-gray-600">터치하여 확인</p>
-                </button>
-              )}
+              {/* 주요 분석 섹션들 */}
+              <div className="grid grid-cols-2 gap-3">
+                {data.spectrum_analysis && (
+                  <button
+                    onClick={() => handleSectionClick('spectrum_analysis')}
+                    className="bg-white p-4 rounded-xl shadow-md text-left hover:shadow-lg transition-shadow"
+                  >
+                    <h3 className="text-sm font-semibold mb-1">경제 스펙트럼</h3>
+                    <p className="text-xs text-gray-500">종합 분석</p>
+                  </button>
+                )}
+                
+                {data.detailed_analysis && (
+                  <button
+                    onClick={() => handleSectionClick('detailed_analysis')}
+                    className="bg-white p-4 rounded-xl shadow-md text-left hover:shadow-lg transition-shadow"
+                  >
+                    <h3 className="text-sm font-semibold mb-1">성향 분석</h3>
+                    <p className="text-xs text-gray-500">상세 설명</p>
+                  </button>
+                )}
+              </div>
               
-              {data.detailed_analysis && (
-                <button
-                  onClick={() => handleSectionClick('detailed_analysis')}
-                  className="bg-white p-4 rounded-xl shadow-md text-left hover:shadow-lg transition-shadow"
-                >
-                  <h3 className="text-base font-semibold mb-1">상세 분석</h3>
-                  <p className="text-sm text-gray-600">터치하여 확인</p>
-                </button>
-              )}
-              
+              {/* 코칭 섹션 */}
               {data.coaching && (
                 <button
                   onClick={() => handleSectionClick('coaching')}
-                  className="bg-white p-4 rounded-xl shadow-md text-left hover:shadow-lg transition-shadow"
+                  className="bg-white p-4 rounded-xl shadow-md text-left hover:shadow-lg transition-shadow w-full border-l-4 border-accent"
                 >
-                  <h3 className="text-base font-semibold mb-1">코칭</h3>
-                  <p className="text-sm text-gray-600">터치하여 확인</p>
+                  <h3 className="text-base font-semibold mb-1 flex items-center">
+                    <span className="mr-2">💡</span> 종합 코칭
+                  </h3>
+                  <p className="text-xs text-gray-500">맞춤형 조언</p>
                 </button>
               )}
               
-              {data.synergy_partner && (
-                <button
-                  onClick={() => handleSectionClick('synergy_partner')}
-                  className="bg-white p-4 rounded-xl shadow-md text-left hover:shadow-lg transition-shadow"
-                >
-                  <h3 className="text-base font-semibold mb-1 text-green-600">시너지 파트너</h3>
-                  <p className="text-sm text-gray-600 line-clamp-2">{data.synergy_partner}</p>
-                </button>
-              )}
+              {/* 파트너십 */}
+              <div className="grid grid-cols-2 gap-3">
+                {data.synergy_partner && (
+                  <button
+                    onClick={() => handleSectionClick('synergy_partner')}
+                    className="bg-white p-4 rounded-xl shadow-md text-left hover:shadow-lg transition-shadow border-l-4 border-green-500"
+                  >
+                    <h3 className="text-sm font-semibold mb-1 text-green-600">🤝 시너지</h3>
+                    <p className="text-xs text-gray-500">최고의 파트너</p>
+                  </button>
+                )}
+                
+                {data.risk_partner && (
+                  <button
+                    onClick={() => handleSectionClick('risk_partner')}
+                    className="bg-white p-4 rounded-xl shadow-md text-left hover:shadow-lg transition-shadow border-l-4 border-red-500"
+                  >
+                    <h3 className="text-sm font-semibold mb-1 text-red-600">🔥 리스크</h3>
+                    <p className="text-xs text-gray-500">주의할 파트너</p>
+                  </button>
+                )}
+              </div>
               
-              {data.risk_partner && (
-                <button
-                  onClick={() => handleSectionClick('risk_partner')}
-                  className="bg-white p-4 rounded-xl shadow-md text-left hover:shadow-lg transition-shadow"
-                >
-                  <h3 className="text-base font-semibold mb-1 text-red-600">리스크 파트너</h3>
-                  <p className="text-sm text-gray-600 line-clamp-2">{data.risk_partner}</p>
-                </button>
-              )}
+              {/* 부의 공식 */}
+              <div className="bg-white p-4 rounded-xl shadow-md">
+                <h3 className="text-base font-semibold mb-3 text-center">부(富)의 공식</h3>
+                <div className="grid grid-cols-2 gap-3">
+                  {data.success_formula && (
+                    <button
+                      onClick={() => handleSectionClick('success_formula')}
+                      className="p-3 rounded-lg border-2 border-blue-200 hover:bg-blue-50 transition-colors"
+                    >
+                      <h4 className="text-sm font-semibold text-blue-600">💰 성공</h4>
+                    </button>
+                  )}
+                  
+                  {data.failure_formula && (
+                    <button
+                      onClick={() => handleSectionClick('failure_formula')}
+                      className="p-3 rounded-lg border-2 border-orange-200 hover:bg-orange-50 transition-colors"
+                    >
+                      <h4 className="text-sm font-semibold text-orange-600">💸 실패</h4>
+                    </button>
+                  )}
+                </div>
+              </div>
               
-              {data.success_formula && (
-                <button
-                  onClick={() => handleSectionClick('success_formula')}
-                  className="bg-white p-4 rounded-xl shadow-md text-left hover:shadow-lg transition-shadow"
-                >
-                  <h3 className="text-base font-semibold mb-1 text-blue-600">성공 공식</h3>
-                  <p className="text-sm text-gray-600">터치하여 확인</p>
-                </button>
-              )}
-              
-              {data.failure_formula && (
-                <button
-                  onClick={() => handleSectionClick('failure_formula')}
-                  className="bg-white p-4 rounded-xl shadow-md text-left hover:shadow-lg transition-shadow"
-                >
-                  <h3 className="text-base font-semibold mb-1 text-orange-600">실패 공식</h3>
-                  <p className="text-sm text-gray-600">터치하여 확인</p>
-                </button>
-              )}
-              
+              {/* 벤치마킹 & 커리어 */}
               {data.benchmarking && (
                 <button
                   onClick={() => handleSectionClick('benchmarking')}
-                  className="bg-white p-4 rounded-xl shadow-md text-left hover:shadow-lg transition-shadow"
+                  className="bg-white p-4 rounded-xl shadow-md text-left hover:shadow-lg transition-shadow w-full border-t-4 border-accent"
                 >
-                  <h3 className="text-base font-semibold mb-1">벤치마킹</h3>
-                  <p className="text-sm text-gray-600">터치하여 확인</p>
+                  <h3 className="text-base font-semibold mb-1">성공 DNA 벤치마킹</h3>
+                  <p className="text-xs text-gray-500">당신과 닮은 성공 인물</p>
                 </button>
               )}
               
               {data.career_navigation && (
                 <button
                   onClick={() => handleSectionClick('career_navigation')}
-                  className="bg-white p-4 rounded-xl shadow-md text-left hover:shadow-lg transition-shadow col-span-2"
+                  className="bg-white p-4 rounded-xl shadow-md text-left hover:shadow-lg transition-shadow w-full border-t-4 border-indigo-500"
                 >
                   <h3 className="text-base font-semibold mb-1">커리어 내비게이션</h3>
-                  <p className="text-sm text-gray-600">터치하여 확인</p>
+                  <p className="text-xs text-gray-500">추천 직업 & 성장 로드맵</p>
                 </button>
               )}
             </div>
 
             {/* 데스크톱용 기존 레이아웃 */}
             <div className="hidden md:block mt-8 space-y-6">
-              {data.nickname && (
-                <div className="bg-white p-6 rounded-xl shadow-md">
-                  <h3 className="text-xl font-semibold mb-4">별칭</h3>
-                  <p className="text-lg font-medium text-accent">{data.nickname}</p>
-                </div>
-              )}
-              
+              {/* 핵심 키워드 섹션 */}
               {data.keywords && (
-                <div className="bg-white p-6 rounded-xl shadow-md">
-                  <h3 className="text-xl font-semibold mb-4">키워드</h3>
-                  <div className="flex flex-wrap gap-2">
+                <div className="bg-white p-6 rounded-xl shadow-md border-t-4 border-accent">
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="text-xl font-semibold">#{data.nickname || data.name}</h3>
+                  </div>
+                  <div className="flex flex-wrap gap-3">
                     {data.keywords.map((keyword, i) => (
-                      <span key={i} className="px-3 py-1 bg-accent/10 text-accent rounded-full text-sm">
-                        {keyword}
+                      <span key={i} className="px-4 py-2 bg-accent/10 text-accent rounded-full text-base font-medium">
+                        #{keyword}
                       </span>
                     ))}
                   </div>
                 </div>
               )}
               
+              {/* 종합 경제 스펙트럼 분석 */}
               {data.spectrum_analysis && (
                 <div className="bg-white p-6 rounded-xl shadow-md">
-                  <h3 className="text-xl font-semibold mb-4">스펙트럼 분석</h3>
-                  <p className="text-gray-700 whitespace-pre-line">{data.spectrum_analysis}</p>
+                  <h3 className="text-xl font-semibold mb-4">종합 경제 스펙트럼 분석</h3>
+                  <div 
+                    className="text-gray-700 leading-relaxed"
+                    dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.spectrum_analysis) }}
+                  />
                 </div>
               )}
               
               {data.detailed_analysis && (
                 <div className="bg-white p-6 rounded-xl shadow-md">
-                  <h3 className="text-xl font-semibold mb-4">상세 분석</h3>
-                  <p className="text-gray-700 whitespace-pre-line">{data.detailed_analysis}</p>
+                  <h3 className="text-xl font-semibold mb-4">당신은 이런 사람입니다</h3>
+                  <div 
+                    className="text-gray-700 leading-relaxed"
+                    dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.detailed_analysis) }}
+                  />
                 </div>
               )}
               
               {data.coaching && (
-                <div className="bg-white p-6 rounded-xl shadow-md">
-                  <h3 className="text-xl font-semibold mb-4">코칭</h3>
-                  <p className="text-gray-700 whitespace-pre-line">{data.coaching}</p>
+                <div className="bg-white p-6 rounded-xl shadow-md border-l-4 border-accent">
+                  <h3 className="text-xl font-semibold mb-4 flex items-center">
+                    <span className="mr-2">💡</span> 종합 코칭 제언
+                  </h3>
+                  <div 
+                    className="text-gray-700 leading-relaxed"
+                    dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.coaching) }}
+                  />
                 </div>
               )}
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {data.synergy_partner && (
-                  <div className="bg-white p-6 rounded-xl shadow-md">
-                    <h3 className="text-xl font-semibold mb-4 text-green-600">시너지 파트너</h3>
-                    <p className="text-gray-700">{data.synergy_partner}</p>
+                  <div className="bg-white p-6 rounded-xl shadow-md border-l-4 border-green-500">
+                    <h3 className="text-xl font-semibold mb-4 text-green-600 flex items-center">
+                      <span className="mr-2">🤝</span> 시너지 파트너
+                    </h3>
+                    <div 
+                      className="text-gray-700 leading-relaxed"
+                      dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.synergy_partner) }}
+                    />
                   </div>
                 )}
                 
                 {data.risk_partner && (
-                  <div className="bg-white p-6 rounded-xl shadow-md">
-                    <h3 className="text-xl font-semibold mb-4 text-red-600">리스크 파트너</h3>
-                    <p className="text-gray-700">{data.risk_partner}</p>
+                  <div className="bg-white p-6 rounded-xl shadow-md border-l-4 border-red-500">
+                    <h3 className="text-xl font-semibold mb-4 text-red-600 flex items-center">
+                      <span className="mr-2">🔥</span> 리스크 파트너
+                    </h3>
+                    <div 
+                      className="text-gray-700 leading-relaxed"
+                      dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.risk_partner) }}
+                    />
                   </div>
                 )}
               </div>
               
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {data.success_formula && (
-                  <div className="bg-white p-6 rounded-xl shadow-md">
-                    <h3 className="text-xl font-semibold mb-4 text-blue-600">성공 공식</h3>
-                    <p className="text-gray-700">{data.success_formula}</p>
-                  </div>
-                )}
-                
-                {data.failure_formula && (
-                  <div className="bg-white p-6 rounded-xl shadow-md">
-                    <h3 className="text-xl font-semibold mb-4 text-orange-600">실패 공식</h3>
-                    <p className="text-gray-700">{data.failure_formula}</p>
-                  </div>
-                )}
+              <div className="bg-white p-6 rounded-xl shadow-md mt-6">
+                <h3 className="text-xl font-semibold mb-6 text-center">부(富)의 공식</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {data.success_formula && (
+                    <div className="border-l-4 border-blue-500 pl-5">
+                      <h4 className="text-lg font-semibold mb-3 text-blue-600 flex items-center">
+                        <span className="mr-2">💰</span> 성공 공식
+                      </h4>
+                      <div 
+                        className="text-gray-700 leading-relaxed"
+                        dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.success_formula) }}
+                      />
+                    </div>
+                  )}
+                  
+                  {data.failure_formula && (
+                    <div className="border-l-4 border-orange-500 pl-5">
+                      <h4 className="text-lg font-semibold mb-3 text-orange-600 flex items-center">
+                        <span className="mr-2">💸</span> 실패 공식
+                      </h4>
+                      <div 
+                        className="text-gray-700 leading-relaxed"
+                        dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.failure_formula) }}
+                      />
+                    </div>
+                  )}
+                </div>
               </div>
               
               {data.benchmarking && (
-                <div className="bg-white p-6 rounded-xl shadow-md">
-                  <h3 className="text-xl font-semibold mb-4">벤치마킹</h3>
-                  <p className="text-gray-700 whitespace-pre-line">{data.benchmarking}</p>
+                <div className="bg-white p-6 rounded-xl shadow-md border-t-4 border-accent">
+                  <h3 className="text-xl font-semibold mb-4">성공 DNA 벤치마킹</h3>
+                  <div 
+                    className="text-gray-700 leading-relaxed"
+                    dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.benchmarking) }}
+                  />
                 </div>
               )}
               
               {data.career_navigation && (
-                <div className="bg-white p-6 rounded-xl shadow-md">
+                <div className="bg-white p-6 rounded-xl shadow-md border-t-4 border-indigo-500">
                   <h3 className="text-xl font-semibold mb-4">커리어 내비게이션</h3>
-                  <p className="text-gray-700 whitespace-pre-line">{data.career_navigation}</p>
+                  <div 
+                    className="text-gray-700 leading-relaxed"
+                    dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.career_navigation) }}
+                  />
                 </div>
               )}
             </div>
@@ -294,28 +360,54 @@ export default function ResultPageClient({ type }: ResultPageClientProps) {
         )}
         
         {/* 강점과 약점 - 모바일에서도 2열로 표시 */}
-        <div className="grid grid-cols-2 gap-4 mt-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">
           <div className="bg-white p-4 md:p-6 rounded-xl shadow-md">
-            <h3 className="text-base md:text-xl font-semibold mb-2 md:mb-4 text-green-600">강점</h3>
-            <ul className="space-y-1 md:space-y-2">
-              {data.strengths.map((strength, i) => (
-                <li key={i} className="flex items-start text-sm md:text-base">
-                  <span className="text-green-600 mr-1 md:mr-2">•</span>
-                  <span>{strength}</span>
-                </li>
-              ))}
+            <h3 className="text-lg md:text-xl font-semibold mb-4 text-green-600">✅ 강점 (Strengths)</h3>
+            <ul className="space-y-3 md:space-y-4">
+              {data.strengths.map((strength, i) => {
+                const [title, ...descParts] = strength.split(':');
+                const description = descParts.join(':').trim();
+                const hasDescription = descParts.length > 0;
+                
+                return (
+                  <li key={i} className="flex flex-col space-y-1">
+                    <div className="flex items-start">
+                      <span className="text-green-600 mr-2 mt-1">•</span>
+                      <div className="flex-1">
+                        <span className="font-semibold text-sm md:text-base">{title}</span>
+                        {hasDescription && (
+                          <p className="text-gray-600 text-xs md:text-sm mt-1 leading-relaxed">{description}</p>
+                        )}
+                      </div>
+                    </div>
+                  </li>
+                );
+              })}
             </ul>
           </div>
           
           <div className="bg-white p-4 md:p-6 rounded-xl shadow-md">
-            <h3 className="text-base md:text-xl font-semibold mb-2 md:mb-4 text-red-600">약점</h3>
-            <ul className="space-y-1 md:space-y-2">
-              {data.weaknesses.map((weakness, i) => (
-                <li key={i} className="flex items-start text-sm md:text-base">
-                  <span className="text-red-600 mr-1 md:mr-2">•</span>
-                  <span>{weakness}</span>
-                </li>
-              ))}
+            <h3 className="text-lg md:text-xl font-semibold mb-4 text-red-600">⚠️ 약점 (Weaknesses)</h3>
+            <ul className="space-y-3 md:space-y-4">
+              {data.weaknesses.map((weakness, i) => {
+                const [title, ...descParts] = weakness.split(':');
+                const description = descParts.join(':').trim();
+                const hasDescription = descParts.length > 0;
+                
+                return (
+                  <li key={i} className="flex flex-col space-y-1">
+                    <div className="flex items-start">
+                      <span className="text-red-600 mr-2 mt-1">•</span>
+                      <div className="flex-1">
+                        <span className="font-semibold text-sm md:text-base">{title}</span>
+                        {hasDescription && (
+                          <p className="text-gray-600 text-xs md:text-sm mt-1 leading-relaxed">{description}</p>
+                        )}
+                      </div>
+                    </div>
+                  </li>
+                );
+              })}
             </ul>
           </div>
         </div>
@@ -346,16 +438,16 @@ export default function ResultPageClient({ type }: ResultPageClientProps) {
           isOpen={showDetailModal}
           onClose={() => setShowDetailModal(false)}
           title={{
-            nickname: '별칭',
-            keywords: '키워드',
-            spectrum_analysis: '스펙트럼 분석',
-            detailed_analysis: '상세 분석',
-            coaching: '코칭',
-            synergy_partner: '시너지 파트너',
-            risk_partner: '리스크 파트너',
-            success_formula: '성공 공식',
-            failure_formula: '실패 공식',
-            benchmarking: '벤치마킹',
+            nickname: data.nickname || data.name,
+            keywords: `#${data.nickname || data.name}`,
+            spectrum_analysis: '종합 경제 스펙트럼 분석',
+            detailed_analysis: '당신은 이런 사람입니다',
+            coaching: '💡 종합 코칭 제언',
+            synergy_partner: '🤝 시너지 파트너',
+            risk_partner: '🔥 리스크 파트너',
+            success_formula: '💰 성공 공식',
+            failure_formula: '💸 실패 공식',
+            benchmarking: '성공 DNA 벤치마킹',
             career_navigation: '커리어 내비게이션'
           }[selectedSection] || ''}
           content={

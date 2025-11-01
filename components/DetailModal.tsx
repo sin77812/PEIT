@@ -9,6 +9,25 @@ interface DetailModalProps {
   content: string;
 }
 
+// 마크다운 스타일 텍스트를 HTML로 변환하는 함수
+function renderMarkdownText(text: string) {
+  // **텍스트** -> <strong>텍스트</strong>
+  let html = text.replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold text-gray-900">$1</strong>');
+  
+  // '텍스트' -> <span class="text-accent">텍스트</span>
+  html = html.replace(/'([^']+)'/g, '<span class="text-accent font-medium">\'$1\'</span>');
+  
+  // 줄바꿈 처리
+  html = html.split('\n').map(paragraph => {
+    if (paragraph.trim()) {
+      return `<p class="mb-4 last:mb-0">${paragraph}</p>`;
+    }
+    return '';
+  }).join('');
+  
+  return html;
+}
+
 export default function DetailModal({ isOpen, onClose, title, content }: DetailModalProps) {
   useEffect(() => {
     if (isOpen) {
@@ -45,7 +64,10 @@ export default function DetailModal({ isOpen, onClose, title, content }: DetailM
         </div>
         
         <div className="p-6">
-          <p className="text-gray-700 whitespace-pre-line">{content}</p>
+          <div 
+            className="text-gray-700 leading-relaxed"
+            dangerouslySetInnerHTML={{ __html: renderMarkdownText(content) }}
+          />
         </div>
       </div>
     </>
