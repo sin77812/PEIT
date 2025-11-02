@@ -63,7 +63,7 @@ export default function ResultPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
+    <div className="min-h-screen bg-bg-light-purple py-12">
       <div className="max-w-6xl mx-auto px-4">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold mb-4">당신의 성향 결과</h1>

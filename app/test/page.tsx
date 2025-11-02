@@ -50,7 +50,7 @@ export default function TestPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <div className="min-h-screen bg-bg-light-purple py-8">
       <div className="max-w-4xl mx-auto px-4">
         <ProgressBar current={currentQ} total={69} />
         

@@ -89,7 +89,7 @@ export default function ResultPageClient({ type }: ResultPageClientProps) {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
+    <div className="min-h-screen bg-bg-light-purple py-12">
       <div className="max-w-4xl mx-auto px-4">
         <h1 className="text-4xl font-bold text-center mb-12">
           당신의 {data.category === 'political' ? '정치' : '경제'} 성향은

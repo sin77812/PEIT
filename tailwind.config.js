@@ -20,6 +20,7 @@ module.exports = {
         'political': '#8B5CF6',
         'economic-growth': '#F59E0B',
         'economic-stable': '#3B82F6',
+        'bg-light-purple': '#FAF7FF', // 매우 연한 보라색 배경
       },
     },
   },
