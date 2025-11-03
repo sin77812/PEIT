@@ -7,6 +7,7 @@ import Button from '@/components/Button';
 import ShareButton from '@/components/ShareButton';
 import { calculateResult, calculateRelativeScores } from '@/lib/calculate';
 import DetailModal from '@/components/DetailModal';
+import ExpandableSection from '@/components/ExpandableSection';
 
 interface ResultPageClientProps {
   type: string;
@@ -230,14 +231,14 @@ export default function ResultPageClient({ type }: ResultPageClientProps) {
               )}
             </div>
 
-            {/* 데스크톱용 기존 레이아웃 */}
-            <div className="hidden md:block mt-8 space-y-6">
+            {/* 데스크톱용 확장 가능한 섹션들 */}
+            <div className="hidden md:block mt-8 space-y-4">
               {/* 핵심 키워드 섹션 */}
               {data.keywords && (
-                <div className="bg-white p-6 rounded-xl shadow-md border-t-4 border-accent">
-                  <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-xl font-semibold">#{data.nickname || data.name}</h3>
-                  </div>
+                <ExpandableSection 
+                  title={`#${data.nickname || data.name}`}
+                  borderColor="border-accent"
+                >
                   <div className="flex flex-wrap gap-3">
                     {data.keywords.map((keyword, i) => (
                       <span key={i} className="px-4 py-2 bg-accent/10 text-accent rounded-full text-base font-medium">
@@ -245,124 +246,133 @@ export default function ResultPageClient({ type }: ResultPageClientProps) {
                       </span>
                     ))}
                   </div>
-                </div>
+                </ExpandableSection>
               )}
               
               {/* 종합 경제 스펙트럼 분석 */}
               {data.spectrum_analysis && (
-                <div className="bg-white p-6 rounded-xl shadow-md">
-                  <h3 className="text-xl font-semibold mb-4">종합 경제 스펙트럼 분석</h3>
+                <ExpandableSection 
+                  title="종합 경제 스펙트럼 분석"
+                  borderColor="border-accent"
+                >
                   <div 
                     className="text-gray-700 leading-relaxed"
                     dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.spectrum_analysis) }}
                   />
-                </div>
+                </ExpandableSection>
               )}
               
               {data.detailed_analysis && (
-                <div className="bg-white p-6 rounded-xl shadow-md">
-                  <h3 className="text-xl font-semibold mb-4">당신은 이런 사람입니다</h3>
+                <ExpandableSection 
+                  title="당신은 이런 사람입니다"
+                  borderColor="border-accent"
+                >
                   <div 
                     className="text-gray-700 leading-relaxed"
                     dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.detailed_analysis) }}
                   />
-                </div>
+                </ExpandableSection>
               )}
               
               {data.coaching && (
-                <div className="bg-white p-6 rounded-xl shadow-md border-l-4 border-accent">
-                  <h3 className="text-xl font-semibold mb-4 flex items-center">
-                    <span className="mr-2">💡</span> 종합 코칭 제언
-                  </h3>
+                <ExpandableSection 
+                  title="종합 코칭 제언"
+                  icon="💡"
+                  borderColor="border-accent"
+                >
                   <div 
                     className="text-gray-700 leading-relaxed"
                     dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.coaching) }}
                   />
-                </div>
+                </ExpandableSection>
               )}
               
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {data.synergy_partner && (
-                  <div className="bg-white p-6 rounded-xl shadow-md border-l-4 border-green-500">
-                    <h3 className="text-xl font-semibold mb-4 text-green-600 flex items-center">
-                      <span className="mr-2">🤝</span> 시너지 파트너
-                    </h3>
-                    <div 
-                      className="text-gray-700 leading-relaxed"
-                      dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.synergy_partner) }}
-                    />
-                  </div>
-                )}
-                
-                {data.risk_partner && (
-                  <div className="bg-white p-6 rounded-xl shadow-md border-l-4 border-red-500">
-                    <h3 className="text-xl font-semibold mb-4 text-red-600 flex items-center">
-                      <span className="mr-2">🔥</span> 리스크 파트너
-                    </h3>
-                    <div 
-                      className="text-gray-700 leading-relaxed"
-                      dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.risk_partner) }}
-                    />
-                  </div>
-                )}
-              </div>
+              {data.synergy_partner && (
+                <ExpandableSection 
+                  title="시너지 파트너"
+                  icon="🤝"
+                  borderColor="border-green-500"
+                >
+                  <div 
+                    className="text-gray-700 leading-relaxed"
+                    dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.synergy_partner) }}
+                  />
+                </ExpandableSection>
+              )}
               
-              <div className="bg-white p-6 rounded-xl shadow-md mt-6">
-                <h3 className="text-xl font-semibold mb-6 text-center">부(富)의 공식</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {data.success_formula && (
-                    <div className="border-l-4 border-blue-500 pl-5">
-                      <h4 className="text-lg font-semibold mb-3 text-blue-600 flex items-center">
-                        <span className="mr-2">💰</span> 성공 공식
-                      </h4>
-                      <div 
-                        className="text-gray-700 leading-relaxed"
-                        dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.success_formula) }}
-                      />
-                    </div>
-                  )}
-                  
-                  {data.failure_formula && (
-                    <div className="border-l-4 border-orange-500 pl-5">
-                      <h4 className="text-lg font-semibold mb-3 text-orange-600 flex items-center">
-                        <span className="mr-2">💸</span> 실패 공식
-                      </h4>
-                      <div 
-                        className="text-gray-700 leading-relaxed"
-                        dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.failure_formula) }}
-                      />
-                    </div>
-                  )}
-                </div>
-              </div>
+              {data.risk_partner && (
+                <ExpandableSection 
+                  title="리스크 파트너"
+                  icon="🔥"
+                  borderColor="border-red-500"
+                >
+                  <div 
+                    className="text-gray-700 leading-relaxed"
+                    dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.risk_partner) }}
+                  />
+                </ExpandableSection>
+              )}
+              
+              {data.success_formula && (
+                <ExpandableSection 
+                  title="성공 공식"
+                  icon="💰"
+                  borderColor="border-blue-500"
+                >
+                  <div 
+                    className="text-gray-700 leading-relaxed"
+                    dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.success_formula) }}
+                  />
+                </ExpandableSection>
+              )}
+              
+              {data.failure_formula && (
+                <ExpandableSection 
+                  title="실패 공식"
+                  icon="💸"
+                  borderColor="border-orange-500"
+                >
+                  <div 
+                    className="text-gray-700 leading-relaxed"
+                    dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.failure_formula) }}
+                  />
+                </ExpandableSection>
+              )}
               
               {data.benchmarking && (
-                <div className="bg-white p-6 rounded-xl shadow-md border-t-4 border-accent">
-                  <h3 className="text-xl font-semibold mb-4">성공 DNA 벤치마킹</h3>
+                <ExpandableSection 
+                  title="성공 DNA 벤치마킹"
+                  borderColor="border-accent"
+                >
                   <div 
                     className="text-gray-700 leading-relaxed"
                     dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.benchmarking) }}
                   />
-                </div>
+                </ExpandableSection>
               )}
               
               {data.career_navigation && (
-                <div className="bg-white p-6 rounded-xl shadow-md border-t-4 border-indigo-500">
-                  <h3 className="text-xl font-semibold mb-4">커리어 내비게이션</h3>
+                <ExpandableSection 
+                  title="커리어 내비게이션"
+                  borderColor="border-indigo-500"
+                >
                   <div 
                     className="text-gray-700 leading-relaxed"
                     dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.career_navigation) }}
                   />
-                </div>
+                </ExpandableSection>
               )}
             </div>
           </>
         )}
         
-        {/* 강점과 약점 - 모바일에서도 2열로 표시 */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">
-          <div className="bg-white p-4 md:p-6 rounded-xl shadow-md">
-            <h3 className="text-lg md:text-xl font-semibold mb-4 text-green-600">✅ 강점 (Strengths)</h3>
+        {/* 강점과 약점 - 확장 가능한 섹션으로 변경 */}
+        <div className="mt-8 space-y-4">
+          <ExpandableSection 
+            title="강점 (Strengths)" 
+            icon="✅"
+            borderColor="border-green-500"
+          >
             <ul className="space-y-3 md:space-y-4">
               {data.strengths.map((strength, i) => {
                 const [title, ...descParts] = strength.split(':');
@@ -384,10 +394,13 @@ export default function ResultPageClient({ type }: ResultPageClientProps) {
                 );
               })}
             </ul>
-          </div>
+          </ExpandableSection>
           
-          <div className="bg-white p-4 md:p-6 rounded-xl shadow-md">
-            <h3 className="text-lg md:text-xl font-semibold mb-4 text-red-600">⚠️ 약점 (Weaknesses)</h3>
+          <ExpandableSection 
+            title="약점 (Weaknesses)" 
+            icon="⚠️"
+            borderColor="border-red-500"
+          >
             <ul className="space-y-3 md:space-y-4">
               {data.weaknesses.map((weakness, i) => {
                 const [title, ...descParts] = weakness.split(':');
@@ -409,7 +422,7 @@ export default function ResultPageClient({ type }: ResultPageClientProps) {
                 );
               })}
             </ul>
-          </div>
+          </ExpandableSection>
         </div>
 
         {/* 액션 버튼들 */}

@@ -9,6 +9,9 @@ import { questions } from '@/lib/questions';
 import { Question } from '@/lib/types';
 import { calculateResult } from '@/lib/calculate';
 
+// 페이지를 항상 동적으로 렌더링하도록 설정
+export const dynamic = 'force-dynamic';
+
 function TestPageContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
