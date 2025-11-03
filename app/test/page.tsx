@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import ProgressBar from '@/components/ProgressBar';
 import QuestionCard from '@/components/QuestionCard';
 import AnswerButton from '@/components/AnswerButton';
@@ -11,36 +11,55 @@ import { calculateResult } from '@/lib/calculate';
 
 export default function TestPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const testType = searchParams.get('type') as 'political' | 'economic' | null;
+  
   const [currentQ, setCurrentQ] = useState(1);
   const [answers, setAnswers] = useState<Record<string, 'A' | 'B'>>({});
   const [isTransitioning, setIsTransitioning] = useState(false);
   
-  const currentQuestion: Question | undefined = questions[currentQ - 1];
+  // 테스트 타입에 따라 질문 필터링
+  const filteredQuestions = testType 
+    ? questions.filter(q => q.category === testType)
+    : questions;
+  
+  const currentQuestion: Question | undefined = filteredQuestions[currentQ - 1];
 
   useEffect(() => {
     // localStorage에서 이전 답변 불러오기
-    const savedAnswers = localStorage.getItem('answers');
+    const storageKey = testType ? `${testType}_answers` : 'answers';
+    const savedAnswers = localStorage.getItem(storageKey);
     if (savedAnswers) {
       setAnswers(JSON.parse(savedAnswers));
     }
-  }, []);
+  }, [testType]);
 
   const handleAnswer = (answer: 'A' | 'B') => {
     setIsTransitioning(true);
     
-    // 답변 저장
-    const newAnswers = { ...answers, [`q${currentQ}`]: answer };
+    // 실제 질문 ID를 저장 (원본 questions 배열의 인덱스)
+    const actualQuestionId = questions.indexOf(currentQuestion!);
+    const newAnswers = { ...answers, [`q${actualQuestionId + 1}`]: answer };
     setAnswers(newAnswers);
-    localStorage.setItem('answers', JSON.stringify(newAnswers));
+    
+    // 테스트 타입별로 다른 localStorage 키 사용
+    const storageKey = testType ? `${testType}_answers` : 'answers';
+    localStorage.setItem(storageKey, JSON.stringify(newAnswers));
     
     // 다음 질문으로 이동
     setTimeout(() => {
-      if (currentQ < 69) {
+      if (currentQ < filteredQuestions.length) {
         setCurrentQ(currentQ + 1);
         setIsTransitioning(false);
       } else {
-        // 마지막 질문 완료 - 결과 확인 페이지로 이동
-        router.push('/result');
+        // 마지막 질문 완료 - 해당 테스트 타입의 결과 페이지로 이동
+        if (testType === 'political') {
+          router.push('/result/political');
+        } else if (testType === 'economic') {
+          router.push('/result/economic');
+        } else {
+          router.push('/result');
+        }
       }
     }, 300);
   };
@@ -52,7 +71,7 @@ export default function TestPage() {
   return (
     <div className="min-h-screen bg-bg-light-purple py-8">
       <div className="max-w-4xl mx-auto px-4">
-        <ProgressBar current={currentQ} total={69} />
+        <ProgressBar current={currentQ} total={filteredQuestions.length} />
         
         <div className={`transition-opacity duration-300 ${isTransitioning ? 'opacity-0' : 'opacity-100'}`}>
           <QuestionCard question={currentQuestion} />

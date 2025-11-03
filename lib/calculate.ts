@@ -29,7 +29,7 @@ export interface CalculationResult {
   };
 }
 
-export function calculateResult(answers: Record<string, 'A' | 'B'>): CalculationResult {
+export function calculateResult(answers: Record<string, 'A' | 'B'>, testType?: 'political' | 'economic'): CalculationResult {
   const scores: Scores = {
     I: 0, C: 0, P: 0, T: 0, A: 0, U: 0, E: 0, S: 0,
     G: 0, S2: 0, V: 0, A2: 0, E2: 0, W: 0

@@ -33,9 +33,15 @@ export default function Home() {
           </p>
         </div>
         
-        <Button href="/test" size="lg">
-          검사 시작하기
-        </Button>
+        {/* 두 개의 테스트 버튼 */}
+        <div className="flex flex-col sm:flex-row gap-4">
+          <Button href="/test?type=political" size="lg">
+            정치 테스트 시작하기
+          </Button>
+          <Button href="/test?type=economic" size="lg">
+            경제 테스트 시작하기
+          </Button>
+        </div>
       </div>
     </div>
   );
