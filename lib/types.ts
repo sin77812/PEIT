@@ -33,6 +33,27 @@ export interface ResultData {
   failure_formula?: string;
   benchmarking?: string;
   career_navigation?: string;
+  // 정치 유형 전용 상세 필드들
+  summary?: string;
+  political_spectrum?: string;
+  political_spectrum_detail?: string;
+  detailed_description?: string;
+  speech_style?: string;
+  stress_moment?: string;
+  solution?: string;
+  love_value?: string;
+  best_partner?: string;
+  worst_partner?: string;
+  communication_barrier?: string;
+  career_value?: string;
+  financial_style?: string;
+  historical_avatar?: string;
+  real_avatar?: string;
+  growth_direction?: string;
+  growth_task?: string;
+  recommended_books?: Array<{title: string; author: string; link?: string}>;
+  recommended_content?: string;
+  final_goal?: string;
 }
 
 export interface Scores {
