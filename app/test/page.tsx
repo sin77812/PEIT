@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import ProgressBar from '@/components/ProgressBar';
 import QuestionCard from '@/components/QuestionCard';
@@ -9,7 +9,7 @@ import { questions } from '@/lib/questions';
 import { Question } from '@/lib/types';
 import { calculateResult } from '@/lib/calculate';
 
-export default function TestPage() {
+function TestPageContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const testType = searchParams.get('type') as 'political' | 'economic' | null;
@@ -101,5 +101,17 @@ export default function TestPage() {
         )}
       </div>
     </div>
+  );
+}
+
+export default function TestPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-xl">로딩 중...</div>
+      </div>
+    }>
+      <TestPageContent />
+    </Suspense>
   );
 }
