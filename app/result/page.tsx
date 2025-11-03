@@ -7,10 +7,11 @@ import FlipCard from '@/components/FlipCard';
 import Button from '@/components/Button';
 
 interface ResultSummary {
-  political: string;
-  economic: string;
-  politicalData: any;
-  economicData: any;
+  political?: string;
+  economic?: string;
+  politicalData?: any;
+  economicData?: any;
+  testType?: 'political' | 'economic' | 'both';
 }
 
 export default function ResultPage() {
@@ -19,27 +20,67 @@ export default function ResultPage() {
 
   useEffect(() => {
     // localStorage에서 답변 가져오기
-    const answers = localStorage.getItem('answers');
-    if (answers) {
-      const parsedAnswers = JSON.parse(answers);
+    const politicalAnswers = localStorage.getItem('political_answers');
+    const economicAnswers = localStorage.getItem('economic_answers');
+    const fullAnswers = localStorage.getItem('answers');
+    
+    let resultData: ResultSummary | null = null;
+
+    // 전체 테스트 결과가 있는 경우
+    if (fullAnswers) {
+      const parsedAnswers = JSON.parse(fullAnswers);
       const calculatedResult = calculateResult(parsedAnswers);
       
       const politicalData = { ...results[calculatedResult.political] };
       const economicData = { ...results[calculatedResult.economic] };
 
       if (politicalData && economicData) {
-        // 실제 점수를 기반으로 상대적 비율 계산
         politicalData.scores = calculateRelativeScores(calculatedResult.scores, 'political');
         economicData.scores = calculateRelativeScores(calculatedResult.scores, 'economic');
 
-        setResultData({
+        resultData = {
           political: calculatedResult.political,
           economic: calculatedResult.economic,
           politicalData,
-          economicData
-        });
+          economicData,
+          testType: 'both'
+        };
       }
     }
+    // 정치 테스트만 완료한 경우
+    else if (politicalAnswers) {
+      const parsedAnswers = JSON.parse(politicalAnswers);
+      const calculatedResult = calculateResult(parsedAnswers);
+      
+      const politicalData = { ...results[calculatedResult.political] };
+      if (politicalData) {
+        politicalData.scores = calculateRelativeScores(calculatedResult.scores, 'political');
+        
+        resultData = {
+          political: calculatedResult.political,
+          politicalData,
+          testType: 'political'
+        };
+      }
+    }
+    // 경제 테스트만 완료한 경우
+    else if (economicAnswers) {
+      const parsedAnswers = JSON.parse(economicAnswers);
+      const calculatedResult = calculateResult(parsedAnswers);
+      
+      const economicData = { ...results[calculatedResult.economic] };
+      if (economicData) {
+        economicData.scores = calculateRelativeScores(calculatedResult.scores, 'economic');
+        
+        resultData = {
+          economic: calculatedResult.economic,
+          economicData,
+          testType: 'economic'
+        };
+      }
+    }
+
+    setResultData(resultData);
     setLoading(false);
   }, []);
 
@@ -62,30 +103,40 @@ export default function ResultPage() {
     );
   }
 
+  const getTitle = () => {
+    if (resultData?.testType === 'political') return '당신의 정치 성향 결과';
+    if (resultData?.testType === 'economic') return '당신의 경제 성향 결과';
+    return '당신의 성향 결과';
+  };
+
   return (
     <div className="min-h-screen bg-bg-light-purple py-12">
       <div className="max-w-6xl mx-auto px-4">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold mb-4">당신의 성향 결과</h1>
+          <h1 className="text-4xl font-bold mb-4">{getTitle()}</h1>
           <p className="text-lg text-gray-600">카드를 클릭하여 자세한 내용을 확인하세요</p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+        <div className={`grid gap-8 mb-12 ${resultData?.testType === 'both' ? 'grid-cols-1 lg:grid-cols-2' : 'grid-cols-1 max-w-md mx-auto'}`}>
           {/* 정치 성향 카드 */}
-          <FlipCard
-            type={resultData.political}
-            data={resultData.politicalData}
-            category="political"
-            title="정치 성향"
-          />
+          {resultData?.political && resultData?.politicalData && (
+            <FlipCard
+              type={resultData.political}
+              data={resultData.politicalData}
+              category="political"
+              title="정치 성향"
+            />
+          )}
 
           {/* 경제 성향 카드 */}
-          <FlipCard
-            type={resultData.economic}
-            data={resultData.economicData}
-            category="economic"
-            title="경제 성향"
-          />
+          {resultData?.economic && resultData?.economicData && (
+            <FlipCard
+              type={resultData.economic}
+              data={resultData.economicData}
+              category="economic"
+              title="경제 성향"
+            />
+          )}
         </div>
 
         {/* 하단 액션 버튼들 */}
@@ -93,12 +144,33 @@ export default function ResultPage() {
           <Button href="/test" variant="primary">
             다시 검사하기
           </Button>
-          <Button href={`/result/${resultData.political}`} variant="outline">
-            정치 성향 자세히 보기
-          </Button>
-          <Button href={`/result/${resultData.economic}`} variant="outline">
-            경제 성향 자세히 보기
-          </Button>
+          
+          {/* 정치 테스트만 한 경우 경제 테스트 추천 */}
+          {resultData?.testType === 'political' && (
+            <Button href="/test?type=economic" variant="outline">
+              경제 테스트 하기
+            </Button>
+          )}
+          
+          {/* 경제 테스트만 한 경우 정치 테스트 추천 */}
+          {resultData?.testType === 'economic' && (
+            <Button href="/test?type=political" variant="outline">
+              정치 테스트 하기
+            </Button>
+          )}
+          
+          {/* 상세 보기 버튼들 */}
+          {resultData?.political && (
+            <Button href={`/result/${resultData.political}`} variant="outline">
+              정치 성향 자세히 보기
+            </Button>
+          )}
+          {resultData?.economic && (
+            <Button href={`/result/${resultData.economic}`} variant="outline">
+              경제 성향 자세히 보기
+            </Button>
+          )}
+          
           <Button href="/types" variant="secondary">
             다른 유형 보기
           </Button>
