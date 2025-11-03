@@ -9,7 +9,7 @@ interface SpectrumChartProps {
 const spectrumLabels = {
   political: {
     '개인주의 vs 공동체주의': { left: '개인주의', right: '공동체주의' },
-    '진보주의 vs 전통주의': { left: '진보주의', right: '전통주의' },
+    '진보주의 vs 보수주의': { left: '진보주의', right: '보수주의' },
     '적극적 평등 vs 보편적 평등': { left: '적극적 평등', right: '보편적 평등' },
     '협력 우선 vs 안보 우선': { left: '협력 우선', right: '안보 우선' },
   },
