@@ -20,8 +20,8 @@ export default function Button({
   const baseStyles = 'inline-flex items-center justify-center font-semibold rounded-xl transition-all duration-200 active:scale-95';
   
   const variantStyles = {
-    primary: 'bg-accent text-white hover:bg-accent-dark shadow-lg hover:shadow-xl',
-    secondary: 'bg-gray-200 text-gray-800 hover:bg-gray-300',
+    primary: 'bg-accent text-white hover:bg-accent-dark shadow-lg hover:shadow-xl border-2 border-white',
+    secondary: 'bg-gray-200 text-gray-800 hover:bg-gray-300 border-2 border-white',
     outline: 'border-2 border-black text-black hover:bg-black hover:text-white'
   };
   
