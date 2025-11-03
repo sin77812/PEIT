@@ -1,14 +1,25 @@
 import ResultPageClient from '@/components/ResultPageClient';
+import SimpleResultCard from '@/components/SimpleResultCard';
 
 interface ResultPageProps {
   params: Promise<{
     type: string;
   }>;
+  searchParams: Promise<{
+    explore?: string;
+  }>;
 }
 
-export default async function ResultPage({ params }: ResultPageProps) {
+export default async function ResultPage({ params, searchParams }: ResultPageProps) {
   const { type } = await params;
+  const { explore } = await searchParams;
   
+  // explore=true 파라미터가 있으면 간단한 버전 표시
+  if (explore === 'true') {
+    return <SimpleResultCard type={type} />;
+  }
+  
+  // 기본적으로는 전체 기능이 있는 버전 표시
   return <ResultPageClient type={type} />;
 }
 

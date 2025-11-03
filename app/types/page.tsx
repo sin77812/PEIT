@@ -25,7 +25,7 @@ export default function TypesPage() {
             {politicalTypes.map(({ code, name }) => (
               <Link
                 key={code}
-                href={`/result/${code}`}
+                href={`/result/${code}?explore=true`}
                 className="bg-white p-4 rounded-xl shadow-md hover:shadow-lg transition-all hover:scale-105"
               >
                 <div className="relative w-full h-32 mb-3">
@@ -50,7 +50,7 @@ export default function TypesPage() {
             {economicTypes.map(({ code, name }) => (
               <Link
                 key={code}
-                href={`/result/${code}`}
+                href={`/result/${code}?explore=true`}
                 className="bg-white p-4 rounded-xl shadow-md hover:shadow-lg transition-all hover:scale-105"
               >
                 <div className="relative w-full h-32 mb-3">
