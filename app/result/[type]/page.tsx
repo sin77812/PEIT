@@ -7,20 +7,24 @@ interface ResultPageProps {
   }>;
   searchParams: Promise<{
     explore?: string;
+    detailed?: string;
   }>;
 }
 
 export default async function ResultPage({ params, searchParams }: ResultPageProps) {
   const { type } = await params;
-  const { explore } = await searchParams;
+  const { explore, detailed } = await searchParams;
   
   // explore=true 파라미터가 있으면 간단한 버전 표시
   if (explore === 'true') {
     return <SimpleResultCard type={type} />;
   }
   
+  // detailed=true 파라미터가 있으면 확장된 버전으로 표시
+  const showExpanded = detailed === 'true';
+  
   // 기본적으로는 전체 기능이 있는 버전 표시
-  return <ResultPageClient type={type} />;
+  return <ResultPageClient type={type} showExpanded={showExpanded} />;
 }
 
 // 빌드 시 24개 페이지 생성

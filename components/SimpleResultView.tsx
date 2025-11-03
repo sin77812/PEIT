@@ -83,7 +83,7 @@ export default function SimpleResultView({ type, name, category }: SimpleResultV
           </button>
           
           <Button 
-            href={`/result/${type}`}
+            href={`/result/${type}?detailed=true`}
             variant="primary"
             className="w-full"
           >

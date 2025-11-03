@@ -11,6 +11,7 @@ import ExpandableSection from '@/components/ExpandableSection';
 
 interface ResultPageClientProps {
   type: string;
+  showExpanded?: boolean;
 }
 
 // 마크다운 스타일 텍스트를 HTML로 변환하는 함수
@@ -32,7 +33,7 @@ function renderMarkdownText(text: string) {
   return html;
 }
 
-export default function ResultPageClient({ type }: ResultPageClientProps) {
+export default function ResultPageClient({ type, showExpanded = false }: ResultPageClientProps) {
   const [data, setData] = useState(results[type]);
   const [showDetailModal, setShowDetailModal] = useState(false);
   const [selectedSection, setSelectedSection] = useState<string | null>(null);
@@ -62,7 +63,7 @@ export default function ResultPageClient({ type }: ResultPageClientProps) {
     ? `/images/political/${type}.${imageExtension}`
     : `/images/economic/${type}.jpg`;
 
-  const shareUrl = `https://peit.kr/result/${type}`;
+  const shareUrl = `https://peit.kr/result/${type}?detailed=true`;
   const shareText = `나의 ${data.category === 'political' ? '정치' : '경제'} 성향은 ${data.name}입니다! 당신도 PEIT 테스트를 해보세요.`;
 
   // localStorage에서 다른 성향 결과 가져오기
@@ -238,6 +239,7 @@ export default function ResultPageClient({ type }: ResultPageClientProps) {
                 <ExpandableSection 
                   title={`#${data.nickname || data.name}`}
                   borderColor="border-accent"
+                  defaultExpanded={showExpanded}
                 >
                   <div className="flex flex-wrap gap-3">
                     {data.keywords.map((keyword, i) => (
@@ -254,6 +256,7 @@ export default function ResultPageClient({ type }: ResultPageClientProps) {
                 <ExpandableSection 
                   title="종합 경제 스펙트럼 분석"
                   borderColor="border-accent"
+                  defaultExpanded={showExpanded}
                 >
                   <div 
                     className="text-gray-700 leading-relaxed"
@@ -266,6 +269,7 @@ export default function ResultPageClient({ type }: ResultPageClientProps) {
                 <ExpandableSection 
                   title="당신은 이런 사람입니다"
                   borderColor="border-accent"
+                  defaultExpanded={showExpanded}
                 >
                   <div 
                     className="text-gray-700 leading-relaxed"
@@ -279,6 +283,7 @@ export default function ResultPageClient({ type }: ResultPageClientProps) {
                   title="종합 코칭 제언"
                   icon="💡"
                   borderColor="border-accent"
+                  defaultExpanded={showExpanded}
                 >
                   <div 
                     className="text-gray-700 leading-relaxed"
@@ -292,6 +297,7 @@ export default function ResultPageClient({ type }: ResultPageClientProps) {
                   title="시너지 파트너"
                   icon="🤝"
                   borderColor="border-green-500"
+                  defaultExpanded={showExpanded}
                 >
                   <div 
                     className="text-gray-700 leading-relaxed"
@@ -305,6 +311,7 @@ export default function ResultPageClient({ type }: ResultPageClientProps) {
                   title="리스크 파트너"
                   icon="🔥"
                   borderColor="border-red-500"
+                  defaultExpanded={showExpanded}
                 >
                   <div 
                     className="text-gray-700 leading-relaxed"
@@ -318,6 +325,7 @@ export default function ResultPageClient({ type }: ResultPageClientProps) {
                   title="성공 공식"
                   icon="💰"
                   borderColor="border-blue-500"
+                  defaultExpanded={showExpanded}
                 >
                   <div 
                     className="text-gray-700 leading-relaxed"
@@ -331,6 +339,7 @@ export default function ResultPageClient({ type }: ResultPageClientProps) {
                   title="실패 공식"
                   icon="💸"
                   borderColor="border-orange-500"
+                  defaultExpanded={showExpanded}
                 >
                   <div 
                     className="text-gray-700 leading-relaxed"
@@ -343,6 +352,7 @@ export default function ResultPageClient({ type }: ResultPageClientProps) {
                 <ExpandableSection 
                   title="성공 DNA 벤치마킹"
                   borderColor="border-accent"
+                  defaultExpanded={showExpanded}
                 >
                   <div 
                     className="text-gray-700 leading-relaxed"
@@ -355,6 +365,7 @@ export default function ResultPageClient({ type }: ResultPageClientProps) {
                 <ExpandableSection 
                   title="커리어 내비게이션"
                   borderColor="border-indigo-500"
+                  defaultExpanded={showExpanded}
                 >
                   <div 
                     className="text-gray-700 leading-relaxed"
@@ -372,6 +383,7 @@ export default function ResultPageClient({ type }: ResultPageClientProps) {
             title="강점 (Strengths)" 
             icon="✅"
             borderColor="border-green-500"
+            defaultExpanded={showExpanded}
           >
             <ul className="space-y-3 md:space-y-4">
               {data.strengths.map((strength, i) => {
@@ -400,6 +412,7 @@ export default function ResultPageClient({ type }: ResultPageClientProps) {
             title="약점 (Weaknesses)" 
             icon="⚠️"
             borderColor="border-red-500"
+            defaultExpanded={showExpanded}
           >
             <ul className="space-y-3 md:space-y-4">
               {data.weaknesses.map((weakness, i) => {
@@ -441,7 +454,13 @@ export default function ResultPageClient({ type }: ResultPageClientProps) {
           <Button href="/types" variant="outline">
             다른 유형 보기
           </Button>
-          <ShareButton shareUrl={shareUrl} shareText={shareText} />
+          <ShareButton 
+            shareUrl={shareUrl} 
+            shareText={shareText}
+            type={type}
+            name={data.name}
+            category={data.category}
+          />
         </div>
       </div>
       
