@@ -3,6 +3,7 @@
 interface SpectrumChartProps {
   data: { [key: string]: number };
   category?: 'political' | 'economic';
+  showAxisTitle?: boolean; // 그래프 위 제목(예: 기업가 기질 vs 안정가 기질) 표시 여부
 }
 
 // 축별 대립 구조 정의
@@ -20,11 +21,11 @@ const spectrumLabels = {
   }
 };
 
-export default function SpectrumChart({ data, category = 'political' }: SpectrumChartProps) {
+export default function SpectrumChart({ data, category = 'political', showAxisTitle = false }: SpectrumChartProps) {
   const labels = spectrumLabels[category];
 
   return (
-    <div className="w-full space-y-6">
+    <div className="w-full space-y-4">
       {Object.entries(data).map(([key, value]) => {
         const label = labels[key as keyof typeof labels] as { left: string; right: string } | undefined;
         if (!label) return null;
@@ -36,16 +37,18 @@ export default function SpectrumChart({ data, category = 'political' }: Spectrum
         const dominantValue = Math.max(leftPercentage, rightPercentage);
         
         return (
-          <div key={key} className="space-y-2">
-            {/* 축 제목 */}
-            <div className="text-center text-sm font-medium text-gray-700">
-              {key}
-            </div>
+          <div key={key} className="space-y-1">
+            {/* 축 제목 (옵션) */}
+            {showAxisTitle && (
+              <div className="text-center text-sm font-medium text-gray-700">
+                {key}
+              </div>
+            )}
             
             {/* 스펙트럼 바 */}
             <div className="relative">
               {/* 배경 바 */}
-              <div className="h-8 bg-gray-200 rounded-lg relative overflow-hidden">
+              <div className="h-5 bg-gray-200 rounded-lg relative overflow-hidden">
                 {/* 중앙 구분선 */}
                 <div className="absolute left-1/2 top-0 h-full w-0.5 bg-gray-400 z-10"></div>
                 
@@ -77,12 +80,12 @@ export default function SpectrumChart({ data, category = 'political' }: Spectrum
               </div>
               
               {/* 좌우 라벨과 수치 */}
-              <div className="flex justify-between items-center mt-2">
+              <div className="flex justify-between items-center mt-1">
                 <div className="text-left">
                   <div className={`text-sm ${isLeftDominant ? 'font-bold' : 'font-normal'} ${isLeftDominant ? 'text-purple-600' : 'text-gray-500'}`}>
                     {label.left}
                   </div>
-                  <div className={`text-xl ${isLeftDominant ? 'font-bold' : 'font-normal'} ${isLeftDominant ? 'text-purple-600' : 'text-gray-400'}`}>
+                  <div className={`text-lg ${isLeftDominant ? 'font-bold' : 'font-normal'} ${isLeftDominant ? 'text-purple-600' : 'text-gray-400'}`}>
                     {leftPercentage}%
                   </div>
                 </div>
@@ -91,7 +94,7 @@ export default function SpectrumChart({ data, category = 'political' }: Spectrum
                   <div className={`text-sm ${!isLeftDominant ? 'font-bold' : 'font-normal'} ${!isLeftDominant ? 'text-purple-600' : 'text-gray-500'}`}>
                     {label.right}
                   </div>
-                  <div className={`text-xl ${!isLeftDominant ? 'font-bold' : 'font-normal'} ${!isLeftDominant ? 'text-purple-600' : 'text-gray-400'}`}>
+                  <div className={`text-lg ${!isLeftDominant ? 'font-bold' : 'font-normal'} ${!isLeftDominant ? 'text-purple-600' : 'text-gray-400'}`}>
                     {rightPercentage}%
                   </div>
                 </div>
