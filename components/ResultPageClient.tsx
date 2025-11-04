@@ -362,7 +362,7 @@ export default function ResultPageClient({ type, showExpanded = false }: ResultP
                             <span className="font-semibold">『{book.title}』</span>
                             <span className="text-gray-600 ml-1">({book.author})</span>
                             {book.link && (
-                              <a href={book.link} className="text-accent ml-2 underline">
+                              <a href={book.link} target="_blank" rel="noopener noreferrer" className="text-accent ml-2 underline">
                                 도서 최저가 구매하기
                               </a>
                             )}
