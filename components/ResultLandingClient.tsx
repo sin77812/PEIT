@@ -6,6 +6,7 @@ import { calculateResult, calculateRelativeScores } from '@/lib/calculate';
 import { results } from '@/lib/results';
 import FlipCard from '@/components/FlipCard';
 import Button from '@/components/Button';
+import ShareButton from '@/components/ShareButton';
 
 interface ResultSummary {
   political?: string;
@@ -136,6 +137,9 @@ export default function ResultLandingClient() {
     if (resultData?.testType === 'economic') return '당신의 경제 성향 결과';
     return '당신의 성향 결과';
   };
+  
+  const shareUrl = typeof window !== 'undefined' ? window.location.origin : 'https://peit.kr';
+  const shareText = 'PEIT에서 정치·경제 성향 테스트 해보기';
 
   return (
     <div className="min-h-screen bg-bg-light-purple py-12">
@@ -156,7 +160,7 @@ export default function ResultLandingClient() {
         </div>
 
         <div className="relative z-10 flex flex-col sm:flex-row gap-4 justify-center">
-          <Button href="/test" variant="primary">다시 검사하기</Button>
+          <ShareButton shareUrl={shareUrl} shareText={shareText} />
 
           {resultData?.testType === 'political' && (
             <Button href="/test?type=economic" variant="outline">경제 테스트 하기</Button>
