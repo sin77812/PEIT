@@ -25,8 +25,8 @@ export default function Home() {
         </p>
         
         {/* 새로운 프로모션 텍스트 */}
-        <div className="text-center mb-16 max-w-2xl">
-          <p className="text-lg md:text-xl text-black leading-relaxed">
+        <div className="text-center mb-16 max-w-2xl mx-auto bg-white/80 backdrop-blur-sm rounded-2xl border border-white/60 shadow-md px-6 py-5 md:px-8 md:py-6">
+          <p className="text-lg md:text-xl text-gray-900 leading-relaxed text-pretty">
             여러분은 스스로를 얼마나 깊이 알고 있나요?<br />
             PEIT에서 기존의 고정관념을 깨고,<br />
             가장 정교한 정치경제 DNA를 확인하세요.
