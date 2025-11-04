@@ -55,11 +55,11 @@ export default function TestPageContent() {
         if (testType === 'political') {
           // 정치 테스트만 완료한 경우 - 경제 테스트로 안내하거나 정치 결과만 보여주기
           localStorage.setItem('political_answers', JSON.stringify(newAnswers));
-          router.push('/result');
+          router.push('/result?type=political');
         } else if (testType === 'economic') {
           // 경제 테스트만 완료한 경우 - 정치 테스트로 안내하거나 경제 결과만 보여주기
           localStorage.setItem('economic_answers', JSON.stringify(newAnswers));
-          router.push('/result');
+          router.push('/result?type=economic');
         } else {
           // 전체 테스트 완료
           router.push('/result');

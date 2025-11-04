@@ -10,6 +10,7 @@ interface ResultCardProps {
   description: string;
   isCompact?: boolean;
   category?: 'political' | 'economic';
+  hideDetailButton?: boolean;
 }
 
 export default function ResultCard({ 
@@ -19,7 +20,8 @@ export default function ResultCard({
   scores, 
   description,
   isCompact = false,
-  category = 'political'
+  category = 'political',
+  hideDetailButton = false
 }: ResultCardProps) {
   return (
     <div className={`bg-white rounded-3xl border-4 border-accent shadow-xl ${isCompact ? 'p-4' : 'p-8'}`}>
@@ -46,12 +48,14 @@ export default function ResultCard({
         {description}
       </p>
       
-      {/* 자세히보기 버튼 - 카드 내부 하단에 위치 */}
-      <div className="mt-8 text-center">
-        <Button href={`/result/${type}`} variant="outline">
-          {category === 'political' ? '정치' : '경제'} 성향 자세히 보기 →
-        </Button>
-      </div>
+      {/* 자세히보기 버튼 (옵션) */}
+      {!hideDetailButton && (
+        <div className="mt-8 text-center">
+          <Button href={`/result/${type}`} variant="outline">
+            {category === 'political' ? '정치' : '경제'} 성향 자세히 보기 →
+          </Button>
+        </div>
+      )}
     </div>
   );
 }

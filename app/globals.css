@@ -1,1 +1,14 @@
 @import 'tailwindcss';
+
+/* 전체 배경색 설정 */
+body {
+  background-color: #FAF7FF; /* 매우 연한 연보라색 */
+}
+
+/* 텍스트 선택 방지 */
+.select-none {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}

@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import ResultCard from './ResultCard';
+import ResultDetailSections from './ResultDetailSections';
 
 interface FlipCardProps {
   type: string;
@@ -84,7 +85,12 @@ export default function FlipCard({ type, data, category, title }: FlipCardProps)
               description={data.description}
               isCompact={true}
               category={category}
+              hideDetailButton={true}
             />
+            {/* 카드 뒤집자마자 상세 섹션을 카드 내부에 노출 */}
+            <div className="px-2 pb-6">
+              <ResultDetailSections type={type} data={data} />
+            </div>
             <div className="absolute top-4 right-4">
               <button
                 onClick={(e) => {

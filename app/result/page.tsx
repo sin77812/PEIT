@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { calculateResult, calculateRelativeScores } from '@/lib/calculate';
 import { results } from '@/lib/results';
 import FlipCard from '@/components/FlipCard';
@@ -17,6 +18,8 @@ interface ResultSummary {
 export default function ResultPage() {
   const [resultData, setResultData] = useState<ResultSummary | null>(null);
   const [loading, setLoading] = useState(true);
+  const searchParams = useSearchParams();
+  const forcedType = searchParams.get('type') as 'political' | 'economic' | null;
 
   useEffect(() => {
     // localStorage에서 답변 가져오기
@@ -26,8 +29,50 @@ export default function ResultPage() {
     
     let resultData: ResultSummary | null = null;
 
-    // 전체 테스트 결과가 있는 경우
-    if (fullAnswers) {
+    // 우선순위 1: URL 파라미터로 강제된 타입 처리
+    if (forcedType === 'political') {
+      const politicalAnswers = localStorage.getItem('political_answers');
+      if (politicalAnswers) {
+        const parsed = JSON.parse(politicalAnswers);
+        const calculated = calculateResult(parsed);
+        const politicalData = { ...results[calculated.political] };
+        if (politicalData) {
+          politicalData.scores = calculateRelativeScores(calculated.scores, 'political');
+          resultData = { political: calculated.political, politicalData, testType: 'political' };
+        }
+      }
+    } else if (forcedType === 'economic') {
+      const economicAnswers = localStorage.getItem('economic_answers');
+      if (economicAnswers) {
+        const parsed = JSON.parse(economicAnswers);
+        const calculated = calculateResult(parsed);
+        const economicData = { ...results[calculated.economic] };
+        if (economicData) {
+          economicData.scores = calculateRelativeScores(calculated.scores, 'economic');
+          resultData = { economic: calculated.economic, economicData, testType: 'economic' };
+        }
+      }
+    }
+    // 우선순위 2: 파라미터 없으면 부분 테스트 우선 표시
+    else if (politicalAnswers && !economicAnswers && !fullAnswers) {
+      const parsedAnswers = JSON.parse(politicalAnswers);
+      const calculatedResult = calculateResult(parsedAnswers);
+      const politicalData = { ...results[calculatedResult.political] };
+      if (politicalData) {
+        politicalData.scores = calculateRelativeScores(calculatedResult.scores, 'political');
+        resultData = { political: calculatedResult.political, politicalData, testType: 'political' };
+      }
+    } else if (economicAnswers && !politicalAnswers && !fullAnswers) {
+      const parsedAnswers = JSON.parse(economicAnswers);
+      const calculatedResult = calculateResult(parsedAnswers);
+      const economicData = { ...results[calculatedResult.economic] };
+      if (economicData) {
+        economicData.scores = calculateRelativeScores(calculatedResult.scores, 'economic');
+        resultData = { economic: calculatedResult.economic, economicData, testType: 'economic' };
+      }
+    }
+    // 우선순위 3: 전체 테스트 결과가 있는 경우
+    else if (fullAnswers) {
       const parsedAnswers = JSON.parse(fullAnswers);
       const calculatedResult = calculateResult(parsedAnswers);
       
@@ -47,7 +92,7 @@ export default function ResultPage() {
         };
       }
     }
-    // 정치 테스트만 완료한 경우
+    // 정치 테스트만 완료한 경우 (fallback)
     else if (politicalAnswers) {
       const parsedAnswers = JSON.parse(politicalAnswers);
       const calculatedResult = calculateResult(parsedAnswers);
@@ -63,7 +108,7 @@ export default function ResultPage() {
         };
       }
     }
-    // 경제 테스트만 완료한 경우
+    // 경제 테스트만 완료한 경우 (fallback)
     else if (economicAnswers) {
       const parsedAnswers = JSON.parse(economicAnswers);
       const calculatedResult = calculateResult(parsedAnswers);
@@ -159,17 +204,7 @@ export default function ResultPage() {
             </Button>
           )}
           
-          {/* 상세 보기 버튼들 */}
-          {resultData?.political && (
-            <Button href={`/result/${resultData.political}`} variant="outline">
-              정치 성향 자세히 보기
-            </Button>
-          )}
-          {resultData?.economic && (
-            <Button href={`/result/${resultData.economic}`} variant="outline">
-              경제 성향 자세히 보기
-            </Button>
-          )}
+          {/* 상세 보기 버튼들은 카드 내부로 통합되어 제거 */}
           
           <Button href="/types" variant="secondary">
             다른 유형 보기
