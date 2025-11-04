@@ -10,8 +10,11 @@ export default function Navigation() {
           </Link>
           
           <div className="flex space-x-8">
-            <Link href="/test" className="text-gray-700 hover:text-accent transition-colors">
-              검사
+            <Link href="/test?type=political" className="text-gray-700 hover:text-accent transition-colors">
+              정치 검사
+            </Link>
+            <Link href="/test?type=economic" className="text-gray-700 hover:text-accent transition-colors">
+              경제 검사
             </Link>
             <Link href="/types" className="text-gray-700 hover:text-accent transition-colors">
               유형 종류
