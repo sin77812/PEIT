@@ -24,7 +24,7 @@ export default function FlipCard({ type, data, category, title }: FlipCardProps)
   };
 
   return (
-    <div className="relative h-[600px] w-full" style={{ perspective: '1000px' }}>
+    <div className="relative z-0 h-[600px] w-full" style={{ perspective: '1000px' }}>
       <div 
         className={`relative w-full h-full transition-transform duration-700 ${
           isFlipped ? '' : 'cursor-pointer'

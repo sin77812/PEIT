@@ -155,7 +155,7 @@ export default function ResultLandingClient() {
           )}
         </div>
 
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+        <div className="relative z-10 flex flex-col sm:flex-row gap-4 justify-center">
           <Button href="/test" variant="primary">다시 검사하기</Button>
 
           {resultData?.testType === 'political' && (
@@ -171,4 +171,3 @@ export default function ResultLandingClient() {
     </div>
   );
 }
-
