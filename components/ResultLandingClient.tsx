@@ -7,6 +7,7 @@ import { results } from '@/lib/results';
 import FlipCard from '@/components/FlipCard';
 import Button from '@/components/Button';
 import ShareButton from '@/components/ShareButton';
+import SaveCardButton from '@/components/SaveCardButton';
 
 interface ResultSummary {
   political?: string;
@@ -141,6 +142,14 @@ export default function ResultLandingClient() {
   const shareUrl = typeof window !== 'undefined' ? window.location.origin : 'https://peit.kr';
   const shareText = 'PEIT에서 정치·경제 성향 테스트 해보기';
 
+  // compute image paths for save-card buttons
+  const politicalImage = resultData?.political && resultData?.politicalData
+    ? `/images/political/${resultData.political}.${resultData.political === 'IPUE' ? 'png' : 'jpg'}`
+    : undefined;
+  const economicImage = resultData?.economic && resultData?.economicData
+    ? `/images/economic/${resultData.economic}.jpg`
+    : undefined;
+
   return (
     <div className="min-h-screen bg-bg-light-purple py-12">
       <div className="max-w-6xl mx-auto px-4">
@@ -170,6 +179,26 @@ export default function ResultLandingClient() {
           )}
 
           <Button href="/types" variant="secondary">다른 유형 보기</Button>
+
+          {/* Save card buttons */}
+          {resultData?.political && resultData?.politicalData && politicalImage && (
+            <SaveCardButton
+              typeCode={resultData.political}
+              name={resultData.politicalData.name}
+              category="political"
+              imageSrc={politicalImage}
+              label={resultData?.testType === 'both' ? '정치 카드 저장' : '카드 저장하기'}
+            />
+          )}
+          {resultData?.economic && resultData?.economicData && economicImage && (
+            <SaveCardButton
+              typeCode={resultData.economic}
+              name={resultData.economicData.name}
+              category="economic"
+              imageSrc={economicImage}
+              label={resultData?.testType === 'both' ? '경제 카드 저장' : '카드 저장하기'}
+            />
+          )}
         </div>
       </div>
     </div>
