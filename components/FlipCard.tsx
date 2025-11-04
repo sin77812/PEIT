@@ -26,19 +26,19 @@ export default function FlipCard({ type, data, category, title }: FlipCardProps)
   return (
     <div className="relative h-[600px] w-full" style={{ perspective: '1000px' }}>
       <div 
-        className={`relative w-full h-full transition-transform duration-700 cursor-pointer ${
-          isFlipped ? '' : ''
+        className={`relative w-full h-full transition-transform duration-700 ${
+          isFlipped ? '' : 'cursor-pointer'
         }`}
         style={{
           transformStyle: 'preserve-3d',
           transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)'
         }}
-        onClick={handleFlip}
       >
         {/* 앞면 */}
         <div 
           className="absolute inset-0 w-full h-full"
           style={{ backfaceVisibility: 'hidden' }}
+          onClick={handleFlip}
         >
           <div className="bg-white rounded-2xl shadow-lg border-2 border-accent h-full flex flex-col items-center justify-center p-8 hover:shadow-xl transition-shadow">
             <div className="relative w-64 h-64 mb-8">
@@ -76,7 +76,7 @@ export default function FlipCard({ type, data, category, title }: FlipCardProps)
             transform: 'rotateY(180deg)'
           }}
         >
-          <div className="h-full overflow-y-auto">
+          <div className="h-full overflow-y-auto" onClick={(e) => e.stopPropagation()}>
             <ResultCard
               type={type}
               name={data.name}
