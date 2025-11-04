@@ -19,7 +19,7 @@ export default function AnswerButton({ option, text, onClick }: AnswerButtonProp
       <span className="block text-accent font-bold text-xl mb-2">
         {option}
       </span>
-      <span className="text-gray-800">
+      <span className="text-gray-800 break-keep text-pretty leading-7">
         {text}
       </span>
     </button>

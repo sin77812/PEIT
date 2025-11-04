@@ -12,3 +12,17 @@ body {
   -ms-user-select: none;
   user-select: none;
 }
+
+/* 한국어 가독성 개선 유틸 */
+.break-keep { /* 어절 단위 줄바꿈, 임의 분리 방지 */
+  word-break: keep-all;
+  line-break: strict;
+}
+
+.text-balance { /* 제목 균형 줄바꿈 */
+  text-wrap: balance;
+}
+
+.text-pretty { /* 문장 예쁜 줄바꿈 */
+  text-wrap: pretty;
+}
