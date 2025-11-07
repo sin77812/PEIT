@@ -8,9 +8,15 @@ interface ResultDetailSectionsProps {
   defaultExpanded?: boolean;
 }
 
+// Remove emoji characters for clean UI
+function stripEmojis(s: string) {
+  return s.replace(/[\u{1F300}-\u{1FAFF}\u{1F900}-\u{1F9FF}\u{2600}-\u{27BF}\u{FE0F}]/gu, '');
+}
+
 // Simple markdown-ish to HTML used in detail sections
 function renderMarkdownText(text: string) {
-  let html = text.replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold text-gray-900">$1</strong>');
+  const cleaned = stripEmojis(text || '');
+  let html = cleaned.replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold text-gray-900">$1</strong>');
   html = html.replace(/'([^']+)'/g, '<span class="text-accent font-medium">\'$1\'</span>');
   html = html
     .split('\n')
@@ -55,37 +61,37 @@ export default function ResultDetailSections({ type, data, defaultExpanded = fal
         )}
 
         {data.speech_style && (
-          <ExpandableSection title="당신의 화법: '가능성을 여는 대화'" icon="🗣️" borderColor="border-accent" defaultExpanded={defaultExpanded}>
+          <ExpandableSection title="당신의 화법: '가능성을 여는 대화'" borderColor="border-accent" defaultExpanded={defaultExpanded}>
             <div className="text-gray-700 leading-relaxed" dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.speech_style) }} />
           </ExpandableSection>
         )}
 
         {data.stress_moment && (
-          <ExpandableSection title="당신이 스트레스 받는 순간" icon="💔" borderColor="border-red-500" defaultExpanded={defaultExpanded}>
+          <ExpandableSection title="당신이 스트레스 받는 순간" borderColor="border-red-500" defaultExpanded={defaultExpanded}>
             <div className="text-gray-700 leading-relaxed" dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.stress_moment) }} />
           </ExpandableSection>
         )}
 
         {data.solution && (
-          <ExpandableSection title="솔루션: 'If' 화법을 사용해 보세요" icon="💡" borderColor="border-blue-500" defaultExpanded={defaultExpanded}>
+          <ExpandableSection title="솔루션: 'If' 화법을 사용해 보세요" borderColor="border-blue-500" defaultExpanded={defaultExpanded}>
             <div className="text-gray-700 leading-relaxed" dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.solution) }} />
           </ExpandableSection>
         )}
 
         {data.love_value && (
-          <ExpandableSection title="당신의 연애 가치관" icon="❤️" borderColor="border-pink-500" defaultExpanded={defaultExpanded}>
+          <ExpandableSection title="당신의 연애 가치관" borderColor="border-pink-500" defaultExpanded={defaultExpanded}>
             <div className="text-gray-700 leading-relaxed" dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.love_value) }} />
           </ExpandableSection>
         )}
 
         {data.best_partner && (
-          <ExpandableSection title="최고의 연애 파트너" icon="💚" borderColor="border-green-500" defaultExpanded={defaultExpanded}>
+          <ExpandableSection title="최고의 연애 파트너" borderColor="border-green-500" defaultExpanded={defaultExpanded}>
             <div className="text-gray-700 leading-relaxed" dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.best_partner) }} />
           </ExpandableSection>
         )}
 
         {data.worst_partner && (
-          <ExpandableSection title="최악의 갈등 상대" icon="💔" borderColor="border-red-500" defaultExpanded={defaultExpanded}>
+          <ExpandableSection title="최악의 갈등 상대" borderColor="border-red-500" defaultExpanded={defaultExpanded}>
             <div className="text-gray-700 leading-relaxed" dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.worst_partner) }} />
           </ExpandableSection>
         )}
@@ -131,15 +137,13 @@ export default function ResultDetailSections({ type, data, defaultExpanded = fal
             <div className="space-y-4">
               {data.recommended_books && data.recommended_books.length > 0 && (
                 <div className="space-y-2">
+                  <p className="font-semibold">추천도서</p>
                   {data.recommended_books.map((book: any, i: number) => (
                     <div key={i} className="flex items-start">
-                      <span className="mr-2">📚</span>
                       <div>
                         <span className="font-semibold">『{book.title}』</span>
                         <span className="text-gray-600 ml-1">({book.author})</span>
-                        {book.link && (
-                          <a href={book.link} target="_blank" rel="noopener noreferrer" className="text-accent ml-2 underline">도서 최저가 구매하기</a>
-                        )}
+                        <a href="#" target="_blank" rel="noopener noreferrer" className="text-accent ml-2 underline">도서 최저가 구매하기</a>
                       </div>
                     </div>
                   ))}
@@ -147,7 +151,7 @@ export default function ResultDetailSections({ type, data, defaultExpanded = fal
               )}
               {data.recommended_content && (
                 <div>
-                  <p className="font-semibold mb-2">🎬 추천 영상/강의:</p>
+                  <p className="font-semibold mb-2">추천 영상/강의:</p>
                   <div className="text-gray-700" dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.recommended_content) }} />
                 </div>
               )}
@@ -156,14 +160,14 @@ export default function ResultDetailSections({ type, data, defaultExpanded = fal
         )}
 
         {data.final_goal && (
-          <ExpandableSection title="성장의 최종 목표" icon="🏆" borderColor="border-yellow-500" defaultExpanded={defaultExpanded}>
+          <ExpandableSection title="성장의 최종 목표" borderColor="border-yellow-500" defaultExpanded={defaultExpanded}>
             <div className="text-gray-700 leading-relaxed" dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.final_goal) }} />
           </ExpandableSection>
         )}
 
         {/* 강점/약점: 정치 데이터에 공통으로 존재하는 경우가 많아 기본 제공 */}
         {Array.isArray(data.strengths) && data.strengths.length > 0 && (
-          <ExpandableSection title="강점 (Strengths)" icon="✅" borderColor="border-green-500" defaultExpanded={defaultExpanded}>
+          <ExpandableSection title="강점 (Strengths)" borderColor="border-green-500" defaultExpanded={defaultExpanded}>
             <ul className="space-y-3">
               {data.strengths.map((item: string, i: number) => {
                 const [title, ...descParts] = item.split(':');
@@ -188,7 +192,7 @@ export default function ResultDetailSections({ type, data, defaultExpanded = fal
         )}
 
         {Array.isArray(data.weaknesses) && data.weaknesses.length > 0 && (
-          <ExpandableSection title="약점 (Weaknesses)" icon="⚠️" borderColor="border-red-500" defaultExpanded={defaultExpanded}>
+          <ExpandableSection title="약점 (Weaknesses)" borderColor="border-red-500" defaultExpanded={defaultExpanded}>
             <ul className="space-y-3">
               {data.weaknesses.map((item: string, i: number) => {
                 const [title, ...descParts] = item.split(':');
@@ -219,8 +223,8 @@ export default function ResultDetailSections({ type, data, defaultExpanded = fal
   return (
     <div className="mt-6 space-y-4">
       {data.nickname && (
-        <ExpandableSection title={`#${data.nickname}`} borderColor="border-accent" defaultExpanded={defaultExpanded}>
-          <div className="text-gray-700">#{data.nickname}</div>
+        <ExpandableSection title={`#${stripEmojis(data.nickname)}`} borderColor="border-accent" defaultExpanded={defaultExpanded}>
+          <div className="text-gray-700">#{stripEmojis(data.nickname)}</div>
         </ExpandableSection>
       )}
 
@@ -237,31 +241,31 @@ export default function ResultDetailSections({ type, data, defaultExpanded = fal
       )}
 
       {data.coaching && (
-        <ExpandableSection title="💡 종합 코칭 제언" borderColor="border-yellow-500" defaultExpanded={defaultExpanded}>
+        <ExpandableSection title="종합 코칭 제언" borderColor="border-yellow-500" defaultExpanded={defaultExpanded}>
           <div className="text-gray-700 leading-relaxed" dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.coaching) }} />
         </ExpandableSection>
       )}
 
       {data.synergy_partner && (
-        <ExpandableSection title="🤝 시너지 파트너" borderColor="border-green-500" defaultExpanded={defaultExpanded}>
+        <ExpandableSection title="시너지 파트너" borderColor="border-green-500" defaultExpanded={defaultExpanded}>
           <div className="text-gray-700 leading-relaxed" dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.synergy_partner) }} />
         </ExpandableSection>
       )}
 
       {data.risk_partner && (
-        <ExpandableSection title="🔥 리스크 파트너" borderColor="border-red-500" defaultExpanded={defaultExpanded}>
+        <ExpandableSection title="리스크 파트너" borderColor="border-red-500" defaultExpanded={defaultExpanded}>
           <div className="text-gray-700 leading-relaxed" dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.risk_partner) }} />
         </ExpandableSection>
       )}
 
       {data.success_formula && (
-        <ExpandableSection title="💰 성공 공식" borderColor="border-blue-500" defaultExpanded={defaultExpanded}>
+        <ExpandableSection title="성공 공식" borderColor="border-blue-500" defaultExpanded={defaultExpanded}>
           <div className="text-gray-700 leading-relaxed" dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.success_formula) }} />
         </ExpandableSection>
       )}
 
       {data.failure_formula && (
-        <ExpandableSection title="💸 실패 공식" borderColor="border-gray-500" defaultExpanded={defaultExpanded}>
+        <ExpandableSection title="실패 공식" borderColor="border-gray-500" defaultExpanded={defaultExpanded}>
           <div className="text-gray-700 leading-relaxed" dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.failure_formula) }} />
         </ExpandableSection>
       )}

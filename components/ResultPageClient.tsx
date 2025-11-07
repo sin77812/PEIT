@@ -171,7 +171,6 @@ export default function ResultPageClient({ type, showExpanded = false }: ResultP
             {data.speech_style && (
               <ExpandableSection 
                 title="당신의 화법: '가능성을 여는 대화'"
-                icon="🗣️"
                 borderColor="border-accent"
                 defaultExpanded={showExpanded}
               >
@@ -186,7 +185,6 @@ export default function ResultPageClient({ type, showExpanded = false }: ResultP
             {data.stress_moment && (
               <ExpandableSection 
                 title="당신이 스트레스 받는 순간"
-                icon="💔"
                 borderColor="border-red-500"
                 defaultExpanded={showExpanded}
               >
@@ -201,7 +199,6 @@ export default function ResultPageClient({ type, showExpanded = false }: ResultP
             {data.solution && (
               <ExpandableSection 
                 title="솔루션: 'If' 화법을 사용해 보세요"
-                icon="💡"
                 borderColor="border-blue-500"
                 defaultExpanded={showExpanded}
               >
@@ -216,7 +213,6 @@ export default function ResultPageClient({ type, showExpanded = false }: ResultP
             {data.love_value && (
               <ExpandableSection 
                 title="당신의 연애 가치관"
-                icon="❤️"
                 borderColor="border-pink-500"
                 defaultExpanded={showExpanded}
               >
@@ -231,7 +227,6 @@ export default function ResultPageClient({ type, showExpanded = false }: ResultP
             {data.best_partner && (
               <ExpandableSection 
                 title="최고의 연애 파트너"
-                icon="💚"
                 borderColor="border-green-500"
                 defaultExpanded={showExpanded}
               >
@@ -246,7 +241,6 @@ export default function ResultPageClient({ type, showExpanded = false }: ResultP
             {data.worst_partner && (
               <ExpandableSection 
                 title="최악의 갈등 상대"
-                icon="💔"
                 borderColor="border-red-500"
                 defaultExpanded={showExpanded}
               >
@@ -275,7 +269,6 @@ export default function ResultPageClient({ type, showExpanded = false }: ResultP
             {data.career_value && (
               <ExpandableSection 
                 title="직업적 가치관"
-                icon="💼"
                 borderColor="border-indigo-500"
                 defaultExpanded={showExpanded}
               >
@@ -290,7 +283,6 @@ export default function ResultPageClient({ type, showExpanded = false }: ResultP
             {data.financial_style && (
               <ExpandableSection 
                 title="잠재적 재무 스타일"
-                icon="💰"
                 borderColor="border-yellow-500"
                 defaultExpanded={showExpanded}
               >
@@ -333,7 +325,6 @@ export default function ResultPageClient({ type, showExpanded = false }: ResultP
             {data.growth_direction && (
               <ExpandableSection 
                 title="성장 방향성"
-                icon="🌱"
                 borderColor="border-green-500"
                 defaultExpanded={showExpanded}
               >
@@ -348,24 +339,21 @@ export default function ResultPageClient({ type, showExpanded = false }: ResultP
             {data.growth_task && (
               <ExpandableSection 
                 title={`핵심 성장 과제: ${data.growth_task}`}
-                icon="🎯"
                 borderColor="border-blue-500"
                 defaultExpanded={showExpanded}
               >
                 <div className="space-y-4">
                   {data.recommended_books && data.recommended_books.length > 0 && (
                     <div className="space-y-2">
+                      <p className="font-semibold">추천도서</p>
                       {data.recommended_books.map((book, i) => (
                         <div key={i} className="flex items-start">
-                          <span className="mr-2">📚</span>
                           <div>
                             <span className="font-semibold">『{book.title}』</span>
                             <span className="text-gray-600 ml-1">({book.author})</span>
-                            {book.link && (
-                              <a href={book.link} target="_blank" rel="noopener noreferrer" className="text-accent ml-2 underline">
-                                도서 최저가 구매하기
-                              </a>
-                            )}
+                            <a href="#" target="_blank" rel="noopener noreferrer" className="text-accent ml-2 underline">
+                              도서 최저가 구매하기
+                            </a>
                           </div>
                         </div>
                       ))}
@@ -373,7 +361,7 @@ export default function ResultPageClient({ type, showExpanded = false }: ResultP
                   )}
                   {data.recommended_content && (
                     <div>
-                      <p className="font-semibold mb-2">🎬 추천 영상/강의:</p>
+                      <p className="font-semibold mb-2">추천 영상/강의:</p>
                       <div 
                         className="text-gray-700"
                         dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.recommended_content) }}
@@ -388,7 +376,6 @@ export default function ResultPageClient({ type, showExpanded = false }: ResultP
             {data.final_goal && (
               <ExpandableSection 
                 title="성장의 최종 목표"
-                icon="🏆"
                 borderColor="border-yellow-500"
                 defaultExpanded={showExpanded}
               >
@@ -676,7 +663,6 @@ export default function ResultPageClient({ type, showExpanded = false }: ResultP
         <div className="mt-8 space-y-4">
           <ExpandableSection 
             title="강점 (Strengths)" 
-            icon="✅"
             borderColor="border-green-500"
             defaultExpanded={showExpanded}
           >
@@ -705,7 +691,6 @@ export default function ResultPageClient({ type, showExpanded = false }: ResultP
           
           <ExpandableSection 
             title="약점 (Weaknesses)" 
-            icon="⚠️"
             borderColor="border-red-500"
             defaultExpanded={showExpanded}
           >
@@ -769,11 +754,11 @@ export default function ResultPageClient({ type, showExpanded = false }: ResultP
             keywords: `#${data.nickname || data.name}`,
             spectrum_analysis: '종합 경제 스펙트럼 분석',
             detailed_analysis: '당신은 이런 사람입니다',
-            coaching: '💡 종합 코칭 제언',
-            synergy_partner: '🤝 시너지 파트너',
-            risk_partner: '🔥 리스크 파트너',
-            success_formula: '💰 성공 공식',
-            failure_formula: '💸 실패 공식',
+            coaching: '종합 코칭 제언',
+            synergy_partner: '시너지 파트너',
+            risk_partner: '리스크 파트너',
+            success_formula: '성공 공식',
+            failure_formula: '실패 공식',
             benchmarking: '성공 DNA 벤치마킹',
             career_navigation: '커리어 내비게이션'
           }[selectedSection] || ''}
