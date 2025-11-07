@@ -542,6 +542,10 @@ try {
   Object.entries(politicalDetails).forEach(([code, details]) => {
     if (results[code] && results[code].category === 'political') {
       Object.assign(results[code], details);
+      // Remove accidental growth_task strings (e.g., parsed '추천 도서' 라인)
+      if ((results[code] as any).growth_task) {
+        delete (results[code] as any).growth_task;
+      }
     }
   });
 } catch (e) {
