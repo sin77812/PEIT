@@ -6,16 +6,16 @@ export default function Home() {
     <div className="relative min-h-screen -mt-16 bg-white">
       {/* 중앙 콘텐츠 */}
       <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4">
-        <h1 className="text-6xl md:text-8xl font-bold text-black mb-4">
+        <h1 className="text-6xl md:text-8xl font-bold text-white mb-4">
           PEIT
         </h1>
-        <p className="text-xl md:text-2xl text-black mb-8">
+        <p className="text-xl md:text-2xl text-white mb-8">
           당신의 정치·경제 좌표
         </p>
         
         {/* 새로운 프로모션 텍스트 (오버레이 제거, 폰트/레이아웃 조정) */}
         <div className="text-center mb-16 max-w-3xl md:max-w-4xl lg:max-w-5xl mx-auto px-2 sm:px-4">
-          <p className="text-2xl sm:text-3xl md:text-4xl text-black leading-tight md:leading-snug text-pretty break-keep text-balance font-bold text-shadow-white-bottom">
+          <p className="text-2xl sm:text-3xl md:text-4xl text-white leading-tight md:leading-snug text-pretty break-keep text-balance font-bold">
             여러분은 스스로를 얼마나 깊이 알고 있나요?<br />
             PEIT에서 기존의 고정관념을 깨고,<br />
             가장 정교한 정치경제 DNA를 확인하세요.
