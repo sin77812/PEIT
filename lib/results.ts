@@ -1,4 +1,5 @@
 import { ResultData } from './types';
+import { politicalDetails } from './political_details';
 
 export const results: Record<string, ResultData> = {
   // 정치 유형 16개
@@ -535,3 +536,14 @@ export const results: Record<string, ResultData> = {
     career_navigation: '추천 직업: 공무원(감사, 재무 직렬), 공기업 경영지원팀, 대기업 재무/회계/인사팀. 성장 로드맵: 1단계-룰북과 데이터 마스터, 2단계-더 나은 시스템 설계, 3단계-조직의 최고의사결정자 조언'
   }
 };
+
+// Merge rich political details parsed from text into political entries
+try {
+  Object.entries(politicalDetails).forEach(([code, details]) => {
+    if (results[code] && results[code].category === 'political') {
+      Object.assign(results[code], details);
+    }
+  });
+} catch (e) {
+  // no-op: keep base data if merge fails
+}
