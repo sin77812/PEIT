@@ -107,3 +107,12 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.35);
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
 }
+
+/* Purple-tinted glass for CTA buttons on results */
+.glass-purple {
+  background: rgba(124, 58, 237, 0.18); /* accent-dark with alpha */
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(124, 58, 237, 0.45);
+  box-shadow: 0 8px 30px rgba(124, 58, 237, 0.25);
+}
