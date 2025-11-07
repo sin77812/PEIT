@@ -79,9 +79,9 @@ export default function SaveCardButton({ typeCode, name, category, imageSrc, lab
   return (
     <button
       onClick={handleSave}
-      className="px-6 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold rounded-lg transition-colors"
+      className="px-6 py-3 glass hover:bg-white/25 hover:border-white/40 text-white font-semibold rounded-xl transition-all"
     >
-      💾 {label}
+      저장하기
     </button>
   );
 }
@@ -95,4 +95,3 @@ function roundRect(ctx: CanvasRenderingContext2D, x: number, y: number, w: numbe
   ctx.arcTo(x, y, x + w, y, r);
   ctx.closePath();
 }
-

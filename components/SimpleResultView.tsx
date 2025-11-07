@@ -77,9 +77,9 @@ export default function SimpleResultView({ type, name, category }: SimpleResultV
           <button
             onClick={handleSaveCard}
             disabled={isCapturing}
-            className="w-full bg-accent hover:bg-accent-dark text-white font-semibold py-3 px-6 rounded-lg transition-colors disabled:opacity-50"
+            className="w-full glass hover:bg-white/25 hover:border-white/40 text-white font-semibold py-3 px-6 rounded-xl transition-all disabled:opacity-50"
           >
-            {isCapturing ? '저장 중...' : '📱 카드 저장하기'}
+            {isCapturing ? '저장 중...' : '카드 저장하기'}
           </button>
           
           <Button 
