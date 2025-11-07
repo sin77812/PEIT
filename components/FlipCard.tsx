@@ -36,9 +36,8 @@ export default function FlipCard({ type, data, category, title }: FlipCardProps)
       >
         {/* 앞면 */}
         <div 
-          className="absolute inset-0 w-full h-full"
+          className="absolute inset-0 w-full h-full pointer-events-none"
           style={{ backfaceVisibility: 'hidden' }}
-          onClick={handleFlip}
         >
           <div className="bg-white rounded-2xl shadow-lg border-2 border-accent h-full flex flex-col items-center justify-center p-8 hover:shadow-xl transition-shadow">
             <div className="relative w-64 h-64 mb-8">
@@ -62,7 +61,12 @@ export default function FlipCard({ type, data, category, title }: FlipCardProps)
             </div>
             <h2 className="text-3xl font-bold mb-4 text-center text-accent">{title}</h2>
             <p className="text-lg text-center text-gray-600 mb-8">당신의 성향을 확인해보세요</p>
-            <div className="bg-accent/10 px-8 py-4 rounded-full">
+            <div 
+              className="bg-accent/10 px-8 py-4 rounded-full pointer-events-auto cursor-pointer select-none"
+              onClick={handleFlip}
+              role="button"
+              aria-label="결과 카드 뒤집기"
+            >
               <span className="text-accent font-semibold text-xl">클릭하여 결과 확인</span>
             </div>
           </div>
