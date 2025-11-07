@@ -28,7 +28,8 @@ export default function Home() {
         <div className="text-center mb-16 max-w-3xl md:max-w-4xl lg:max-w-5xl mx-auto px-2 sm:px-4">
           <p className="text-2xl sm:text-3xl md:text-4xl text-black leading-tight md:leading-snug text-pretty break-keep text-balance font-bold">
             여러분은 스스로를 얼마나 깊이 알고 있나요?<br />
-            PEIT에서 기존의 고정관념을 깨고, 가장 정교한 정치경제 DNA를 확인하세요.
+            PEIT에서 기존의 고정관념을 깨고,<br />
+            가장 정교한 정치경제 DNA를 확인하세요.
           </p>
         </div>
         
