@@ -160,6 +160,57 @@ export default function ResultDetailSections({ type, data, defaultExpanded = fal
             <div className="text-gray-700 leading-relaxed" dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.final_goal) }} />
           </ExpandableSection>
         )}
+
+        {/* 강점/약점: 정치 데이터에 공통으로 존재하는 경우가 많아 기본 제공 */}
+        {Array.isArray(data.strengths) && data.strengths.length > 0 && (
+          <ExpandableSection title="강점 (Strengths)" icon="✅" borderColor="border-green-500" defaultExpanded={defaultExpanded}>
+            <ul className="space-y-3">
+              {data.strengths.map((item: string, i: number) => {
+                const [title, ...descParts] = item.split(':');
+                const description = descParts.join(':').trim();
+                const hasDescription = descParts.length > 0;
+                return (
+                  <li key={i} className="flex flex-col space-y-1">
+                    <div className="flex items-start">
+                      <span className="text-green-600 mr-2 mt-1">•</span>
+                      <div className="flex-1">
+                        <span className="font-semibold text-sm md:text-base">{title}</span>
+                        {hasDescription && (
+                          <p className="text-gray-600 text-xs md:text-sm mt-1 leading-relaxed">{description}</p>
+                        )}
+                      </div>
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
+          </ExpandableSection>
+        )}
+
+        {Array.isArray(data.weaknesses) && data.weaknesses.length > 0 && (
+          <ExpandableSection title="약점 (Weaknesses)" icon="⚠️" borderColor="border-red-500" defaultExpanded={defaultExpanded}>
+            <ul className="space-y-3">
+              {data.weaknesses.map((item: string, i: number) => {
+                const [title, ...descParts] = item.split(':');
+                const description = descParts.join(':').trim();
+                const hasDescription = descParts.length > 0;
+                return (
+                  <li key={i} className="flex flex-col space-y-1">
+                    <div className="flex items-start">
+                      <span className="text-red-600 mr-2 mt-1">•</span>
+                      <div className="flex-1">
+                        <span className="font-semibold text-sm md:text-base">{title}</span>
+                        {hasDescription && (
+                          <p className="text-gray-600 text-xs md:text-sm mt-1 leading-relaxed">{description}</p>
+                        )}
+                      </div>
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
+          </ExpandableSection>
+        )}
       </div>
     );
   }

@@ -16,7 +16,7 @@ export default function FlipCard({ type, data, category, title }: FlipCardProps)
   const [isFlipped, setIsFlipped] = useState(false);
 
   const imagePath = category === 'political' 
-    ? `/images/political/${type}.jpg`
+    ? `/images/political/${type}.${type === 'IPUE' ? 'png' : 'jpg'}`
     : `/images/economic/${type}.jpg`;
 
   const handleFlip = () => {
