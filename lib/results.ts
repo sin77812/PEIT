@@ -546,6 +546,10 @@ try {
       if ((results[code] as any).growth_task) {
         delete (results[code] as any).growth_task;
       }
+      // Alias money_value -> financial_style for components
+      if ((results[code] as any).money_value && !(results[code] as any).financial_style) {
+        (results[code] as any).financial_style = (results[code] as any).money_value;
+      }
     }
   });
 } catch (e) {
