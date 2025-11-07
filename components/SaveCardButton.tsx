@@ -80,7 +80,7 @@ export default function SaveCardButton({ typeCode, name, category, imageSrc, lab
   return (
     <button
       onClick={handleSave}
-      className={`px-6 py-3 glass hover:bg-white/25 hover:border-white/40 text-white font-semibold rounded-xl transition-all ${className}`}
+      className={`px-6 py-3 font-semibold rounded-xl transition-all ${className}`}
     >
       저장하기
     </button>

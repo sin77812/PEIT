@@ -680,18 +680,18 @@ export default function ResultPageClient({ type, showExpanded = false }: ResultP
 
         {/* 액션 버튼들 */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center mt-12">
-          <Button href="/result" variant="secondary" className="glass-purple text-white">
+          <Button href="/result" variant="secondary" className="no-glass btn-purple">
             ← 결과 페이지로 돌아가기
           </Button>
-          <Button href="/test" variant="primary" className="glass-purple text-white">
+          <Button href="/test" variant="primary" className="no-glass btn-purple">
             다시 검사하기
           </Button>
           {otherType && (
-            <Button href={`/result/${otherType}`} variant="primary" className="glass-purple text-white">
+            <Button href={`/result/${otherType}`} variant="primary" className="no-glass btn-purple">
               {data.category === 'political' ? '경제' : '정치'} 성향 보기
             </Button>
           )}
-          <Button href="/types" variant="outline" className="glass-purple text-white border-accent/40">
+          <Button href="/types" variant="outline" className="no-glass btn-purple">
             다른 유형 보기
           </Button>
           <ShareButton 
@@ -700,7 +700,7 @@ export default function ResultPageClient({ type, showExpanded = false }: ResultP
             type={type}
             name={data.name}
             category={data.category}
-            className="glass-purple text-white"
+            className="no-glass btn-purple"
           />
         </div>
       </div>

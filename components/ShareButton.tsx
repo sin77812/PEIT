@@ -72,7 +72,7 @@ ${shareUrl}
     <button 
       onClick={handleShare} 
       disabled={isSharing}
-      className={`px-6 py-3 glass hover:bg-white/25 hover:border-white/40 text-white font-semibold rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed ${className}`}
+      className={`px-6 py-3 font-semibold rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed ${className}`}
     >
       {isSharing ? '공유 중...' : '결과 공유하기'}
     </button>

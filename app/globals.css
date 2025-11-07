@@ -116,3 +116,21 @@ body {
   border: 1px solid rgba(124, 58, 237, 0.45);
   box-shadow: 0 8px 30px rgba(124, 58, 237, 0.25);
 }
+
+/* Disable glass blur when needed */
+.no-glass {
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+
+/* Solid purple CTA button */
+.btn-purple {
+  background: #7C3AED; /* accent dark */
+  color: #fff !important;
+  border: 1px solid #7C3AED;
+  box-shadow: 0 8px 20px rgba(124, 58, 237, 0.25);
+}
+.btn-purple:hover {
+  background: #6D28D9; /* darker hover */
+  border-color: #6D28D9;
+}

@@ -169,16 +169,16 @@ export default function ResultLandingClient() {
         </div>
 
         <div className="relative z-10 flex flex-col sm:flex-row gap-4 justify-center">
-          <ShareButton shareUrl={shareUrl} shareText={shareText} className="glass-purple text-white" />
+          <ShareButton shareUrl={shareUrl} shareText={shareText} className="no-glass btn-purple" />
 
           {resultData?.testType === 'political' && (
-            <Button href="/test?type=economic" variant="outline" className="glass-purple text-white border-accent/40">경제 테스트 하기</Button>
+            <Button href="/test?type=economic" variant="outline" className="no-glass btn-purple">경제 테스트 하기</Button>
           )}
           {resultData?.testType === 'economic' && (
-            <Button href="/test?type=political" variant="outline" className="glass-purple text-white border-accent/40">정치 테스트 하기</Button>
+            <Button href="/test?type=political" variant="outline" className="no-glass btn-purple">정치 테스트 하기</Button>
           )}
 
-          <Button href="/types" variant="secondary" className="glass-purple text-white">다른 유형 보기</Button>
+          <Button href="/types" variant="secondary" className="no-glass btn-purple">다른 유형 보기</Button>
 
           {/* Save card buttons */}
           {resultData?.political && resultData?.politicalData && politicalImage && (
@@ -188,7 +188,7 @@ export default function ResultLandingClient() {
               category="political"
               imageSrc={politicalImage}
               label={resultData?.testType === 'both' ? '정치 카드 저장' : '카드 저장하기'}
-              className="glass-purple text-white"
+              className="no-glass btn-purple"
             />
           )}
           {resultData?.economic && resultData?.economicData && economicImage && (
@@ -198,7 +198,7 @@ export default function ResultLandingClient() {
               category="economic"
               imageSrc={economicImage}
               label={resultData?.testType === 'both' ? '경제 카드 저장' : '카드 저장하기'}
-              className="glass-purple text-white"
+              className="no-glass btn-purple"
             />
           )}
         </div>

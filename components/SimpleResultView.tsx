@@ -85,7 +85,7 @@ export default function SimpleResultView({ type, name, category }: SimpleResultV
           <Button 
             href={`/result/${type}?detailed=true`}
             variant="primary"
-            className="w-full glass-purple text-white"
+            className="w-full no-glass btn-purple"
           >
             결과 자세히 보기
           </Button>
