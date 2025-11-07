@@ -1,10 +1,12 @@
 "use client";
 
 import { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 
 export default function Navigation() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
 
   // Prevent body scroll when drawer is open
   useEffect(() => {
@@ -15,6 +17,11 @@ export default function Navigation() {
     }
     return () => { document.body.style.overflow = ''; };
   }, [open]);
+
+  // Close drawer on route change to avoid overlay blocking clicks
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
 
   const NavLinks = ({ onClick }: { onClick?: () => void }) => (
     <>
