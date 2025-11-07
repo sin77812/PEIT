@@ -137,13 +137,12 @@ export default function ResultDetailSections({ type, data, defaultExpanded = fal
             <div className="space-y-4">
               {data.recommended_books && data.recommended_books.length > 0 && (
                 <div className="space-y-2">
-                  <p className="font-semibold">추천도서</p>
+                  <p className="font-semibold">도서추천</p>
                   {data.recommended_books.map((book: any, i: number) => (
                     <div key={i} className="flex items-start">
                       <div>
                         <span className="font-semibold">『{book.title}』</span>
                         <span className="text-gray-600 ml-1">({book.author})</span>
-                        <a href="#" target="_blank" rel="noopener noreferrer" className="text-accent ml-2 underline">도서 최저가 구매하기</a>
                       </div>
                     </div>
                   ))}
