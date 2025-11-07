@@ -37,14 +37,14 @@ export default function RadarChart({ data, category = 'political' }: RadarChartP
         data: values,
         backgroundColor: category === 'political' 
           ? 'rgba(139, 92, 246, 0.2)'
-          : 'rgba(59, 130, 246, 0.2)',
+          : 'rgba(239, 68, 68, 0.2)',
         borderColor: category === 'political' 
           ? 'rgba(139, 92, 246, 1)'
-          : 'rgba(59, 130, 246, 1)',
+          : 'rgba(239, 68, 68, 1)',
         borderWidth: 3,
         pointBackgroundColor: category === 'political' 
           ? 'rgba(139, 92, 246, 1)'
-          : 'rgba(59, 130, 246, 1)',
+          : 'rgba(239, 68, 68, 1)',
         pointBorderColor: '#fff',
         pointBorderWidth: 2,
         pointRadius: 6,
@@ -66,7 +66,7 @@ export default function RadarChart({ data, category = 'political' }: RadarChartP
         bodyColor: '#fff',
         borderColor: category === 'political' 
           ? 'rgba(139, 92, 246, 1)'
-          : 'rgba(59, 130, 246, 1)',
+          : 'rgba(239, 68, 68, 1)',
         borderWidth: 1,
         callbacks: {
           label: function(context: any) {

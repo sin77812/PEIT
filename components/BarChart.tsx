@@ -37,10 +37,10 @@ export default function BarChart({ data, category = 'political' }: BarChartProps
         data: values,
         backgroundColor: category === 'political' 
           ? 'rgba(139, 92, 246, 0.8)'
-          : 'rgba(59, 130, 246, 0.8)',
+          : 'rgba(239, 68, 68, 0.8)',
         borderColor: category === 'political' 
           ? 'rgba(139, 92, 246, 1)'
-          : 'rgba(59, 130, 246, 1)',
+          : 'rgba(239, 68, 68, 1)',
         borderWidth: 2,
         borderRadius: 8,
         borderSkipped: false,
@@ -61,7 +61,7 @@ export default function BarChart({ data, category = 'political' }: BarChartProps
         bodyColor: '#fff',
         borderColor: category === 'political' 
           ? 'rgba(139, 92, 246, 1)'
-          : 'rgba(59, 130, 246, 1)',
+          : 'rgba(239, 68, 68, 1)',
         borderWidth: 1,
         callbacks: {
           label: function(context: any) {

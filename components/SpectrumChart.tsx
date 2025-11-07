@@ -23,6 +23,8 @@ const spectrumLabels = {
 
 export default function SpectrumChart({ data, category = 'political', showAxisTitle = false }: SpectrumChartProps) {
   const labels = spectrumLabels[category];
+  const barClass = category === 'political' ? 'bg-purple-500' : 'bg-red-500';
+  const textClass = category === 'political' ? 'text-purple-600' : 'text-red-600';
 
   return (
     <div className="w-full space-y-4">
@@ -56,9 +58,7 @@ export default function SpectrumChart({ data, category = 'political', showAxisTi
                 {leftPercentage >= 50 ? (
                   // 왼쪽이 더 강할 때: 중앙에서 왼쪽으로
                   <div 
-                    className={`absolute top-0 h-full transition-all duration-500 ${
-                      category === 'political' ? 'bg-purple-500' : 'bg-blue-500'
-                    }`}
+                    className={`absolute top-0 h-full transition-all duration-500 ${barClass}`}
                     style={{ 
                       left: `${100 - leftPercentage}%`,
                       width: `${leftPercentage - 50}%`,
@@ -67,9 +67,7 @@ export default function SpectrumChart({ data, category = 'political', showAxisTi
                 ) : (
                   // 오른쪽이 더 강할 때: 중앙에서 오른쪽으로
                   <div 
-                    className={`absolute top-0 h-full transition-all duration-500 ${
-                      category === 'political' ? 'bg-purple-500' : 'bg-blue-500'
-                    }`}
+                    className={`absolute top-0 h-full transition-all duration-500 ${barClass}`}
                     style={{ 
                       left: '50%',
                       width: `${rightPercentage - 50}%`,
@@ -82,19 +80,19 @@ export default function SpectrumChart({ data, category = 'political', showAxisTi
               {/* 좌우 라벨과 수치 */}
               <div className="flex justify-between items-center mt-1">
                 <div className="text-left">
-                  <div className={`text-sm ${isLeftDominant ? 'font-bold' : 'font-normal'} ${isLeftDominant ? 'text-purple-600' : 'text-gray-500'}`}>
+                  <div className={`text-sm ${isLeftDominant ? 'font-bold' : 'font-normal'} ${isLeftDominant ? textClass : 'text-gray-500'}`}>
                     {label.left}
                   </div>
-                  <div className={`text-lg ${isLeftDominant ? 'font-bold' : 'font-normal'} ${isLeftDominant ? 'text-purple-600' : 'text-gray-400'}`}>
+                  <div className={`text-lg ${isLeftDominant ? 'font-bold' : 'font-normal'} ${isLeftDominant ? textClass : 'text-gray-400'}`}>
                     {leftPercentage}%
                   </div>
                 </div>
                 
                 <div className="text-right">
-                  <div className={`text-sm ${!isLeftDominant ? 'font-bold' : 'font-normal'} ${!isLeftDominant ? 'text-purple-600' : 'text-gray-500'}`}>
+                  <div className={`text-sm ${!isLeftDominant ? 'font-bold' : 'font-normal'} ${!isLeftDominant ? textClass : 'text-gray-500'}`}>
                     {label.right}
                   </div>
-                  <div className={`text-lg ${!isLeftDominant ? 'font-bold' : 'font-normal'} ${!isLeftDominant ? 'text-purple-600' : 'text-gray-400'}`}>
+                  <div className={`text-lg ${!isLeftDominant ? 'font-bold' : 'font-normal'} ${!isLeftDominant ? textClass : 'text-gray-400'}`}>
                     {rightPercentage}%
                   </div>
                 </div>

@@ -24,12 +24,11 @@ export default function Home() {
           당신의 정치·경제 좌표
         </p>
         
-        {/* 새로운 프로모션 텍스트 */}
-        <div className="text-center mb-16 max-w-2xl mx-auto bg-white/15 backdrop-blur-sm rounded-2xl border border-white/30 shadow-md px-6 py-5 md:px-8 md:py-6">
-          <p className="text-lg md:text-xl text-gray-900 leading-relaxed text-pretty">
+        {/* 새로운 프로모션 텍스트 (오버레이 제거, 폰트 크기 조정) */}
+        <div className="text-center mb-16 max-w-2xl mx-auto">
+          <p className="text-3xl md:text-4xl text-black leading-relaxed text-pretty">
             여러분은 스스로를 얼마나 깊이 알고 있나요?<br />
-            PEIT에서 기존의 고정관념을 깨고,<br />
-            가장 정교한 정치경제 DNA를 확인하세요.
+            PEIT에서 기존의 고정관념을 깨고, 가장 정교한 정치경제 DNA를 확인하세요.
           </p>
         </div>
         
