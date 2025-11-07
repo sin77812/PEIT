@@ -6,9 +6,10 @@ interface SaveCardButtonProps {
   category: 'political' | 'economic';
   imageSrc: string;
   label?: string;
+  className?: string;
 }
 
-export default function SaveCardButton({ typeCode, name, category, imageSrc, label = '카드 저장하기' }: SaveCardButtonProps) {
+export default function SaveCardButton({ typeCode, name, category, imageSrc, label = '카드 저장하기', className = '' }: SaveCardButtonProps) {
   const handleSave = async () => {
     const width = 1080; // square card
     const height = 1080;
@@ -79,7 +80,7 @@ export default function SaveCardButton({ typeCode, name, category, imageSrc, lab
   return (
     <button
       onClick={handleSave}
-      className="px-6 py-3 glass hover:bg-white/25 hover:border-white/40 text-white font-semibold rounded-xl transition-all"
+      className={`px-6 py-3 glass hover:bg-white/25 hover:border-white/40 text-white font-semibold rounded-xl transition-all ${className}`}
     >
       저장하기
     </button>

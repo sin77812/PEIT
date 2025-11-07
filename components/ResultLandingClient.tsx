@@ -169,16 +169,16 @@ export default function ResultLandingClient() {
         </div>
 
         <div className="relative z-10 flex flex-col sm:flex-row gap-4 justify-center">
-          <ShareButton shareUrl={shareUrl} shareText={shareText} />
+          <ShareButton shareUrl={shareUrl} shareText={shareText} className="text-black" />
 
           {resultData?.testType === 'political' && (
-            <Button href="/test?type=economic" variant="outline">경제 테스트 하기</Button>
+            <Button href="/test?type=economic" variant="outline" className="text-black border-black/30">경제 테스트 하기</Button>
           )}
           {resultData?.testType === 'economic' && (
-            <Button href="/test?type=political" variant="outline">정치 테스트 하기</Button>
+            <Button href="/test?type=political" variant="outline" className="text-black border-black/30">정치 테스트 하기</Button>
           )}
 
-          <Button href="/types" variant="secondary">다른 유형 보기</Button>
+          <Button href="/types" variant="secondary" className="text-black">다른 유형 보기</Button>
 
           {/* Save card buttons */}
           {resultData?.political && resultData?.politicalData && politicalImage && (
@@ -188,6 +188,7 @@ export default function ResultLandingClient() {
               category="political"
               imageSrc={politicalImage}
               label={resultData?.testType === 'both' ? '정치 카드 저장' : '카드 저장하기'}
+              className="text-black"
             />
           )}
           {resultData?.economic && resultData?.economicData && economicImage && (
@@ -197,6 +198,7 @@ export default function ResultLandingClient() {
               category="economic"
               imageSrc={economicImage}
               label={resultData?.testType === 'both' ? '경제 카드 저장' : '카드 저장하기'}
+              className="text-black"
             />
           )}
         </div>

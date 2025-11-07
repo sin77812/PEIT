@@ -77,7 +77,7 @@ export default function SimpleResultView({ type, name, category }: SimpleResultV
           <button
             onClick={handleSaveCard}
             disabled={isCapturing}
-            className="w-full glass hover:bg-white/25 hover:border-white/40 text-white font-semibold py-3 px-6 rounded-xl transition-all disabled:opacity-50"
+            className="w-full glass hover:bg-white/25 hover:border-white/40 text-black font-semibold py-3 px-6 rounded-xl transition-all disabled:opacity-50"
           >
             {isCapturing ? '저장 중...' : '카드 저장하기'}
           </button>
@@ -85,9 +85,9 @@ export default function SimpleResultView({ type, name, category }: SimpleResultV
           <Button 
             href={`/result/${type}?detailed=true`}
             variant="primary"
-            className="w-full"
+            className="w-full text-black"
           >
-            📊 클릭하여 결과 확인
+            결과 자세히 보기
           </Button>
         </div>
       </div>
