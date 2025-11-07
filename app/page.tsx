@@ -3,20 +3,9 @@ import Image from 'next/image';
 
 export default function Home() {
   return (
-    <div className="relative h-screen -mt-16 overflow-hidden">
-      {/* 배경 이미지 */}
-      <div className="absolute inset-0 z-0">
-        <Image
-          src="/images/mainbackground2.png"
-          alt="PEIT 배경"
-          fill
-          className="object-cover"
-          priority
-        />
-      </div>
-      
+    <div className="relative min-h-screen -mt-16 bg-white">
       {/* 중앙 콘텐츠 */}
-      <div className="relative z-10 flex flex-col items-center justify-center h-full px-4">
+      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4">
         <h1 className="text-6xl md:text-8xl font-bold text-black mb-4">
           PEIT
         </h1>
