@@ -25,16 +25,16 @@ export default function Navigation() {
 
   const NavLinks = ({ onClick }: { onClick?: () => void }) => (
     <>
-      <Link href="/test?type=political" className="text-gray-700 hover:text-accent transition-colors" onClick={onClick}>
+      <Link href="/test?type=political" className="text-black font-bold hover:text-accent transition-colors" onClick={onClick}>
         정치 검사
       </Link>
-      <Link href="/test?type=economic" className="text-gray-700 hover:text-accent transition-colors" onClick={onClick}>
+      <Link href="/test?type=economic" className="text-black font-bold hover:text-accent transition-colors" onClick={onClick}>
         경제 검사
       </Link>
-      <Link href="/types" className="text-gray-700 hover:text-accent transition-colors" onClick={onClick}>
+      <Link href="/types" className="text-black font-bold hover:text-accent transition-colors" onClick={onClick}>
         유형 종류
       </Link>
-      <Link href="/about" className="text-gray-700 hover:text-accent transition-colors" onClick={onClick}>
+      <Link href="/about" className="text-black font-bold hover:text-accent transition-colors" onClick={onClick}>
         서비스
       </Link>
     </>
