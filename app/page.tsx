@@ -16,7 +16,7 @@ export default function Home() {
       </div>
       
       {/* 중앙 콘텐츠 */}
-      <div className="relative z-10 flex flex-col items-center justify-start h-full px-4 pt-[calc(40vh+4rem)]">
+      <div className="relative z-10 flex flex-col items-center justify-start h-full px-4 pt-[calc(20vh+4rem)]">
         <h1 className="text-6xl md:text-8xl font-bold text-white mb-4">
           PEIT
         </h1>

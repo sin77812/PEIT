@@ -26,6 +26,7 @@
     "typescript": "^5.9.3"
   },
   "devDependencies": {
+    "@jridgewell/resolve-uri": "^3.1.2",
     "@tailwindcss/node": "^4.1.17",
     "@tailwindcss/postcss": "^4.1.16",
     "autoprefixer": "^10.4.21",
