@@ -91,17 +91,8 @@ export default function ResultPageClient({ type, showExpanded = false }: ResultP
   };
 
   return (
-    <div 
-      className="min-h-screen relative overflow-hidden"
-      style={{
-        backgroundImage: 'url(/images/subackground.png)',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-        backgroundAttachment: 'fixed'
-      }}
-    >
-      <div className="relative z-10 max-w-4xl mx-auto px-4 py-12">
+    <div className="min-h-screen bg-bg-light-purple">
+      <div className="max-w-4xl mx-auto px-4 py-12">
         <h1 className="text-4xl font-bold text-center mb-12">
           당신의 {data.category === 'political' ? '정치' : '경제'} 성향은
         </h1>
