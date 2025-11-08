@@ -151,7 +151,16 @@ export default function ResultLandingClient() {
     : undefined;
 
   return (
-    <div className="min-h-screen bg-bg-light-purple py-12">
+    <div 
+      className="min-h-screen py-12"
+      style={{
+        backgroundImage: 'url(/images/subackground.png)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        backgroundAttachment: 'fixed'
+      }}
+    >
       <div className="max-w-6xl mx-auto px-4">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold mb-4">{getTitle()}</h1>

@@ -90,9 +90,18 @@ export default function TestPageContent() {
   }
 
   return (
-    <div className="min-h-screen bg-white py-8">
+    <div 
+      className="min-h-screen py-8 relative"
+      style={{
+        backgroundImage: 'url(/images/subackground.png)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        backgroundAttachment: 'fixed'
+      }}
+    >
       <div className="max-w-4xl mx-auto px-4">
-        <div className="bg-white/60 backdrop-blur-md border border-white/40 shadow-xl rounded-2xl p-4 sm:p-6 md:p-8">
+        <div className="bg-white/70 backdrop-blur-md border border-white/30 shadow-xl rounded-2xl p-4 sm:p-6 md:p-8">
           <ProgressBar current={currentQ} total={orderedQuestions.length} />
           <div className={`transition-opacity duration-300 ${isTransitioning ? 'opacity-0' : 'opacity-100'}`}>
             <QuestionCard question={currentQuestion} />
