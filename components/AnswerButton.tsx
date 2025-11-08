@@ -5,9 +5,12 @@ interface AnswerButtonProps {
 }
 
 export default function AnswerButton({ option, text, onClick }: AnswerButtonProps) {
-  // 마침표/쉼표 뒤에서 줄바꿈:
-  // 문장 끝의 마침표(.) 또는 쉼표(,) 다음 공백(있을 수도, 없을 수도)을 기준으로 분리
-  const lines = text.split(/(?<=[\.,，])\s*/);
+  // 마침표/쉼표 뒤에서 줄바꿈 (Safari 호환):
+  // lookbehind 미사용. 문장을 
+  //  - 마침표/쉼표(영문/전각) 포함한 단위로 match 후 분리.
+  const lines = (text.match(/[^\.,，]+[\.,，]?/g) || [])
+    .map(s => s.trim())
+    .filter(Boolean);
   return (
     <button
       onClick={onClick}

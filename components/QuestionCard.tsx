@@ -5,8 +5,10 @@ interface QuestionCardProps {
 }
 
 export default function QuestionCard({ question }: QuestionCardProps) {
-  // 마침표/쉼표 뒤에서 줄바꿈 적용
-  const lines = question.text.split(/(?<=[\.,，])\s*/);
+  // 마침표/쉼표 뒤에서 줄바꿈 (Safari 호환): lookbehind 미사용
+  const lines = (question.text.match(/[^\.,，]+[\.,，]?/g) || [])
+    .map(s => s.trim())
+    .filter(Boolean);
   return (
     <div className="text-center py-12">
       <h2 className="text-balance break-keep text-2xl md:text-3xl font-medium leading-snug md:leading-relaxed w-full max-w-none px-2 sm:px-4">
