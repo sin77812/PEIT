@@ -5,9 +5,9 @@ interface AnswerButtonProps {
 }
 
 export default function AnswerButton({ option, text, onClick }: AnswerButtonProps) {
-  // 마침표 뒤에서 줄바꿈: 
-  // 문장 끝의 마침표 다음 공백을 기준으로 분리하여 각 문장을 줄바꿈 처리
-  const lines = text.split(/(?<=\.)\s+/);
+  // 마침표/쉼표 뒤에서 줄바꿈:
+  // 문장 끝의 마침표(.) 또는 쉼표(,) 다음 공백(있을 수도, 없을 수도)을 기준으로 분리
+  const lines = text.split(/(?<=[\.,，])\s*/);
   return (
     <button
       onClick={onClick}
