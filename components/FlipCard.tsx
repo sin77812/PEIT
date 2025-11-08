@@ -25,14 +25,14 @@ export default function FlipCard({ type, data, category, title }: FlipCardProps)
 
 
   return (
-    <div className="relative z-0 h-[600px] w-full" style={{ perspective: '1000px' }}>
+    <div className="relative z-0 h-[600px] w-full" style={{ perspective: '1000px', touchAction: 'pan-y' }}>
       <div 
-        className={`relative w-full h-full transition-transform duration-700 ${
-          isFlipped ? '' : 'cursor-pointer'
-        }`}
+        className="relative w-full h-full transition-transform duration-700"
         style={{
           transformStyle: 'preserve-3d',
-          transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)'
+          transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)',
+          touchAction: 'pan-y',
+          WebkitTransform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)'
         }}
       >
         {/* 앝면 */}
@@ -40,7 +40,7 @@ export default function FlipCard({ type, data, category, title }: FlipCardProps)
           className="absolute inset-0 w-full h-full"
           style={{ backfaceVisibility: 'hidden' }}
         >
-          <div className="bg-white rounded-2xl shadow-lg border-2 border-accent h-full flex flex-col items-center justify-center p-8 hover:shadow-xl transition-shadow cursor-pointer">
+          <div className="bg-white rounded-2xl shadow-lg border-2 border-accent h-full flex flex-col items-center justify-center p-8 hover:shadow-xl transition-shadow" style={{ touchAction: 'pan-y' }}>
             <div className="relative w-64 h-64 mb-8">
               {/* 실제 이미지 표시 */}
               <div className="w-full h-full rounded-lg flex items-center justify-center overflow-hidden">
