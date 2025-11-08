@@ -39,7 +39,6 @@ export default function FlipCard({ type, data, category, title }: FlipCardProps)
         <div 
           className="absolute inset-0 w-full h-full"
           style={{ backfaceVisibility: 'hidden' }}
-          onClick={handleFlip}
         >
           <div className="bg-white rounded-2xl shadow-lg border-2 border-accent h-full flex flex-col items-center justify-center p-8 hover:shadow-xl transition-shadow cursor-pointer">
             <div className="relative w-64 h-64 mb-8">
