@@ -101,11 +101,11 @@ export default function TestPageContent() {
       }}
     >
       <div className="max-w-4xl mx-auto px-4">
-        <div className="bg-white/70 backdrop-blur-md border border-white/30 shadow-xl rounded-2xl p-4 sm:p-6 md:p-8">
+        <div className="bg-white/70 backdrop-blur-md border border-white/30 shadow-xl rounded-2xl p-3 sm:p-4 md:p-8">
           <ProgressBar current={currentQ} total={orderedQuestions.length} />
           <div className={`transition-opacity duration-300 ${isTransitioning ? 'opacity-0' : 'opacity-100'}`}>
             <QuestionCard question={currentQuestion} />
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6 md:mt-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 md:gap-6 mt-3 sm:mt-4 md:mt-12">
               <AnswerButton
                 option="A"
                 text={currentQuestion.optionA}

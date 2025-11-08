@@ -10,8 +10,8 @@ export default function QuestionCard({ question }: QuestionCardProps) {
     .map(s => s.trim())
     .filter(Boolean);
   return (
-    <div className="text-center py-12">
-      <h2 className="text-balance break-keep text-2xl md:text-3xl font-medium leading-snug md:leading-relaxed w-full max-w-none px-2 sm:px-4">
+    <div className="text-center py-6 sm:py-8 md:py-12">
+      <h2 className="text-balance break-keep text-lg sm:text-xl md:text-3xl font-medium leading-snug md:leading-relaxed w-full max-w-none px-2 sm:px-4">
         {lines.map((line, i) => (
           <span key={i}>
             {line}

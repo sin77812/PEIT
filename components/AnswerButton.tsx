@@ -15,7 +15,7 @@ export default function AnswerButton({ option, text, onClick }: AnswerButtonProp
     <button
       onClick={onClick}
       className="
-        group w-full p-8 bg-white border-2 border-border-light rounded-xl
+        group w-full p-4 sm:p-6 md:p-8 bg-white border-2 border-border-light rounded-xl
         hover:bg-[#8B5CF6] hover:border-[#7C3AED] hover:shadow-md
         transition-all duration-200
         text-lg font-medium
