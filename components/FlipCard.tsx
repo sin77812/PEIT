@@ -41,15 +41,15 @@ export default function FlipCard({ type, data, category, title }: FlipCardProps)
           style={{ backfaceVisibility: 'hidden' }}
         >
           <div className="bg-white rounded-2xl shadow-lg border-2 border-accent h-full flex flex-col items-center justify-center p-8 hover:shadow-xl transition-shadow" style={{ touchAction: 'pan-y' }}>
-            <div className="relative w-64 h-64 mb-8">
+            <div className="relative w-full sm:w-64 h-64 sm:h-64 mb-8 px-4 sm:px-0">
               {/* 실제 이미지 표시 */}
               <div className="w-full h-full rounded-lg flex items-center justify-center overflow-hidden">
                 <Image
                   src={imagePath}
                   alt={type}
-                  width={240}
-                  height={240}
-                  className="object-contain"
+                  width={320}
+                  height={320}
+                  className="object-contain w-full h-full"
                   onError={(e) => {
                     // 이미지 로드 실패 시 이모지로 폴백
                     e.currentTarget.style.display = 'none';
