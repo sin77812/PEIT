@@ -19,8 +19,37 @@ export default function ExpandableSection({
 }: ExpandableSectionProps) {
   const [isExpanded, setIsExpanded] = useState(defaultExpanded);
 
+  // border 클래스와 색상 추출
+  const getBorderStyle = () => {
+    const colorMap: Record<string, string> = {
+      'border-purple-gradient-100': '#F3E8FF',
+      'border-purple-gradient-200': '#E9D5FF',
+      'border-purple-gradient-300': '#D8B4FE',
+      'border-purple-gradient-400': '#C084FC',
+      'border-purple-gradient-500': '#A855F7',
+      'border-purple-gradient-600': '#9333EA',
+      'border-purple-gradient-700': '#7E22CE',
+      'border-purple-gradient-800': '#6B21A8',
+      'border-purple-gradient-900': '#581C87',
+      'border-purple-gradient-950': '#3B0764',
+      'border-accent': '#8B5CF6',
+    };
+    return colorMap[borderColor] || '#8B5CF6';
+  };
+
+  const borderStyle = getBorderStyle();
+
   return (
-    <div className={`bg-white/40 backdrop-blur-md rounded-xl shadow-lg border border-white/30 border-l-8 ${borderColor} mb-6 transition-all duration-300 hover:shadow-xl hover:bg-white/50 hover:border-white/40`}>
+    <div 
+      className="relative bg-white/30 backdrop-blur-md rounded-xl shadow-lg border border-white/30 mb-6 transition-all duration-300 hover:shadow-xl hover:bg-white/40 overflow-hidden"
+      style={{
+        borderLeftWidth: '8px',
+        borderLeftColor: borderStyle,
+        backgroundColor: 'rgba(255, 255, 255, 0.3)',
+        backdropFilter: 'blur(12px)',
+        WebkitBackdropFilter: 'blur(12px)',
+      }}
+    >
       <button
         onClick={() => setIsExpanded(!isExpanded)}
         className="w-full p-4 md:p-6 flex items-center justify-between hover:bg-white/20 transition-all duration-300 rounded-xl backdrop-blur-sm"

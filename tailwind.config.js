@@ -5,6 +5,19 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  safelist: [
+    // 보라색 그라데이션 border 클래스들
+    'border-purple-gradient-100',
+    'border-purple-gradient-200',
+    'border-purple-gradient-300',
+    'border-purple-gradient-400',
+    'border-purple-gradient-500',
+    'border-purple-gradient-600',
+    'border-purple-gradient-700',
+    'border-purple-gradient-800',
+    'border-purple-gradient-900',
+    'border-purple-gradient-950',
+  ],
   theme: {
     extend: {
       colors: {
