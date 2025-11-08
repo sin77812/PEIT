@@ -26,12 +26,14 @@ export default function ResultCard({
   return (
     <div className={`bg-white rounded-3xl border-4 border-accent shadow-xl ${isCompact ? 'p-4' : 'p-8'}`}>
       <div className={`text-center ${isCompact ? 'mb-4' : 'mb-8'}`}>
-        <div className={`relative mx-auto mb-4 ${isCompact ? 'w-48 h-32' : 'w-full h-80'}`}>
+        <div className={`relative mx-auto mb-4 ${isCompact ? 'w-48 h-32' : 'w-full'}`}>
           <Image
             src={image}
             alt={type}
-            fill
-            className="object-contain rounded-xl"
+            width={isCompact ? 192 : 800}
+            height={isCompact ? 128 : 533}
+            className="w-full h-auto object-cover rounded-xl"
+            style={{ maxHeight: isCompact ? '128px' : '400px' }}
           />
         </div>
         <h2 className="text-4xl font-bold text-accent mb-2">{type}</h2>
