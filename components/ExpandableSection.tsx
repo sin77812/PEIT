@@ -20,10 +20,10 @@ export default function ExpandableSection({
   const [isExpanded, setIsExpanded] = useState(defaultExpanded);
 
   return (
-    <div className={`bg-white/60 backdrop-blur-lg rounded-xl shadow-lg border border-white/20 border-l-4 ${borderColor} mb-6 transition-all duration-300 hover:shadow-xl hover:bg-white/70`}>
+    <div className={`bg-white/40 backdrop-blur-md rounded-xl shadow-lg border border-white/30 border-l-8 ${borderColor} mb-6 transition-all duration-300 hover:shadow-xl hover:bg-white/50 hover:border-white/40`}>
       <button
         onClick={() => setIsExpanded(!isExpanded)}
-        className="w-full p-4 md:p-6 flex items-center justify-between hover:bg-white/30 transition-all duration-300 rounded-xl"
+        className="w-full p-4 md:p-6 flex items-center justify-between hover:bg-white/20 transition-all duration-300 rounded-xl backdrop-blur-sm"
       >
         <div className="flex items-center">
           {icon && <span className="mr-3">{icon}</span>}

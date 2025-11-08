@@ -91,8 +91,15 @@ export default function ResultPageClient({ type, showExpanded = false }: ResultP
   };
 
   return (
-    <div className="min-h-screen bg-bg-light-purple py-12">
-      <div className="max-w-4xl mx-auto px-4">
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-purple-100/30 to-white relative overflow-hidden">
+      {/* 배경 패턴 */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute top-0 left-0 w-96 h-96 bg-purple-400 rounded-full filter blur-3xl"></div>
+        <div className="absolute top-1/2 right-0 w-96 h-96 bg-purple-300 rounded-full filter blur-3xl"></div>
+        <div className="absolute bottom-0 left-1/3 w-96 h-96 bg-purple-500 rounded-full filter blur-3xl"></div>
+      </div>
+      
+      <div className="relative z-10 max-w-4xl mx-auto px-4 py-12">
         <h1 className="text-4xl font-bold text-center mb-12">
           당신의 {data.category === 'political' ? '정치' : '경제'} 성향은
         </h1>
