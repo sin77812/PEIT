@@ -23,6 +23,14 @@ export default function FlipCard({ type, data, category, title }: FlipCardProps)
     setIsFlipped(!isFlipped);
   };
 
+  // 스크롤 이벤트만 허용하고 클릭 이벤트는 차단
+  const handleBackgroundClick = (e: React.MouseEvent | React.TouchEvent) => {
+    // 스크롤 중에는 플립 방지
+    if (e.type === 'click') {
+      e.stopPropagation();
+    }
+  };
+
   return (
     <div className="relative z-0 h-[600px] w-full" style={{ perspective: '1000px' }}>
       <div 
@@ -80,7 +88,17 @@ export default function FlipCard({ type, data, category, title }: FlipCardProps)
             transform: 'rotateY(180deg)'
           }}
         >
-          <div className="h-full overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+          <div 
+            className="h-full overflow-y-auto scroll-smooth"
+            onClick={handleBackgroundClick}
+            onTouchStart={(e) => e.stopPropagation()}
+            onTouchMove={(e) => e.stopPropagation()}
+            onTouchEnd={(e) => e.stopPropagation()}
+            style={{
+              WebkitOverflowScrolling: 'touch',
+              overscrollBehavior: 'contain'
+            }}
+          >
             <ResultCard
               type={type}
               name={data.name}
@@ -98,6 +116,12 @@ export default function FlipCard({ type, data, category, title }: FlipCardProps)
             <div className="absolute top-4 right-4">
               <button
                 onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  handleFlip();
+                }}
+                onTouchEnd={(e) => {
+                  e.preventDefault();
                   e.stopPropagation();
                   handleFlip();
                 }}
