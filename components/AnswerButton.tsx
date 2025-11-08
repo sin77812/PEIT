@@ -5,6 +5,9 @@ interface AnswerButtonProps {
 }
 
 export default function AnswerButton({ option, text, onClick }: AnswerButtonProps) {
+  // 마침표 뒤에서 줄바꿈: 
+  // 문장 끝의 마침표 다음 공백을 기준으로 분리하여 각 문장을 줄바꿈 처리
+  const lines = text.split(/(?<=\.)\s+/);
   return (
     <button
       onClick={onClick}
@@ -21,7 +24,12 @@ export default function AnswerButton({ option, text, onClick }: AnswerButtonProp
         {option}
       </span>
       <span className="text-gray-800 group-hover:text-white break-keep text-pretty leading-7">
-        {text}
+        {lines.map((line, i) => (
+          <span key={i}>
+            {line}
+            {i < lines.length - 1 && <br />}
+          </span>
+        ))}
       </span>
     </button>
   );
