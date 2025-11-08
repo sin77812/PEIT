@@ -91,10 +91,20 @@ function parse() {
     const stressMatch = text.match(/스트레스[^\n]*:\s*([\s\S]*?)(\n\s*•|\n\s*돈과 일|\n\s*역사와 현실|\n\s*개인적 성장|$)/);
     if (stressMatch) data.stress_moment = normalize(stressMatch[1]);
 
+    // love/partner/barrier
+    const loveMatch = text.match(/연애 가치관[\s\S]*?\n([\s\S]*?)(\n\s*\💚|\n\s*최고의 연애 파트너|\n\s*💔|\n\s*최악의 갈등 상대|$)/);
+    if (loveMatch) data.love_value = normalize(loveMatch[1]);
+    const bestPartnerMatch = text.match(/최고의 연애 파트너[\s\S]*?\n([\s\S]*?)(\n\s*💔|\n\s*최악의 갈등 상대|\n\s*소통의 벽|$)/);
+    if (bestPartnerMatch) data.best_partner = normalize(bestPartnerMatch[1]);
+    const worstPartnerMatch = text.match(/최악의 갈등 상대[\s\S]*?\n([\s\S]*?)(\n\s*소통의 벽|\n\s*돈과 일|$)/);
+    if (worstPartnerMatch) data.worst_partner = normalize(worstPartnerMatch[1]);
+    const barrierMatch = text.match(/소통의 벽[\s\S]*?\n([\s\S]*?)(\n\s*돈과 일|\n\s*역사와 현실|\n\s*개인적 성장|$)/);
+    if (barrierMatch) data.communication_barrier = normalize(barrierMatch[1]);
+
     // career and finance
     const careerMatch = text.match(/직업적 가치관[\s\S]*?\n([\s\S]*?)(\n\s*•|\n\s*역사와 현실|\n\s*개인적 성장|$)/);
     if (careerMatch) data.career_value = normalize(careerMatch[1]);
-    const financeMatch = text.match(/재무 스타일[\s\S]*?\n([\s\S]*?)(\n\s*역사와 현실|\n\s*개인적 성장|$)/);
+    const financeMatch = text.match(/재무 스타일|잠재적 재무 스타일|돈과 일에 대한 태도[\s\S]*?\n([\s\S]*?)(\n\s*역사와 현실|\n\s*개인적 성장|$)/);
     if (financeMatch) data.money_value = normalize(financeMatch[1]);
 
     // growth task, recommended
@@ -114,6 +124,16 @@ function parse() {
     const rcMatch = text.match(/추천 영상[\/•\s\S]*?\n([^\n]+)\n/);
     if (rcMatch) data.recommended_content = normalize(rcMatch[1]);
 
+    // avatars
+    const histMatch = text.match(/역사적 아바타[\s\S]*?\n([\s\S]*?)(\n\s*현실 속 아바타|\n\s*개인적 성장|$)/);
+    if (histMatch) data.historical_avatar = normalize(histMatch[1]);
+    const realMatch = text.match(/현실 속 아바타[\s\S]*?\n([\s\S]*?)(\n\s*개인적 성장|\n\s*성장 방향성|$)/);
+    if (realMatch) data.real_avatar = normalize(realMatch[1]);
+
+    // growth direction + final goal
+    const growthDirMatch = text.match(/성장 방향성[\s\S]*?\n([\s\S]*?)(\n\s*핵심 성장 과제|\n\s*\*\*|$)/);
+    if (growthDirMatch) data.growth_direction = normalize(growthDirMatch[1]);
+
     // final goal
     const finalGoalMatch = text.match(/성장의 최종 목표[\s\S]*?\n([\s\S]*?)$/);
     if (finalGoalMatch) data.final_goal = normalize(finalGoalMatch[1]);
@@ -132,4 +152,3 @@ function main() {
 }
 
 main();
-
