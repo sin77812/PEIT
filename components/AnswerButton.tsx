@@ -23,7 +23,7 @@ export default function AnswerButton({ option, text, onClick }: AnswerButtonProp
         focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 focus-visible:ring-offset-2 focus-visible:ring-offset-white
       "
     >
-      <span className="block text-accent group-hover:text-white font-bold text-xl mb-2">
+      <span className="block text-accent group-hover:text-white font-bold text-lg mb-2">
         {option}
       </span>
       <span className="text-gray-800 group-hover:text-white break-keep text-pretty leading-7">
