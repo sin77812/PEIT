@@ -23,13 +23,6 @@ export default function FlipCard({ type, data, category, title }: FlipCardProps)
     setIsFlipped(!isFlipped);
   };
 
-  // 스크롤 이벤트만 허용하고 클릭 이벤트는 차단
-  const handleBackgroundClick = (e: React.MouseEvent | React.TouchEvent) => {
-    // 스크롤 중에는 플립 방지
-    if (e.type === 'click') {
-      e.stopPropagation();
-    }
-  };
 
   return (
     <div className="relative z-0 h-[600px] w-full" style={{ perspective: '1000px' }}>
@@ -42,12 +35,13 @@ export default function FlipCard({ type, data, category, title }: FlipCardProps)
           transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)'
         }}
       >
-        {/* 앞면 */}
+        {/* 앝면 */}
         <div 
-          className="absolute inset-0 w-full h-full pointer-events-none"
+          className="absolute inset-0 w-full h-full"
           style={{ backfaceVisibility: 'hidden' }}
+          onClick={handleFlip}
         >
-          <div className="bg-white rounded-2xl shadow-lg border-2 border-accent h-full flex flex-col items-center justify-center p-8 hover:shadow-xl transition-shadow">
+          <div className="bg-white rounded-2xl shadow-lg border-2 border-accent h-full flex flex-col items-center justify-center p-8 hover:shadow-xl transition-shadow cursor-pointer">
             <div className="relative w-64 h-64 mb-8">
               {/* 실제 이미지 표시 */}
               <div className="w-full h-full rounded-lg flex items-center justify-center overflow-hidden">
@@ -70,8 +64,11 @@ export default function FlipCard({ type, data, category, title }: FlipCardProps)
             <h2 className="text-3xl font-bold mb-4 text-center text-accent">{title}</h2>
             <p className="text-lg text-center text-gray-600 mb-8">당신의 성향을 확인해보세요</p>
             <div 
-              className="bg-accent/10 px-8 py-4 rounded-full pointer-events-auto cursor-pointer select-none"
-              onClick={handleFlip}
+              className="bg-accent/10 px-8 py-4 rounded-full cursor-pointer select-none"
+              onClick={(e) => {
+                e.stopPropagation();
+                handleFlip();
+              }}
               role="button"
               aria-label="결과 카드 뒤집기"
             >
@@ -88,17 +85,7 @@ export default function FlipCard({ type, data, category, title }: FlipCardProps)
             transform: 'rotateY(180deg)'
           }}
         >
-          <div 
-            className="h-full overflow-y-auto scroll-smooth"
-            onClick={handleBackgroundClick}
-            onTouchStart={(e) => e.stopPropagation()}
-            onTouchMove={(e) => e.stopPropagation()}
-            onTouchEnd={(e) => e.stopPropagation()}
-            style={{
-              WebkitOverflowScrolling: 'touch',
-              overscrollBehavior: 'contain'
-            }}
-          >
+          <div className="h-full overflow-y-auto" onClick={(e) => e.stopPropagation()}>
             <ResultCard
               type={type}
               name={data.name}
@@ -116,12 +103,6 @@ export default function FlipCard({ type, data, category, title }: FlipCardProps)
             <div className="absolute top-4 right-4">
               <button
                 onClick={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  handleFlip();
-                }}
-                onTouchEnd={(e) => {
-                  e.preventDefault();
                   e.stopPropagation();
                   handleFlip();
                 }}
