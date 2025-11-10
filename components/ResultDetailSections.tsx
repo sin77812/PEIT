@@ -33,11 +33,63 @@ export default function ResultDetailSections({ type, data, defaultExpanded = fal
     return (
       <div className="mt-6 space-y-4">
         {data.keywords && (
-          <ExpandableSection title={`#${data.keywords.join(' #')}`} borderColor="border-purple-gradient-100" defaultExpanded={defaultExpanded}>
-            <div className="flex flex-wrap gap-3">
-              {data.keywords.map((k: string, i: number) => (
-                <span key={i} className="px-4 py-2 bg-accent/10 text-accent rounded-full text-base font-medium">#{k}</span>
-              ))}
+          <ExpandableSection title="핵심 키워드" borderColor="border-purple-gradient-100" defaultExpanded={defaultExpanded}>
+            <div className="space-y-4">
+              <div className="flex flex-wrap gap-3">
+                {data.keywords.map((k: string, i: number) => (
+                  <span key={i} className="px-4 py-2 bg-accent/10 text-accent rounded-full text-base font-medium">#{k}</span>
+                ))}
+              </div>
+              {Array.isArray(data.strengths) && data.strengths.length > 0 && Array.isArray(data.weaknesses) && data.weaknesses.length > 0 && (
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div>
+                    <h4 className="font-semibold mb-2">강점</h4>
+                    <ul className="space-y-3">
+                      {data.strengths.map((item: string, i: number) => {
+                        const [title, ...descParts] = item.split(':');
+                        const description = descParts.join(':').trim();
+                        const hasDescription = descParts.length > 0;
+                        return (
+                          <li key={i} className="flex flex-col space-y-1">
+                            <div className="flex items-start">
+                              <span className="text-green-600 mr-2 mt-1">•</span>
+                              <div className="flex-1">
+                                <span className="font-semibold text-sm md:text-base">{title}</span>
+                                {hasDescription && (
+                                  <p className="text-gray-600 text-xs md:text-sm mt-1 leading-relaxed">{description}</p>
+                                )}
+                              </div>
+                            </div>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold mb-2">약점</h4>
+                    <ul className="space-y-3">
+                      {data.weaknesses.map((item: string, i: number) => {
+                        const [title, ...descParts] = item.split(':');
+                        const description = descParts.join(':').trim();
+                        const hasDescription = descParts.length > 0;
+                        return (
+                          <li key={i} className="flex flex-col space-y-1">
+                            <div className="flex items-start">
+                              <span className="text-red-600 mr-2 mt-1">•</span>
+                              <div className="flex-1">
+                                <span className="font-semibold text-sm md:text-base">{title}</span>
+                                {hasDescription && (
+                                  <p className="text-gray-600 text-xs md:text-sm mt-1 leading-relaxed">{description}</p>
+                                )}
+                              </div>
+                            </div>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </div>
+                </div>
+              )}
             </div>
           </ExpandableSection>
         )}
@@ -181,68 +233,73 @@ export default function ResultDetailSections({ type, data, defaultExpanded = fal
           </ExpandableSection>
         )}
 
-        {Array.isArray(data.strengths) && data.strengths.length > 0 && Array.isArray(data.weaknesses) && data.weaknesses.length > 0 && (
-          <ExpandableSection title="강점과 약점" borderColor="border-purple-gradient-950" defaultExpanded={defaultExpanded}>
-            <div className="grid md:grid-cols-2 gap-6">
-              <div>
-                <h4 className="font-semibold mb-2">강점</h4>
-                <ul className="space-y-3">
-                  {data.strengths.map((item: string, i: number) => {
-                    const [title, ...descParts] = item.split(':');
-                    const description = descParts.join(':').trim();
-                    const hasDescription = descParts.length > 0;
-                    return (
-                      <li key={i} className="flex flex-col space-y-1">
-                        <div className="flex items-start">
-                          <span className="text-green-600 mr-2 mt-1">•</span>
-                          <div className="flex-1">
-                            <span className="font-semibold text-sm md:text-base">{title}</span>
-                            {hasDescription && (
-                              <p className="text-gray-600 text-xs md:text-sm mt-1 leading-relaxed">{description}</p>
-                            )}
-                          </div>
-                        </div>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </div>
-              <div>
-                <h4 className="font-semibold mb-2">약점</h4>
-                <ul className="space-y-3">
-                  {data.weaknesses.map((item: string, i: number) => {
-                    const [title, ...descParts] = item.split(':');
-                    const description = descParts.join(':').trim();
-                    const hasDescription = descParts.length > 0;
-                    return (
-                      <li key={i} className="flex flex-col space-y-1">
-                        <div className="flex items-start">
-                          <span className="text-red-600 mr-2 mt-1">•</span>
-                          <div className="flex-1">
-                            <span className="font-semibold text-sm md:text-base">{title}</span>
-                            {hasDescription && (
-                              <p className="text-gray-600 text-xs md:text-sm mt-1 leading-relaxed">{description}</p>
-                            )}
-                          </div>
-                        </div>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </div>
-            </div>
-          </ExpandableSection>
-        )}
+        {/* 강점/약점은 핵심 키워드 섹션 내부로 통합 */}
       </div>
     );
   }
 
-  // Economic detail sections (matches screenshot ordering/labels)
+  // Economic detail sections
   return (
     <div className="mt-6 space-y-4">
-      {data.nickname && (
-        <ExpandableSection title={`#${stripEmojis(data.nickname)}`} borderColor="border-purple-gradient-100" defaultExpanded={defaultExpanded}>
-          <div className="text-gray-700">#{stripEmojis(data.nickname)}</div>
+      {data.keywords && (
+        <ExpandableSection title="핵심 키워드" borderColor="border-purple-gradient-100" defaultExpanded={defaultExpanded}>
+          <div className="space-y-4">
+            <div className="flex flex-wrap gap-3">
+              {data.keywords.map((k: string, i: number) => (
+                <span key={i} className="px-4 py-2 bg-accent/10 text-accent rounded-full text-base font-medium">#{k}</span>
+              ))}
+            </div>
+            {Array.isArray(data.strengths) && data.strengths.length > 0 && Array.isArray(data.weaknesses) && data.weaknesses.length > 0 && (
+              <div className="grid md:grid-cols-2 gap-6">
+                <div>
+                  <h4 className="font-semibold mb-2">강점</h4>
+                  <ul className="space-y-3">
+                    {data.strengths.map((item: string, i: number) => {
+                      const [title, ...descParts] = item.split(':');
+                      const description = descParts.join(':').trim();
+                      const hasDescription = descParts.length > 0;
+                      return (
+                        <li key={i} className="flex flex-col space-y-1">
+                          <div className="flex items-start">
+                            <span className="text-green-600 mr-2 mt-1">•</span>
+                            <div className="flex-1">
+                              <span className="font-semibold text-sm md:text-base">{title}</span>
+                              {hasDescription && (
+                                <p className="text-gray-600 text-xs md:text-sm mt-1 leading-relaxed">{description}</p>
+                              )}
+                            </div>
+                          </div>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
+                <div>
+                  <h4 className="font-semibold mb-2">약점</h4>
+                  <ul className="space-y-3">
+                    {data.weaknesses.map((item: string, i: number) => {
+                      const [title, ...descParts] = item.split(':');
+                      const description = descParts.join(':').trim();
+                      const hasDescription = descParts.length > 0;
+                      return (
+                        <li key={i} className="flex flex-col space-y-1">
+                          <div className="flex items-start">
+                            <span className="text-red-600 mr-2 mt-1">•</span>
+                            <div className="flex-1">
+                              <span className="font-semibold text-sm md:text-base">{title}</span>
+                              {hasDescription && (
+                                <p className="text-gray-600 text-xs md:text-sm mt-1 leading-relaxed">{description}</p>
+                              )}
+                            </div>
+                          </div>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
+              </div>
+            )}
+          </div>
         </ExpandableSection>
       )}
 
