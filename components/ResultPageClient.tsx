@@ -112,7 +112,7 @@ export default function ResultPageClient({ type, showExpanded = false }: ResultP
             {/* 핵심 키워드 */}
             {data.keywords && (
               <ExpandableSection 
-                title="#핵심키워드"
+                title="핵심 키워드"
                 borderColor="border-accent"
                 defaultExpanded={showExpanded}
               >
@@ -366,6 +366,51 @@ export default function ResultPageClient({ type, showExpanded = false }: ResultP
         {/* 경제 유형 상세 정보 - 모바일에서는 클릭 가능한 카드로 표시 */}
         {data.category === 'economic' && (
           <>
+            {/* 핵심 키워드 + 강점/약점 (데스크탑) */}
+            {data.keywords && (
+              <div className="hidden md:block mt-8">
+                <ExpandableSection 
+                  title="핵심 키워드"
+                  borderColor="border-accent"
+                  defaultExpanded={showExpanded}
+                >
+                  <div className="space-y-4">
+                    {/* 키워드 태그 */}
+                    <div className="flex flex-wrap gap-3">
+                      {data.keywords.map((keyword, i) => (
+                        <span key={i} className="px-4 py-2 bg-accent/10 text-accent rounded-full text-base font-medium">
+                          #{keyword}
+                        </span>
+                      ))}
+                    </div>
+
+                    {/* 강점과 약점 */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+                      {data.strengths && data.strengths.length > 0 && (
+                        <div>
+                          <h4 className="font-semibold text-green-600 mb-2">🌟 강점</h4>
+                          <ul className="space-y-1">
+                            {data.strengths.map((strength, i) => (
+                              <li key={i} className="text-gray-700">• {strength}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                      {data.weaknesses && data.weaknesses.length > 0 && (
+                        <div>
+                          <h4 className="font-semibold text-orange-600 mb-2">⚠️ 약점</h4>
+                          <ul className="space-y-1">
+                            {data.weaknesses.map((weakness, i) => (
+                              <li key={i} className="text-gray-700">• {weakness}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </ExpandableSection>
+              </div>
+            )}
             {/* 모바일용 클릭 가능한 카드들 */}
             <div className="md:hidden mt-8 space-y-4">
               {/* 핵심 키워드 */}
@@ -374,7 +419,7 @@ export default function ResultPageClient({ type, showExpanded = false }: ResultP
                   onClick={() => handleSectionClick('keywords')}
                   className="bg-white p-4 rounded-xl shadow-md text-left hover:shadow-lg transition-shadow w-full border-l-4 border-accent"
                 >
-                  <h3 className="text-base font-semibold mb-1">#{data.nickname || data.name}</h3>
+                  <h3 className="text-base font-semibold mb-1">핵심 키워드</h3>
                   <div className="flex gap-2 flex-wrap">
                     {data.keywords.slice(0, 3).map((keyword, i) => (
                       <span key={i} className="text-xs text-accent">#{keyword}</span>
@@ -494,16 +539,43 @@ export default function ResultPageClient({ type, showExpanded = false }: ResultP
               {/* 핵심 키워드 섹션 */}
               {data.keywords && (
                 <ExpandableSection 
-                  title={`#${data.nickname || data.name}`}
+                  title="핵심 키워드"
                   borderColor="border-accent"
                   defaultExpanded={showExpanded}
                 >
-                  <div className="flex flex-wrap gap-3">
-                    {data.keywords.map((keyword, i) => (
-                      <span key={i} className="px-4 py-2 bg-accent/10 text-accent rounded-full text-base font-medium">
-                        #{keyword}
-                      </span>
-                    ))}
+                  <div className="space-y-4">
+                    {/* 키워드 태그 */}
+                    <div className="flex flex-wrap gap-3">
+                      {data.keywords.map((keyword, i) => (
+                        <span key={i} className="px-4 py-2 bg-accent/10 text-accent rounded-full text-base font-medium">
+                          #{keyword}
+                        </span>
+                      ))}
+                    </div>
+                    
+                    {/* 강점과 약점 */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+                      {data.strengths && data.strengths.length > 0 && (
+                        <div>
+                          <h4 className="font-semibold text-green-600 mb-2">🌟 강점</h4>
+                          <ul className="space-y-1">
+                            {data.strengths.map((strength, i) => (
+                              <li key={i} className="text-gray-700">• {strength}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                      {data.weaknesses && data.weaknesses.length > 0 && (
+                        <div>
+                          <h4 className="font-semibold text-orange-600 mb-2">⚠️ 약점</h4>
+                          <ul className="space-y-1">
+                            {data.weaknesses.map((weakness, i) => (
+                              <li key={i} className="text-gray-700">• {weakness}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </ExpandableSection>
               )}
@@ -634,63 +706,7 @@ export default function ResultPageClient({ type, showExpanded = false }: ResultP
           </>
         )}
         
-        {/* 강점과 약점 (통합) */}
-        <div className="mt-8 space-y-4">
-          <ExpandableSection 
-            title="강점과 약점" 
-            borderColor="border-green-500"
-            defaultExpanded={showExpanded}
-          >
-            <div className="grid md:grid-cols-2 gap-6">
-              <div>
-                <h4 className="font-semibold mb-2">강점</h4>
-                <ul className="space-y-3 md:space-y-4">
-                  {data.strengths.map((strength, i) => {
-                    const [title, ...descParts] = strength.split(':');
-                    const description = descParts.join(':').trim();
-                    const hasDescription = descParts.length > 0;
-                    return (
-                      <li key={i} className="flex flex-col space-y-1">
-                        <div className="flex items-start">
-                          <span className="text-green-600 mr-2 mt-1">•</span>
-                          <div className="flex-1">
-                            <span className="font-semibold text-sm md:text-base">{title}</span>
-                            {hasDescription && (
-                              <p className="text-gray-600 text-xs md:text-sm mt-1 leading-relaxed">{description}</p>
-                            )}
-                          </div>
-                        </div>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </div>
-              <div>
-                <h4 className="font-semibold mb-2">약점</h4>
-                <ul className="space-y-3 md:space-y-4">
-                  {data.weaknesses.map((weakness, i) => {
-                    const [title, ...descParts] = weakness.split(':');
-                    const description = descParts.join(':').trim();
-                    const hasDescription = descParts.length > 0;
-                    return (
-                      <li key={i} className="flex flex-col space-y-1">
-                        <div className="flex items-start">
-                          <span className="text-red-600 mr-2 mt-1">•</span>
-                          <div className="flex-1">
-                            <span className="font-semibold text-sm md:text-base">{title}</span>
-                            {hasDescription && (
-                              <p className="text-gray-600 text-xs md:text-sm mt-1 leading-relaxed">{description}</p>
-                            )}
-                          </div>
-                        </div>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </div>
-            </div>
-          </ExpandableSection>
-        </div>
+        {/* 강점과 약점 하단 통합 섹션 제거: 강점/약점은 '핵심 키워드' 섹션 내부에서 노출 */}
 
         {/* 액션 버튼들 */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center mt-12">
@@ -726,22 +742,30 @@ export default function ResultPageClient({ type, showExpanded = false }: ResultP
           onClose={() => setShowDetailModal(false)}
           title={{
             nickname: data.nickname || data.name,
-            keywords: `#${data.nickname || data.name}`,
-            spectrum_analysis: '종합 경제 스펙트럼 분석',
+            keywords: '핵심 키워드',
+            spectrum_analysis: '종합 경제 스펙트럼',
             detailed_analysis: '당신은 이런 사람입니다',
-            coaching: '종합 코칭 제언',
+            coaching: '당신의 파트너십',
             synergy_partner: '시너지 파트너',
             risk_partner: '리스크 파트너',
-            success_formula: '성공 공식',
+            success_formula: '부의 공식',
             failure_formula: '실패 공식',
             benchmarking: '성공 DNA 벤치마킹',
             career_navigation: '커리어 내비게이션'
           }[selectedSection] || ''}
-          content={
-            selectedSection === 'keywords' && data.keywords
-              ? data.keywords.join(', ')
-              : (data as any)[selectedSection] || ''
-          }
+          content={(() => {
+            if (selectedSection === 'keywords' && data.keywords) {
+              const keywords = `키워드: ${data.keywords.map(k => `#${k}`).join(' ')}`;
+              const strengths = (data.strengths && data.strengths.length)
+                ? `\n\n강점\n- ${data.strengths.join('\n- ')}`
+                : '';
+              const weaknesses = (data.weaknesses && data.weaknesses.length)
+                ? `\n\n약점\n- ${data.weaknesses.join('\n- ')}`
+                : '';
+              return `${keywords}${strengths}${weaknesses}`;
+            }
+            return (data as any)[selectedSection] || '';
+          })()}
         />
       )}
     </div>
