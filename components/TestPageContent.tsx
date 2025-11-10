@@ -43,11 +43,17 @@ export default function TestPageContent() {
   const currentQuestion: Question | undefined = orderedQuestions[currentQ - 1];
 
   useEffect(() => {
+    // 테스트 타입이 변경되면 현재 질문 번호를 1로 리셋
+    setCurrentQ(1);
+    
     // localStorage에서 이전 답변 불러오기
     const storageKey = testType ? `${testType}_answers` : 'answers';
     const savedAnswers = localStorage.getItem(storageKey);
     if (savedAnswers) {
       setAnswers(JSON.parse(savedAnswers));
+    } else {
+      // 저장된 답변이 없으면 빈 객체로 초기화
+      setAnswers({});
     }
   }, [testType]);
 
