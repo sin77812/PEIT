@@ -45,13 +45,16 @@ export default function SimpleResultCard({ type }: SimpleResultCardProps) {
           </p>
         </div>
 
-        {/* 액션 버튼들 - 간단하게 */}
+        {/* 액션 버튼들 - 메인과 동일 링크 구성 */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center mt-12">
-          <Button href="/test" variant="primary" className="btn-purple">
-            나도 검사하기
+          <Button href="/test?type=political" variant="primary" className="btn-purple">
+            정치 성향 테스트
           </Button>
-          <Button href="/types" variant="outline" className="btn-purple-outline">
-            다른 유형 보기
+          <Button href="/test?type=economic" variant="primary" className="btn-purple">
+            경제 성향 테스트
+          </Button>
+          <Button href="/" variant="outline" className="btn-purple-outline">
+            메인으로 가기
           </Button>
         </div>
       </div>
