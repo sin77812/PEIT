@@ -134,3 +134,16 @@ body {
   background: #6D28D9; /* darker hover */
   border-color: #6D28D9;
 }
+
+/* Solid purple outline button */
+.btn-purple-outline {
+  background: transparent;
+  color: #7C3AED !important;
+  border: 2px solid #7C3AED;
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.15);
+}
+.btn-purple-outline:hover {
+  background: rgba(124, 58, 237, 0.1);
+  border-color: #6D28D9;
+  color: #6D28D9 !important;
+}

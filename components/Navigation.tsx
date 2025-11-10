@@ -1,12 +1,13 @@
 "use client";
 
 import { useState, useEffect } from 'react';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import Link from 'next/link';
 
 export default function Navigation() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
+  const router = useRouter();
 
   // Prevent body scroll when drawer is open
   useEffect(() => {
@@ -23,14 +24,36 @@ export default function Navigation() {
     setOpen(false);
   }, [pathname]);
 
+  const handleTestNavigation = (testType: 'political' | 'economic') => {
+    // Clear the localStorage for the test being started to ensure it begins from question 1
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem(`${testType}_currentQuestion`);
+      localStorage.removeItem(`${testType}_answers`);
+      localStorage.removeItem(`${testType}_shuffledOrder`);
+    }
+    router.push(`/test?type=${testType}`);
+  };
+
   const NavLinks = ({ onClick }: { onClick?: () => void }) => (
     <>
-      <Link href="/test?type=political" className="text-black font-bold hover:text-accent transition-colors" onClick={onClick}>
+      <button 
+        className="text-black font-bold hover:text-accent transition-colors text-left"
+        onClick={() => {
+          handleTestNavigation('political');
+          onClick?.();
+        }}
+      >
         정치 검사
-      </Link>
-      <Link href="/test?type=economic" className="text-black font-bold hover:text-accent transition-colors" onClick={onClick}>
+      </button>
+      <button 
+        className="text-black font-bold hover:text-accent transition-colors text-left"
+        onClick={() => {
+          handleTestNavigation('economic');
+          onClick?.();
+        }}
+      >
         경제 검사
-      </Link>
+      </button>
       <Link href="/types" className="text-black font-bold hover:text-accent transition-colors" onClick={onClick}>
         유형 종류
       </Link>

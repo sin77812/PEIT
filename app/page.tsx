@@ -36,10 +36,10 @@ export default function Home() {
         {/* 두 개의 테스트 버튼 */}
         <div className="flex flex-col sm:flex-row gap-4">
           <Button href="/test?type=political" size="lg">
-            정치 테스트 시작하기
+            정치성향 테스트 시작하기
           </Button>
           <Button href="/test?type=economic" size="lg">
-            경제 테스트 시작하기
+            경제성향 테스트 시작하기
           </Button>
         </div>
       </div>

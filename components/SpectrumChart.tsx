@@ -10,7 +10,7 @@ interface SpectrumChartProps {
 const spectrumLabels = {
   political: {
     '개인주의 vs 공동체주의': { left: '개인주의', right: '공동체주의' },
-    '진보주의 vs 보수주의': { left: '진보주의', right: '보수주의' },
+    '진보주의 vs 전통주의': { left: '진보주의', right: '전통주의' },
     '적극적 평등 vs 보편적 평등': { left: '적극적 평등', right: '보편적 평등' },
     '협력 우선 vs 안보 우선': { left: '협력 우선', right: '안보 우선' },
   },
@@ -21,16 +21,68 @@ const spectrumLabels = {
   }
 };
 
+// 간단한 키를 전체 축 이름으로 매핑하는 함수
+const expandKeyToFullAxis = (key: string, category: 'political' | 'economic'): string | null => {
+  const mappings = {
+    political: {
+      '개인주의': '개인주의 vs 공동체주의',
+      '진보주의': '진보주의 vs 전통주의',
+      '적극적 평등': '적극적 평등 vs 보편적 평등',
+      '협력 우선': '협력 우선 vs 안보 우선',
+      '공동체주의': '개인주의 vs 공동체주의',
+      '전통주의': '진보주의 vs 전통주의',
+      '보수주의': '진보주의 vs 전통주의', // 호환성을 위해 추가
+      '보편적 평등': '적극적 평등 vs 보편적 평등',
+      '안보 우선': '협력 우선 vs 안보 우선',
+    },
+    economic: {
+      '성장': '성장 중시 vs 안정 중시',
+      '성장 중시': '성장 중시 vs 안정 중시',
+      '안정': '성장 중시 vs 안정 중시',
+      '안정 중시': '성장 중시 vs 안정 중시',
+      '비전': '비전 투자 vs 데이터 투자',
+      '비전 투자': '비전 투자 vs 데이터 투자',
+      '데이터': '비전 투자 vs 데이터 투자',
+      '데이터 투자': '비전 투자 vs 데이터 투자',
+      '기업가': '기업가 기질 vs 안정가 기질',
+      '기업가 기질': '기업가 기질 vs 안정가 기질',
+      '안정가': '기업가 기질 vs 안정가 기질',
+      '안정가 기질': '기업가 기질 vs 안정가 기질',
+    }
+  };
+  
+  return (mappings[category] as Record<string, string>)[key] || null;
+};
+
 export default function SpectrumChart({ data, category = 'political', showAxisTitle = false }: SpectrumChartProps) {
   const labels = spectrumLabels[category];
   const barClass = category === 'political' ? 'bg-purple-500' : 'bg-red-500';
   const textClass = category === 'political' ? 'text-purple-600' : 'text-red-600';
 
+  // 데이터를 정규화하여 전체 축 이름 형식으로 변환
+  let normalizedData: { [key: string]: number } = {};
+  
+  // 이미 전체 축 이름 형식인지 확인
+  const hasFullAxisNames = Object.keys(data).some(key => key.includes(' vs '));
+  
+  if (hasFullAxisNames) {
+    // 이미 전체 형식이면 그대로 사용
+    normalizedData = data;
+  } else {
+    // 간단한 키를 전체 축 이름으로 변환
+    Object.entries(data).forEach(([key, value]) => {
+      const fullAxisName = expandKeyToFullAxis(key, category);
+      if (fullAxisName) {
+        normalizedData[fullAxisName] = value;
+      }
+    });
+  }
+
   return (
     <div className="w-full space-y-4">
-      {Object.entries(data).map(([key, value]) => {
-        const label = labels[key as keyof typeof labels] as { left: string; right: string } | undefined;
-        if (!label) return null;
+      {Object.entries(labels).map(([fullAxisKey, label]) => {
+        const value = normalizedData[fullAxisKey];
+        if (value === undefined) return null;
 
         // 50%를 기준으로 좌우 계산
         const leftPercentage = value;
@@ -39,11 +91,11 @@ export default function SpectrumChart({ data, category = 'political', showAxisTi
         const dominantValue = Math.max(leftPercentage, rightPercentage);
         
         return (
-          <div key={key} className="space-y-1">
+          <div key={fullAxisKey} className="space-y-1">
             {/* 축 제목 (옵션) */}
             {showAxisTitle && (
               <div className="text-center text-sm font-medium text-gray-700">
-                {key}
+                {fullAxisKey}
               </div>
             )}
             

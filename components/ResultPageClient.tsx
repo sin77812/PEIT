@@ -112,46 +112,63 @@ export default function ResultPageClient({ type, showExpanded = false }: ResultP
             {/* 핵심 키워드 */}
             {data.keywords && (
               <ExpandableSection 
-                title={`#${data.keywords.join(' #')}`}
+                title="#핵심키워드"
                 borderColor="border-accent"
                 defaultExpanded={showExpanded}
               >
-                <div className="flex flex-wrap gap-3">
-                  {data.keywords.map((keyword, i) => (
-                    <span key={i} className="px-4 py-2 bg-accent/10 text-accent rounded-full text-base font-medium">
-                      #{keyword}
-                    </span>
-                  ))}
-                </div>
-              </ExpandableSection>
-            )}
-            
-            {/* 한 줄 요약 */}
-            {data.summary && (
-              <ExpandableSection 
-                title="한 줄 요약"
-                borderColor="border-accent"
-                defaultExpanded={showExpanded}
-              >
-                <div className="text-gray-700 leading-relaxed">
-                  {data.summary}
+                <div className="space-y-4">
+                  {/* 키워드 태그 */}
+                  <div className="flex flex-wrap gap-3">
+                    {data.keywords.map((keyword, i) => (
+                      <span key={i} className="px-4 py-2 bg-accent/10 text-accent rounded-full text-base font-medium">
+                        #{keyword}
+                      </span>
+                    ))}
+                  </div>
+                  
+                  {/* 강점과 약점 */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+                    {data.strengths && data.strengths.length > 0 && (
+                      <div>
+                        <h4 className="font-semibold text-green-600 mb-2">🌟 강점</h4>
+                        <ul className="space-y-1">
+                          {data.strengths.map((strength, i) => (
+                            <li key={i} className="text-gray-700">• {strength}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                    {data.weaknesses && data.weaknesses.length > 0 && (
+                      <div>
+                        <h4 className="font-semibold text-orange-600 mb-2">⚠️ 약점</h4>
+                        <ul className="space-y-1">
+                          {data.weaknesses.map((weakness, i) => (
+                            <li key={i} className="text-gray-700">• {weakness}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                  </div>
                 </div>
               </ExpandableSection>
             )}
             
             {/* 종합 정치 스펙트럼 */}
-            {data.political_spectrum && data.political_spectrum_detail && (
+            {(data.political_spectrum_detail || data.summary) && (
               <ExpandableSection 
-                title={`종합 정치 스펙트럼: ${data.political_spectrum}`}
+                title="종합 정치 스펙트럼"
                 borderColor="border-accent"
                 defaultExpanded={showExpanded}
               >
                 <div 
                   className="text-gray-700 leading-relaxed"
-                  dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.political_spectrum_detail) }}
+                  dangerouslySetInnerHTML={{ 
+                    __html: renderMarkdownText(data.political_spectrum_detail || data.summary || '') 
+                  }}
                 />
               </ExpandableSection>
             )}
+            
             
             {/* 당신은 이런 사람입니다 */}
             {data.detailed_description && (
@@ -232,7 +249,7 @@ export default function ResultPageClient({ type, showExpanded = false }: ResultP
             {/* 직업적 가치관 */}
             {data.career_value && (
               <ExpandableSection 
-                title="직업적 가치관"
+                title="돈과 일에 대한 태도"
                 borderColor="border-indigo-500"
                 defaultExpanded={showExpanded}
               >
@@ -257,38 +274,35 @@ export default function ResultPageClient({ type, showExpanded = false }: ResultP
               </ExpandableSection>
             )}
             
-            {/* 역사적 아바타 */}
-            {data.historical_avatar && (
+            {/* 역사와 현실 속 아바타 */}
+            {(data.historical_avatar || data.real_avatar) && (
               <ExpandableSection 
-                title="역사적 아바타"
+                title="역사와 현실 속 당신의 아바타,유사 유형 인물 분석"
                 borderColor="border-purple-500"
                 defaultExpanded={showExpanded}
               >
-                <div 
-                  className="text-gray-700 leading-relaxed"
-                  dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.historical_avatar) }}
-                />
+                <div className="space-y-6 text-gray-700 leading-relaxed">
+                  {data.historical_avatar && (
+                    <div>
+                      <h4 className="font-semibold mb-2">역사적 아바타</h4>
+                      <div dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.historical_avatar) }} />
+                    </div>
+                  )}
+                  {data.real_avatar && (
+                    <div>
+                      <h4 className="font-semibold mb-2">현실 속 아바타</h4>
+                      <div dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.real_avatar) }} />
+                    </div>
+                  )}
+                </div>
               </ExpandableSection>
             )}
             
-            {/* 현실 속 아바타 */}
-            {data.real_avatar && (
-              <ExpandableSection 
-                title="현실 속 아바타"
-                borderColor="border-purple-500"
-                defaultExpanded={showExpanded}
-              >
-                <div 
-                  className="text-gray-700 leading-relaxed"
-                  dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.real_avatar) }}
-                />
-              </ExpandableSection>
-            )}
             
             {/* 개인적 성장과 자기계발 */}
             {data.growth_direction && (
               <ExpandableSection 
-                title="성장 방향성"
+                title="개인적 성장과 자기계발"
                 borderColor="border-green-500"
                 defaultExpanded={showExpanded}
               >
@@ -497,7 +511,7 @@ export default function ResultPageClient({ type, showExpanded = false }: ResultP
               {/* 종합 경제 스펙트럼 분석 */}
               {data.spectrum_analysis && (
                 <ExpandableSection 
-                  title="종합 경제 스펙트럼 분석"
+                  title="종합 경제 스펙트럼"
                   borderColor="border-accent"
                   defaultExpanded={showExpanded}
                 >
@@ -523,7 +537,7 @@ export default function ResultPageClient({ type, showExpanded = false }: ResultP
               
               {data.coaching && (
                 <ExpandableSection 
-                  title="종합 코칭 제언"
+                  title="당신의 파트너십"
                   icon="💡"
                   borderColor="border-accent"
                   defaultExpanded={showExpanded}
@@ -565,7 +579,7 @@ export default function ResultPageClient({ type, showExpanded = false }: ResultP
               
               {data.success_formula && (
                 <ExpandableSection 
-                  title="성공 공식"
+                  title="부의 공식"
                   icon="💰"
                   borderColor="border-blue-500"
                   defaultExpanded={showExpanded}

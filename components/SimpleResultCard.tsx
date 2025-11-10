@@ -47,10 +47,10 @@ export default function SimpleResultCard({ type }: SimpleResultCardProps) {
 
         {/* 액션 버튼들 - 간단하게 */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center mt-12">
-          <Button href="/test" variant="primary">
+          <Button href="/test" variant="primary" className="btn-purple">
             나도 검사하기
           </Button>
-          <Button href="/types" variant="outline">
+          <Button href="/types" variant="outline" className="btn-purple-outline">
             다른 유형 보기
           </Button>
         </div>
