@@ -2,20 +2,21 @@ import { Suspense } from 'react';
 import ResultPageClient from '@/components/ResultPageClient';
 
 interface ResultPageProps {
-  params: {
+  params: Promise<{
     type: string;
-  };
+  }>;
 }
 
-export default function ResultPage({ params }: ResultPageProps) {
+export default async function ResultPage({ params }: ResultPageProps) {
+  const { type } = await params;
+  
   console.log('ResultPage DEBUG:');
-  console.log('- params:', params);
-  console.log('- params.type:', params.type);
-  console.log('- type of params.type:', typeof params.type);
+  console.log('- type:', type);
+  console.log('- type of type:', typeof type);
   
   return (
     <Suspense fallback={<div>로딩 중...</div>}>
-      <ResultPageClient type={params.type} showExpanded={false} />
+      <ResultPageClient type={type} showExpanded={false} />
     </Suspense>
   );
 }
