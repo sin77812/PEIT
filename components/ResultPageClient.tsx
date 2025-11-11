@@ -726,7 +726,7 @@ export default function ResultPageClient({ type, showExpanded = false }: ResultP
 
         {/* 액션 버튼들 */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center mt-12">
-          <Button href="/result" variant="secondary" className="no-glass btn-purple">
+          <Button href="/results" variant="secondary" className="no-glass btn-purple">
             ← 결과 페이지로 돌아가기
           </Button>
           <Button href="/test" variant="primary" className="no-glass btn-purple">
