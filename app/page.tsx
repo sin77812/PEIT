@@ -20,7 +20,7 @@ export default function Home() {
         <h1 className="text-6xl md:text-8xl font-bold text-white mb-4">
           PEIT
         </h1>
-        <p className="text-xl md:text-2xl text-white mb-8">
+        <p className="text-xl md:text-2xl text-white mb-8 font-bold whitespace-nowrap">
           당신의 정치·경제 좌표
         </p>
         
