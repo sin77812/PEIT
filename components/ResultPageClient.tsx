@@ -44,6 +44,11 @@ export default function ResultPageClient({ type, showExpanded = false }: ResultP
   const [showDetailModal, setShowDetailModal] = useState(false);
   const [selectedSection, setSelectedSection] = useState<string | null>(null);
   
+  console.log('ResultPageClient DEBUG:');
+  console.log('- type prop:', type);
+  console.log('- explore param:', explore);
+  console.log('- type of type:', typeof type);
+  
   // explore=true 파라미터가 있으면 간단한 버전 표시
   if (explore === 'true') {
     return <SimpleResultCard type={type} />;

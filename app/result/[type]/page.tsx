@@ -8,6 +8,11 @@ interface ResultPageProps {
 }
 
 export default function ResultPage({ params }: ResultPageProps) {
+  console.log('ResultPage DEBUG:');
+  console.log('- params:', params);
+  console.log('- params.type:', params.type);
+  console.log('- type of params.type:', typeof params.type);
+  
   return (
     <Suspense fallback={<div>로딩 중...</div>}>
       <ResultPageClient type={params.type} showExpanded={false} />
