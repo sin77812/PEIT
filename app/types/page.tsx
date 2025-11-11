@@ -23,7 +23,7 @@ export default function TypesPage() {
         {/* 정치 유형 */}
         <section className="mb-16">
           <h2 className="text-2xl font-semibold mb-6">정치 유형 (16개)</h2>
-          <div className="grid grid-cols-4 gap-3 sm:gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
             {politicalTypes.map(({ code, name }) => (
               <Link
                 key={code}
@@ -48,7 +48,7 @@ export default function TypesPage() {
         {/* 경제 유형 */}
         <section>
           <h2 className="text-2xl font-semibold mb-6">경제 유형 (8개)</h2>
-          <div className="grid grid-cols-4 gap-3 sm:gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
             {economicTypes.map(({ code, name }) => (
               <Link
                 key={code}
