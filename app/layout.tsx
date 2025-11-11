@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   creator: 'PEIT24',
   publisher: 'PEIT24',
   verification: {
-    google: 'yYjwR4HFcKoWN2W7zihpikkSAxtV0kjLaKYLlmYm64w',
+    google: ['yYjwR4HFcKoWN2W7zihpikkSAxtV0kjLaKYLlmYm64w', 'aY-OP_HKvLbejW5qyIFKDhjkDM0h8fiK4FjvSw7OksM'],
   },
   formatDetection: {
     email: false,
