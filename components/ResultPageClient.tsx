@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { results } from '@/lib/results';
 import ResultCard from '@/components/ResultCard';
 import Button from '@/components/Button';
@@ -8,6 +9,7 @@ import ShareButton from '@/components/ShareButton';
 import { calculateResult, calculateRelativeScores } from '@/lib/calculate';
 import DetailModal from '@/components/DetailModal';
 import ExpandableSection from '@/components/ExpandableSection';
+import SimpleResultCard from '@/components/SimpleResultCard';
 
 interface ResultPageClientProps {
   type: string;
@@ -34,9 +36,18 @@ function renderMarkdownText(text: string) {
 }
 
 export default function ResultPageClient({ type, showExpanded = false }: ResultPageClientProps) {
+  const searchParams = useSearchParams();
+  const explore = searchParams.get('explore');
+  const detailed = searchParams.get('detailed');
+  
   const [data, setData] = useState(results[type]);
   const [showDetailModal, setShowDetailModal] = useState(false);
   const [selectedSection, setSelectedSection] = useState<string | null>(null);
+  
+  // explore=true 파라미터가 있으면 간단한 버전 표시
+  if (explore === 'true') {
+    return <SimpleResultCard type={type} />;
+  }
   
   useEffect(() => {
     if (!results[type]) return;
