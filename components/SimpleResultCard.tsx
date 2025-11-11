@@ -9,8 +9,30 @@ interface SimpleResultCardProps {
 export default function SimpleResultCard({ type }: SimpleResultCardProps) {
   const data = results[type];
 
+  console.log('SimpleResultCard DEBUG:');
+  console.log('- type:', type);
+  console.log('- data:', data);
+  console.log('- results keys:', Object.keys(results));
+  console.log('- has IPUE?', 'IPUE' in results);
+
   if (!data) {
-    return <div>결과를 찾을 수 없습니다.</div>;
+    return (
+      <div className="min-h-screen bg-red-100 p-8">
+        <div className="max-w-2xl mx-auto bg-white p-8 rounded-lg">
+          <h1 className="text-2xl font-bold text-red-600 mb-4">디버그 정보</h1>
+          <p><strong>요청된 type:</strong> "{type}"</p>
+          <p><strong>type의 타입:</strong> {typeof type}</p>
+          <p><strong>사용 가능한 키들:</strong></p>
+          <ul className="list-disc pl-6">
+            {Object.keys(results).map(key => (
+              <li key={key} className={key === type ? 'text-green-600 font-bold' : ''}>
+                {key} {key === type && '← 매치!'}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    );
   }
 
   // IPUE는 PNG 파일이므로 특별 처리
