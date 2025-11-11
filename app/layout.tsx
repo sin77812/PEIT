@@ -13,6 +13,9 @@ export const metadata: Metadata = {
   publisher: 'PEIT24',
   verification: {
     google: ['yYjwR4HFcKoWN2W7zihpikkSAxtV0kjLaKYLlmYm64w', 'aY-OP_HKvLbejW5qyIFKDhjkDM0h8fiK4FjvSw7OksM'],
+    other: {
+      'naver-site-verification': '62329bb9560fad8cb9d75900ac2459876081462a',
+    },
   },
   formatDetection: {
     email: false,
