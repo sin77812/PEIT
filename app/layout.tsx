@@ -11,6 +11,9 @@ export const metadata: Metadata = {
   authors: [{ name: 'PEIT Team' }],
   creator: 'PEIT24',
   publisher: 'PEIT24',
+  verification: {
+    google: 'yYjwR4HFcKoWN2W7zihpikkSAxtV0kjLaKYLlmYm64w',
+  },
   formatDetection: {
     email: false,
     address: false,
