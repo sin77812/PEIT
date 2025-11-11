@@ -4,7 +4,7 @@ import Navigation from '@/components/Navigation'
 import Footer from '@/components/Footer'
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://sin77812.github.io/PEIT'),
+  metadataBase: new URL('https://www.peit24.co.kr'),
   title: 'PEIT - 정치성향테스트, 경제성향테스트 | 정치mbti',
   description: '정치성향테스트 PEIT24! 69개 질문으로 나의정치성향 알아보기. 진보보수차이, 좌파우파차이를 쉽게 이해하고 정치mbti로 재미있게 확인해보세요.',
   keywords: '정치성향테스트, PEIT24, 정치mbti, 진보보수차이, 좌파우파차이, 나의정치성향, 정치성향알아보기, 경제성향테스트, 폴리티컬컴퍼스, 정치좌표테스트, 정치잘모르는데, 나는진보일까보수일까, 나랑맞는정당, 투표전테스트, 재미있는정치테스트, 정치처음, 정치색깔, 성향테스트, 정치유형, 좌파우파뜻, 진보뜻, 보수뜻, 정치스펙트럼, 정치이념, 중도성향, 정치입문, 청년정치, 친구랑할테스트, 심심풀이테스트, mbti말고',
@@ -29,11 +29,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'PEIT - 정치성향테스트, 정치mbti로 나의정치성향 알아보기',
     description: '69개 질문으로 정치성향테스트! 진보보수, 좌파우파 쉽게 이해하고 나랑맞는정당 찾기. 재미있는정치테스트 PEIT24',
-    url: 'https://sin77812.github.io/PEIT',
+    url: 'https://www.peit24.co.kr',
     siteName: 'PEIT24 - 정치경제성향테스트',
     images: [
       {
-        url: 'https://sin77812.github.io/PEIT/images/forshare.jpg',
+        url: 'https://www.peit24.co.kr/images/forshare.jpg',
         width: 1200,
         height: 630,
         alt: 'PEIT24 정치성향테스트 - 정치mbti로 나의정치성향 알아보기',
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'PEIT - 정치성향테스트, 정치mbti',
     description: '정치잘모르는데? 69개 질문으로 쉽게 알아보는 나의정치성향! 진보보수차이 이해하고 정치mbti 확인',
-    images: ['https://sin77812.github.io/PEIT/images/forshare.jpg'],
+    images: ['https://www.peit24.co.kr/images/forshare.jpg'],
     creator: '@peit24',
     site: '@peit24',
   },
@@ -62,7 +62,7 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: 'https://peit24.com',
+    canonical: 'https://www.peit24.co.kr',
   },
 }
 
