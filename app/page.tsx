@@ -16,11 +16,11 @@ export default function Home() {
       </div>
       
       {/* 중앙 콘텐츠 */}
-      <div className="relative z-10 flex flex-col items-center justify-start h-full px-4 pt-[calc(25vh+4rem-10vh)] sm:pt-[calc(25vh+4rem-6.25vh-10vh)] md:pt-[calc(25vh+4rem)]">
+      <div className="relative z-10 flex flex-col items-center justify-start h-full px-8 sm:px-12 md:px-4 pt-[calc(25vh+4rem-10vh)] sm:pt-[calc(25vh+4rem-6.25vh-10vh)] md:pt-[calc(25vh+4rem)]">
         <h1 className="text-6xl md:text-8xl font-bold text-white mb-4">
           PEIT
         </h1>
-        <p className="text-xl md:text-2xl text-white mb-8 font-bold whitespace-nowrap">
+        <p className="text-lg sm:text-xl md:text-2xl text-white mb-8 font-bold whitespace-nowrap">
           당신의 정치·경제 좌표
         </p>
         
