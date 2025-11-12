@@ -115,6 +115,7 @@ export default function ResultPageClient({ type, showExpanded = false }: ResultP
           scores={data.scores}
           description={data.description}
           category={data.category}
+          hideDetailButton={data.category === 'economic'}
         />
 
         {/* 정치 유형 상세 정보 - 확장 가능한 섹션들 */}
@@ -377,51 +378,6 @@ export default function ResultPageClient({ type, showExpanded = false }: ResultP
         {/* 경제 유형 상세 정보 - 모바일에서는 클릭 가능한 카드로 표시 */}
         {data.category === 'economic' && (
           <>
-            {/* 핵심 키워드 + 강점/약점 (데스크탑) */}
-            {data.keywords && (
-              <div className="hidden md:block mt-8">
-                <ExpandableSection 
-                  title="핵심 키워드"
-                  borderColor="border-accent"
-                  defaultExpanded={showExpanded}
-                >
-                  <div className="space-y-4">
-                    {/* 키워드 태그 */}
-                    <div className="flex flex-wrap gap-3">
-                      {data.keywords.map((keyword, i) => (
-                        <span key={i} className="px-4 py-2 bg-accent/10 text-accent rounded-full text-base font-medium">
-                          #{keyword}
-                        </span>
-                      ))}
-                    </div>
-
-                    {/* 강점과 약점 */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
-                      {data.strengths && data.strengths.length > 0 && (
-                        <div>
-                          <h4 className="font-semibold text-green-600 mb-2">🌟 강점</h4>
-                          <ul className="space-y-1">
-                            {data.strengths.map((strength, i) => (
-                              <li key={i} className="text-gray-700">• {strength}</li>
-                            ))}
-                          </ul>
-                        </div>
-                      )}
-                      {data.weaknesses && data.weaknesses.length > 0 && (
-                        <div>
-                          <h4 className="font-semibold text-orange-600 mb-2">⚠️ 약점</h4>
-                          <ul className="space-y-1">
-                            {data.weaknesses.map((weakness, i) => (
-                              <li key={i} className="text-gray-700">• {weakness}</li>
-                            ))}
-                          </ul>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                </ExpandableSection>
-              </div>
-            )}
             {/* 모바일용 클릭 가능한 카드들 */}
             <div className="md:hidden mt-8 space-y-4">
               {/* 핵심 키워드 */}
@@ -469,9 +425,7 @@ export default function ResultPageClient({ type, showExpanded = false }: ResultP
                   onClick={() => handleSectionClick('coaching')}
                   className="bg-white p-4 rounded-xl shadow-md text-left hover:shadow-lg transition-shadow w-full border-l-4 border-accent"
                 >
-                  <h3 className="text-base font-semibold mb-1 flex items-center">
-                    <span className="mr-2">💡</span> 종합 코칭
-                  </h3>
+                  <h3 className="text-base font-semibold mb-1">종합 코칭</h3>
                   <p className="text-xs text-gray-500">맞춤형 조언</p>
                 </button>
               )}
@@ -483,7 +437,7 @@ export default function ResultPageClient({ type, showExpanded = false }: ResultP
                     onClick={() => handleSectionClick('synergy_partner')}
                     className="bg-white p-4 rounded-xl shadow-md text-left hover:shadow-lg transition-shadow border-l-4 border-green-500"
                   >
-                    <h3 className="text-sm font-semibold mb-1 text-green-600">🤝 시너지</h3>
+                    <h3 className="text-sm font-semibold mb-1 text-green-600">시너지</h3>
                     <p className="text-xs text-gray-500">최고의 파트너</p>
                   </button>
                 )}
@@ -493,7 +447,7 @@ export default function ResultPageClient({ type, showExpanded = false }: ResultP
                     onClick={() => handleSectionClick('risk_partner')}
                     className="bg-white p-4 rounded-xl shadow-md text-left hover:shadow-lg transition-shadow border-l-4 border-red-500"
                   >
-                    <h3 className="text-sm font-semibold mb-1 text-red-600">🔥 리스크</h3>
+                    <h3 className="text-sm font-semibold mb-1 text-red-600">리스크</h3>
                     <p className="text-xs text-gray-500">주의할 파트너</p>
                   </button>
                 )}
@@ -508,7 +462,7 @@ export default function ResultPageClient({ type, showExpanded = false }: ResultP
                       onClick={() => handleSectionClick('success_formula')}
                       className="p-3 rounded-lg border-2 border-blue-200 hover:bg-blue-50 transition-colors"
                     >
-                      <h4 className="text-sm font-semibold text-blue-600">💰 성공</h4>
+                      <h4 className="text-sm font-semibold text-blue-600">성공</h4>
                     </button>
                   )}
                   
@@ -517,7 +471,7 @@ export default function ResultPageClient({ type, showExpanded = false }: ResultP
                       onClick={() => handleSectionClick('failure_formula')}
                       className="p-3 rounded-lg border-2 border-orange-200 hover:bg-orange-50 transition-colors"
                     >
-                      <h4 className="text-sm font-semibold text-orange-600">💸 실패</h4>
+                      <h4 className="text-sm font-semibold text-orange-600">실패</h4>
                     </button>
                   )}
                 </div>
@@ -621,7 +575,6 @@ export default function ResultPageClient({ type, showExpanded = false }: ResultP
               {data.coaching && (
                 <ExpandableSection 
                   title="당신의 파트너십"
-                  icon="💡"
                   borderColor="border-accent"
                   defaultExpanded={showExpanded}
                 >
@@ -635,7 +588,6 @@ export default function ResultPageClient({ type, showExpanded = false }: ResultP
               {data.synergy_partner && (
                 <ExpandableSection 
                   title="시너지 파트너"
-                  icon="🤝"
                   borderColor="border-green-500"
                   defaultExpanded={showExpanded}
                 >
@@ -649,7 +601,6 @@ export default function ResultPageClient({ type, showExpanded = false }: ResultP
               {data.risk_partner && (
                 <ExpandableSection 
                   title="리스크 파트너"
-                  icon="🔥"
                   borderColor="border-red-500"
                   defaultExpanded={showExpanded}
                 >
@@ -663,7 +614,6 @@ export default function ResultPageClient({ type, showExpanded = false }: ResultP
               {data.success_formula && (
                 <ExpandableSection 
                   title="부의 공식"
-                  icon="💰"
                   borderColor="border-blue-500"
                   defaultExpanded={showExpanded}
                 >
@@ -677,7 +627,6 @@ export default function ResultPageClient({ type, showExpanded = false }: ResultP
               {data.failure_formula && (
                 <ExpandableSection 
                   title="실패 공식"
-                  icon="💸"
                   borderColor="border-orange-500"
                   defaultExpanded={showExpanded}
                 >
