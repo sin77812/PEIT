@@ -7,7 +7,6 @@ import ResultCard from '@/components/ResultCard';
 import Button from '@/components/Button';
 import ShareButton from '@/components/ShareButton';
 import { calculateResult, calculateRelativeScores } from '@/lib/calculate';
-import DetailModal from '@/components/DetailModal';
 import ExpandableSection from '@/components/ExpandableSection';
 import SimpleResultCard from '@/components/SimpleResultCard';
 
@@ -41,8 +40,6 @@ export default function ResultPageClient({ type, showExpanded = false }: ResultP
   const detailed = searchParams.get('detailed');
   
   const [data, setData] = useState(results[type]);
-  const [showDetailModal, setShowDetailModal] = useState(false);
-  const [selectedSection, setSelectedSection] = useState<string | null>(null);
   
   // explore=true 파라미터가 있으면 간단한 버전 표시
   if (explore === 'true') {
@@ -95,11 +92,6 @@ export default function ResultPageClient({ type, showExpanded = false }: ResultP
   };
 
   const otherType = getOtherTypeResult();
-
-  const handleSectionClick = (section: string) => {
-    setSelectedSection(section);
-    setShowDetailModal(true);
-  };
 
   return (
     <div className="min-h-screen bg-bg-light-purple">
@@ -375,132 +367,9 @@ export default function ResultPageClient({ type, showExpanded = false }: ResultP
           </div>
         )}
         
-        {/* 경제 유형 상세 정보 - 모바일에서는 클릭 가능한 카드로 표시 */}
+        {/* 경제 유형 상세 정보 - 확장 가능한 섹션들 (모바일/데스크톱 공통) */}
         {data.category === 'economic' && (
-          <>
-            {/* 모바일용 클릭 가능한 카드들 */}
-            <div className="md:hidden mt-8 space-y-4">
-              {/* 핵심 키워드 */}
-              {data.keywords && (
-                <button
-                  onClick={() => handleSectionClick('keywords')}
-                  className="bg-white p-4 rounded-xl shadow-md text-left hover:shadow-lg transition-shadow w-full border-l-4 border-accent"
-                >
-                  <h3 className="text-base font-semibold mb-1">핵심 키워드</h3>
-                  <div className="flex gap-2 flex-wrap">
-                    {data.keywords.slice(0, 3).map((keyword, i) => (
-                      <span key={i} className="text-xs text-accent">#{keyword}</span>
-                    ))}
-                    {data.keywords.length > 3 && <span className="text-xs text-gray-500">...</span>}
-                  </div>
-                </button>
-              )}
-              
-              {/* 주요 분석 섹션들 */}
-              <div className="grid grid-cols-2 gap-3">
-                {data.spectrum_analysis && (
-                  <button
-                    onClick={() => handleSectionClick('spectrum_analysis')}
-                    className="bg-white p-4 rounded-xl shadow-md text-left hover:shadow-lg transition-shadow"
-                  >
-                    <h3 className="text-sm font-semibold mb-1">경제 스펙트럼</h3>
-                    <p className="text-xs text-gray-500">종합 분석</p>
-                  </button>
-                )}
-                
-                {data.detailed_analysis && (
-                  <button
-                    onClick={() => handleSectionClick('detailed_analysis')}
-                    className="bg-white p-4 rounded-xl shadow-md text-left hover:shadow-lg transition-shadow"
-                  >
-                    <h3 className="text-sm font-semibold mb-1">성향 분석</h3>
-                    <p className="text-xs text-gray-500">상세 설명</p>
-                  </button>
-                )}
-              </div>
-              
-              {/* 코칭 섹션 */}
-              {data.coaching && (
-                <button
-                  onClick={() => handleSectionClick('coaching')}
-                  className="bg-white p-4 rounded-xl shadow-md text-left hover:shadow-lg transition-shadow w-full border-l-4 border-accent"
-                >
-                  <h3 className="text-base font-semibold mb-1">종합 코칭</h3>
-                  <p className="text-xs text-gray-500">맞춤형 조언</p>
-                </button>
-              )}
-              
-              {/* 파트너십 */}
-              <div className="grid grid-cols-2 gap-3">
-                {data.synergy_partner && (
-                  <button
-                    onClick={() => handleSectionClick('synergy_partner')}
-                    className="bg-white p-4 rounded-xl shadow-md text-left hover:shadow-lg transition-shadow border-l-4 border-green-500"
-                  >
-                    <h3 className="text-sm font-semibold mb-1 text-green-600">시너지</h3>
-                    <p className="text-xs text-gray-500">최고의 파트너</p>
-                  </button>
-                )}
-                
-                {data.risk_partner && (
-                  <button
-                    onClick={() => handleSectionClick('risk_partner')}
-                    className="bg-white p-4 rounded-xl shadow-md text-left hover:shadow-lg transition-shadow border-l-4 border-red-500"
-                  >
-                    <h3 className="text-sm font-semibold mb-1 text-red-600">리스크</h3>
-                    <p className="text-xs text-gray-500">주의할 파트너</p>
-                  </button>
-                )}
-              </div>
-              
-              {/* 부의 공식 */}
-              <div className="bg-white p-4 rounded-xl shadow-md">
-                <h3 className="text-base font-semibold mb-3 text-center">부(富)의 공식</h3>
-                <div className="grid grid-cols-2 gap-3">
-                  {data.success_formula && (
-                    <button
-                      onClick={() => handleSectionClick('success_formula')}
-                      className="p-3 rounded-lg border-2 border-blue-200 hover:bg-blue-50 transition-colors"
-                    >
-                      <h4 className="text-sm font-semibold text-blue-600">성공</h4>
-                    </button>
-                  )}
-                  
-                  {data.failure_formula && (
-                    <button
-                      onClick={() => handleSectionClick('failure_formula')}
-                      className="p-3 rounded-lg border-2 border-orange-200 hover:bg-orange-50 transition-colors"
-                    >
-                      <h4 className="text-sm font-semibold text-orange-600">실패</h4>
-                    </button>
-                  )}
-                </div>
-              </div>
-              
-              {/* 벤치마킹 & 커리어 */}
-              {data.benchmarking && (
-                <button
-                  onClick={() => handleSectionClick('benchmarking')}
-                  className="bg-white p-4 rounded-xl shadow-md text-left hover:shadow-lg transition-shadow w-full border-t-4 border-accent"
-                >
-                  <h3 className="text-base font-semibold mb-1">성공 DNA 벤치마킹</h3>
-                  <p className="text-xs text-gray-500">당신과 닮은 성공 인물</p>
-                </button>
-              )}
-              
-              {data.career_navigation && (
-                <button
-                  onClick={() => handleSectionClick('career_navigation')}
-                  className="bg-white p-4 rounded-xl shadow-md text-left hover:shadow-lg transition-shadow w-full border-t-4 border-indigo-500"
-                >
-                  <h3 className="text-base font-semibold mb-1">커리어 내비게이션</h3>
-                  <p className="text-xs text-gray-500">추천 직업 & 성장 로드맵</p>
-                </button>
-              )}
-            </div>
-
-            {/* 데스크톱용 확장 가능한 섹션들 */}
-            <div className="hidden md:block mt-8 space-y-4">
+          <div className="mt-8 space-y-4">
               {/* 핵심 키워드 섹션 */}
               {data.keywords && (
                 <ExpandableSection 
@@ -662,8 +531,7 @@ export default function ResultPageClient({ type, showExpanded = false }: ResultP
                   />
                 </ExpandableSection>
               )}
-            </div>
-          </>
+          </div>
         )}
         
         {/* 강점과 약점 하단 통합 섹션 제거: 강점/약점은 '핵심 키워드' 섹션 내부에서 노출 */}
@@ -691,40 +559,6 @@ export default function ResultPageClient({ type, showExpanded = false }: ResultP
           />
         </div>
       </div>
-      
-      {/* 모바일 상세 정보 모달 */}
-      {showDetailModal && selectedSection && data.category === 'economic' && (
-        <DetailModal
-          isOpen={showDetailModal}
-          onClose={() => setShowDetailModal(false)}
-          title={{
-            nickname: data.nickname || data.name,
-            keywords: '핵심 키워드',
-            spectrum_analysis: '종합 경제 스펙트럼',
-            detailed_analysis: '당신은 이런 사람입니다',
-            coaching: '당신의 파트너십',
-            synergy_partner: '시너지 파트너',
-            risk_partner: '리스크 파트너',
-            success_formula: '부의 공식',
-            failure_formula: '실패 공식',
-            benchmarking: '성공 DNA 벤치마킹',
-            career_navigation: '커리어 내비게이션'
-          }[selectedSection] || ''}
-          content={(() => {
-            if (selectedSection === 'keywords' && data.keywords) {
-              const keywords = `키워드: ${data.keywords.map(k => `#${k}`).join(' ')}`;
-              const strengths = (data.strengths && data.strengths.length)
-                ? `\n\n강점\n- ${data.strengths.join('\n- ')}`
-                : '';
-              const weaknesses = (data.weaknesses && data.weaknesses.length)
-                ? `\n\n약점\n- ${data.weaknesses.join('\n- ')}`
-                : '';
-              return `${keywords}${strengths}${weaknesses}`;
-            }
-            return (data as any)[selectedSection] || '';
-          })()}
-        />
-      )}
     </div>
   );
 }
