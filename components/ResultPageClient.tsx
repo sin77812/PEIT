@@ -107,7 +107,7 @@ export default function ResultPageClient({ type, showExpanded = false }: ResultP
           scores={data.scores}
           description={data.description}
           category={data.category}
-          hideDetailButton={data.category === 'economic'}
+          hideDetailButton={true}
         />
 
         {/* 정치 유형 상세 정보 - 확장 가능한 섹션들 */}

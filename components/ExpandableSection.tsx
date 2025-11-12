@@ -41,25 +41,18 @@ export default function ExpandableSection({
 
   return (
     <div 
-      className="relative bg-white/30 backdrop-blur-md rounded-xl shadow-lg border border-white/30 mb-6 transition-all duration-300 hover:shadow-xl hover:bg-white/40 overflow-hidden"
-      style={{
-        backgroundColor: 'rgba(255, 255, 255, 0.3)',
-        backdropFilter: 'blur(12px)',
-        WebkitBackdropFilter: 'blur(12px)',
-      }}
+      className="relative bg-white rounded-xl shadow-lg border border-gray-200 mb-6 transition-all duration-300 hover:shadow-xl overflow-hidden"
     >
-      {/* 왼쪽 액센트 바 - 글래스모피즘 효과 적용 */}
+      {/* 왼쪽 액센트 바 */}
       <div 
-        className="absolute left-0 top-0 bottom-0 w-1 rounded-l-xl"
+        className="absolute left-0 top-0 bottom-0 w-1"
         style={{
-          backgroundColor: `${borderStyle}80`,
-          backdropFilter: 'blur(8px)',
-          WebkitBackdropFilter: 'blur(8px)',
+          backgroundColor: borderStyle,
         }}
       />
       <button
         onClick={() => setIsExpanded(!isExpanded)}
-        className="w-full p-4 md:p-6 flex items-center justify-between hover:bg-white/20 transition-all duration-300 rounded-xl backdrop-blur-sm"
+        className="w-full p-4 md:p-6 flex items-center justify-between hover:bg-gray-50 transition-all duration-300 rounded-xl"
       >
         <div className="flex items-center">
           {icon && <span className="mr-3">{icon}</span>}
