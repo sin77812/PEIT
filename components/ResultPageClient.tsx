@@ -119,6 +119,7 @@ export default function ResultPageClient({ type, showExpanded = false }: ResultP
           image={imagePath}
           scores={data.scores}
           description={data.description}
+          hideDetailButton={true}
           category={data.category}
         />
 
