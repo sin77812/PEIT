@@ -35,7 +35,7 @@ export default function TypesPage() {
                     src={`/images/political/${code}.${code === 'IPUE' ? 'png' : 'jpg'}`}
                     alt={name}
                     fill
-                    className="object-contain rounded"
+                    className="object-contain rounded-xl"
                   />
                 </div>
                 <h3 className="font-bold text-accent text-center">{code}</h3>
@@ -60,7 +60,7 @@ export default function TypesPage() {
                     src={`/images/economic/${code}.jpg`}
                     alt={name}
                     fill
-                    className="object-contain rounded"
+                    className="object-contain rounded-xl"
                   />
                 </div>
                 <h3 className="font-bold text-accent text-center">{code}</h3>
