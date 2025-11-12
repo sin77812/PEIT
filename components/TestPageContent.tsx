@@ -8,6 +8,7 @@ import AnswerButton from '@/components/AnswerButton';
 import { questions } from '@/lib/questions';
 import { Question } from '@/lib/types';
 import { DISPLAY_ORDER, DISPLAY_ORDER_BOTH } from '@/lib/order';
+import { calculatePoliticalType, calculateEconomicType, calculateResult } from '@/lib/calculate';
 
 export default function TestPageContent() {
   const router = useRouter();
@@ -76,16 +77,20 @@ export default function TestPageContent() {
       } else {
         // 마지막 질문 완료 - 결과 계산 후 해당 페이지로 이동
         if (testType === 'political') {
-          // 정치 테스트만 완료한 경우 - 경제 테스트로 안내하거나 정치 결과만 보여주기
+          // 정치 테스트만 완료한 경우
           localStorage.setItem('political_answers', JSON.stringify(newAnswers));
-          router.push('/result?type=political');
+          const politicalType = calculatePoliticalType(newAnswers);
+          router.push(`/result/${politicalType}`);
         } else if (testType === 'economic') {
-          // 경제 테스트만 완료한 경우 - 정치 테스트로 안내하거나 경제 결과만 보여주기
+          // 경제 테스트만 완료한 경우
           localStorage.setItem('economic_answers', JSON.stringify(newAnswers));
-          router.push('/result?type=economic');
+          const economicType = calculateEconomicType(newAnswers);
+          router.push(`/result/${economicType}`);
         } else {
           // 전체 테스트 완료
-          router.push('/result');
+          const result = calculateResult(newAnswers);
+          // 정치 유형으로 리다이렉트 (전체 테스트의 경우)
+          router.push(`/result/${result.political}`);
         }
       }
     }, 300);
