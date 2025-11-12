@@ -721,6 +721,12 @@ export default function ResultPageClient({ type, showExpanded = false }: ResultP
 
         {/* 액션 버튼들 */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center mt-12">
+          {/* 경제 타입일 때만 결과 페이지로 돌아가기 버튼 표시 (d66cc86 버전과 동일) */}
+          {data.category === 'economic' && (
+            <Button href="/result" variant="secondary" className="no-glass btn-purple">
+              ← 결과 페이지로 돌아가기
+            </Button>
+          )}
           <Button href="/test" variant="primary" className="no-glass btn-purple">
             다시 검사하기
           </Button>

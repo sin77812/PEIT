@@ -7,12 +7,21 @@ interface ResultPageProps {
   }>;
 }
 
+// 경제 타입 목록
+const ECONOMIC_TYPES = ['GVE', 'GVW', 'GAE', 'GAW', 'SVE', 'SVW', 'SAE', 'SAW'];
+
 export default async function ResultPage({ params }: ResultPageProps) {
   const { type } = await params;
   
-  console.log('ResultPage DEBUG:');
-  console.log('- type:', type);
-  console.log('- type of type:', typeof type);
+  // 경제 타입인지 확인
+  const isEconomicType = ECONOMIC_TYPES.includes(type);
+  
+  // 경제 타입일 때는 디버그 로그 제거 (d66cc86 버전과 동일하게)
+  if (!isEconomicType) {
+    console.log('ResultPage DEBUG:');
+    console.log('- type:', type);
+    console.log('- type of type:', typeof type);
+  }
   
   return (
     <Suspense fallback={<div>로딩 중...</div>}>
