@@ -441,68 +441,47 @@ export default function ResultPageClient({ type, showExpanded = false }: ResultP
                 </ExpandableSection>
               )}
               
-              {data.coaching && (
+              {/* 당신의 파트너십 - 시너지 파트너와 리스크 파트너를 하나의 섹션으로 */}
+              {(data.synergy_partner || data.risk_partner) && (
                 <ExpandableSection 
                   title="당신의 파트너십"
                   borderColor="border-accent"
                   defaultExpanded={showExpanded}
                 >
-                  <div 
-                    className="text-gray-700 leading-relaxed"
-                    dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.coaching) }}
-                  />
+                  <div className="space-y-6 text-gray-700 leading-relaxed">
+                    {data.synergy_partner && (
+                      <div 
+                        dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.synergy_partner) }}
+                      />
+                    )}
+                    {data.risk_partner && (
+                      <div 
+                        dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.risk_partner) }}
+                      />
+                    )}
+                  </div>
                 </ExpandableSection>
               )}
               
-              {data.synergy_partner && (
-                <ExpandableSection 
-                  title="시너지 파트너"
-                  borderColor="border-green-500"
-                  defaultExpanded={showExpanded}
-                >
-                  <div 
-                    className="text-gray-700 leading-relaxed"
-                    dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.synergy_partner) }}
-                  />
-                </ExpandableSection>
-              )}
-              
-              {data.risk_partner && (
-                <ExpandableSection 
-                  title="리스크 파트너"
-                  borderColor="border-red-500"
-                  defaultExpanded={showExpanded}
-                >
-                  <div 
-                    className="text-gray-700 leading-relaxed"
-                    dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.risk_partner) }}
-                  />
-                </ExpandableSection>
-              )}
-              
-              {data.success_formula && (
+              {/* 부의 공식 - 성공 공식과 실패 공식을 하나의 섹션으로 */}
+              {(data.success_formula || data.failure_formula) && (
                 <ExpandableSection 
                   title="부의 공식"
                   borderColor="border-blue-500"
                   defaultExpanded={showExpanded}
                 >
-                  <div 
-                    className="text-gray-700 leading-relaxed"
-                    dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.success_formula) }}
-                  />
-                </ExpandableSection>
-              )}
-              
-              {data.failure_formula && (
-                <ExpandableSection 
-                  title="실패 공식"
-                  borderColor="border-orange-500"
-                  defaultExpanded={showExpanded}
-                >
-                  <div 
-                    className="text-gray-700 leading-relaxed"
-                    dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.failure_formula) }}
-                  />
+                  <div className="space-y-6 text-gray-700 leading-relaxed">
+                    {data.success_formula && (
+                      <div 
+                        dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.success_formula) }}
+                      />
+                    )}
+                    {data.failure_formula && (
+                      <div 
+                        dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.failure_formula) }}
+                      />
+                    )}
+                  </div>
                 </ExpandableSection>
               )}
               
