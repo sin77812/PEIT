@@ -294,18 +294,62 @@ export default function ResultPageClient({ type, showExpanded = false }: ResultP
                 defaultExpanded={showExpanded}
               >
                 <div className="space-y-6 text-gray-700 leading-relaxed">
-                  {data.historical_avatar && (
-                    <div>
-                      <h4 className="font-semibold mb-2">역사적 아바타</h4>
-                      <div dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.historical_avatar) }} />
-                    </div>
-                  )}
-                  {data.real_avatar && (
-                    <div>
-                      <h4 className="font-semibold mb-2">현실 속 아바타</h4>
-                      <div dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.real_avatar) }} />
-                    </div>
-                  )}
+                  {data.historical_avatar && (() => {
+                    // 인물 이름 추출
+                    // 패턴 1: "인물 이름 (설명) -" 예: "나폴레옹 보나파르트 (프랑스의 황제) -"
+                    // 패턴 2: "인물 이름은" 예: "케네디는"
+                    // 패턴 3: "인물 이름 (설명) -" 예: "존 스튜어트 밀 (영국의 철학자, 정치경제학자) -"
+                    let personName = null;
+                    const pattern1 = data.historical_avatar.match(/^([^\(]+?)\s*\([^\)]+\)\s*-\s*/);
+                    const pattern2 = data.historical_avatar.match(/^([^는은]+?)(?:는|은)\s/);
+                    if (pattern1) {
+                      personName = pattern1[1].trim();
+                    } else if (pattern2) {
+                      personName = pattern2[1].trim();
+                    }
+                    return (
+                      <div>
+                        <h4 className="font-semibold mb-2 text-lg">
+                          역사적 아바타{personName ? `: ${personName}` : ''}
+                        </h4>
+                        <div dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.historical_avatar) }} />
+                      </div>
+                    );
+                  })()}
+                  {data.real_avatar && (() => {
+                    // 현실 속 아바타의 인물/그룹 이름 추출
+                    // 패턴 1: "설명" 예: "기성 정치에 반기를 드는 제3지대의 젊은 개혁가"
+                    // 패턴 2: "이들은..." 형태에서 첫 문장의 핵심 키워드 추출
+                    let avatarName = null;
+                    const quotedMatch = data.real_avatar.match(/^"([^"]+)"/);
+                    if (quotedMatch) {
+                      avatarName = quotedMatch[1].trim();
+                    } else {
+                      // "이들은..." 형태에서 첫 문장의 핵심 부분 추출
+                      // 예: "이들은 특정 진영 논리에 갇히기보다, 데이터와 합리적인 분석을 바탕으로..."
+                      // -> "데이터와 합리적인 분석을 바탕으로 사회 문제 해결책을 제시하는 사람들"
+                      const firstSentence = data.real_avatar.split(/[\.。]/)[0];
+                      if (firstSentence.includes('이들은') || firstSentence.includes('이들')) {
+                        // 첫 문장에서 핵심 키워드 추출 (너무 길지 않게)
+                        const keywords = firstSentence.match(/(?:데이터|합리적|정책|전문가|개혁가|논객|행정가|법조인|경제학자|정치인|지식인|분석|통찰|비전|원칙|안정|질서)[^,，]*/);
+                        if (keywords) {
+                          avatarName = keywords[0].trim();
+                          // 너무 길면 자르기
+                          if (avatarName.length > 30) {
+                            avatarName = avatarName.substring(0, 27) + '...';
+                          }
+                        }
+                      }
+                    }
+                    return (
+                      <div>
+                        <h4 className="font-semibold mb-2 text-lg">
+                          현실 속 아바타{avatarName ? `: ${avatarName}` : ''}
+                        </h4>
+                        <div dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.real_avatar) }} />
+                      </div>
+                    );
+                  })()}
                 </div>
               </ExpandableSection>
             )}
