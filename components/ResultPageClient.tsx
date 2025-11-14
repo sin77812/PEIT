@@ -188,8 +188,8 @@ export default function ResultPageClient({ type, showExpanded = false }: ResultP
               </ExpandableSection>
             )}
             
-            {/* 당신의 화법 (하위: 스트레스/솔루션/연애/파트너) */}
-            {(data.speech_style || data.stress_moment || data.solution || data.love_value || data.best_partner || data.worst_partner) && (
+            {/* 당신의 화법 */}
+            {(data.speech_style || data.stress_moment || data.solution) && (
               <ExpandableSection 
                 title="당신의 화법"
                 borderColor="border-accent"
@@ -214,6 +214,18 @@ export default function ResultPageClient({ type, showExpanded = false }: ResultP
                       <div dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.solution) }} />
                     </div>
                   )}
+                </div>
+              </ExpandableSection>
+            )}
+            
+            {/* 당신의 연애 */}
+            {(data.love_value || data.best_partner || data.worst_partner) && (
+              <ExpandableSection 
+                title="당신의 연애"
+                borderColor="border-pink-500"
+                defaultExpanded={showExpanded}
+              >
+                <div className="space-y-6 text-gray-700 leading-relaxed">
                   {data.love_value && (
                     <div>
                       <h4 className="font-semibold mb-2">당신의 연애 가치관</h4>
@@ -228,7 +240,7 @@ export default function ResultPageClient({ type, showExpanded = false }: ResultP
                   )}
                   {data.worst_partner && (
                     <div>
-                      <h4 className="font-semibold mb-2">최악의 갈등 상대</h4>
+                      <h4 className="font-semibold mb-2">최악의 상대</h4>
                       <div dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.worst_partner) }} />
                     </div>
                   )}
@@ -239,7 +251,7 @@ export default function ResultPageClient({ type, showExpanded = false }: ResultP
             {/* 소통의 벽 */}
             {data.communication_barrier && (
               <ExpandableSection 
-                title="소통의 벽: 당신이 보수주의자와 대화할 때 답답함을 느끼는 이유"
+                title="소통의 벽: 당신이 갈등을 겪는 이유"
                 borderColor="border-orange-500"
                 defaultExpanded={showExpanded}
               >
@@ -250,38 +262,34 @@ export default function ResultPageClient({ type, showExpanded = false }: ResultP
               </ExpandableSection>
             )}
             
-            {/* 직업적 가치관 */}
-            {data.career_value && (
+            {/* 돈과 일에 대한 태도 */}
+            {(data.career_value || data.financial_style) && (
               <ExpandableSection 
                 title="돈과 일에 대한 태도"
                 borderColor="border-indigo-500"
                 defaultExpanded={showExpanded}
               >
-                <div 
-                  className="text-gray-700 leading-relaxed"
-                  dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.career_value) }}
-                />
+                <div className="space-y-6 text-gray-700 leading-relaxed">
+                  {data.career_value && (
+                    <div>
+                      <h4 className="font-semibold mb-2">직업적 가치관</h4>
+                      <div dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.career_value) }} />
+                    </div>
+                  )}
+                  {data.financial_style && (
+                    <div>
+                      <h4 className="font-semibold mb-2">잠재적 재무 스타일</h4>
+                      <div dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.financial_style) }} />
+                    </div>
+                  )}
+                </div>
               </ExpandableSection>
             )}
             
-            {/* 재무 스타일 */}
-            {data.financial_style && (
-              <ExpandableSection 
-                title="잠재적 재무 스타일"
-                borderColor="border-yellow-500"
-                defaultExpanded={showExpanded}
-              >
-                <div 
-                  className="text-gray-700 leading-relaxed"
-                  dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.financial_style) }}
-                />
-              </ExpandableSection>
-            )}
-            
-            {/* 역사와 현실 속 아바타 */}
+            {/* 역사와 현실 속 당신의 아바타 */}
             {(data.historical_avatar || data.real_avatar) && (
               <ExpandableSection 
-                title="역사와 현실 속 당신의 아바타,유사 유형 인물 분석"
+                title="역사와 현실 속 당신의 아바타"
                 borderColor="border-purple-500"
                 defaultExpanded={showExpanded}
               >
@@ -302,32 +310,41 @@ export default function ResultPageClient({ type, showExpanded = false }: ResultP
               </ExpandableSection>
             )}
             
-            
             {/* 개인적 성장과 자기계발 */}
-            {data.growth_direction && (
+            {(data.growth_direction || data.final_goal) && (
               <ExpandableSection 
                 title="개인적 성장과 자기계발"
                 borderColor="border-green-500"
                 defaultExpanded={showExpanded}
               >
-                <div 
-                  className="text-gray-700 leading-relaxed"
-                  dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.growth_direction) }}
-                />
+                <div className="space-y-6 text-gray-700 leading-relaxed">
+                  {data.growth_direction && (
+                    <div>
+                      <h4 className="font-semibold mb-2">성장 방향성</h4>
+                      <div dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.growth_direction) }} />
+                    </div>
+                  )}
+                  {data.final_goal && (
+                    <div>
+                      <h4 className="font-semibold mb-2">성장의 최종 목표</h4>
+                      <div dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.final_goal) }} />
+                    </div>
+                  )}
+                </div>
               </ExpandableSection>
             )}
             
-            {/* 도서추천 */}
+            {/* 추천도서/강의 */}
             {(data.recommended_books?.length || data.recommended_content) && (
               <ExpandableSection 
-                title="도서추천"
+                title="추천도서/강의"
                 borderColor="border-blue-500"
                 defaultExpanded={showExpanded}
               >
                 <div className="space-y-4">
                   {data.recommended_books && data.recommended_books.length > 0 && (
                     <div className="space-y-2">
-                      <p className="font-semibold">도서추천</p>
+                      <p className="font-semibold mb-2">추천 도서</p>
                       {data.recommended_books.map((book, i) => (
                         <div key={i} className="flex items-start">
                           <div>
@@ -340,7 +357,7 @@ export default function ResultPageClient({ type, showExpanded = false }: ResultP
                   )}
                   {data.recommended_content && (
                     <div>
-                      <p className="font-semibold mb-2">추천 영상/강의:</p>
+                      <p className="font-semibold mb-2">추천 영상/강의</p>
                       <div 
                         className="text-gray-700"
                         dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.recommended_content) }}
@@ -348,20 +365,6 @@ export default function ResultPageClient({ type, showExpanded = false }: ResultP
                     </div>
                   )}
                 </div>
-              </ExpandableSection>
-            )}
-            
-            {/* 성장의 최종 목표 */}
-            {data.final_goal && (
-              <ExpandableSection 
-                title="성장의 최종 목표"
-                borderColor="border-yellow-500"
-                defaultExpanded={showExpanded}
-              >
-                <div 
-                  className="text-gray-700 leading-relaxed"
-                  dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.final_goal) }}
-                />
               </ExpandableSection>
             )}
           </div>
