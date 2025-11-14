@@ -5,67 +5,170 @@ import { results } from '@/lib/results';
 export default function TypesPage() {
   const politicalTypes = Object.entries(results)
     .filter(([_, data]) => data.category === 'political')
-    .map(([code, data]) => ({ code, ...data }));
+    .map(([code, data]) => ({ code, ...data }))
+    .sort((a, b) => a.code.localeCompare(b.code));
     
   const economicTypes = Object.entries(results)
     .filter(([_, data]) => data.category === 'economic')
-    .map(([code, data]) => ({ code, ...data }));
+    .map(([code, data]) => ({ code, ...data }))
+    .sort((a, b) => a.code.localeCompare(b.code));
 
   const stripEnglish = (label: string) => label.replace(/\s*\([^)]*\)$/, '');
+
+  // 정치 유형을 카테고리별로 그룹화
+  const groupPoliticalTypes = () => {
+    const groups: Record<string, typeof politicalTypes> = {
+      '개인주의 + 진보': [],
+      '개인주의 + 보수': [],
+      '공동체주의 + 진보': [],
+      '공동체주의 + 보수': [],
+    };
+
+    politicalTypes.forEach(type => {
+      const first = type.code[0]; // I or C
+      const second = type.code[1]; // P or T
+      
+      if (first === 'I' && second === 'P') {
+        groups['개인주의 + 진보'].push(type);
+      } else if (first === 'I' && second === 'T') {
+        groups['개인주의 + 보수'].push(type);
+      } else if (first === 'C' && second === 'P') {
+        groups['공동체주의 + 진보'].push(type);
+      } else if (first === 'C' && second === 'T') {
+        groups['공동체주의 + 보수'].push(type);
+      }
+    });
+
+    return groups;
+  };
+
+  const politicalGroups = groupPoliticalTypes();
+
+  // 경제 유형을 카테고리별로 그룹화
+  const groupEconomicTypes = () => {
+    const groups: Record<string, typeof economicTypes> = {
+      '성장 지향': [],
+      '안정 지향': [],
+    };
+
+    economicTypes.forEach(type => {
+      const first = type.code[0]; // G or S
+      if (first === 'G') {
+        groups['성장 지향'].push(type);
+      } else if (first === 'S') {
+        groups['안정 지향'].push(type);
+      }
+    });
+
+    return groups;
+  };
+
+  const economicGroups = groupEconomicTypes();
 
   return (
     <div className="min-h-screen bg-bg-light-purple py-12">
       <div className="max-w-7xl mx-auto px-4">
-        <h1 className="text-4xl font-bold text-center mb-12">
+        <h1 className="text-4xl font-bold text-center mb-4">
           모든 유형 알아보기
         </h1>
+        <p className="text-center text-gray-600 mb-12">
+          정치 유형 16개 · 경제 유형 8개
+        </p>
 
         {/* 정치 유형 */}
-        <section className="mb-16">
-          <h2 className="text-2xl font-semibold mb-6">정치 유형 (16개)</h2>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
-            {politicalTypes.map(({ code, name }) => (
-              <Link
-                key={code}
-                href={`/result/${code}?explore=true`}
-                className="bg-white p-4 rounded-xl shadow-md hover:shadow-lg transition-all hover:scale-105"
-              >
-                <div className="relative w-full h-20 sm:h-24 md:h-32 mb-2 sm:mb-3">
-                  <Image
-                    src={`/images/political/${code}.${code === 'IPUE' ? 'png' : 'jpg'}`}
-                    alt={name}
-                    fill
-                    className="object-contain rounded-xl"
-                  />
+        <section className="mb-20">
+          <div className="flex items-center justify-between mb-8">
+            <h2 className="text-3xl font-bold">정치 유형</h2>
+            <span className="text-lg text-gray-600">총 16개</span>
+          </div>
+          
+          <div className="space-y-12">
+            {Object.entries(politicalGroups).map(([category, types]) => (
+              <div key={category} className="bg-white/50 rounded-2xl p-6 shadow-sm">
+                <h3 className="text-xl font-semibold mb-4 text-gray-800 border-b-2 border-accent/30 pb-2">
+                  {category} ({types.length}개)
+                </h3>
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                  {types.map(({ code, name, keywords }) => (
+                    <Link
+                      key={code}
+                      href={`/result/${code}?explore=true`}
+                      className="bg-white p-4 rounded-xl shadow-md hover:shadow-xl transition-all hover:scale-105 border-2 border-transparent hover:border-accent/50"
+                    >
+                      <div className="relative w-full h-24 sm:h-28 mb-3">
+                        <Image
+                          src={`/images/political/${code}.${code === 'IPUE' ? 'png' : 'jpg'}`}
+                          alt={name}
+                          fill
+                          className="object-contain rounded-lg"
+                        />
+                      </div>
+                      <h4 className="font-bold text-accent text-center text-sm mb-1">{code}</h4>
+                      <p className="text-xs text-center text-gray-700 mb-2 leading-tight">
+                        {stripEnglish(name as string)}
+                      </p>
+                      {keywords && keywords.length > 0 && (
+                        <div className="flex flex-wrap gap-1 justify-center mt-2">
+                          {keywords.slice(0, 2).map((keyword, i) => (
+                            <span key={i} className="text-[10px] px-1.5 py-0.5 bg-accent/10 text-accent rounded">
+                              #{keyword}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                    </Link>
+                  ))}
                 </div>
-                <h3 className="font-bold text-accent text-center">{code}</h3>
-                <p className="text-xs sm:text-sm text-center mt-1">{stripEnglish(name as string)}</p>
-              </Link>
+              </div>
             ))}
           </div>
         </section>
 
         {/* 경제 유형 */}
         <section>
-          <h2 className="text-2xl font-semibold mb-6">경제 유형 (8개)</h2>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
-            {economicTypes.map(({ code, name }) => (
-              <Link
-                key={code}
-                href={`/result/${code}?explore=true`}
-                className="bg-white p-4 rounded-xl shadow-md hover:shadow-lg transition-all hover:scale-105"
-              >
-                <div className="relative w-full h-20 sm:h-24 md:h-32 mb-2 sm:mb-3">
-                  <Image
-                    src={`/images/economic/${code}.jpg`}
-                    alt={name}
-                    fill
-                    className="object-contain rounded-xl"
-                  />
+          <div className="flex items-center justify-between mb-8">
+            <h2 className="text-3xl font-bold">경제 유형</h2>
+            <span className="text-lg text-gray-600">총 8개</span>
+          </div>
+          
+          <div className="space-y-12">
+            {Object.entries(economicGroups).map(([category, types]) => (
+              <div key={category} className="bg-white/50 rounded-2xl p-6 shadow-sm">
+                <h3 className="text-xl font-semibold mb-4 text-gray-800 border-b-2 border-accent/30 pb-2">
+                  {category} ({types.length}개)
+                </h3>
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                  {types.map(({ code, name, keywords }) => (
+                    <Link
+                      key={code}
+                      href={`/result/${code}?explore=true`}
+                      className="bg-white p-4 rounded-xl shadow-md hover:shadow-xl transition-all hover:scale-105 border-2 border-transparent hover:border-accent/50"
+                    >
+                      <div className="relative w-full h-24 sm:h-28 mb-3">
+                        <Image
+                          src={`/images/economic/${code}.jpg`}
+                          alt={name}
+                          fill
+                          className="object-contain rounded-lg"
+                        />
+                      </div>
+                      <h4 className="font-bold text-accent text-center text-sm mb-1">{code}</h4>
+                      <p className="text-xs text-center text-gray-700 mb-2 leading-tight">
+                        {stripEnglish(name as string)}
+                      </p>
+                      {keywords && keywords.length > 0 && (
+                        <div className="flex flex-wrap gap-1 justify-center mt-2">
+                          {keywords.slice(0, 2).map((keyword, i) => (
+                            <span key={i} className="text-[10px] px-1.5 py-0.5 bg-accent/10 text-accent rounded">
+                              #{keyword}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                    </Link>
+                  ))}
                 </div>
-                <h3 className="font-bold text-accent text-center">{code}</h3>
-                <p className="text-xs sm:text-sm text-center mt-1">{stripEnglish(name as string)}</p>
-              </Link>
+              </div>
             ))}
           </div>
         </section>
