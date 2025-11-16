@@ -7,6 +7,10 @@ const nextConfig = {
     domains: [],
     unoptimized: isGitHubPages,
   },
+  // Turbopack 오류 방지를 위해 webpack 사용
+  experimental: {
+    turbo: false,
+  },
   ...(isGitHubPages && {
     output: 'export',
     basePath: '/PEIT',
