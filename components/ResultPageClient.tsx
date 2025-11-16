@@ -355,14 +355,10 @@ export default function ResultPageClient({ type, showExpanded = false }: ResultP
                       // -> "데이터와 합리적인 분석을 바탕으로 사회 문제 해결책을 제시하는 사람들"
                       const firstSentence = data.real_avatar.split(/[\.。]/)[0];
                       if (firstSentence.includes('이들은') || firstSentence.includes('이들')) {
-                        // 첫 문장에서 핵심 키워드 추출 (너무 길지 않게)
+                        // 첫 문장에서 핵심 키워드 추출
                         const keywords = firstSentence.match(/(?:데이터|합리적|정책|전문가|개혁가|논객|행정가|법조인|경제학자|정치인|지식인|분석|통찰|비전|원칙|안정|질서|기업가|투자자|경영자)[^,，]*/);
                         if (keywords) {
                           avatarName = keywords[0].trim();
-                          // 너무 길면 자르기
-                          if (avatarName.length > 30) {
-                            avatarName = avatarName.substring(0, 27) + '...';
-                          }
                         }
                       }
                     }
