@@ -20,7 +20,18 @@ function renderMarkdownText(text: string) {
   html = html.replace(/'([^']+)'/g, '<span class="text-accent font-medium">\'$1\'</span>');
   html = html
     .split('\n')
-    .map((p) => (p.trim() ? `<p class="mb-4 last:mb-0">${p}</p>` : ''))
+    .map((p) => {
+      const trimmed = p.trim();
+      if (!trimmed) return '';
+      
+      // ### 제목 처리
+      if (trimmed.startsWith('### ')) {
+        const titleText = trimmed.substring(4).trim();
+        return `<h3 class="text-xl font-bold mb-3 mt-6 text-gray-900">${titleText}</h3>`;
+      }
+      
+      return `<p class="mb-4 last:mb-0">${p}</p>`;
+    })
     .join('');
   return html;
 }

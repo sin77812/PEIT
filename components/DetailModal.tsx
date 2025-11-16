@@ -17,12 +17,18 @@ function renderMarkdownText(text: string) {
   // '텍스트' -> <span class="text-accent">텍스트</span>
   html = html.replace(/'([^']+)'/g, '<span class="text-accent font-medium">\'$1\'</span>');
   
-  // 줄바꿈 처리
+  // 줄바꿈 처리 - ### 제목 처리 포함
   html = html.split('\n').map(paragraph => {
-    if (paragraph.trim()) {
-      return `<p class="mb-4 last:mb-0">${paragraph}</p>`;
+    const trimmed = paragraph.trim();
+    if (!trimmed) return '';
+    
+    // ### 제목 처리
+    if (trimmed.startsWith('### ')) {
+      const titleText = trimmed.substring(4).trim();
+      return `<h3 class="text-xl font-bold mb-3 mt-6 text-gray-900">${titleText}</h3>`;
     }
-    return '';
+    
+    return `<p class="mb-4 last:mb-0">${paragraph}</p>`;
   }).join('');
   
   return html;

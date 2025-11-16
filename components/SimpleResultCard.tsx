@@ -6,6 +6,20 @@ import { results } from '@/lib/results';
 function renderMarkdownText(text: string) {
   // **텍스트** -> <strong>텍스트</strong>
   let html = text.replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold text-gray-900">$1</strong>');
+  
+  // ### 제목 처리
+  html = html.split('\n').map(paragraph => {
+    const trimmed = paragraph.trim();
+    if (!trimmed) return '';
+    
+    if (trimmed.startsWith('### ')) {
+      const titleText = trimmed.substring(4).trim();
+      return `<h3 class="text-xl font-bold mb-3 mt-6 text-gray-900">${titleText}</h3>`;
+    }
+    
+    return paragraph;
+  }).join('\n');
+  
   return html;
 }
 
