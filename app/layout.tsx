@@ -24,9 +24,15 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
+      { url: '/images/pabicon.jpg', sizes: '16x16', type: 'image/jpeg' },
       { url: '/images/pabicon.jpg', sizes: '32x32', type: 'image/jpeg' },
+      { url: '/images/pabicon.jpg', sizes: '48x48', type: 'image/jpeg' },
+      { url: '/images/pabicon.jpg', sizes: '96x96', type: 'image/jpeg' },
+      { url: '/images/pabicon.jpg', sizes: '192x192', type: 'image/jpeg' },
     ],
-    apple: '/images/pabicon.jpg',
+    apple: [
+      { url: '/images/pabicon.jpg', sizes: '180x180', type: 'image/jpeg' },
+    ],
     shortcut: '/images/pabicon.jpg',
   },
   openGraph: {
@@ -100,6 +106,9 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <head>
+        <link rel="icon" href="/images/pabicon.jpg" type="image/jpeg" />
+        <link rel="shortcut icon" href="/images/pabicon.jpg" type="image/jpeg" />
+        <link rel="apple-touch-icon" href="/images/pabicon.jpg" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
