@@ -180,19 +180,22 @@ export default function ResultDetailSections({ type, data, defaultExpanded = fal
           </ExpandableSection>
         )}
 
-        {(data.growth_direction || data.recommended_content || data.final_goal) && (
+        {(data.growth_direction || data.final_goal) && (
           <ExpandableSection title="개인적 성장과 자기계발" borderColor="border-purple-gradient-900" defaultExpanded={defaultExpanded}>
             <div className="space-y-6">
               {data.growth_direction && (
                 <div className="text-gray-700 leading-relaxed" dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.growth_direction) }} />
               )}
-              {data.recommended_content && (
-                <div className="text-gray-700 leading-relaxed" dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.recommended_content) }} />
-              )}
               {data.final_goal && (
                 <div className="text-gray-700 leading-relaxed" dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.final_goal) }} />
               )}
             </div>
+          </ExpandableSection>
+        )}
+
+        {data.recommended_content && (
+          <ExpandableSection title="추천도서/강의" borderColor="border-blue-500" defaultExpanded={defaultExpanded}>
+            <div className="text-gray-700 leading-relaxed" dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.recommended_content) }} />
           </ExpandableSection>
         )}
 
