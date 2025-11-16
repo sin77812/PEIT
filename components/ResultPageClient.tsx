@@ -556,36 +556,16 @@ export default function ResultPageClient({ type, showExpanded = false }: ResultP
               )}
               
               {/* 추천도서/강의 */}
-              {(data.recommended_books?.length || data.recommended_content) && (
+              {data.recommended_content && (
                 <ExpandableSection 
                   title="추천도서/강의"
                   borderColor="border-blue-500"
                   defaultExpanded={showExpanded}
                 >
-                  <div className="space-y-4">
-                    {data.recommended_books && data.recommended_books.length > 0 && (
-                      <div className="space-y-2">
-                        <p className="font-semibold mb-2">추천 도서</p>
-                        {data.recommended_books.map((book, i) => (
-                          <div key={i} className="flex items-start">
-                            <div>
-                              <span className="font-semibold">『{book.title}』</span>
-                              <span className="text-gray-600 ml-1">({book.author})</span>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                    {data.recommended_content && (
-                      <div>
-                        <p className="font-semibold mb-2">추천 영상/강의</p>
-                        <div 
-                          className="text-gray-700"
-                          dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.recommended_content) }}
-                        />
-                      </div>
-                    )}
-                  </div>
+                  <div 
+                    className="text-gray-700"
+                    dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.recommended_content) }}
+                  />
                 </ExpandableSection>
               )}
           </div>
