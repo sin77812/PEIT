@@ -176,16 +176,10 @@ export default function ResultDetailSections({ type, data, defaultExpanded = fal
           <ExpandableSection title="돈과 일에 대한 태도" borderColor="border-purple-gradient-700" defaultExpanded={defaultExpanded}>
             <div className="space-y-6">
               {data.career_value && (
-                <div>
-                  <h4 className="font-semibold mb-2">직업적 가치관</h4>
-                  <div className="text-gray-700 leading-relaxed" dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.career_value) }} />
-                </div>
+                <div className="text-gray-700 leading-relaxed" dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.career_value) }} />
               )}
               {data.financial_style && (
-                <div>
-                  <h4 className="font-semibold mb-2">잠재적 재무 스타일</h4>
-                  <div className="text-gray-700 leading-relaxed" dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.financial_style) }} />
-                </div>
+                <div className="text-gray-700 leading-relaxed" dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.financial_style) }} />
               )}
             </div>
           </ExpandableSection>
@@ -195,16 +189,10 @@ export default function ResultDetailSections({ type, data, defaultExpanded = fal
           <ExpandableSection title="역사와 현실 속 당신의 아바타" borderColor="border-purple-gradient-800" defaultExpanded={defaultExpanded}>
             <div className="space-y-6">
               {data.historical_avatar && (
-                <div>
-                  <h4 className="font-semibold mb-2">역사적 아바타</h4>
-                  <div className="text-gray-700 leading-relaxed" dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.historical_avatar) }} />
-                </div>
+                <div className="text-gray-700 leading-relaxed" dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.historical_avatar) }} />
               )}
               {data.real_avatar && (
-                <div>
-                  <h4 className="font-semibold mb-2">현실 속 아바타</h4>
-                  <div className="text-gray-700 leading-relaxed" dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.real_avatar) }} />
-                </div>
+                <div className="text-gray-700 leading-relaxed" dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.real_avatar) }} />
               )}
             </div>
           </ExpandableSection>
@@ -214,14 +202,10 @@ export default function ResultDetailSections({ type, data, defaultExpanded = fal
           <ExpandableSection title="개인적 성장과 자기계발" borderColor="border-purple-gradient-900" defaultExpanded={defaultExpanded}>
             <div className="space-y-6">
               {data.growth_direction && (
-                <div>
-                  <h4 className="font-semibold mb-2">성장 방향성</h4>
-                  <div className="text-gray-700 leading-relaxed" dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.growth_direction) }} />
-                </div>
+                <div className="text-gray-700 leading-relaxed" dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.growth_direction) }} />
               )}
               {(data.recommended_books?.length || data.recommended_content) && (
                 <div>
-                  <h4 className="font-semibold mb-2">도서추천</h4>
                   {data.recommended_books && data.recommended_books.length > 0 && (
                     <ul className="list-disc pl-5 space-y-1 text-gray-700">
                       {data.recommended_books.map((book: any, i: number) => (
@@ -235,10 +219,7 @@ export default function ResultDetailSections({ type, data, defaultExpanded = fal
                 </div>
               )}
               {data.final_goal && (
-                <div>
-                  <h4 className="font-semibold mb-2">성장의 최종 목표</h4>
-                  <div className="text-gray-700 leading-relaxed" dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.final_goal) }} />
-                </div>
+                <div className="text-gray-700 leading-relaxed" dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.final_goal) }} />
               )}
             </div>
           </ExpandableSection>
