@@ -1065,6 +1065,11 @@ try {
       // political_details.ts의 모든 필드를 results.ts에 덮어씁니다
       Object.assign(results[code], details);
       
+      // recommended_content가 있는 경우 명시적으로 설정 (IPAE, IPAS 등)
+      if (details.recommended_content) {
+        (results[code] as any).recommended_content = details.recommended_content;
+      }
+      
       // money_value를 financial_style로 alias (컴포넌트 호환성을 위해)
       if ((results[code] as any).money_value) {
         (results[code] as any).financial_style = (results[code] as any).money_value;
