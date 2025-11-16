@@ -1038,17 +1038,56 @@ export const results: Record<string, ResultData> = {
 };
 
 // Merge rich political details parsed from text into political entries
+// political_details.ts의 내용이 results.ts의 하드코딩된 내용을 완전히 덮어씁니다
 try {
   Object.entries(politicalDetails).forEach(([code, details]) => {
     if (results[code] && results[code].category === 'political') {
+      // results.ts에서 제거해야 할 하드코딩된 상세 필드들
+      const fieldsToRemove = [
+        'speech_style',
+        'stress_moment',
+        'solution',
+        'love_value',
+        'best_partner',
+        'worst_partner',
+        'communication_barrier',
+        'career_value',
+        'financial_style', // political_details.ts의 money_value로 대체됨
+        'historical_avatar',
+        'real_avatar',
+        'growth_direction',
+        'final_goal',
+        'recommended_books',
+        'recommended_content',
+        'growth_task',
+        'detailed_description', // political_details.ts의 것으로 대체됨
+        'political_spectrum_detail', // political_details.ts의 것으로 대체됨
+        'summary', // political_details.ts의 것으로 대체됨
+        'political_spectrum', // political_details.ts의 것으로 대체됨
+        'strengths', // political_details.ts의 것으로 대체됨
+        'weaknesses', // political_details.ts의 것으로 대체됨
+        'keywords', // political_details.ts의 것으로 대체됨
+      ];
+      
+      // 하드코딩된 필드들 제거
+      fieldsToRemove.forEach(field => {
+        delete (results[code] as any)[field];
+      });
+      
+      // political_details.ts의 모든 필드를 results.ts에 덮어씁니다
       Object.assign(results[code], details);
-      // Remove accidental growth_task strings (e.g., parsed '추천 도서' 라인)
-      if ((results[code] as any).growth_task) {
-        delete (results[code] as any).growth_task;
-      }
-      // Alias money_value -> financial_style for components
-      if ((results[code] as any).money_value && !(results[code] as any).financial_style) {
+      
+      // money_value를 financial_style로 alias (컴포넌트 호환성을 위해)
+      if ((results[code] as any).money_value) {
         (results[code] as any).financial_style = (results[code] as any).money_value;
+      }
+      
+      // Remove accidental growth_task strings (e.g., parsed '추천 도서' 라인)
+      if ((results[code] as any).growth_task && typeof (results[code] as any).growth_task === 'string') {
+        const taskStr = (results[code] as any).growth_task;
+        if (taskStr.includes('📚 추천 도서') || taskStr.includes('추천 도서')) {
+          delete (results[code] as any).growth_task;
+        }
       }
     }
   });
