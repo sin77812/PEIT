@@ -11,6 +11,7 @@ interface ResultCardProps {
   isCompact?: boolean;
   category?: 'political' | 'economic';
   hideDetailButton?: boolean;
+  showChart?: boolean;
 }
 
 export default function ResultCard({ 
@@ -21,7 +22,8 @@ export default function ResultCard({
   description,
   isCompact = false,
   category = 'political',
-  hideDetailButton = false
+  hideDetailButton = false,
+  showChart = true
 }: ResultCardProps) {
   return (
     <div className={`bg-white rounded-3xl border-4 border-accent shadow-xl ${isCompact ? 'p-4' : 'p-8'}`}>
@@ -40,11 +42,13 @@ export default function ResultCard({
         <h3 className="text-2xl font-medium">{name}</h3>
       </div>
       
-      {/* 성향 차트 */}
-      <div className={`${isCompact ? 'mb-4' : 'mb-8'}`}>
-        <h4 className={`font-semibold ${isCompact ? 'text-lg mb-2' : 'text-xl mb-4'} text-center`}>성향 분석</h4>
-        <SpectrumChart data={scores} category={category} />
-      </div>
+      {/* 성향 차트 - 검사 결과가 있을 때만 표시 */}
+      {showChart && (
+        <div className={`${isCompact ? 'mb-4' : 'mb-8'}`}>
+          <h4 className={`font-semibold ${isCompact ? 'text-lg mb-2' : 'text-xl mb-4'} text-center`}>성향 분석</h4>
+          <SpectrumChart data={scores} category={category} />
+        </div>
+      )}
       
       <p className="text-lg leading-relaxed text-gray-700">
         {description}

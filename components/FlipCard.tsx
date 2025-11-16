@@ -105,6 +105,7 @@ export default function FlipCard({ type, data, category, title }: FlipCardProps)
               isCompact={true}
               category={category}
               hideDetailButton={true}
+              showChart={true}
             />
             {/* 카드 뒤집자마자 상세 섹션을 카드 내부에 노출 */}
             <div className="px-2 pb-6">

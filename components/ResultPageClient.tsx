@@ -46,14 +46,31 @@ export default function ResultPageClient({ type, showExpanded = false }: ResultP
     return <SimpleResultCard type={type} />;
   }
   
+  const [hasTestResult, setHasTestResult] = useState(false);
+
   useEffect(() => {
     if (!results[type]) return;
     
     const originalData = { ...results[type] };
+    
+    // 검사 결과 확인: answers, political_answers, economic_answers 중 하나라도 있으면 검사 완료로 간주
     const answers = localStorage.getItem('answers');
+    const politicalAnswers = localStorage.getItem('political_answers');
+    const economicAnswers = localStorage.getItem('economic_answers');
+    
+    const hasCompletedTest = !!(answers || politicalAnswers || economicAnswers);
+    setHasTestResult(hasCompletedTest);
     
     if (answers) {
       const parsedAnswers = JSON.parse(answers);
+      const calculatedResult = calculateResult(parsedAnswers);
+      originalData.scores = calculateRelativeScores(calculatedResult.scores, originalData.category);
+    } else if (politicalAnswers && originalData.category === 'political') {
+      const parsedAnswers = JSON.parse(politicalAnswers);
+      const calculatedResult = calculateResult(parsedAnswers);
+      originalData.scores = calculateRelativeScores(calculatedResult.scores, originalData.category);
+    } else if (economicAnswers && originalData.category === 'economic') {
+      const parsedAnswers = JSON.parse(economicAnswers);
       const calculatedResult = calculateResult(parsedAnswers);
       originalData.scores = calculateRelativeScores(calculatedResult.scores, originalData.category);
     }
@@ -108,6 +125,7 @@ export default function ResultPageClient({ type, showExpanded = false }: ResultP
           description={data.description}
           category={data.category}
           hideDetailButton={true}
+          showChart={hasTestResult}
         />
 
         {/* 정치 유형 상세 정보 - 확장 가능한 섹션들 */}
