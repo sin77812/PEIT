@@ -221,22 +221,13 @@ export default function ResultPageClient({ type, showExpanded = false }: ResultP
               >
                 <div className="space-y-6 text-gray-700 leading-relaxed">
                   {data.speech_style && (
-                    <div>
-                      <h4 className="font-semibold mb-2">당신의 화법</h4>
-                      <div dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.speech_style) }} />
-                    </div>
+                    <div dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.speech_style) }} />
                   )}
                   {data.stress_moment && (
-                    <div>
-                      <h4 className="font-semibold mb-2">당신이 스트레스 받는 순간</h4>
-                      <div dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.stress_moment) }} />
-                    </div>
+                    <div dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.stress_moment) }} />
                   )}
                   {data.solution && (
-                    <div>
-                      <h4 className="font-semibold mb-2">솔루션</h4>
-                      <div dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.solution) }} />
-                    </div>
+                    <div dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.solution) }} />
                   )}
                 </div>
               </ExpandableSection>
@@ -251,22 +242,13 @@ export default function ResultPageClient({ type, showExpanded = false }: ResultP
               >
                 <div className="space-y-6 text-gray-700 leading-relaxed">
                   {data.love_value && (
-                    <div>
-                      <h4 className="font-semibold mb-2">당신의 연애 가치관</h4>
-                      <div dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.love_value) }} />
-                    </div>
+                    <div dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.love_value) }} />
                   )}
                   {data.best_partner && (
-                    <div>
-                      <h4 className="font-semibold mb-2">최고의 연애 파트너</h4>
-                      <div dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.best_partner) }} />
-                    </div>
+                    <div dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.best_partner) }} />
                   )}
                   {data.worst_partner && (
-                    <div>
-                      <h4 className="font-semibold mb-2">최악의 상대</h4>
-                      <div dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.worst_partner) }} />
-                    </div>
+                    <div dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.worst_partner) }} />
                   )}
                 </div>
               </ExpandableSection>
@@ -341,36 +323,16 @@ export default function ResultPageClient({ type, showExpanded = false }: ResultP
             )}
             
             {/* 추천도서/강의 */}
-            {(data.recommended_books?.length || data.recommended_content) && (
+            {data.recommended_content && (
               <ExpandableSection 
                 title="추천도서/강의"
                 borderColor="border-blue-500"
                 defaultExpanded={showExpanded}
               >
-                <div className="space-y-4">
-                  {data.recommended_books && data.recommended_books.length > 0 && (
-                    <div className="space-y-2">
-                      <p className="font-semibold mb-2">추천 도서</p>
-                      {data.recommended_books.map((book, i) => (
-                        <div key={i} className="flex items-start">
-                          <div>
-                            <span className="font-semibold">『{book.title}』</span>
-                            <span className="text-gray-600 ml-1">({book.author})</span>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                  {data.recommended_content && (
-                    <div>
-                      <p className="font-semibold mb-2">추천 영상/강의</p>
-                      <div 
-                        className="text-gray-700"
-                        dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.recommended_content) }}
-                      />
-                    </div>
-                  )}
-                </div>
+                <div 
+                  className="text-gray-700"
+                  dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.recommended_content) }}
+                />
               </ExpandableSection>
             )}
           </div>
