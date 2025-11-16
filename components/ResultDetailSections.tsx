@@ -193,9 +193,17 @@ export default function ResultDetailSections({ type, data, defaultExpanded = fal
           </ExpandableSection>
         )}
 
+        {/* 추천도서/강의 */}
         {data.recommended_content && (
-          <ExpandableSection title="추천도서/강의" borderColor="border-blue-500" defaultExpanded={defaultExpanded}>
-            <div className="text-gray-700 leading-relaxed" dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.recommended_content) }} />
+          <ExpandableSection 
+            title="추천도서/강의"
+            borderColor="border-blue-500"
+            defaultExpanded={defaultExpanded}
+          >
+            <div 
+              className="text-gray-700 leading-relaxed"
+              dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.recommended_content) }}
+            />
           </ExpandableSection>
         )}
 
