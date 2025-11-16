@@ -2,6 +2,13 @@ import Image from 'next/image';
 import SpectrumChart from './SpectrumChart';
 import Button from './Button';
 
+// 마크다운 스타일 텍스트를 HTML로 변환하는 함수
+function renderMarkdownText(text: string) {
+  // **텍스트** -> <strong>텍스트</strong>
+  let html = text.replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold text-gray-900">$1</strong>');
+  return html;
+}
+
 interface ResultCardProps {
   type: string;
   name: string;
@@ -50,9 +57,10 @@ export default function ResultCard({
         </div>
       )}
       
-      <p className="text-lg leading-relaxed text-gray-700">
-        {description}
-      </p>
+      <p 
+        className="text-lg leading-relaxed text-gray-700"
+        dangerouslySetInnerHTML={{ __html: renderMarkdownText(description) }}
+      />
       
       {/* 자세히보기 버튼 (옵션) */}
       {!hideDetailButton && (

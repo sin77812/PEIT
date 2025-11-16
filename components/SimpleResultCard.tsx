@@ -2,6 +2,13 @@ import Image from 'next/image';
 import Button from './Button';
 import { results } from '@/lib/results';
 
+// 마크다운 스타일 텍스트를 HTML로 변환하는 함수
+function renderMarkdownText(text: string) {
+  // **텍스트** -> <strong>텍스트</strong>
+  let html = text.replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold text-gray-900">$1</strong>');
+  return html;
+}
+
 interface SimpleResultCardProps {
   type: string;
 }
@@ -62,9 +69,10 @@ export default function SimpleResultCard({ type }: SimpleResultCardProps) {
           <h2 className="text-4xl font-bold text-accent mb-4">{type}</h2>
           <h3 className="text-2xl font-medium mb-6">{data.name}</h3>
           
-          <p className="text-lg leading-relaxed text-gray-700 max-w-2xl mx-auto">
-            {data.description}
-          </p>
+          <p 
+            className="text-lg leading-relaxed text-gray-700 max-w-2xl mx-auto"
+            dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.description) }}
+          />
         </div>
 
         {/* 액션 버튼들 - 메인과 동일 링크 구성 */}

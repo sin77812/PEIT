@@ -54,9 +54,9 @@ export default function ResultDetailSections({ type, data, defaultExpanded = fal
                             <div className="flex items-start">
                               <span className="text-green-600 mr-2 mt-1">•</span>
                               <div className="flex-1">
-                                <span className="font-semibold text-sm md:text-base">{title}</span>
+                                <span className="font-semibold text-sm md:text-base" dangerouslySetInnerHTML={{ __html: renderMarkdownText(title) }} />
                                 {hasDescription && (
-                                  <p className="text-gray-600 text-xs md:text-sm mt-1 leading-relaxed">{description}</p>
+                                  <p className="text-gray-600 text-xs md:text-sm mt-1 leading-relaxed" dangerouslySetInnerHTML={{ __html: renderMarkdownText(description) }} />
                                 )}
                               </div>
                             </div>
@@ -77,9 +77,9 @@ export default function ResultDetailSections({ type, data, defaultExpanded = fal
                             <div className="flex items-start">
                               <span className="text-red-600 mr-2 mt-1">•</span>
                               <div className="flex-1">
-                                <span className="font-semibold text-sm md:text-base">{title}</span>
+                                <span className="font-semibold text-sm md:text-base" dangerouslySetInnerHTML={{ __html: renderMarkdownText(title) }} />
                                 {hasDescription && (
-                                  <p className="text-gray-600 text-xs md:text-sm mt-1 leading-relaxed">{description}</p>
+                                  <p className="text-gray-600 text-xs md:text-sm mt-1 leading-relaxed" dangerouslySetInnerHTML={{ __html: renderMarkdownText(description) }} />
                                 )}
                               </div>
                             </div>
@@ -96,7 +96,7 @@ export default function ResultDetailSections({ type, data, defaultExpanded = fal
 
         {data.summary && (
           <ExpandableSection title="한 줄 요약" borderColor="border-purple-gradient-200" defaultExpanded={defaultExpanded}>
-            <div className="text-gray-700 leading-relaxed">{data.summary}</div>
+            <div className="text-gray-700 leading-relaxed" dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.summary) }} />
           </ExpandableSection>
         )}
 
@@ -263,9 +263,9 @@ export default function ResultDetailSections({ type, data, defaultExpanded = fal
                           <div className="flex items-start">
                             <span className="text-green-600 mr-2 mt-1">•</span>
                             <div className="flex-1">
-                              <span className="font-semibold text-sm md:text-base">{title}</span>
+                              <span className="font-semibold text-sm md:text-base" dangerouslySetInnerHTML={{ __html: renderMarkdownText(title) }} />
                               {hasDescription && (
-                                <p className="text-gray-600 text-xs md:text-sm mt-1 leading-relaxed">{description}</p>
+                                <p className="text-gray-600 text-xs md:text-sm mt-1 leading-relaxed" dangerouslySetInnerHTML={{ __html: renderMarkdownText(description) }} />
                               )}
                             </div>
                           </div>
@@ -286,9 +286,9 @@ export default function ResultDetailSections({ type, data, defaultExpanded = fal
                           <div className="flex items-start">
                             <span className="text-red-600 mr-2 mt-1">•</span>
                             <div className="flex-1">
-                              <span className="font-semibold text-sm md:text-base">{title}</span>
+                              <span className="font-semibold text-sm md:text-base" dangerouslySetInnerHTML={{ __html: renderMarkdownText(title) }} />
                               {hasDescription && (
-                                <p className="text-gray-600 text-xs md:text-sm mt-1 leading-relaxed">{description}</p>
+                                <p className="text-gray-600 text-xs md:text-sm mt-1 leading-relaxed" dangerouslySetInnerHTML={{ __html: renderMarkdownText(description) }} />
                               )}
                             </div>
                           </div>

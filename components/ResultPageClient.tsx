@@ -155,7 +155,7 @@ export default function ResultPageClient({ type, showExpanded = false }: ResultP
                         <h4 className="font-semibold text-green-600 mb-2">🌟 강점</h4>
                         <ul className="space-y-1">
                           {data.strengths.map((strength, i) => (
-                            <li key={i} className="text-gray-700">• {strength}</li>
+                            <li key={i} className="text-gray-700" dangerouslySetInnerHTML={{ __html: `• ${renderMarkdownText(strength)}` }} />
                           ))}
                         </ul>
                       </div>
@@ -165,7 +165,7 @@ export default function ResultPageClient({ type, showExpanded = false }: ResultP
                         <h4 className="font-semibold text-orange-600 mb-2">⚠️ 약점</h4>
                         <ul className="space-y-1">
                           {data.weaknesses.map((weakness, i) => (
-                            <li key={i} className="text-gray-700">• {weakness}</li>
+                            <li key={i} className="text-gray-700" dangerouslySetInnerHTML={{ __html: `• ${renderMarkdownText(weakness)}` }} />
                           ))}
                         </ul>
                       </div>
@@ -462,7 +462,7 @@ export default function ResultPageClient({ type, showExpanded = false }: ResultP
                           <h4 className="font-semibold text-green-600 mb-2">🌟 강점</h4>
                           <ul className="space-y-1">
                             {data.strengths.map((strength, i) => (
-                              <li key={i} className="text-gray-700">• {strength}</li>
+                              <li key={i} className="text-gray-700" dangerouslySetInnerHTML={{ __html: `• ${renderMarkdownText(strength)}` }} />
                             ))}
                           </ul>
                         </div>
@@ -472,7 +472,7 @@ export default function ResultPageClient({ type, showExpanded = false }: ResultP
                           <h4 className="font-semibold text-orange-600 mb-2">⚠️ 약점</h4>
                           <ul className="space-y-1">
                             {data.weaknesses.map((weakness, i) => (
-                              <li key={i} className="text-gray-700">• {weakness}</li>
+                              <li key={i} className="text-gray-700" dangerouslySetInnerHTML={{ __html: `• ${renderMarkdownText(weakness)}` }} />
                             ))}
                           </ul>
                         </div>
