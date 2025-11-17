@@ -19,16 +19,21 @@ export default function ShareButton({ shareUrl, shareText, type, name, category,
     // 더 풍부한 공유 텍스트 생성
     if (type && name && category) {
       const categoryText = category === 'political' ? '정치' : '경제';
+      // URL을 별도 줄에 배치하고 앞뒤 공백을 확실히 해서 메시지 앱이 링크로 인식하기 쉽게 함
       return `🎯 PEIT ${categoryText} 성향 테스트 결과
 
 🏷️ 나의 ${categoryText} 성향: ${type} (${name})
 
 📊 당신도 PEIT에서 자신의 정치·경제 성향을 알아보세요!
+
 ${shareUrl}
 
 #PEIT #성향테스트 #${categoryText}성향`;
     }
-    return `${shareText}\n\n${shareUrl}`;
+    // URL을 별도 줄에 배치
+    return `${shareText}
+
+${shareUrl}`;
   };
 
   const handleShare = async () => {
@@ -38,9 +43,12 @@ ${shareUrl}
       const shareContent = createShareContent();
       
       if (navigator.share) {
+        // navigator.share API 사용 시 text에서 URL을 제거하고 url 파라미터만 사용
+        // 이렇게 하면 메시지 앱에서 링크가 더 잘 인식됨
+        const shareTextOnly = shareContent.replace(shareUrl, '').trim();
         await navigator.share({
           title: 'PEIT 성향 테스트 결과',
-          text: shareContent,
+          text: shareTextOnly,
           url: shareUrl,
         });
       } else {
