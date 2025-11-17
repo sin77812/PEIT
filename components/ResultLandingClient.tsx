@@ -139,7 +139,18 @@ export default function ResultLandingClient() {
     return '당신의 성향 결과';
   };
   
-  const shareUrl = typeof window !== 'undefined' ? window.location.origin : 'https://peit.kr';
+  // 검사 결과에 해당하는 유형의 링크 생성
+  const baseUrl = typeof window !== 'undefined' ? window.location.origin : 'https://peit.kr';
+  
+  const politicalShareUrl = resultData?.political 
+    ? `${baseUrl}/result/${resultData.political}?explore=true`
+    : null;
+  const economicShareUrl = resultData?.economic 
+    ? `${baseUrl}/result/${resultData.economic}?explore=true`
+    : null;
+  
+  // 기본 공유 URL (정치 우선, 없으면 경제)
+  const shareUrl = politicalShareUrl || economicShareUrl || baseUrl;
   const shareText = 'PEIT에서 정치·경제 성향 테스트 해보기';
 
   // compute image paths for save-card buttons
@@ -169,7 +180,38 @@ export default function ResultLandingClient() {
         </div>
 
         <div className="relative z-10 flex flex-col sm:flex-row gap-4 justify-center">
-          <ShareButton shareUrl={shareUrl} shareText={shareText} className="no-glass btn-purple" />
+          {/* 정치 결과 공유 버튼 */}
+          {resultData?.political && resultData?.politicalData && politicalShareUrl && (
+            <ShareButton 
+              shareUrl={politicalShareUrl} 
+              shareText={shareText}
+              type={resultData.political}
+              name={resultData.politicalData.name}
+              category="political"
+              className="no-glass btn-purple" 
+            />
+          )}
+          
+          {/* 경제 결과 공유 버튼 */}
+          {resultData?.economic && resultData?.economicData && economicShareUrl && (
+            <ShareButton 
+              shareUrl={economicShareUrl} 
+              shareText={shareText}
+              type={resultData.economic}
+              name={resultData.economicData.name}
+              category="economic"
+              className="no-glass btn-purple" 
+            />
+          )}
+          
+          {/* 둘 다 없는 경우 (fallback) */}
+          {!resultData?.political && !resultData?.economic && (
+            <ShareButton 
+              shareUrl={shareUrl} 
+              shareText={shareText}
+              className="no-glass btn-purple" 
+            />
+          )}
 
           {resultData?.testType === 'political' && (
             <Button href="/test?type=economic" variant="outline" className="no-glass btn-purple">경제 테스트 하기</Button>
