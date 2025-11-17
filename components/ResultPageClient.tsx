@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { results } from '@/lib/results';
 import ResultCard from '@/components/ResultCard';
@@ -40,7 +40,8 @@ function renderMarkdownText(text: string) {
   return html;
 }
 
-export default function ResultPageClient({ type, showExpanded = false }: ResultPageClientProps) {
+// useSearchParams를 사용하는 내부 컴포넌트
+function ResultPageContent({ type, showExpanded = false }: ResultPageClientProps) {
   const searchParams = useSearchParams();
   const explore = searchParams.get('explore');
   const detailed = searchParams.get('detailed');
@@ -599,5 +600,18 @@ export default function ResultPageClient({ type, showExpanded = false }: ResultP
         </div>
       </div>
     </div>
+  );
+}
+
+// Suspense로 감싼 메인 컴포넌트
+export default function ResultPageClient({ type, showExpanded = false }: ResultPageClientProps) {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-bg-light-purple flex items-center justify-center">
+        <div className="text-xl">로딩 중...</div>
+      </div>
+    }>
+      <ResultPageContent type={type} showExpanded={showExpanded} />
+    </Suspense>
   );
 }

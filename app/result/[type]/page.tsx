@@ -1,4 +1,3 @@
-import { Suspense } from 'react';
 import ResultPageClient from '@/components/ResultPageClient';
 
 interface ResultPageProps {
@@ -10,11 +9,7 @@ interface ResultPageProps {
 export default async function ResultPage({ params }: ResultPageProps) {
   const { type } = await params;
   
-  return (
-    <Suspense fallback={<div>로딩 중...</div>}>
-      <ResultPageClient type={type} showExpanded={false} />
-    </Suspense>
-  );
+  return <ResultPageClient type={type} showExpanded={false} />;
 }
 
 // 빌드 시 24개 페이지 생성
