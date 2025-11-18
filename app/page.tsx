@@ -9,7 +9,7 @@ export default function Home() {
       {/* 웹: 기존처럼 중앙 정렬 */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/images/mainbackground2.png"
+          src="/images/mainbackground.png"
           alt="PEIT 배경"
           fill
           className="object-cover md:object-center"
