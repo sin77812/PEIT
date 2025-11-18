@@ -5,12 +5,14 @@ export default function Home() {
   return (
     <div className="relative h-screen -mt-16 overflow-hidden">
       {/* 배경 이미지 */}
+      {/* 모바일: 세로 끝단(위/아래)을 맞추기 위해 높이 기준으로 확대, 가로는 잘림 */}
+      {/* 웹: 기존처럼 중앙 정렬 */}
       <div className="absolute inset-0 z-0">
         <Image
           src="/images/mainbackground2.png"
           alt="PEIT 배경"
           fill
-          className="object-cover"
+          className="object-cover md:object-center"
           quality={90}
           sizes="100vw"
           priority
