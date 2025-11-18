@@ -182,7 +182,7 @@ export const results: Record<string, ResultData> = {
       {title: '정의란 무엇인가', author: '마이클 샌델'},
       {title: '돈의 심리학', author: '모건 하우절'}
     ],
-    recommended_content: '유튜브에서 **\'사회적 기업가\'**들의 창업 스토리를 담은 다큐멘터리를 시청해보세요. \'돈 버는 것\' 이상의 가치를 추구하는 사람들의 이야기를 통해, 당신이 놓치고 있던 새로운 관점을 발견할 수 있습니다.',
+    recommended_content: '**📚 추천 도서:** **『정의란 무엇인가』 (마이클 샌델):** <a href="https://link.coupang.com/a/c4naqO" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline">(도서 최저가 구매하기)</a>\n\n**📚 추천 도서:** **『돈의 심리학』 (모건 하우절):** <a href="https://link.coupang.com/a/c4na2F" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline">(도서 최저가 구매하기)</a>\n\n**🎬 추천 영상/강의:** 유튜브에서 **\'사회적 기업가\'**들의 창업 스토리를 담은 다큐멘터리를 시청해보세요. \'돈 버는 것\' 이상의 가치를 추구하는 사람들의 이야기를 통해, 당신이 놓치고 있던 새로운 관점을 발견할 수 있습니다.\n\n*이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.*',
     final_goal: '당신 성장의 최종 목표는, 단순히 부강한 국가를 만드는 \'냉철한 전략가\'를 넘어, 그 안에서 살아가는 **소외된 이웃의 삶까지 돌아볼 줄 아는 \'따뜻한 리더\'**가 되는 것입니다.'
   },
 
@@ -232,7 +232,7 @@ export const results: Record<string, ResultData> = {
       {title: '성공하는 사람들의 7가지 습관', author: '스티븐 코비'},
       {title: '안티프래질', author: '나심 니콜라스 탈레브'}
     ],
-    recommended_content: '역사 속에서 위대한 리더들이 **\'원칙을 깨고 예외를 허용하여\'** 더 큰 성공을 이룬 사례(예: 링컨의 노예 해방 선언)를 다룬 역사 다큐멘터리를 찾아보세요.',
+    recommended_content: '**📚 추천 도서:** **『성공하는 사람들의 7가지 습관』 (스티븐 코비):** <a href="https://link.coupang.com/a/c4nbn4" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline">(도서 최저가 구매하기)</a>\n\n**📚 추천 도서:** **『안티프래질』 (나심 니콜라스 탈레브):** <a href="https://link.coupang.com/a/c4nbQX" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline">(도서 최저가 구매하기)</a>\n\n**🎬 추천 영상/강의:** 역사 속에서 위대한 리더들이 **\'원칙을 깨고 예외를 허용하여\'** 더 큰 성공을 이룬 사례(예: 링컨의 노예 해방 선언)를 다룬 역사 다큐멘터리를 찾아보세요.\n\n*이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.*',
     final_goal: '당신 성장의 최종 목표는, 단순히 규칙을 수호하는 \'엄격한 심판\'을 넘어, 때로는 규칙보다 **사람을 우선할 줄 아는 \'성숙한 리더\'**가 되는 것입니다.'
   },
 
@@ -282,7 +282,7 @@ export const results: Record<string, ResultData> = {
       {title: '사피엔스', author: '유발 하라리'},
       {title: '지리의 힘', author: '팀 마샬'}
     ],
-    recommended_content: '유튜브에서 **\'성공적인 글로벌 파트너십\'** 사례에 대한 다큐멘터리나, 서로 다른 문화권의 사람들이 만나 교류하는 여행 콘텐츠를 시청해보세요. 당신이 몰랐던 \'연결\'의 긍정적인 측면을 발견할 수 있습니다.',
+    recommended_content: '**📚 추천 도서:** **『사피엔스』 (유발 하라리):** <a href="https://link.coupang.com/a/c4nv6c" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline">(도서 최저가 구매하기)</a>\n\n**📚 추천 도서:** **『지리의 힘』 (팀 마샬):** <a href="https://link.coupang.com/a/c4nmiu" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline">(도서 최저가 구매하기)</a>\n\n**🎬 추천 영상/강의:** 유튜브에서 **\'성공적인 글로벌 파트너십\'** 사례에 대한 다큐멘터리나, 서로 다른 문화권의 사람들이 만나 교류하는 여행 콘텐츠를 시청해보세요. 당신이 몰랐던 \'연결\'의 긍정적인 측면을 발견할 수 있습니다.\n\n*이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.*',
     final_goal: '당신 성장의 최종 목표는, 고독한 요새를 지키는 \'파수꾼\'을 넘어, 외부 세계와 **\'필요한 만큼 현명하게 교류\'**할 줄 아는 **\'강력한 독립 국가의 지도자\'**와 같은 지혜를 갖추는 것입니다.'
   },
 
@@ -332,7 +332,7 @@ export const results: Record<string, ResultData> = {
       {title: '바른 마음', author: '조너선 하이트'},
       {title: '설득의 심리학', author: '로버트 치알디니'}
     ],
-    recommended_content: '당신이 가장 비판적으로 생각하는 **보수 논객의 토론 영상** 중, 가장 논리적이라고 생각되는 영상을 하나 찾아 \'그 사람이 왜 저렇게 생각할까?\'를 이해하려는 목적으로 시청해보세요.',
+    recommended_content: '**📚 추천 도서:** **『바른 마음』 (조너선 하이트):** <a href="https://link.coupang.com/a/c4ndre" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline">(도서 최저가 구매하기)</a>\n\n**📚 추천 도서:** **『설득의 심리학』 (로버트 치알디니):** <a href="https://link.coupang.com/a/c4neEQ" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline">(도서 최저가 구매하기)</a>\n\n**🎬 추천 영상/강의:** 당신이 가장 비판적으로 생각하는 **보수 논객의 토론 영상** 중, 가장 논리적이라고 생각되는 영상을 하나 찾아 \'그 사람이 왜 저렇게 생각할까?\'를 이해하려는 목적으로 시청해보세요.\n\n*이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.*',
     final_goal: '당신 성장의 최종 목표는, 단순히 \'우리 편\'을 이끄는 리더를 넘어, 나와 다른 생각을 가진 사람까지 포용하여 **\'더 큰 우리\'를 만들어내는 \'진정한 통합의 리더\'**가 되는 것입니다.'
   },
 
@@ -382,7 +382,7 @@ export const results: Record<string, ResultData> = {
       {title: '아주 작은 습관의 힘', author: '제임스 클리어'},
       {title: '군주론', author: '니콜로 마키아벨리'}
     ],
-    recommended_content: '유튜브에서 **\'대한민국 헌법의 가치\'**나 **\'민주적 의사결정 과정\'**에 대한 교양 강의를 시청해보세요. 당신이 때로 답답하게 느끼는 \'절차\'가 왜 공동체를 지키기 위해 필수적인지 이해할 수 있습니다.',
+    recommended_content: '**📚 추천 도서:** **『아주 작은 습관의 힘』 (제임스 클리어):** <a href="https://link.coupang.com/a/c4nfHy" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline">(도서 최저가 구매하기)</a>\n\n**📚 추천 도서:** **『군주론』 (니콜로 마키아벨리):** <a href="https://link.coupang.com/a/c4ngi7" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline">(도서 최저가 구매하기)</a>\n\n**🎬 추천 영상/강의:** 유튜브에서 **\'대한민국 헌법의 가치\'**나 **\'민주적 의사결정 과정\'**에 대한 교양 강의를 시청해보세요. 당신이 때로 답답하게 느끼는 \'절차\'가 왜 공동체를 지키기 위해 필수적인지 이해할 수 있습니다.\n\n*이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.*',
     final_goal: '당신 성장의 최종 목표는, 단순히 목표를 향해 돌진하는 \'불도저 같은 리더\'를 넘어, 때로는 멈추고, 때로는 돌아가며 **\'과정의 정당성\'까지 확보하는 \'존경받는 지도자\'**가 되는 것입니다.'
   },
 
@@ -432,7 +432,7 @@ export const results: Record<string, ResultData> = {
       {title: '국가는 왜 실패하는가', author: '대런 아세모글루'},
       {title: '정치와 비전', author: '셸던 월린'}
     ],
-    recommended_content: '유튜브에서 **\'북유럽 복지국가의 그림자\'**나 **\'베네수엘라 경제 위기의 원인\'**을 다룬 다큐멘터리를 시청해보세요. 복지 정책의 성공 조건과 실패 원인을 객관적으로 학습할 수 있습니다.',
+    recommended_content: '**📚 추천 도서:** **『국가는 왜 실패하는가』 (대런 아세모글루):** <a href="https://link.coupang.com/a/c4ngW3" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline">(도서 최저가 구매하기)</a>\n\n**📚 추천 도서:** **『정치와 비전』 (셸던 월린):** <a href="https://link.coupang.com/a/c4njP6" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline">(도서 최저가 구매하기)</a>\n\n**🎬 추천 영상/강의:** 유튜브에서 **\'북유럽 복지국가의 그림자\'**나 **\'베네수엘라 경제 위기의 원인\'**을 다룬 다큐멘터리를 시청해보세요. 복지 정책의 성공 조건과 실패 원인을 객관적으로 학습할 수 있습니다.\n\n*이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.*',
     final_goal: '당신 성장의 최종 목표는, 단순히 \'착한 사람\'을 넘어, 공동체를 위한 선한 의도를 **\'지속 가능한 성공 모델\'로 만들어내는 \'유능한 설계자\'**가 되는 것입니다.'
   },
 
@@ -484,7 +484,7 @@ export const results: Record<string, ResultData> = {
       {title: '넛지', author: '리처드 탈러'},
       {title: '빅데이터 인문학', author: '에르네스토 시메티'}
     ],
-    recommended_content: '**추천 영상/강의:**\n\n- **TED Talks**: "The future of work", "AI and society"\n- **유튜브**: "Computerphile", "3Blue1Brown" 등 기술 채널\n- **팟캐스트**: "AI Podcast", "Tech 따라잡기"\n- **온라인 강의**: 코세라의 데이터 사이언스, 시스템 설계 강의\n\n도서 최저가 구매하기를 통해 관련 도서들을 경제적으로 구매할 수 있습니다.',
+    recommended_content: '**📚 추천 도서:** **『미래의 일』 (칼 베네딕트 프레이):** <a href="https://link.coupang.com/a/c4mXIL" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline">(도서 최저가 구매하기)</a>\n\n**📚 추천 도서:** **『호모 데우스』 (유발 하라리):** <a href="https://link.coupang.com/a/c4nv6c" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline">(도서 최저가 구매하기)</a>\n\n**📚 추천 도서:** **『넛지』 (리처드 탈러):** <a href="https://link.coupang.com/a/c4m3jT" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline">(도서 최저가 구매하기)</a>\n\n**📚 추천 도서:** **『빅데이터 인문학』 (에르네스토 시메티):** <a href="https://link.coupang.com/a/c4m40N" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline">(도서 최저가 구매하기)</a>\n\n**🎬 추천 영상/강의:**\n\n- **TED Talks**: "The future of work", "AI and society"\n- **유튜브**: "Computerphile", "3Blue1Brown" 등 기술 채널\n- **팟캐스트**: "AI Podcast", "Tech 따라잡기"\n- **온라인 강의**: 코세라의 데이터 사이언스, 시스템 설계 강의\n\n*이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.*',
     final_goal: '당신 성장의 최종 목표는, 단순히 효율적인 시스템을 만드는 기술자를 넘어, 기술적 효율성과 인간적 가치를 동시에 고려하는 **\'휴머니즘이 있는 시스템 설계자\'**가 되는 것입니다. 당신의 기술이 단순히 효율적인 것이 아니라, 사람들을 더 행복하게 만들 때 진정한 성공을 경험하게 될 것입니다.'
   },
 
@@ -536,7 +536,7 @@ export const results: Record<string, ResultData> = {
       {title: '실용주의 사상', author: '윌리엄 제임스'},
       {title: '협상의 기술', author: '로저 피셔'}
     ],
-    recommended_content: '**추천 영상/강의:**\n\n- **TED Talks**: "Successful negotiation", "Leadership in complexity"\n- **유튜브**: "하버드 협상강의", "리더십 특강" 등\n- **팟캐스트**: "성공하는 사람들의 대화", "경영 인사이트"\n- **온라인 강의**: 코세라의 리더십, 협상 관련 강의\n\n도서 최저가 구매하기를 통해 관련 도서들을 경제적으로 구매할 수 있습니다.',
+    recommended_content: '**📚 추천 도서:** **『성공하는 사람들의 7가지 습관』 (스티븐 코비):** <a href="https://link.coupang.com/a/c4nbn4" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline">(도서 최저가 구매하기)</a>\n\n**📚 추천 도서:** **『어떻게 원하는 것을 얻는가』 (스튜어트 다이아몬드):** <a href="https://link.coupang.com/a/c4nB5n" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline">(도서 최저가 구매하기)</a>\n\n**📚 추천 도서:** **『실용주의 사상』 (윌리엄 제임스):** <a href="https://link.coupang.com/a/c4m54a" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline">(도서 최저가 구매하기)</a>\n\n**📚 추천 도서:** **『협상의 기술』 (로저 피셔):** <a href="https://link.coupang.com/a/c4m75Q" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline">(도서 최저가 구매하기)</a>\n\n**🎬 추천 영상/강의:**\n\n- **TED Talks**: "Successful negotiation", "Leadership in complexity"\n- **유튜브**: "하버드 협상강의", "리더십 특강" 등\n- **팟캐스트**: "성공하는 사람들의 대화", "경영 인사이트"\n- **온라인 강의**: 코세라의 리더십, 협상 관련 강의\n\n*이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.*',
     final_goal: '당신 성장의 최종 목표는, 단순히 갈등을 피하고 중재하는 조정자를 넘어, 다양한 이해관계를 조화시키면서도 명확한 방향성을 제시하는 **\'통합형 리더\'**가 되는 것입니다. 당신의 포용력과 현실감각이 강력한 추진력과 만나 큰 변화를 이끌어낼 때 진정한 성취를 경험하게 될 것입니다.'
   },
 
@@ -588,7 +588,7 @@ export const results: Record<string, ResultData> = {
       {title: '삼국지', author: '나관중'},
       {title: '역사의 교훈', author: '윌 듀런트'}
     ],
-    recommended_content: '**추천 영상/강의:**\n\n- **다큐멘터리**: KBS 역사저널 그날, "이순신의 리더십"\n- **유튜브**: "설민석의 한국사", "최태성의 한국사" 등\n- **팟캐스트**: "역사 팟캐스트", "전쟁사 이야기"\n- **온라인 강의**: 한국사 강의, 리더십 개발 프로그램\n\n도서 최저가 구매하기를 통해 관련 도서들을 경제적으로 구매할 수 있습니다.',
+    recommended_content: '**📚 추천 도서:** **『징비록』 (유성룡):** <a href="https://link.coupang.com/a/c4m8BG" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline">(도서 최저가 구매하기)</a>\n\n**📚 추천 도서:** **『난중일기』 (이순신):** <a href="https://link.coupang.com/a/c4m8BG" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline">(도서 최저가 구매하기)</a>\n\n**📚 추천 도서:** **『삼국지』 (나관중):** <a href="https://link.coupang.com/a/c4m9Zt" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline">(도서 최저가 구매하기)</a>\n\n**📚 추천 도서:** **『역사의 교훈』 (윌 듀런트):** <a href="https://link.coupang.com/a/c4naqO" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline">(도서 최저가 구매하기)</a>\n\n**🎬 추천 영상/강의:**\n\n- **다큐멘터리**: KBS 역사저널 그날, "이순신의 리더십"\n- **유튜브**: "설민석의 한국사", "최태성의 한국사" 등\n- **팟캐스트**: "역사 팟캐스트", "전쟁사 이야기"\n- **온라인 강의**: 한국사 강의, 리더십 개발 프로그램\n\n*이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.*',
     final_goal: '당신 성장의 최종 목표는, 감정적 애국심을 넘어서 전략적이고 포용적인 리더십으로 진정한 공동체 발전을 이끄는 **\'현명한 애국자\'**가 되는 것입니다. 당신의 뜨거운 가슴이 차가운 머리와 만날 때, 진짜로 나라와 공동체를 위한 큰 일을 해낼 수 있을 것입니다.'
   },
 
@@ -640,7 +640,7 @@ export const results: Record<string, ResultData> = {
       {title: '성공하는 사람들의 7가지 습관', author: '스티븐 코비'},
       {title: '조직의 재발견', author: '헨리 민츠버그'}
     ],
-    recommended_content: '**추천 영상/강의:**\n\n- **TED Talks**: "Leadership in uncertainty", "Building trust"\n- **유튜브**: "경영학 강의", "리더십 개발" 등\n- **팟캐스트**: "성장하는 리더", "조직 관리의 지혜"\n- **온라인 강의**: 코세라의 조직관리, 리더십 강의\n\n도서 최저가 구매하기를 통해 관련 도서들을 경제적으로 구매할 수 있습니다.',
+    recommended_content: '**📚 추천 도서:** **『좋은 기업을 넘어 위대한 기업으로』 (짐 콜린스):** <a href="https://link.coupang.com/a/c4nlnX" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline">(도서 최저가 구매하기)</a>\n\n**📚 추천 도서:** **『변화하는 세상의 불변하는 법칙』 (존 맥스웰):** <a href="https://link.coupang.com/a/c4m8BG" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline">(도서 최저가 구매하기)</a>\n\n**📚 추천 도서:** **『성공하는 사람들의 7가지 습관』 (스티븐 코비):** <a href="https://link.coupang.com/a/c4nbn4" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline">(도서 최저가 구매하기)</a>\n\n**📚 추천 도서:** **『조직의 재발견』 (헨리 민츠버그):** <a href="https://link.coupang.com/a/c4nceA" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline">(도서 최저가 구매하기)</a>\n\n**🎬 추천 영상/강의:**\n\n- **TED Talks**: "Leadership in uncertainty", "Building trust"\n- **유튜브**: "경영학 강의", "리더십 개발" 등\n- **팟캐스트**: "성장하는 리더", "조직 관리의 지혜"\n- **온라인 강의**: 코세라의 조직관리, 리더십 강의\n\n*이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.*',
     final_goal: '당신 성장의 최종 목표는, 단순히 안정을 유지하는 관리자를 넘어, 변화하는 시대에도 사람들이 믿고 따를 수 있는 **\'적응적 리더\'**가 되는 것입니다. 당신의 신뢰성과 안정성이 유연성과 추진력과 만날 때, 진정한 리더십을 발휘하게 될 것입니다.'
   },
 
@@ -692,7 +692,7 @@ export const results: Record<string, ResultData> = {
       {title: '조직의 힘', author: '짐 콜린스'},
       {title: '변화관리 이론과 실제', author: '존 코터'}
     ],
-    recommended_content: '**추천 영상/강의:**\n\n- **다큐멘터리**: "위대한 리더들", "역사 속 통치자들"\n- **유튜브**: "리더십 강의", "조직관리 이론" 등\n- **팟캐스트**: "리더의 조건", "경영과 리더십"\n- **온라인 강의**: 코세라의 조직론, 리더십 개발 프로그램\n\n도서 최저가 구매하기를 통해 관련 도서들을 경제적으로 구매할 수 있습니다.',
+    recommended_content: '**📚 추천 도서:** **『원칙』 (레이 달리오):** <a href="https://link.coupang.com/a/c4nnLZ" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline">(도서 최저가 구매하기)</a>\n\n**📚 추천 도서:** **『리더십의 순간』 (마이클 유심):** <a href="https://link.coupang.com/a/c4m8BG" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline">(도서 최저가 구매하기)</a>\n\n**📚 추천 도서:** **『조직의 힘』 (짐 콜린스):** <a href="https://link.coupang.com/a/c4nlnX" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline">(도서 최저가 구매하기)</a>\n\n**📚 추천 도서:** **『변화관리 이론과 실제』 (존 코터):** <a href="https://link.coupang.com/a/c4m65M" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline">(도서 최저가 구매하기)</a>\n\n**🎬 추천 영상/강의:**\n\n- **다큐멘터리**: "위대한 리더들", "역사 속 통치자들"\n- **유튜브**: "리더십 강의", "조직관리 이론" 등\n- **팟캐스트**: "리더의 조건", "경영과 리더십"\n- **온라인 강의**: 코세라의 조직론, 리더십 개발 프로그램\n\n*이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.*',
     final_goal: '당신 성장의 최종 목표는, 단순히 규칙을 고수하는 관리자를 넘어, 원칙은 지키되 시대 변화도 수용할 수 있는 **\'지혜로운 통치자\'**가 되는 것입니다. 당신의 확고한 원칙이 유연한 지혜와 만날 때, 진정으로 사람들이 따르고 존경하는 리더가 될 수 있을 것입니다.'
   },
 
@@ -735,7 +735,7 @@ export const results: Record<string, ResultData> = {
       {title: '제로 투 원', author: '피터 틸'},
       {title: '그릿', author: '앤젤라 더크워스'}
     ],
-    recommended_content: '**📚 추천 도서:** **『제로 투 원』 (피터 틸):** <u>(도서 최저가 구매하기)</u>\n\n**📚 추천 도서:** **『그릿』 (앤젤라 더크워스):**  <u>(도서 최저가 구매하기)</u>\n\n**🎬 추천 영상/강의:** 유튜브에서 **\'스타트업 성공 전략\', \'혁신 리더십\', \'실행력 강화\'** 관련 강의나 영상을 찾아보세요. 당신의 비전을 더욱 빠르고 효과적으로 현실화하는 데 필요한 실질적인 지식과 영감을 얻을 수 있습니다.'
+    recommended_content: '**📚 추천 도서:** **『제로 투 원』 (피터 틸):** <a href="https://link.coupang.com/a/c4nwtT" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline">(도서 최저가 구매하기)</a>\n\n**📚 추천 도서:** **『그릿』 (앤젤라 더크워스):** <a href="https://link.coupang.com/a/c4nwQU" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline">(도서 최저가 구매하기)</a>\n\n**🎬 추천 영상/강의:** 유튜브에서 **\'스타트업 성공 전략\', \'혁신 리더십\', \'실행력 강화\'** 관련 강의나 영상을 찾아보세요. 당신의 비전을 더욱 빠르고 효과적으로 현실화하는 데 필요한 실질적인 지식과 영감을 얻을 수 있습니다.\n\n*이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.*'
   },
 
   GVW: {
@@ -776,7 +776,7 @@ export const results: Record<string, ResultData> = {
       {title: '변화의 시작 5초의 법칙', author: '멜 로빈스'},
       {title: '생각의 탄생', author: '로버트 루트번스타인, 미셸 루트번스타인'}
     ],
-    recommended_content: '**📚 추천 도서:** **『변화의 시작 5초의 법칙』 (멜 로빈스):** <u>(도서 최저가 구매하기)</u>\n\n**📚 추천 도서:** **『생각의 탄생』 (로버트 루트번스타인, 미셸 루트번스타인):**  <u>(도서 최저가 구매하기)</u>\n\n**🎬 추천 영상/강의:** 유튜브에서 **\'미래학 트렌드\', \'거시 경제 분석\', \'선행 지표 분석\'** 관련 강의나 영상을 찾아보세요. 당신의 예측 능력을 데이터 기반의 통찰과 결합하여, 조직에 더욱 명확한 방향성을 제시하는 데 필요한 지식을 얻을 수 있습니다.'
+    recommended_content: '**📚 추천 도서:** **『변화의 시작 5초의 법칙』 (멜 로빈스):** <a href="https://link.coupang.com/a/c4nxt5" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline">(도서 최저가 구매하기)</a>\n\n**📚 추천 도서:** **『생각의 탄생』 (로버트 루트번스타인, 미셸 루트번스타인):** <a href="https://link.coupang.com/a/c4nx4z" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline">(도서 최저가 구매하기)</a>\n\n**🎬 추천 영상/강의:** 유튜브에서 **\'미래학 트렌드\', \'거시 경제 분석\', \'선행 지표 분석\'** 관련 강의나 영상을 찾아보세요. 당신의 예측 능력을 데이터 기반의 통찰과 결합하여, 조직에 더욱 명확한 방향성을 제시하는 데 필요한 지식을 얻을 수 있습니다.\n\n*이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.*'
   },
 
   GAE: {
@@ -817,7 +817,7 @@ export const results: Record<string, ResultData> = {
       {title: '스타트업 바이블', author: '빌 올렛'},
       {title: '경영의 모험', author: '존 브룩스'}
     ],
-    recommended_content: '**📚 추천 도서:** **『스타트업 바이블』 (빌 올렛):** <u>(도서 최저가 구매하기)</u>\n\n**📚 추천 도서:** **『경영의 모험』 (존 브룩스):** <u>(도서 최저가 구매하기)</u>\n\n**🎬 추천 영상/강의:** 유튜브에서 **\'린 스타트업\', \'비즈니스 모델 캔버스\', \'데이터 기반 의사결정\'** 관련 강의나 영상을 찾아보세요. 당신의 전략적인 창업 역량에 실행력을 더하고, 성장을 가속화하는 데 필요한 실질적인 지식과 노하우를 얻을 수 있습니다.'
+    recommended_content: '**📚 추천 도서:** **『스타트업 바이블』 (빌 올렛):** <a href="https://link.coupang.com/a/c4nyOa" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline">(도서 최저가 구매하기)</a>\n\n**📚 추천 도서:** **『경영의 모험』 (존 브룩스):** <a href="https://link.coupang.com/a/c4nzc5" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline">(도서 최저가 구매하기)</a>\n\n**🎬 추천 영상/강의:** 유튜브에서 **\'린 스타트업\', \'비즈니스 모델 캔버스\', \'데이터 기반 의사결정\'** 관련 강의나 영상을 찾아보세요. 당신의 전략적인 창업 역량에 실행력을 더하고, 성장을 가속화하는 데 필요한 실질적인 지식과 노하우를 얻을 수 있습니다.\n\n*이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.*'
   },
 
   GAW: {
@@ -858,7 +858,7 @@ export const results: Record<string, ResultData> = {
       {title: '데이터는 어떻게 세상을 지배하는가', author: '강성호'},
       {title: '데일 카네기 인간관계론', author: '데일 카네기'}
     ],
-    recommended_content: '**📚 추천 도서:** **『데이터는 어떻게 세상을 지배하는가』 (강성호):** <u>(도서 최저가 구매하기)</u>\n\n**📚 추천 도서:** **『인간관계론』 (데일 카네기):** <u>(도서 최저가 구매하기)</u>\n\n**🎬 추천 영상/강의:** 유튜브에서 **\'데이터 시각화\', \'비즈니스 프레젠테이션\', \'설득의 기술\'** 관련 강의나 영상을 찾아보세요. 당신의 강력한 데이터 분석 역량을 조직 내 변화를 이끄는 실질적인 동력으로 전환하는 데 필요한 노하우를 얻을 수 있습니다.'
+    recommended_content: '**📚 추천 도서:** **『데이터는 어떻게 세상을 지배하는가』 (강성호):** <a href="https://link.coupang.com/a/c4nzLo" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline">(도서 최저가 구매하기)</a>\n\n**📚 추천 도서:** **『인간관계론』 (데일 카네기):** <a href="https://link.coupang.com/a/c4nAUH" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline">(도서 최저가 구매하기)</a>\n\n**🎬 추천 영상/강의:** 유튜브에서 **\'데이터 시각화\', \'비즈니스 프레젠테이션\', \'설득의 기술\'** 관련 강의나 영상을 찾아보세요. 당신의 강력한 데이터 분석 역량을 조직 내 변화를 이끄는 실질적인 동력으로 전환하는 데 필요한 노하우를 얻을 수 있습니다.\n\n*이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.*'
   },
 
   SVE: {
@@ -899,7 +899,7 @@ export const results: Record<string, ResultData> = {
       {title: '부자의 그릇', author: '이즈미 마사토'},
       {title: '나쁜 사마리아인들', author: '장하준'}
     ],
-    recommended_content: '**📚 추천 도서:** **『부자의 그릇』 (이즈미 마사토):**  <u>(도서 최저가 구매하기)</u>\n\n**📚 추천 도서:** **『나쁜 사마리아인들』 (장하준):**  <u>(도서 최저가 구매하기)</u>\n\n**🎬 추천 영상/강의:** 유튜브에서 **\'사회적 기업가 정신\', \'임팩트 투자\', \'비영리 조직의 수익 모델\'** 관련 강의나 영상을 찾아보세요. 당신의 따뜻한 비전이 현실에서 단단하고 지속 가능한 힘을 가질 수 있도록 돕는 실용적인 지식을 얻을 수 있습니다.'
+    recommended_content: '**📚 추천 도서:** **『부자의 그릇』 (이즈미 마사토):** <a href="https://link.coupang.com/a/c4nBlc" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline">(도서 최저가 구매하기)</a>\n\n**📚 추천 도서:** **『나쁜 사마리아인들』 (장하준):** <a href="https://link.coupang.com/a/c4nBHo" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline">(도서 최저가 구매하기)</a>\n\n**🎬 추천 영상/강의:** 유튜브에서 **\'사회적 기업가 정신\', \'임팩트 투자\', \'비영리 조직의 수익 모델\'** 관련 강의나 영상을 찾아보세요. 당신의 따뜻한 비전이 현실에서 단단하고 지속 가능한 힘을 가질 수 있도록 돕는 실용적인 지식을 얻을 수 있습니다.\n\n*이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.*'
   },
 
   SVW: {
@@ -940,7 +940,7 @@ export const results: Record<string, ResultData> = {
       {title: '어떻게 원하는 것을 얻는가', author: '스튜어트 다이아몬드'},
       {title: '기브 앤 테이크', author: '애덤 그랜트'}
     ],
-    recommended_content: '**📚 추천 도서:** **『어떻게 원하는 것을 얻는가』 (스튜어트 다이아몬드):** <u>(도서 최저가 구매하기)</u>\n\n**📚 추천 도서:** **『기브 앤 테이크』 (애덤 그랜트):**  <u>(도서 최저가 구매하기)</u>\n\n**🎬 추천 영상/강의:** 유튜브에서 **\'조직 문화 혁신\', \'변화 관리 리더십\', \'내부 브랜딩\'** 관련 강의나 영상을 찾아보세요. 당신의 확고한 신념이 조직 전체의 동력으로 작용하도록 만드는 효과적인 소통 및 실행 전략을 배울 수 있습니다.'
+    recommended_content: '**📚 추천 도서:** **『어떻게 원하는 것을 얻는가』 (스튜어트 다이아몬드):** <a href="https://link.coupang.com/a/c4nB5n" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline">(도서 최저가 구매하기)</a>\n\n**📚 추천 도서:** **『기브 앤 테이크』 (애덤 그랜트):** <a href="https://link.coupang.com/a/c4nCox" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline">(도서 최저가 구매하기)</a>\n\n**🎬 추천 영상/강의:** 유튜브에서 **\'조직 문화 혁신\', \'변화 관리 리더십\', \'내부 브랜딩\'** 관련 강의나 영상을 찾아보세요. 당신의 확고한 신념이 조직 전체의 동력으로 작용하도록 만드는 효과적인 소통 및 실행 전략을 배울 수 있습니다.\n\n*이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.*'
   },
 
   SAE: {
@@ -981,7 +981,7 @@ export const results: Record<string, ResultData> = {
       {title: '한국형 장사의 신', author: '김유진'},
       {title: '아이디어 불패의 법칙', author: '알베르토 사보이아'}
     ],
-    recommended_content: '**📚 추천 도서:** **『한국형 장사의 신』 (김유진):** <u>(도서 최저가 구매하기)</u>\n\n**📚 추천 도서:** **『아이디어 불패의 법칙』 (알베르토 사보이아):** <u>(도서 최저가 구매하기)</u>\n\n**🎬 추천 영상/강의:** 유튜브에서 **\'고객 관계 관리 (CRM)\', \'네트워킹 전략\', \'사업 제휴 노하우\'** 관련 강의나 영상을 찾아보세요. 당신의 데이터 기반 사업 역량에 사람을 얻는 기술을 더하여, 사업의 지속적인 성공을 위한 기반을 다질 수 있습니다.'
+    recommended_content: '**📚 추천 도서:** **『한국형 장사의 신』 (김유진):** <a href="https://link.coupang.com/a/c4nCQe" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline">(도서 최저가 구매하기)</a>\n\n**📚 추천 도서:** **『아이디어 불패의 법칙』 (알베르토 사보이아):** <a href="https://link.coupang.com/a/c4nDkm" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline">(도서 최저가 구매하기)</a>\n\n**🎬 추천 영상/강의:** 유튜브에서 **\'고객 관계 관리 (CRM)\', \'네트워킹 전략\', \'사업 제휴 노하우\'** 관련 강의나 영상을 찾아보세요. 당신의 데이터 기반 사업 역량에 사람을 얻는 기술을 더하여, 사업의 지속적인 성공을 위한 기반을 다질 수 있습니다.\n\n*이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.*'
   },
 
   SAW: {
@@ -1022,7 +1022,7 @@ export const results: Record<string, ResultData> = {
       {title: '블랙 스완', author: '나심 니콜라스 탈레브'},
       {title: '더 골', author: '엘리 골드렛'}
     ],
-    recommended_content: '**📚 추천 도서:** **『블랙 스완』 (나심 니콜라스 탈레브):** <u>(도서 최저가 구매하기)</u>\n\n**📚 추천 도서:** **『더 골』 (엘리 골드렛):** <u>(도서 최저가 구매하기)</u>\n\n**🎬 추천 영상/강의:** 유튜브에서 **\'위기 관리 전략\', \'준법 경영\', \'사업 연속성 계획(BCP)\'** 관련 강의나 영상을 찾아보세요. 당신의 탁월한 리스크 관리 능력을 조직의 지속 가능한 성장을 위한 강력한 방패이자, 때로는 새로운 기회를 모색하는 발판으로 삼는 방법을 배울 수 있습니다.'
+    recommended_content: '**📚 추천 도서:** **『블랙 스완』 (나심 니콜라스 탈레브):** <a href="https://link.coupang.com/a/c4nDIP" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline">(도서 최저가 구매하기)</a>\n\n**📚 추천 도서:** **『더 골』 (엘리 골드렛):** <a href="https://link.coupang.com/a/c4nD4E" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline">(도서 최저가 구매하기)</a>\n\n**🎬 추천 영상/강의:** 유튜브에서 **\'위기 관리 전략\', \'준법 경영\', \'사업 연속성 계획(BCP)\'** 관련 강의나 영상을 찾아보세요. 당신의 탁월한 리스크 관리 능력을 조직의 지속 가능한 성장을 위한 강력한 방패이자, 때로는 새로운 기회를 모색하는 발판으로 삼는 방법을 배울 수 있습니다.\n\n*이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.*'
   }
 };
 
