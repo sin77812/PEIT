@@ -17,8 +17,16 @@ interface ResultPageClientProps {
 
 // 마크다운 스타일 텍스트를 HTML로 변환하는 함수
 function renderMarkdownText(text: string) {
+  // HTML 링크가 이미 포함된 경우를 처리하기 위해 먼저 링크를 보호
+  const linkPlaceholders: string[] = [];
+  let html = text.replace(/<a[^>]*>.*?<\/a>/g, (match) => {
+    const placeholder = `__LINK_${linkPlaceholders.length}__`;
+    linkPlaceholders.push(match);
+    return placeholder;
+  });
+  
   // **텍스트** -> <strong>텍스트</strong>
-  let html = text.replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold text-gray-900">$1</strong>');
+  html = html.replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold text-gray-900">$1</strong>');
   
   // '텍스트' -> <span class="text-accent">텍스트</span>
   html = html.replace(/'([^']+)'/g, '<span class="text-accent font-medium">\'$1\'</span>');
@@ -34,8 +42,18 @@ function renderMarkdownText(text: string) {
       return `<h3 class="text-xl font-bold mb-3 mt-6 text-gray-900">${titleText}</h3>`;
     }
     
+    // 링크가 포함된 줄은 <p> 태그로 감싸지 않고 그대로 반환
+    if (trimmed.includes('__LINK_')) {
+      return trimmed;
+    }
+    
     return `<p class="mb-4 last:mb-0">${paragraph}</p>`;
   }).join('');
+  
+  // 링크 플레이스홀더를 원래 HTML로 복원
+  linkPlaceholders.forEach((link, index) => {
+    html = html.replace(`__LINK_${index}__`, link);
+  });
   
   return html;
 }
