@@ -88,7 +88,11 @@ export default function SimpleResultCard({ type }: SimpleResultCardProps) {
           
           <p 
             className="text-lg leading-relaxed text-gray-700 max-w-2xl mx-auto"
-            dangerouslySetInnerHTML={{ __html: renderMarkdownText(data.description) }}
+            dangerouslySetInnerHTML={{ __html: renderMarkdownText(
+              data.category === 'economic' && data.spectrum_analysis 
+                ? data.spectrum_analysis 
+                : data.description
+            ) }}
           />
         </div>
 

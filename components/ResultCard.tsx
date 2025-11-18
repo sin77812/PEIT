@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import SpectrumChart from './SpectrumChart';
 import Button from './Button';
+import { results } from '@/lib/results';
 
 // 마크다운 스타일 텍스트를 HTML로 변환하는 함수
 function renderMarkdownText(text: string) {
@@ -76,7 +77,11 @@ export default function ResultCard({
       
       <p 
         className="text-lg leading-relaxed text-gray-700"
-        dangerouslySetInnerHTML={{ __html: renderMarkdownText(description) }}
+        dangerouslySetInnerHTML={{ __html: renderMarkdownText(
+          category === 'economic' && results[type]?.spectrum_analysis 
+            ? results[type].spectrum_analysis 
+            : description
+        ) }}
       />
       
       {/* 자세히보기 버튼 (옵션) */}
