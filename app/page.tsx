@@ -19,19 +19,19 @@ export default function Home() {
       
       {/* 중앙 콘텐츠 */}
       <div className="relative z-10 flex flex-col items-center justify-start h-full px-8 sm:px-12 md:px-4 pt-[calc(25vh+4rem-10vh)] sm:pt-[calc(25vh+4rem-6.25vh-10vh)] md:pt-[calc(25vh+4rem)]">
-        <h1 className="text-6xl md:text-8xl font-bold text-white mb-[1px]">
+        {/* 모바일: 제목 10% 증가 (text-6xl = 3.75rem * 1.1 = 4.125rem), 웹: 제목과 소제목 끝단 맞추기 위해 소제목 폰트 조정 */}
+        <h1 className="text-[4.125rem] md:text-8xl font-bold text-white mb-[1px]">
           PEIT24
         </h1>
-        {/* 모바일: 작은 폰트, 웹: 10% 큰 폰트 + 줄간격 줄임 */}
-        <p className="text-base sm:text-lg md:text-xl lg:text-[1.1em] text-white mb-8 whitespace-nowrap md:leading-tight">
+        {/* 웹에서 제목과 소제목 끝단이 맞도록 폰트 크기 조정 */}
+        <p className="text-base sm:text-lg md:text-2xl lg:text-3xl text-white mb-8 whitespace-nowrap md:leading-tight">
           가장 완벽한 <span className="font-bold">정치 / 경제</span> 성향 테스트
         </p>
         
-        {/* 새로운 프로모션 텍스트 - 볼드 제거, 폰트 10% 축소 */}
+        {/* 프로모션 텍스트 - "가장 완벽한 정치 / 경제 성향 테스트." 문장 제거 */}
         <div className="text-center mb-16 max-w-3xl md:max-w-4xl lg:max-w-5xl mx-auto px-2 sm:px-4">
           <p className="text-[0.9em] sm:text-lg md:text-xl text-white leading-tight md:leading-tight text-pretty break-keep text-balance">
             스스로를 얼마나 깊이 알고 있나요?<br />
-            가장 완벽한 정치 / 경제 성향 테스트.<br />
             PEIT24에서 기존의 고정관념을 깨고,<br />
             가장 정교한 정치경제 DNA를 확인하세요.
           </p>
