@@ -140,45 +140,37 @@ export default function TypesPage() {
                   {category} ({types.length}개)
                 </h3>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                  {types.map(({ code, name, keywords, spectrum_analysis }) => {
-                    const displayText = spectrum_analysis || '';
-                    return (
-                      <Link
-                        key={code}
-                        href={`/result/${code}?explore=true`}
-                        className="bg-white p-4 rounded-xl shadow-md hover:shadow-xl transition-all hover:scale-105 border-2 border-transparent hover:border-accent/50"
-                      >
-                        <div className="relative w-full h-24 sm:h-28 mb-3">
-                          <Image
-                            src={`/images/economic/${code}.jpg`}
-                            alt={name}
-                            fill
-                            className="object-contain rounded-lg"
-                            quality={95}
-                            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 200px"
-                          />
+                  {types.map(({ code, name, keywords }) => (
+                    <Link
+                      key={code}
+                      href={`/result/${code}?explore=true`}
+                      className="bg-white p-4 rounded-xl shadow-md hover:shadow-xl transition-all hover:scale-105 border-2 border-transparent hover:border-accent/50"
+                    >
+                      <div className="relative w-full h-24 sm:h-28 mb-3">
+                        <Image
+                          src={`/images/economic/${code}.jpg`}
+                          alt={name}
+                          fill
+                          className="object-contain rounded-lg"
+                          quality={95}
+                          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 200px"
+                        />
+                      </div>
+                      <h4 className="font-bold text-accent text-center text-sm mb-1">{code}</h4>
+                      <p className="text-xs text-center text-gray-700 mb-2 leading-tight">
+                        {stripEnglish(name as string)}
+                      </p>
+                      {keywords && keywords.length > 0 && (
+                        <div className="flex flex-wrap gap-1 justify-center mt-2">
+                          {keywords.slice(0, 2).map((keyword, i) => (
+                            <span key={i} className="text-[10px] px-1.5 py-0.5 bg-accent/10 text-accent rounded">
+                              #{keyword}
+                            </span>
+                          ))}
                         </div>
-                        <h4 className="font-bold text-accent text-center text-sm mb-1">{code}</h4>
-                        <p className="text-xs text-center text-gray-700 mb-2 leading-tight">
-                          {stripEnglish(name as string)}
-                        </p>
-                        {displayText && (
-                          <p className="text-[10px] text-gray-600 text-center leading-tight mt-2 line-clamp-3">
-                            {displayText.replace(/\*\*/g, '').replace(/\n/g, ' ').substring(0, 80)}...
-                          </p>
-                        )}
-                        {keywords && keywords.length > 0 && (
-                          <div className="flex flex-wrap gap-1 justify-center mt-2">
-                            {keywords.slice(0, 2).map((keyword, i) => (
-                              <span key={i} className="text-[10px] px-1.5 py-0.5 bg-accent/10 text-accent rounded">
-                                #{keyword}
-                              </span>
-                            ))}
-                          </div>
-                        )}
-                      </Link>
-                    );
-                  })}
+                      )}
+                    </Link>
+                  ))}
                 </div>
               </div>
             ))}
