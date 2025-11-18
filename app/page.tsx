@@ -19,12 +19,12 @@ export default function Home() {
       
       {/* 중앙 콘텐츠 */}
       <div className="relative z-10 flex flex-col items-center justify-start h-full px-8 sm:px-12 md:px-4 pt-[calc(25vh+4rem-10vh)] sm:pt-[calc(25vh+4rem-6.25vh-10vh)] md:pt-[calc(25vh+4rem)]">
-        {/* 모바일: 원래 제목 크기 유지, 웹: 제목과 소제목 끝단 맞추기 위해 소제목 폰트 조정 (5% 축소) */}
-        <h1 className="text-6xl md:text-8xl font-bold text-white mb-[1px]">
+        {/* 모바일: 제목 5% 증가 (text-6xl = 3.75rem * 1.05 = 3.9375rem), 웹: 소제목 이전 크기로 복원 */}
+        <h1 className="text-[3.9375rem] md:text-8xl font-bold text-white mb-[1px]">
           PEIT24
         </h1>
-        {/* 웹에서 제목과 소제목 끝단이 맞도록 폰트 크기 조정 (5% 축소: text-2xl=1.5rem*0.95=1.425rem, text-3xl=1.875rem*0.95=1.78125rem) */}
-        <p className="text-base sm:text-lg md:text-[1.425rem] lg:text-[1.78125rem] text-white mb-8 whitespace-nowrap md:leading-tight">
+        {/* 웹에서 소제목 이전 크기로 복원 (md:text-2xl lg:text-3xl) */}
+        <p className="text-base sm:text-lg md:text-2xl lg:text-3xl text-white mb-8 whitespace-nowrap md:leading-tight">
           가장 완벽한 <span className="font-bold">정치 / 경제</span> 성향 테스트
         </p>
         
