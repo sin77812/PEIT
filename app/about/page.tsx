@@ -27,7 +27,7 @@ export default function AboutPage() {
               <ul className="space-y-2 text-gray-700">
                 <li><strong>사회관 (I/C):</strong> 개인주의 vs 공동체주의</li>
                 <li><strong>변화관 (P/T):</strong> 진보주의 vs 보수주의</li>
-                <li><strong>평등관 (A/U):</strong> 적극적 평등 vs 자연적 위계</li>
+                <li><strong>평등관 (A/U):</strong> 적극적 평등 vs 보편적 평등</li>
                 <li><strong>외교안보관 (E/S):</strong> 국제협력 vs 자국우선</li>
               </ul>
             </div>
