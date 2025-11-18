@@ -19,12 +19,12 @@ export default function Home() {
       
       {/* 중앙 콘텐츠 */}
       <div className="relative z-10 flex flex-col items-center justify-start h-full px-8 sm:px-12 md:px-4 pt-[calc(25vh+4rem-10vh)] sm:pt-[calc(25vh+4rem-6.25vh-10vh)] md:pt-[calc(25vh+4rem)]">
-        {/* 모바일: 제목 원래 크기 (text-6xl), 소제목 5% 증가 (text-base = 1rem * 1.05 = 1.05rem) */}
-        {/* 웹: 소제목 3% 축소 (text-2xl=1.5rem*0.97=1.455rem, text-3xl=1.875rem*0.97=1.81875rem), 줄간격 50% 더 가깝게 */}
-        <h1 className="text-6xl md:text-8xl font-bold text-white mb-[1px] md:mb-0">
+        {/* 모바일: 제목 3px 증가 (text-6xl = 60px + 3px = 63px = 3.9375rem), 소제목 5% 증가 (text-base = 1rem * 1.05 = 1.05rem) */}
+        {/* 웹: 소제목 이전 크기에서 2px 축소 (text-2xl=24px-2px=22px=1.375rem, text-3xl=30px-2px=28px=1.75rem), 줄간격 50% 더 가깝게 */}
+        <h1 className="text-[3.9375rem] md:text-8xl font-bold text-white mb-[1px] md:mb-0">
           PEIT24
         </h1>
-        <p className="text-[1.05rem] sm:text-lg md:text-[1.455rem] lg:text-[1.81875rem] text-white mb-8 whitespace-nowrap md:leading-tight md:-mt-[0.5px]">
+        <p className="text-[1.05rem] sm:text-lg md:text-[1.375rem] lg:text-[1.75rem] text-white mb-8 whitespace-nowrap md:leading-tight md:-mt-[0.5px]">
           가장 완벽한 <span className="font-bold">정치 / 경제</span> 성향 테스트
         </p>
         
