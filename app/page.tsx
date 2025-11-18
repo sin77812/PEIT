@@ -20,7 +20,7 @@ export default function Home() {
       </div>
       
       {/* 중앙 콘텐츠 */}
-      <div className="relative z-10 flex flex-col items-center justify-center md:justify-start h-full px-8 sm:px-12 md:px-4 md:pt-[calc(25vh+4rem)] translate-y-[50vh] md:-translate-y-[30vh]">
+      <div className="relative z-10 flex flex-col items-center justify-center md:justify-start h-full px-8 sm:px-12 md:px-4 md:pt-[calc(25vh+4rem)] max-md:translate-y-[20vh] md:-translate-y-[30vh]">
         {/* 모바일: 제목과 소제목 모두 이전 크기로 복원 */}
         {/* 웹: 소제목 이전 크기로 복원 (md:text-2xl lg:text-3xl), 제목과 소제목 끝단 맞추기 위해 조정 필요 */}
         <h1 className="text-6xl md:text-8xl font-bold text-white mb-[1px] md:mb-0">
