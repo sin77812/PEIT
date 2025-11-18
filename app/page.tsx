@@ -22,8 +22,8 @@ export default function Home() {
         <h1 className="text-6xl md:text-8xl font-bold text-white mb-4">
           PEIT24
         </h1>
-        <p className="text-lg sm:text-xl md:text-2xl text-white mb-8 font-bold whitespace-nowrap">
-          가장 완벽한 정치 / 경제 성향 테스트
+        <p className="text-base sm:text-lg md:text-xl text-white mb-8 whitespace-nowrap -mt-4 sm:-mt-5 md:-mt-6">
+          가장 완벽한 <span className="font-bold">정치 / 경제</span> 성향 테스트
         </p>
         
         {/* 새로운 프로모션 텍스트 (오버레이 제거, 폰트/레이아웃 조정) */}
