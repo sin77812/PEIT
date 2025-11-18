@@ -825,7 +825,7 @@ export const results: Record<string, ResultData> = {
     category: 'economic',
     code: 'GAW',
     nickname: '데이터를 통해 조직을 혁신하는 전문가',
-    keywords: ['체계적분석', '현실감각', '업무효율', '단계적확장', '데이터검증'],
+    keywords: ['성장지향', '데이터기반', '안정추구', '시스템최적화', '효율성'],
     scores: {
       '성장 중시 vs 안정 중시': 75,
       '비전 투자 vs 데이터 투자': 15,
