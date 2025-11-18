@@ -147,3 +147,14 @@ body {
   border-color: #6D28D9;
   color: #6D28D9 !important;
 }
+
+/* 모바일 배경 이미지 왼쪽 정렬 강제 */
+.bg-image-left {
+  object-position: left center !important;
+}
+
+@media (min-width: 768px) {
+  .bg-image-center {
+    object-position: center center !important;
+  }
+}
