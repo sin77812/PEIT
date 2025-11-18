@@ -158,3 +158,14 @@ body {
     object-position: center center !important;
   }
 }
+
+/* 모바일/웹 컨텐츠 위치 조정 */
+.mobile-content-down {
+  transform: translateY(4px) !important;
+}
+
+@media (min-width: 768px) {
+  .mobile-content-down {
+    transform: translateY(-10px) !important;
+  }
+}
