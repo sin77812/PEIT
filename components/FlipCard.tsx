@@ -53,6 +53,9 @@ export default function FlipCard({ type, data, category, title }: FlipCardProps)
                   width={320}
                   height={320}
                   className="object-contain w-full h-full"
+                  quality={95}
+                  sizes="(max-width: 640px) 100vw, 320px"
+                  priority
                   onError={(e) => {
                     // 이미지 로드 실패 시 이모지로 폴백
                     e.currentTarget.style.display = 'none';

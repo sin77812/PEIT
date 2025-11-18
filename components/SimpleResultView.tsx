@@ -60,6 +60,9 @@ export default function SimpleResultView({ type, name, category }: SimpleResultV
               alt={type}
               fill
               className="object-contain rounded-xl"
+              quality={95}
+              sizes="(max-width: 768px) 100vw, 512px"
+              priority
             />
           </div>
           

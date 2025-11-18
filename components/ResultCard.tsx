@@ -57,6 +57,9 @@ export default function ResultCard({
             height={isCompact ? 128 : 533}
             className="w-full h-auto object-cover rounded-xl"
             style={{ maxHeight: isCompact ? '128px' : '400px' }}
+            quality={95}
+            sizes={isCompact ? '192px' : '(max-width: 768px) 100vw, (max-width: 1200px) 800px, 800px'}
+            priority={!isCompact}
           />
         </div>
         <h2 className="text-4xl font-bold text-accent mb-2">{type}</h2>

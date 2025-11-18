@@ -11,6 +11,8 @@ export default function Home() {
           alt="PEIT 배경"
           fill
           className="object-cover"
+          quality={90}
+          sizes="100vw"
           priority
         />
       </div>

@@ -101,6 +101,8 @@ export default function TypesPage() {
                           alt={name}
                           fill
                           className="object-contain rounded-lg"
+                          quality={95}
+                          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 200px"
                         />
                       </div>
                       <h4 className="font-bold text-accent text-center text-sm mb-1">{code}</h4>
@@ -150,6 +152,8 @@ export default function TypesPage() {
                           alt={name}
                           fill
                           className="object-contain rounded-lg"
+                          quality={95}
+                          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 200px"
                         />
                       </div>
                       <h4 className="font-bold text-accent text-center text-sm mb-1">{code}</h4>

@@ -77,6 +77,9 @@ export default function SimpleResultCard({ type }: SimpleResultCardProps) {
               alt={type}
               fill
               className="object-contain rounded-xl"
+              quality={95}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+              priority
             />
           </div>
           
