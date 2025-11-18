@@ -12,7 +12,7 @@ export default function Home() {
           src="/images/mainbackground.png"
           alt="PEIT 배경"
           fill
-          className="object-cover md:object-center"
+          className="object-cover object-left md:object-center"
           quality={90}
           sizes="100vw"
           priority
