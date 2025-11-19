@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server'
 
+export const dynamic = 'force-static'
+
 export async function GET() {
   const baseUrl = 'https://www.peit24.co.kr'
   const currentDate = new Date().toUTCString()
@@ -81,6 +83,14 @@ export async function GET() {
     },
   })
 }
+
+
+
+
+
+
+
+
 
 
 
