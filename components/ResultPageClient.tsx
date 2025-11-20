@@ -19,20 +19,20 @@ interface ResultPageClientProps {
 function renderMarkdownText(text: string) {
   // HTML 링크가 이미 포함된 경우를 처리하기 위해 먼저 링크를 보호
   const linkPlaceholders: string[] = [];
-  let html = text.replace(/<a[^>]*>.*?<\/a>/g, (match) => {
+  let html = text.replace(new RegExp('<a[^>]*>.*?</a>', 'g'), (match) => {
     const placeholder = `__LINK_${linkPlaceholders.length}__`;
     linkPlaceholders.push(match);
     return placeholder;
   });
   
   // ### **제목** 형태의 소제목에서 ** 제거 (경제테스트 결과 최종 텍스트용)
-  html = html.replace(/### \*\*([^*]+?)\*\*/g, '### $1');
+  html = html.replace(new RegExp('### \\*\\*([^*]+?)\\*\\*', 'g'), '### $1');
   
   // **텍스트** -> <strong>텍스트</strong>
-  html = html.replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold text-gray-900">$1</strong>');
+  html = html.replace(new RegExp('\\*\\*(.*?)\\*\\*', 'g'), '<strong class="font-semibold text-gray-900">$1</strong>');
   
   // '텍스트' -> <span class="text-accent">텍스트</span>
-  html = html.replace(/'([^']+)'/g, '<span class="text-accent font-medium">\'$1\'</span>');
+  html = html.replace(new RegExp("'([^']+)'", 'g'), '<span class="text-accent font-medium">\'$1\'</span>');
   
   // 줄바꿈 처리 - ### 제목 처리 포함
   html = html.split('\n').map(paragraph => {
@@ -59,7 +59,7 @@ function renderMarkdownText(text: string) {
   });
   
   // 최종 HTML에서 남아있는 ** 제거 (경제테스트 결과 최종 텍스트용)
-  html = html.replace(/\*\*/g, '');
+  html = html.replace(new RegExp('\\*\\*', 'g'), '');
   
   return html;
 }
@@ -200,8 +200,8 @@ function ResultPageContent({ type, showExpanded = false }: ResultPageClientProps
                         <ul className="space-y-2">
                           {data.strengths.map((strength, i) => {
                             const parts = strength.split(':');
-                            const title = parts[0].trim().replace(/\*\*/g, '');
-                            const description = parts.slice(1).join(':').trim().replace(/\*\*/g, '');
+                            const title = parts[0].trim().replace(new RegExp('\\*\\*', 'g'), '');
+                            const description = parts.slice(1).join(':').trim().replace(new RegExp('\\*\\*', 'g'), '');
                             return (
                               <li key={i} className="text-gray-700">
                                 <strong className="font-bold text-gray-900">{title}</strong>
@@ -218,8 +218,8 @@ function ResultPageContent({ type, showExpanded = false }: ResultPageClientProps
                         <ul className="space-y-2">
                           {data.weaknesses.map((weakness, i) => {
                             const parts = weakness.split(':');
-                            const title = parts[0].trim().replace(/\*\*/g, '');
-                            const description = parts.slice(1).join(':').trim().replace(/\*\*/g, '');
+                            const title = parts[0].trim().replace(new RegExp('\\*\\*', 'g'), '');
+                            const description = parts.slice(1).join(':').trim().replace(new RegExp('\\*\\*', 'g'), '');
                             return (
                               <li key={i} className="text-gray-700">
                                 <strong className="font-bold text-gray-900">{title}</strong>
@@ -420,8 +420,8 @@ function ResultPageContent({ type, showExpanded = false }: ResultPageClientProps
                           <ul className="space-y-2">
                             {data.strengths.map((strength, i) => {
                               const parts = strength.split(':');
-                              const title = parts[0].trim().replace(/\*\*/g, '');
-                              const description = parts.slice(1).join(':').trim().replace(/\*\*/g, '');
+                              const title = parts[0].trim().replace(new RegExp('\\*\\*', 'g'), '');
+                              const description = parts.slice(1).join(':').trim().replace(new RegExp('\\*\\*', 'g'), '');
                               return (
                                 <li key={i} className="text-gray-700">
                                   <strong className="font-bold text-gray-900">{title}</strong>
@@ -438,8 +438,8 @@ function ResultPageContent({ type, showExpanded = false }: ResultPageClientProps
                           <ul className="space-y-2">
                             {data.weaknesses.map((weakness, i) => {
                               const parts = weakness.split(':');
-                              const title = parts[0].trim().replace(/\*\*/g, '');
-                              const description = parts.slice(1).join(':').trim().replace(/\*\*/g, '');
+                              const title = parts[0].trim().replace(new RegExp('\\*\\*', 'g'), '');
+                              const description = parts.slice(1).join(':').trim().replace(new RegExp('\\*\\*', 'g'), '');
                               return (
                                 <li key={i} className="text-gray-700">
                                   <strong className="font-bold text-gray-900">{title}</strong>
@@ -566,10 +566,10 @@ function ResultPageContent({ type, showExpanded = false }: ResultPageClientProps
                       // 패턴 2: "인물 이름은" 예: "케네디는"
                       // 패턴 3: "인물 이름 (설명) -" 예: "존 스튜어트 밀 (영국의 철학자, 정치경제학자) -"
                       let personName = null;
-                      const pattern1 = data.historical_avatar.match(/^([^\(]+?)\s*\([^\)]+\)\s*-\s*/);
-                      const pattern2 = data.historical_avatar.match(/^([^는은]+?)(?:는|은)\s/);
+                      const pattern1 = data.historical_avatar.match(new RegExp('^([^\\(]+?)\\s*\\([^\\)]+\\)\\s*-\\s*'));
+                      const pattern2 = data.historical_avatar.match(new RegExp('^([^는은]+?)(?:는|은)\\s'));
                       // 패턴 3: "**인물 이름**" 형식
-                      const pattern3 = data.historical_avatar.match(/\*\*([^*]+?)\*\*/);
+                      const pattern3 = data.historical_avatar.match(new RegExp('\\*\\*([^*]+?)\\*\\*'));
                       if (pattern1) {
                         personName = pattern1[1].trim();
                       } else if (pattern2) {
@@ -591,15 +591,16 @@ function ResultPageContent({ type, showExpanded = false }: ResultPageClientProps
                       // 패턴 1: "설명" 예: "기성 정치에 반기를 드는 제3지대의 젊은 개혁가"
                       // 패턴 2: "이들은..." 형태에서 첫 문장의 핵심 키워드 추출
                       let avatarName = null;
-                      const quotedMatch = data.real_avatar.match(/^"([^"]+)"/);
-                      const boldMatch = data.real_avatar.match(/\*\*([^*]+?)\*\*/);
+                      const quotedMatch = data.real_avatar.match(new RegExp('^"([^"]+)"'));
+                      const boldMatch = data.real_avatar.match(new RegExp('\\*\\*([^*]+?)\\*\\*'));
                       if (quotedMatch) {
                         avatarName = quotedMatch[1].trim();
                       } else if (boldMatch) {
                         avatarName = boldMatch[1].trim();
                       } else {
                         // "이들은..." 형태에서 첫 문장의 핵심 부분 추출
-                        const firstSentence = data.real_avatar.split(/[\.。]/)[0];
+                        const sentencePattern = new RegExp('[\\u002E\\u3002]');
+                        const firstSentence = data.real_avatar.split(sentencePattern)[0];
                         if (firstSentence.includes('이들은') || firstSentence.includes('이들')) {
                           // 첫 문장에서 핵심 키워드 추출 (너무 길지 않게)
                           const keywordPattern = new RegExp('(?:데이터|합리적|정책|전문가|개혁가|논객|행정가|법조인|경제학자|정치인|지식인|분석|통찰|비전|원칙|안정|질서|기업가|투자자|경영자)[^,\\uFF0C]*');
