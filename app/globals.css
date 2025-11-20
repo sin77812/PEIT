@@ -171,19 +171,10 @@ body {
   }
 }
 
-/* 모바일 전용: 제목과 서브타이틀만 조금 내리기 */
+/* 모바일 전용: 제목만 조금 내리기 */
 @media (max-width: 767px) {
   .relative.z-10 h1.mobile-title-down {
-    margin-top: 28.8288px !important; /* 27.72px * 1.04 (4% 추가 증가) */
-  }
-
-  .relative.z-10 p.mobile-subtitle-down {
-    margin-top: 22.88px !important; /* 22px * 1.04 (4% 추가 증가) */
-  }
-
-  /* 모바일: 제목과 소제목을 제외한 나머지 컨텐츠 10% 위로 올리기 */
-  .relative.z-10 h1.mobile-title-down ~ *:not(p.mobile-subtitle-down) {
-    transform: translateY(-10%) !important;
+    margin-top: 20px !important; /* 제목만 조금 내리기 */
   }
 }
 

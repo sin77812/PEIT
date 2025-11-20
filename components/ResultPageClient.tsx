@@ -634,16 +634,17 @@ function ResultPageContent({ type, showExpanded = false }: ResultPageClientProps
 
         {/* 액션 버튼들 */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center mt-12">
-          <Button href="/test" variant="primary" className="no-glass btn-purple">
-            다시 검사하기
-          </Button>
           {otherType && (
             <Button href={`/result/${otherType}`} variant="primary" className="no-glass btn-purple">
               {data.category === 'political' ? '경제' : '정치'} 성향 보기
             </Button>
           )}
-          <Button href="/types" variant="outline" className="no-glass btn-purple">
-            다른 유형 보기
+          <Button 
+            href={data.category === 'political' ? '/test?type=economic' : '/test?type=political'} 
+            variant="primary" 
+            className="no-glass btn-purple"
+          >
+            {data.category === 'political' ? '경제 테스트하기' : '정치 테스트하기'}
           </Button>
           <ShareButton 
             shareUrl={shareUrl} 
