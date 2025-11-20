@@ -172,21 +172,13 @@ body {
 }
 
 /* 모바일 전용: 제목과 서브타이틀만 조금 내리기 */
-.relative.z-10 h1.mobile-title-down {
-  margin-top: 24px !important;
-}
-
-.relative.z-10 p.mobile-subtitle-down {
-  margin-top: 20px !important;
-}
-
-@media (min-width: 768px) {
+@media (max-width: 767px) {
   .relative.z-10 h1.mobile-title-down {
-    margin-top: 0 !important;
+    margin-top: 26.4px !important; /* 24px * 1.1 (10% 증가) */
   }
-  
+
   .relative.z-10 p.mobile-subtitle-down {
-    margin-top: 0 !important;
+    margin-top: 22px !important; /* 20px * 1.1 (10% 증가) */
   }
 }
 
