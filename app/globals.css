@@ -173,11 +173,11 @@ body {
 
 /* 모바일 전용: 제목과 서브타이틀만 조금 내리기 */
 .mobile-title-down {
-  margin-top: 8px !important;
+  margin-top: 16px !important;
 }
 
 .mobile-subtitle-down {
-  margin-top: 4px !important;
+  margin-top: 12px !important;
 }
 
 @media (min-width: 768px) {
