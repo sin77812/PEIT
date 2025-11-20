@@ -135,26 +135,26 @@ body {
   border-color: #6D28D9;
 }
 
-/* 메인 페이지 소제목 커스텀 폰트 크기 - Tailwind 우선순위 문제 해결 */
-/* 더 구체적인 선택자로 Tailwind CSS 우선순위 문제 완전 해결 */
-p.subtitle-custom {
+/* 메인 페이지 일반 텍스트 커스텀 폰트 크기 - Tailwind 우선순위 문제 해결 */
+/* h1 다음에 오는 일반 텍스트 (소제목이 아닌 일반 텍스트) */
+.relative.z-10 p.subtitle-custom {
   font-size: 28.08px !important;
 }
 
 @media (min-width: 640px) {
-  p.subtitle-custom {
+  .relative.z-10 p.subtitle-custom {
     font-size: 31.59px !important;
   }
 }
 
 @media (min-width: 768px) {
-  p.subtitle-custom {
+  .relative.z-10 p.subtitle-custom {
     font-size: 63.18px !important;
   }
 }
 
 @media (min-width: 1024px) {
-  p.subtitle-custom {
+  .relative.z-10 p.subtitle-custom {
     font-size: 78.975px !important;
   }
 }
