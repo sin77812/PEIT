@@ -135,6 +135,29 @@ body {
   border-color: #6D28D9;
 }
 
+/* 메인 페이지 소제목 커스텀 폰트 크기 */
+.subtitle-custom {
+  font-size: 21.6px;
+}
+
+@media (min-width: 640px) {
+  .subtitle-custom {
+    font-size: 24.3px;
+  }
+}
+
+@media (min-width: 768px) {
+  .subtitle-custom {
+    font-size: 48.6px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .subtitle-custom {
+    font-size: 60.75px;
+  }
+}
+
 /* Solid purple outline button */
 .btn-purple-outline {
   background: transparent;
