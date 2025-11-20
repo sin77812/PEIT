@@ -190,10 +190,17 @@ body {
   }
 }
 
-/* 서브타이틀 하얀색 밑줄 */
+/* 서브타이틀 하얀색 밑줄 - 모바일 전용 */
 .subtitle-underline {
   border-bottom: 1px solid white !important;
   padding-bottom: 2px !important;
+}
+
+@media (min-width: 768px) {
+  .subtitle-underline {
+    border-bottom: none !important;
+    padding-bottom: 0 !important;
+  }
 }
 
 /* Solid purple outline button */
