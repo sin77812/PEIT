@@ -173,10 +173,13 @@ body {
 
 /* 모바일 전용: 제목과 소제목 조금 내리기 */
 @media (max-width: 767px) {
+  .relative.z-10.flex.flex-col.items-center.justify-center h1.mobile-title-down,
   .relative.z-10.flex.flex-col.items-center h1.mobile-title-down {
     margin-top: 24px !important; /* 제목 조금 내리기 */
+    margin-bottom: 0 !important; /* mb-[1px] 오버라이드 */
   }
 
+  .relative.z-10.flex.flex-col.items-center.justify-center p.mobile-subtitle-down,
   .relative.z-10.flex.flex-col.items-center p.mobile-subtitle-down {
     margin-top: 8px !important; /* 소제목 조금 내리기 */
   }

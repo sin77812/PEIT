@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, Suspense, useRef } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { results } from '@/lib/results';
 import ResultCard from '@/components/ResultCard';
@@ -9,7 +9,6 @@ import ShareButton from '@/components/ShareButton';
 import { calculateResult, calculateRelativeScores } from '@/lib/calculate';
 import ExpandableSection from '@/components/ExpandableSection';
 import SimpleResultCard from '@/components/SimpleResultCard';
-import html2canvas from 'html2canvas';
 
 interface ResultPageClientProps {
   type: string;
@@ -85,6 +84,16 @@ function ResultPageContent({ type, showExpanded = false }: ResultPageClientProps
     
     const originalData = { ...results[type] };
     
+    // /admin 페이지에서 접근한 경우 그래프 숨김
+    const isFromAdmin = typeof window !== 'undefined' && 
+      (document.referrer.includes('/admin') || window.location.pathname.includes('/admin'));
+    
+    if (isFromAdmin) {
+      setHasTestResult(false);
+      setData(originalData);
+      return;
+    }
+    
     // 검사 결과 확인: answers, political_answers, economic_answers 중 하나라도 있으면 검사 완료로 간주
     const answers = localStorage.getItem('answers');
     const politicalAnswers = localStorage.getItem('political_answers');
@@ -143,110 +152,6 @@ function ResultPageContent({ type, showExpanded = false }: ResultPageClientProps
   };
 
   const otherType = getOtherTypeResult();
-  const resultCardRef = useRef<HTMLDivElement>(null);
-
-  const handleSaveImage = async () => {
-    if (!resultCardRef.current) return;
-    
-    try {
-      // 이미지가 모두 로드될 때까지 대기
-      const images = resultCardRef.current.querySelectorAll('img');
-      await Promise.all(
-        Array.from(images).map((img) => {
-          if (img.complete) return Promise.resolve();
-          return new Promise((resolve, reject) => {
-            img.onload = resolve;
-            img.onerror = resolve; // 에러가 나도 계속 진행
-            setTimeout(resolve, 3000); // 최대 3초 대기
-          });
-        })
-      );
-
-      // 약간의 지연을 두어 렌더링 완료 보장
-      await new Promise(resolve => setTimeout(resolve, 500));
-
-      // 원본 요소의 모든 computed style을 미리 가져오기
-      const originalElement = resultCardRef.current;
-      const styleMap = new Map<Element, CSSStyleDeclaration>();
-      
-      const collectStyles = (element: Element) => {
-        const computed = window.getComputedStyle(element);
-        styleMap.set(element, computed);
-        
-        // 자식 요소들도 재귀적으로 수집
-        Array.from(element.children).forEach(child => collectStyles(child));
-      };
-      
-      if (originalElement) {
-        collectStyles(originalElement);
-      }
-
-      const canvas = await html2canvas(resultCardRef.current, {
-        backgroundColor: '#FAF7FF',
-        scale: 2,
-        logging: false,
-        useCORS: true,
-        allowTaint: false,
-        foreignObjectRendering: false,
-        removeContainer: false,
-        imageTimeout: 15000,
-        onclone: (clonedDoc: Document, element: HTMLElement) => {
-          // Next.js Image 컴포넌트의 최적화된 이미지를 일반 img로 변환
-          const clonedImages = clonedDoc.querySelectorAll('img');
-          clonedImages.forEach((img) => {
-            if (img.src && img.src.startsWith('data:') === false) {
-              // src가 data URL이 아니면 그대로 유지
-              img.crossOrigin = 'anonymous';
-            }
-          });
-
-          // 원본 요소의 computed style을 클론된 요소에 인라인으로 적용
-          const applyStyles = (originalEl: Element, clonedEl: Element) => {
-            const computed = styleMap.get(originalEl);
-            if (computed && clonedEl instanceof HTMLElement) {
-              // 모든 CSS 속성을 순회하면서 oklch가 없는 값만 인라인 스타일로 적용
-              for (let i = 0; i < computed.length; i++) {
-                const prop = computed[i];
-                const value = computed.getPropertyValue(prop);
-                
-                // oklch가 포함되지 않은 값만 적용 (이미 rgb/rgba로 변환된 값)
-                if (value && !value.includes('oklch') && !value.includes('oklab')) {
-                  try {
-                    clonedEl.style.setProperty(prop, value, 'important');
-                  } catch (e) {
-                    // 일부 속성은 설정할 수 없을 수 있음
-                  }
-                }
-              }
-            }
-            
-            // 자식 요소들도 재귀적으로 처리
-            const originalChildren = Array.from(originalEl.children);
-            const clonedChildren = Array.from(clonedEl.children);
-            originalChildren.forEach((origChild, index) => {
-              if (clonedChildren[index]) {
-                applyStyles(origChild, clonedChildren[index]);
-              }
-            });
-          };
-
-          // 클론된 루트 요소 찾기
-          const clonedRoot = clonedDoc.body.firstElementChild || clonedDoc.documentElement;
-          if (clonedRoot && originalElement) {
-            applyStyles(originalElement, clonedRoot);
-          }
-        },
-      } as any);
-      
-      const link = document.createElement('a');
-      link.download = `PEIT_${type}_${data.name}.png`;
-      link.href = canvas.toDataURL('image/png');
-      link.click();
-    } catch (error) {
-      console.error('이미지 저장 실패:', error);
-      alert('이미지 저장에 실패했습니다. 다시 시도해주세요.');
-    }
-  };
 
   return (
     <div className="min-h-screen bg-bg-light-purple">
@@ -255,8 +160,7 @@ function ResultPageContent({ type, showExpanded = false }: ResultPageClientProps
           당신의 {data.category === 'political' ? '정치' : '경제'} 성향은
         </h1>
 
-        <div ref={resultCardRef}>
-          <ResultCard
+        <ResultCard
             type={type}
             name={data.name}
             image={imagePath}
@@ -755,13 +659,6 @@ function ResultPageContent({ type, showExpanded = false }: ResultPageClientProps
           </Button>
           <Button href="/types" variant="outline" className="no-glass btn-purple">
             다른 유형 보기
-          </Button>
-          <Button 
-            onClick={handleSaveImage}
-            variant="outline" 
-            className="no-glass btn-purple"
-          >
-            이미지로 저장하기
           </Button>
           <ShareButton 
             shareUrl={shareUrl} 
