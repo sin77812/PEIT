@@ -62,11 +62,11 @@ export default function ResultDetailSections({ type, data, defaultExpanded = fal
                         const hasDescription = descParts.length > 0;
                         return (
                           <li key={i} className="flex flex-col space-y-1">
-                            <div className="flex-1">
+                              <div className="flex-1">
                               <strong className="font-bold text-gray-900 text-sm md:text-base">{title.trim()}</strong>
-                              {hasDescription && (
+                                {hasDescription && (
                                 <span className="text-gray-700 text-xs md:text-sm ml-1">: {description}</span>
-                              )}
+                                )}
                             </div>
                           </li>
                         );
@@ -82,11 +82,11 @@ export default function ResultDetailSections({ type, data, defaultExpanded = fal
                         const hasDescription = descParts.length > 0;
                         return (
                           <li key={i} className="flex flex-col space-y-1">
-                            <div className="flex-1">
+                              <div className="flex-1">
                               <strong className="font-bold text-gray-900 text-sm md:text-base">{title.trim()}</strong>
-                              {hasDescription && (
+                                {hasDescription && (
                                 <span className="text-gray-700 text-xs md:text-sm ml-1">: {description}</span>
-                              )}
+                                )}
                             </div>
                           </li>
                         );
@@ -228,11 +228,11 @@ export default function ResultDetailSections({ type, data, defaultExpanded = fal
                       const hasDescription = descParts.length > 0;
                       return (
                         <li key={i} className="flex flex-col space-y-1">
-                          <div className="flex-1">
+                            <div className="flex-1">
                             <strong className="font-bold text-gray-900 text-sm md:text-base">{title.trim()}</strong>
-                            {hasDescription && (
+                              {hasDescription && (
                               <span className="text-gray-700 text-xs md:text-sm ml-1">: {description}</span>
-                            )}
+                              )}
                           </div>
                         </li>
                       );
@@ -248,11 +248,11 @@ export default function ResultDetailSections({ type, data, defaultExpanded = fal
                       const hasDescription = descParts.length > 0;
                       return (
                         <li key={i} className="flex flex-col space-y-1">
-                          <div className="flex-1">
+                            <div className="flex-1">
                             <strong className="font-bold text-gray-900 text-sm md:text-base">{title.trim()}</strong>
-                            {hasDescription && (
+                              {hasDescription && (
                               <span className="text-gray-700 text-xs md:text-sm ml-1">: {description}</span>
-                            )}
+                              )}
                           </div>
                         </li>
                       );

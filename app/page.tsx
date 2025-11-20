@@ -35,7 +35,7 @@ export default function Home() {
           <p className="text-[0.9em] sm:text-lg md:text-xl text-white leading-tight md:leading-tight text-pretty break-keep">
             스스로를 얼마나 깊이 알고 있나요?<br />
             PEIT24에서 기존의 고정관념을 깨고,<br />
-            가장 정교한 정치경제 DNA를 확인하세요.
+            정교한 정치경제 DNA를 확인하세요.
           </p>
         </div>
         
