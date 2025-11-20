@@ -138,24 +138,24 @@ body {
 /* 메인 페이지 일반 텍스트 커스텀 폰트 크기 - Tailwind 우선순위 문제 해결 */
 /* h1 다음에 오는 일반 텍스트 (소제목이 아닌 일반 텍스트) */
 .relative.z-10 p.subtitle-custom {
-  font-size: 28.08px !important;
+  font-size: 42.12px !important; /* 28.08px * 1.5 */
 }
 
 @media (min-width: 640px) {
   .relative.z-10 p.subtitle-custom {
-    font-size: 31.59px !important;
+    font-size: 47.385px !important; /* 31.59px * 1.5 */
   }
 }
 
 @media (min-width: 768px) {
   .relative.z-10 p.subtitle-custom {
-    font-size: 63.18px !important;
+    font-size: 94.77px !important; /* 63.18px * 1.5 */
   }
 }
 
 @media (min-width: 1024px) {
   .relative.z-10 p.subtitle-custom {
-    font-size: 78.975px !important;
+    font-size: 118.4625px !important; /* 78.975px * 1.5 */
   }
 }
 
