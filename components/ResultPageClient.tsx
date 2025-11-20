@@ -149,11 +149,41 @@ function ResultPageContent({ type, showExpanded = false }: ResultPageClientProps
     if (!resultCardRef.current) return;
     
     try {
+      // 이미지가 모두 로드될 때까지 대기
+      const images = resultCardRef.current.querySelectorAll('img');
+      await Promise.all(
+        Array.from(images).map((img) => {
+          if (img.complete) return Promise.resolve();
+          return new Promise((resolve, reject) => {
+            img.onload = resolve;
+            img.onerror = resolve; // 에러가 나도 계속 진행
+            setTimeout(resolve, 3000); // 최대 3초 대기
+          });
+        })
+      );
+
+      // 약간의 지연을 두어 렌더링 완료 보장
+      await new Promise(resolve => setTimeout(resolve, 500));
+
       const canvas = await html2canvas(resultCardRef.current, {
         backgroundColor: '#FAF7FF',
         scale: 2,
         logging: false,
         useCORS: true,
+        allowTaint: false,
+        foreignObjectRendering: false,
+        removeContainer: false,
+        imageTimeout: 15000,
+        onclone: (clonedDoc) => {
+          // Next.js Image 컴포넌트의 최적화된 이미지를 일반 img로 변환
+          const clonedImages = clonedDoc.querySelectorAll('img');
+          clonedImages.forEach((img) => {
+            if (img.src && img.src.startsWith('data:') === false) {
+              // src가 data URL이 아니면 그대로 유지
+              img.crossOrigin = 'anonymous';
+            }
+          });
+        },
       } as any);
       
       const link = document.createElement('a');
