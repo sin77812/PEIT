@@ -602,7 +602,8 @@ function ResultPageContent({ type, showExpanded = false }: ResultPageClientProps
                         const firstSentence = data.real_avatar.split(/[\.。]/)[0];
                         if (firstSentence.includes('이들은') || firstSentence.includes('이들')) {
                           // 첫 문장에서 핵심 키워드 추출 (너무 길지 않게)
-                          const keywords = firstSentence.match(/(?:데이터|합리적|정책|전문가|개혁가|논객|행정가|법조인|경제학자|정치인|지식인|분석|통찰|비전|원칙|안정|질서|기업가|투자자|경영자)[^,\uFF0C]*/);
+                          const keywordPattern = /(?:데이터|합리적|정책|전문가|개혁가|논객|행정가|법조인|경제학자|정치인|지식인|분석|통찰|비전|원칙|안정|질서|기업가|투자자|경영자)[^,，]*/;
+                          const keywords = firstSentence.match(keywordPattern);
                           if (keywords) {
                             avatarName = keywords[0].trim();
                             // 너무 길면 자르기
