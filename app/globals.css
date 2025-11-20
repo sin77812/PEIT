@@ -159,6 +159,17 @@ body {
   }
 }
 
+/* 메인 페이지 콘텐츠 위치 조정 - 아래로 15% 이동 */
+.relative.z-10.flex.flex-col.items-center {
+  transform: translateY(15%) !important;
+}
+
+@media (min-width: 768px) {
+  .relative.z-10.flex.flex-col.items-center {
+    transform: translateY(15%) !important;
+  }
+}
+
 /* Solid purple outline button */
 .btn-purple-outline {
   background: transparent;
