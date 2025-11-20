@@ -139,24 +139,24 @@ body {
 /* h1 다음에 오는 일반 텍스트 (소제목이 아닌 일반 텍스트) */
 /* 모바일 전용: 추가 30% 증가 */
 .relative.z-10 p.subtitle-custom {
-  font-size: 13.524732px !important; /* 10.40364px * 1.3 (모바일 전용 추가 30% 증가) */
+  font-size: 13.79522664px !important; /* 13.524732px * 1.02 (2% 증가) */
 }
 
 @media (min-width: 640px) {
   .relative.z-10 p.subtitle-custom {
-    font-size: 9.00315px !important; /* 9.477px * 0.95 (5% 감소) */
+    font-size: 9.183213px !important; /* 9.00315px * 1.02 (2% 증가) */
   }
 }
 
 @media (min-width: 768px) {
   .relative.z-10 p.subtitle-custom {
-    font-size: 18.0063px !important; /* 18.954px * 0.95 (5% 감소) */
+    font-size: 18.366426px !important; /* 18.0063px * 1.02 (2% 증가) */
   }
 }
 
 @media (min-width: 1024px) {
   .relative.z-10 p.subtitle-custom {
-    font-size: 22.507875px !important; /* 23.6925px * 0.95 (5% 감소) */
+    font-size: 22.9580245px !important; /* 22.507875px * 1.02 (2% 증가) */
   }
 }
 
