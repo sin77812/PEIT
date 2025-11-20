@@ -171,6 +171,31 @@ body {
   }
 }
 
+/* 모바일 전용: 제목과 서브타이틀만 조금 내리기 */
+.mobile-title-down {
+  margin-top: 8px !important;
+}
+
+.mobile-subtitle-down {
+  margin-top: 4px !important;
+}
+
+@media (min-width: 768px) {
+  .mobile-title-down {
+    margin-top: 0 !important;
+  }
+  
+  .mobile-subtitle-down {
+    margin-top: 0 !important;
+  }
+}
+
+/* 서브타이틀 하얀색 밑줄 */
+.subtitle-underline {
+  border-bottom: 1px solid white !important;
+  padding-bottom: 2px !important;
+}
+
 /* Solid purple outline button */
 .btn-purple-outline {
   background: transparent;

@@ -23,10 +23,10 @@ export default function Home() {
       <div className="relative z-10 flex flex-col items-center justify-center md:justify-start h-full px-8 sm:px-12 md:px-4 md:pt-[calc(25vh+4rem)] mobile-content-down">
         {/* 모바일: 제목과 일반 텍스트 모두 이전 크기로 복원 */}
         {/* 웹: 일반 텍스트 이전 크기로 복원, 제목과 일반 텍스트 끝단 맞추기 위해 조정 필요 */}
-        <h1 className="text-6xl md:text-8xl font-bold text-white mb-[1px] md:mb-0">
+        <h1 className="text-6xl md:text-8xl font-bold text-white mb-[1px] md:mb-0 mobile-title-down">
           PEIT24
         </h1>
-        <p className="subtitle-custom text-white mb-8 whitespace-nowrap md:leading-tight md:-mt-[0.5px]">
+        <p className="subtitle-custom text-white mb-8 whitespace-nowrap md:leading-tight md:-mt-[0.5px] mobile-subtitle-down subtitle-underline">
           가장 완벽한 <span className="font-bold">정치 / 경제</span> 성향 테스트
         </p>
         
