@@ -202,7 +202,7 @@ function ResultPageContent({ type, showExpanded = false }: ResultPageClientProps
         foreignObjectRendering: false,
         removeContainer: false,
         imageTimeout: 15000,
-        onclone: (clonedDoc, element) => {
+        onclone: (clonedDoc: Document, element: HTMLElement) => {
           // Next.js Image 컴포넌트의 최적화된 이미지를 일반 img로 변환
           const clonedImages = clonedDoc.querySelectorAll('img');
           clonedImages.forEach((img) => {
