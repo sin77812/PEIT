@@ -165,6 +165,34 @@ function ResultPageContent({ type, showExpanded = false }: ResultPageClientProps
       // 약간의 지연을 두어 렌더링 완료 보장
       await new Promise(resolve => setTimeout(resolve, 500));
 
+      // 원본 요소의 모든 computed style을 미리 가져오기
+      const originalElement = resultCardRef.current;
+      const styleMap = new Map<Element, Map<string, string>>();
+      
+      const collectStyles = (element: Element) => {
+        const computed = window.getComputedStyle(element);
+        const styles = new Map<string, string>();
+        const colorProps = ['color', 'backgroundColor', 'borderColor', 'borderTopColor', 
+                          'borderRightColor', 'borderBottomColor', 'borderLeftColor',
+                          'outlineColor', 'textDecorationColor'];
+        
+        colorProps.forEach(prop => {
+          const value = computed.getPropertyValue(prop);
+          if (value) {
+            styles.set(prop, value);
+          }
+        });
+        
+        styleMap.set(element, styles);
+        
+        // 자식 요소들도 재귀적으로 수집
+        Array.from(element.children).forEach(child => collectStyles(child));
+      };
+      
+      if (originalElement) {
+        collectStyles(originalElement);
+      }
+
       const canvas = await html2canvas(resultCardRef.current, {
         backgroundColor: '#FAF7FF',
         scale: 2,
@@ -174,7 +202,7 @@ function ResultPageContent({ type, showExpanded = false }: ResultPageClientProps
         foreignObjectRendering: false,
         removeContainer: false,
         imageTimeout: 15000,
-        onclone: (clonedDoc) => {
+        onclone: (clonedDoc, element) => {
           // Next.js Image 컴포넌트의 최적화된 이미지를 일반 img로 변환
           const clonedImages = clonedDoc.querySelectorAll('img');
           clonedImages.forEach((img) => {
@@ -183,6 +211,34 @@ function ResultPageContent({ type, showExpanded = false }: ResultPageClientProps
               img.crossOrigin = 'anonymous';
             }
           });
+
+          // 원본 요소의 computed style을 클론된 요소에 적용
+          const applyStyles = (originalEl: Element, clonedEl: Element) => {
+            const styles = styleMap.get(originalEl);
+            if (styles && clonedEl instanceof HTMLElement) {
+              styles.forEach((value, prop) => {
+                // oklch가 아닌 rgb/rgba 값만 적용
+                if (value && !value.includes('oklch')) {
+                  clonedEl.style.setProperty(prop, value, 'important');
+                }
+              });
+            }
+            
+            // 자식 요소들도 재귀적으로 처리
+            const originalChildren = Array.from(originalEl.children);
+            const clonedChildren = Array.from(clonedEl.children);
+            originalChildren.forEach((origChild, index) => {
+              if (clonedChildren[index]) {
+                applyStyles(origChild, clonedChildren[index]);
+              }
+            });
+          };
+
+          // 클론된 루트 요소 찾기
+          const clonedRoot = clonedDoc.body.firstElementChild || clonedDoc.documentElement;
+          if (clonedRoot && originalElement) {
+            applyStyles(originalElement, clonedRoot);
+          }
         },
       } as any);
       
