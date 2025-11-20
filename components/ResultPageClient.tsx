@@ -9,7 +9,7 @@ import ShareButton from '@/components/ShareButton';
 import { calculateResult, calculateRelativeScores } from '@/lib/calculate';
 import ExpandableSection from '@/components/ExpandableSection';
 import SimpleResultCard from '@/components/SimpleResultCard';
-import html2canvas from 'html2canvas';
+import html2canvas, { type Options } from 'html2canvas';
 
 interface ResultPageClientProps {
   type: string;
@@ -149,11 +149,13 @@ function ResultPageContent({ type, showExpanded = false }: ResultPageClientProps
     if (!resultCardRef.current) return;
     
     try {
-      const canvas = await html2canvas(resultCardRef.current, {
+      const options: Options = {
         backgroundColor: '#FAF7FF',
         scale: 2,
         logging: false,
-      });
+        useCORS: true,
+      };
+      const canvas = await html2canvas(resultCardRef.current, options);
       
       const link = document.createElement('a');
       link.download = `PEIT_${type}_${data.name}.png`;
