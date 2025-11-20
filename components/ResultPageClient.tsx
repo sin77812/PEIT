@@ -658,7 +658,7 @@ function ResultPageContent({ type, showExpanded = false }: ResultPageClientProps
         {/* 강점과 약점 하단 통합 섹션 제거: 강점/약점은 '핵심 키워드' 섹션 내부에서 노출 */}
 
         {/* 액션 버튼들 */}
-        <div className="flex flex-col gap-4 justify-center mt-12">
+        <div className="flex flex-col md:flex-row gap-4 justify-center mt-12">
           {otherType && (
             <Button href={`/result/${otherType}`} variant="primary" className="no-glass btn-purple">
               {data.category === 'political' ? '경제' : '정치'} 성향 보기

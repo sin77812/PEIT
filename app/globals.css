@@ -173,11 +173,11 @@ body {
 
 /* 모바일 전용: 제목과 소제목 조금 내리기 */
 @media (max-width: 767px) {
-  .relative.z-10 h1.mobile-title-down {
+  .relative.z-10.flex.flex-col.items-center h1.mobile-title-down {
     margin-top: 24px !important; /* 제목 조금 내리기 */
   }
 
-  .relative.z-10 p.mobile-subtitle-down {
+  .relative.z-10.flex.flex-col.items-center p.mobile-subtitle-down {
     margin-top: 8px !important; /* 소제목 조금 내리기 */
   }
 }
