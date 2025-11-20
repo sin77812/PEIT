@@ -167,23 +167,11 @@ function ResultPageContent({ type, showExpanded = false }: ResultPageClientProps
 
       // 원본 요소의 모든 computed style을 미리 가져오기
       const originalElement = resultCardRef.current;
-      const styleMap = new Map<Element, Map<string, string>>();
+      const styleMap = new Map<Element, CSSStyleDeclaration>();
       
       const collectStyles = (element: Element) => {
         const computed = window.getComputedStyle(element);
-        const styles = new Map<string, string>();
-        const colorProps = ['color', 'backgroundColor', 'borderColor', 'borderTopColor', 
-                          'borderRightColor', 'borderBottomColor', 'borderLeftColor',
-                          'outlineColor', 'textDecorationColor'];
-        
-        colorProps.forEach(prop => {
-          const value = computed.getPropertyValue(prop);
-          if (value) {
-            styles.set(prop, value);
-          }
-        });
-        
-        styleMap.set(element, styles);
+        styleMap.set(element, computed);
         
         // 자식 요소들도 재귀적으로 수집
         Array.from(element.children).forEach(child => collectStyles(child));
@@ -212,16 +200,24 @@ function ResultPageContent({ type, showExpanded = false }: ResultPageClientProps
             }
           });
 
-          // 원본 요소의 computed style을 클론된 요소에 적용
+          // 원본 요소의 computed style을 클론된 요소에 인라인으로 적용
           const applyStyles = (originalEl: Element, clonedEl: Element) => {
-            const styles = styleMap.get(originalEl);
-            if (styles && clonedEl instanceof HTMLElement) {
-              styles.forEach((value, prop) => {
-                // oklch가 아닌 rgb/rgba 값만 적용
-                if (value && !value.includes('oklch')) {
-                  clonedEl.style.setProperty(prop, value, 'important');
+            const computed = styleMap.get(originalEl);
+            if (computed && clonedEl instanceof HTMLElement) {
+              // 모든 CSS 속성을 순회하면서 oklch가 없는 값만 인라인 스타일로 적용
+              for (let i = 0; i < computed.length; i++) {
+                const prop = computed[i];
+                const value = computed.getPropertyValue(prop);
+                
+                // oklch가 포함되지 않은 값만 적용 (이미 rgb/rgba로 변환된 값)
+                if (value && !value.includes('oklch') && !value.includes('oklab')) {
+                  try {
+                    clonedEl.style.setProperty(prop, value, 'important');
+                  } catch (e) {
+                    // 일부 속성은 설정할 수 없을 수 있음
+                  }
                 }
-              });
+              }
             }
             
             // 자식 요소들도 재귀적으로 처리
