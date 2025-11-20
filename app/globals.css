@@ -135,26 +135,26 @@ body {
   border-color: #6D28D9;
 }
 
-/* 메인 페이지 소제목 커스텀 폰트 크기 */
+/* 메인 페이지 소제목 커스텀 폰트 크기 - Tailwind 우선순위 문제 해결 */
 .subtitle-custom {
-  font-size: 21.6px;
+  font-size: 21.6px !important;
 }
 
 @media (min-width: 640px) {
   .subtitle-custom {
-    font-size: 24.3px;
+    font-size: 24.3px !important;
   }
 }
 
 @media (min-width: 768px) {
   .subtitle-custom {
-    font-size: 48.6px;
+    font-size: 48.6px !important;
   }
 }
 
 @media (min-width: 1024px) {
   .subtitle-custom {
-    font-size: 60.75px;
+    font-size: 60.75px !important;
   }
 }
 
