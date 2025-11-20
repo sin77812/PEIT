@@ -170,7 +170,6 @@ function ResultPageContent({ type, showExpanded = false }: ResultPageClientProps
             hideDetailButton={true}
             showChart={hasTestResult}
           />
-        </div>
 
         {/* 정치 유형 상세 정보 - 확장 가능한 섹션들 */}
         {data.category === 'political' && (
