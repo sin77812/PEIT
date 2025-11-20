@@ -137,8 +137,9 @@ body {
 
 /* 메인 페이지 일반 텍스트 커스텀 폰트 크기 - Tailwind 우선순위 문제 해결 */
 /* h1 다음에 오는 일반 텍스트 (소제목이 아닌 일반 텍스트) */
+/* 모바일 전용: 30% 증가 */
 .relative.z-10 p.subtitle-custom {
-  font-size: 8.0028px !important; /* 8.424px * 0.95 (5% 감소) */
+  font-size: 10.40364px !important; /* 8.0028px * 1.3 (모바일 전용 30% 증가) */
 }
 
 @media (min-width: 640px) {
