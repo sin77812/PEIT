@@ -177,8 +177,9 @@ body {
     margin-top: 27.72px !important; /* 26.4px * 1.05 (5% 추가 증가) */
   }
 
-  .relative.z-10 p.mobile-subtitle-down {
-    margin-top: 22px !important; /* 20px * 1.1 (10% 증가) */
+  /* 모바일: 제목을 제외한 나머지 컨텐츠 10% 위로 올리기 */
+  .relative.z-10 h1.mobile-title-down ~ * {
+    transform: translateY(-10%) !important;
   }
 }
 
