@@ -58,6 +58,9 @@ function renderMarkdownText(text: string) {
     html = html.replace(`__LINK_${index}__`, link);
   });
   
+  // 최종 HTML에서 남아있는 ** 제거 (경제테스트 결과 최종 텍스트용)
+  html = html.replace(/\*\*/g, '');
+  
   return html;
 }
 
@@ -186,8 +189,8 @@ function ResultPageContent({ type, showExpanded = false }: ResultPageClientProps
                         <ul className="space-y-2">
                           {data.strengths.map((strength, i) => {
                             const parts = strength.split(':');
-                            const title = parts[0].trim();
-                            const description = parts.slice(1).join(':').trim();
+                            const title = parts[0].trim().replace(/\*\*/g, '');
+                            const description = parts.slice(1).join(':').trim().replace(/\*\*/g, '');
                             return (
                               <li key={i} className="text-gray-700">
                                 <strong className="font-bold text-gray-900">{title}</strong>
@@ -204,8 +207,8 @@ function ResultPageContent({ type, showExpanded = false }: ResultPageClientProps
                         <ul className="space-y-2">
                           {data.weaknesses.map((weakness, i) => {
                             const parts = weakness.split(':');
-                            const title = parts[0].trim();
-                            const description = parts.slice(1).join(':').trim();
+                            const title = parts[0].trim().replace(/\*\*/g, '');
+                            const description = parts.slice(1).join(':').trim().replace(/\*\*/g, '');
                             return (
                               <li key={i} className="text-gray-700">
                                 <strong className="font-bold text-gray-900">{title}</strong>
@@ -406,8 +409,8 @@ function ResultPageContent({ type, showExpanded = false }: ResultPageClientProps
                           <ul className="space-y-2">
                             {data.strengths.map((strength, i) => {
                               const parts = strength.split(':');
-                              const title = parts[0].trim();
-                              const description = parts.slice(1).join(':').trim();
+                              const title = parts[0].trim().replace(/\*\*/g, '');
+                              const description = parts.slice(1).join(':').trim().replace(/\*\*/g, '');
                               return (
                                 <li key={i} className="text-gray-700">
                                   <strong className="font-bold text-gray-900">{title}</strong>
@@ -424,8 +427,8 @@ function ResultPageContent({ type, showExpanded = false }: ResultPageClientProps
                           <ul className="space-y-2">
                             {data.weaknesses.map((weakness, i) => {
                               const parts = weakness.split(':');
-                              const title = parts[0].trim();
-                              const description = parts.slice(1).join(':').trim();
+                              const title = parts[0].trim().replace(/\*\*/g, '');
+                              const description = parts.slice(1).join(':').trim().replace(/\*\*/g, '');
                               return (
                                 <li key={i} className="text-gray-700">
                                   <strong className="font-bold text-gray-900">{title}</strong>
