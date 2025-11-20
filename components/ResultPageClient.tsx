@@ -183,20 +183,36 @@ function ResultPageContent({ type, showExpanded = false }: ResultPageClientProps
                     {data.strengths && data.strengths.length > 0 && (
                       <div>
                         <h4 className="font-semibold text-green-600 mb-2">🌟 강점</h4>
-                        <ul className="space-y-1">
-                          {data.strengths.map((strength, i) => (
-                            <li key={i} className="text-gray-700" dangerouslySetInnerHTML={{ __html: `• ${renderMarkdownText(strength)}` }} />
-                          ))}
+                        <ul className="space-y-2">
+                          {data.strengths.map((strength, i) => {
+                            const parts = strength.split(':');
+                            const title = parts[0].trim();
+                            const description = parts.slice(1).join(':').trim();
+                            return (
+                              <li key={i} className="text-gray-700">
+                                <strong className="font-bold text-gray-900">{title}</strong>
+                                {description && `: ${description}`}
+                              </li>
+                            );
+                          })}
                         </ul>
                       </div>
                     )}
                     {data.weaknesses && data.weaknesses.length > 0 && (
                       <div>
                         <h4 className="font-semibold text-orange-600 mb-2">⚠️ 약점</h4>
-                        <ul className="space-y-1">
-                          {data.weaknesses.map((weakness, i) => (
-                            <li key={i} className="text-gray-700" dangerouslySetInnerHTML={{ __html: `• ${renderMarkdownText(weakness)}` }} />
-                          ))}
+                        <ul className="space-y-2">
+                          {data.weaknesses.map((weakness, i) => {
+                            const parts = weakness.split(':');
+                            const title = parts[0].trim();
+                            const description = parts.slice(1).join(':').trim();
+                            return (
+                              <li key={i} className="text-gray-700">
+                                <strong className="font-bold text-gray-900">{title}</strong>
+                                {description && `: ${description}`}
+                              </li>
+                            );
+                          })}
                         </ul>
                       </div>
                     )}
@@ -387,20 +403,36 @@ function ResultPageContent({ type, showExpanded = false }: ResultPageClientProps
                       {data.strengths && data.strengths.length > 0 && (
                         <div>
                           <h4 className="font-semibold text-green-600 mb-2">🌟 강점</h4>
-                          <ul className="space-y-1">
-                            {data.strengths.map((strength, i) => (
-                              <li key={i} className="text-gray-700" dangerouslySetInnerHTML={{ __html: `• ${renderMarkdownText(strength)}` }} />
-                            ))}
+                          <ul className="space-y-2">
+                            {data.strengths.map((strength, i) => {
+                              const parts = strength.split(':');
+                              const title = parts[0].trim();
+                              const description = parts.slice(1).join(':').trim();
+                              return (
+                                <li key={i} className="text-gray-700">
+                                  <strong className="font-bold text-gray-900">{title}</strong>
+                                  {description && `: ${description}`}
+                                </li>
+                              );
+                            })}
                           </ul>
                         </div>
                       )}
                       {data.weaknesses && data.weaknesses.length > 0 && (
                         <div>
                           <h4 className="font-semibold text-orange-600 mb-2">⚠️ 약점</h4>
-                          <ul className="space-y-1">
-                            {data.weaknesses.map((weakness, i) => (
-                              <li key={i} className="text-gray-700" dangerouslySetInnerHTML={{ __html: `• ${renderMarkdownText(weakness)}` }} />
-                            ))}
+                          <ul className="space-y-2">
+                            {data.weaknesses.map((weakness, i) => {
+                              const parts = weakness.split(':');
+                              const title = parts[0].trim();
+                              const description = parts.slice(1).join(':').trim();
+                              return (
+                                <li key={i} className="text-gray-700">
+                                  <strong className="font-bold text-gray-900">{title}</strong>
+                                  {description && `: ${description}`}
+                                </li>
+                              );
+                            })}
                           </ul>
                         </div>
                       )}
