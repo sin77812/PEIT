@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, Suspense } from 'react';
+import { useEffect, useState, Suspense, useRef } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { results } from '@/lib/results';
 import ResultCard from '@/components/ResultCard';
@@ -9,6 +9,7 @@ import ShareButton from '@/components/ShareButton';
 import { calculateResult, calculateRelativeScores } from '@/lib/calculate';
 import ExpandableSection from '@/components/ExpandableSection';
 import SimpleResultCard from '@/components/SimpleResultCard';
+import html2canvas from 'html2canvas';
 
 interface ResultPageClientProps {
   type: string;
@@ -142,6 +143,27 @@ function ResultPageContent({ type, showExpanded = false }: ResultPageClientProps
   };
 
   const otherType = getOtherTypeResult();
+  const resultCardRef = useRef<HTMLDivElement>(null);
+
+  const handleSaveImage = async () => {
+    if (!resultCardRef.current) return;
+    
+    try {
+      const canvas = await html2canvas(resultCardRef.current, {
+        backgroundColor: '#FAF7FF',
+        scale: 2,
+        logging: false,
+      });
+      
+      const link = document.createElement('a');
+      link.download = `PEIT_${type}_${data.name}.png`;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    } catch (error) {
+      console.error('이미지 저장 실패:', error);
+      alert('이미지 저장에 실패했습니다. 다시 시도해주세요.');
+    }
+  };
 
   return (
     <div className="min-h-screen bg-bg-light-purple">
@@ -150,16 +172,18 @@ function ResultPageContent({ type, showExpanded = false }: ResultPageClientProps
           당신의 {data.category === 'political' ? '정치' : '경제'} 성향은
         </h1>
 
-        <ResultCard
-          type={type}
-          name={data.name}
-          image={imagePath}
-          scores={data.scores}
-          description={data.description}
-          category={data.category}
-          hideDetailButton={true}
-          showChart={hasTestResult}
-        />
+        <div ref={resultCardRef}>
+          <ResultCard
+            type={type}
+            name={data.name}
+            image={imagePath}
+            scores={data.scores}
+            description={data.description}
+            category={data.category}
+            hideDetailButton={true}
+            showChart={hasTestResult}
+          />
+        </div>
 
         {/* 정치 유형 상세 정보 - 확장 가능한 섹션들 */}
         {data.category === 'political' && (
@@ -633,7 +657,7 @@ function ResultPageContent({ type, showExpanded = false }: ResultPageClientProps
         {/* 강점과 약점 하단 통합 섹션 제거: 강점/약점은 '핵심 키워드' 섹션 내부에서 노출 */}
 
         {/* 액션 버튼들 */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-center mt-12">
+        <div className="flex flex-col gap-4 justify-center mt-12">
           {otherType && (
             <Button href={`/result/${otherType}`} variant="primary" className="no-glass btn-purple">
               {data.category === 'political' ? '경제' : '정치'} 성향 보기
@@ -645,6 +669,16 @@ function ResultPageContent({ type, showExpanded = false }: ResultPageClientProps
             className="no-glass btn-purple"
           >
             {data.category === 'political' ? '경제 테스트하기' : '정치 테스트하기'}
+          </Button>
+          <Button href="/types" variant="outline" className="no-glass btn-purple">
+            다른 유형 보기
+          </Button>
+          <Button 
+            onClick={handleSaveImage}
+            variant="outline" 
+            className="no-glass btn-purple"
+          >
+            이미지로 저장하기
           </Button>
           <ShareButton 
             shareUrl={shareUrl} 
