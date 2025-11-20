@@ -174,7 +174,7 @@ body {
 /* 모바일 전용: 제목과 서브타이틀만 조금 내리기 */
 @media (max-width: 767px) {
   .relative.z-10 h1.mobile-title-down {
-    margin-top: 26.4px !important; /* 24px * 1.1 (10% 증가) */
+    margin-top: 27.72px !important; /* 26.4px * 1.05 (5% 추가 증가) */
   }
 
   .relative.z-10 p.mobile-subtitle-down {
