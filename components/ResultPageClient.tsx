@@ -45,9 +45,9 @@ function renderMarkdownText(text: string) {
       return `<h3 class="text-xl font-bold mb-3 mt-6 text-gray-900">${titleText}</h3>`;
     }
     
-    // 링크가 포함된 줄은 <p> 태그로 감싸지 않고 그대로 반환
+    // 링크가 포함된 줄도 <p> 태그로 감싸서 줄바꿈 처리 (경제테스트 결과 추천도서 줄바꿈용)
     if (trimmed.includes('__LINK_')) {
-      return trimmed;
+      return `<p class="mb-4 last:mb-0">${trimmed}</p>`;
     }
     
     return `<p class="mb-4 last:mb-0">${paragraph}</p>`;
