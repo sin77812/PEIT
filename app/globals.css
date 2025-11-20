@@ -171,10 +171,14 @@ body {
   }
 }
 
-/* 모바일 전용: 제목만 조금 내리기 */
+/* 모바일 전용: 제목과 소제목 조금 내리기 */
 @media (max-width: 767px) {
   .relative.z-10 h1.mobile-title-down {
-    margin-top: 20px !important; /* 제목만 조금 내리기 */
+    margin-top: 24px !important; /* 제목 조금 내리기 */
+  }
+
+  .relative.z-10 p.mobile-subtitle-down {
+    margin-top: 8px !important; /* 소제목 조금 내리기 */
   }
 }
 
