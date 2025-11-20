@@ -159,14 +159,14 @@ body {
   }
 }
 
-/* 메인 페이지 콘텐츠 위치 조정 - 아래로 15% 이동 */
+/* 메인 페이지 콘텐츠 위치 조정 - 아래로 10% 이동 (15%에서 5% 위로 조정) */
 .relative.z-10.flex.flex-col.items-center {
-  transform: translateY(15%) !important;
+  transform: translateY(10%) !important;
 }
 
 @media (min-width: 768px) {
   .relative.z-10.flex.flex-col.items-center {
-    transform: translateY(15%) !important;
+    transform: translateY(10%) !important;
   }
 }
 
