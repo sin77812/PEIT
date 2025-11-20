@@ -136,24 +136,25 @@ body {
 }
 
 /* 메인 페이지 소제목 커스텀 폰트 크기 - Tailwind 우선순위 문제 해결 */
-.subtitle-custom {
+/* 더 구체적인 선택자로 Tailwind CSS 우선순위 문제 완전 해결 */
+p.subtitle-custom {
   font-size: 28.08px !important;
 }
 
 @media (min-width: 640px) {
-  .subtitle-custom {
+  p.subtitle-custom {
     font-size: 31.59px !important;
   }
 }
 
 @media (min-width: 768px) {
-  .subtitle-custom {
+  p.subtitle-custom {
     font-size: 63.18px !important;
   }
 }
 
 @media (min-width: 1024px) {
-  .subtitle-custom {
+  p.subtitle-custom {
     font-size: 78.975px !important;
   }
 }
