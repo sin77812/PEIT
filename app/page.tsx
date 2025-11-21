@@ -41,7 +41,7 @@ export default function Home() {
         </div>
         
         {/* 두 개의 테스트 버튼 */}
-        <div className="flex flex-col sm:flex-row gap-4 mt-8">
+        <div className="flex flex-col sm:flex-row gap-4 mt-8 md:mt-2">
           <Button href="/test?type=political" size="lg">
             정치성향 테스트 시작하기
           </Button>
