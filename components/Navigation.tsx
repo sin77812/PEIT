@@ -37,7 +37,7 @@ export default function Navigation() {
   const NavLinks = ({ onClick }: { onClick?: () => void }) => (
     <>
       <button 
-        className="text-black font-bold hover:text-accent transition-colors text-left"
+        className="text-xl font-bold text-gray-800 hover:text-accent hover:bg-white/50 active:bg-white/70 transition-all duration-200 text-left py-4 px-4 rounded-lg"
         onClick={() => {
           handleTestNavigation('political');
           onClick?.();
@@ -46,7 +46,7 @@ export default function Navigation() {
         정치 검사
       </button>
       <button 
-        className="text-black font-bold hover:text-accent transition-colors text-left"
+        className="text-xl font-bold text-gray-800 hover:text-accent hover:bg-white/50 active:bg-white/70 transition-all duration-200 text-left py-4 px-4 rounded-lg"
         onClick={() => {
           handleTestNavigation('economic');
           onClick?.();
@@ -54,10 +54,18 @@ export default function Navigation() {
       >
         경제 검사
       </button>
-      <Link href="/types" className="text-black font-bold hover:text-accent transition-colors" onClick={onClick}>
+      <Link 
+        href="/types" 
+        className="text-xl font-bold text-gray-800 hover:text-accent hover:bg-white/50 active:bg-white/70 transition-all duration-200 py-4 px-4 rounded-lg" 
+        onClick={onClick}
+      >
         유형 종류
       </Link>
-      <Link href="/about" className="text-black font-bold hover:text-accent transition-colors" onClick={onClick}>
+      <Link 
+        href="/about" 
+        className="text-xl font-bold text-gray-800 hover:text-accent hover:bg-white/50 active:bg-white/70 transition-all duration-200 py-4 px-4 rounded-lg" 
+        onClick={onClick}
+      >
         서비스
       </Link>
     </>
@@ -89,25 +97,26 @@ export default function Navigation() {
         </div>
       </div>
 
-      {/* Overlay */}
+      {/* Overlay - 화면 전체를 덮는 어두운 배경 */}
       {open && (
         <div
-          className="fixed inset-0 bg-black/40 md:hidden"
+          className="fixed inset-0 z-40 w-full h-screen bg-black/60 md:hidden"
           aria-hidden="true"
           onClick={() => setOpen(false)}
         />
       )}
 
-      {/* Right drawer: 40% of viewport width on mobile */}
+      {/* Right drawer: Glassmorphism 스타일의 오른쪽 슬라이드 메뉴 */}
       <div
-        className={`fixed top-0 right-0 h-screen w-[40vw] max-w-[80%] min-w-[240px] bg-white shadow-xl md:hidden transition-transform duration-300 ${open ? 'translate-x-0' : 'translate-x-full'}`}
+        className={`fixed top-0 right-0 z-50 h-screen w-[75vw] max-w-[320px] min-w-[240px] bg-white/90 backdrop-blur-md shadow-2xl md:hidden transition-transform duration-300 ease-in-out ${open ? 'translate-x-0' : 'translate-x-full'}`}
         role="dialog"
         aria-modal="true"
       >
-        <div className="flex items-center justify-between h-16 px-4 border-b border-gray-200">
-          <span className="text-lg font-semibold text-accent">메뉴</span>
+        {/* 메뉴 헤더 */}
+        <div className="flex items-center justify-between p-6 border-b border-gray-200/50">
+          <span className="text-xl font-bold text-accent">메뉴</span>
           <button
-            className="inline-flex items-center justify-center w-10 h-10 rounded-md text-gray-700 hover:text-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/60"
+            className="inline-flex items-center justify-center w-10 h-10 rounded-md text-gray-700 hover:bg-gray-100/50 hover:text-accent transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/60"
             aria-label="메뉴 닫기"
             onClick={() => setOpen(false)}
           >
@@ -116,7 +125,8 @@ export default function Navigation() {
             </svg>
           </button>
         </div>
-        <div className="flex flex-col gap-4 p-6">
+        {/* 메뉴 리스트 */}
+        <div className="flex flex-col p-6 gap-1">
           <NavLinks onClick={() => setOpen(false)} />
         </div>
       </div>
