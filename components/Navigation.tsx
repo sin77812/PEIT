@@ -34,42 +34,50 @@ export default function Navigation() {
     router.push(`/test?type=${testType}`);
   };
 
-  const NavLinks = ({ onClick }: { onClick?: () => void }) => (
-    <>
-      <button 
-        className="text-xl font-bold text-gray-900 hover:text-accent hover:bg-gray-100 active:bg-gray-200 transition-all duration-200 text-left py-4 px-4 rounded-lg"
-        onClick={() => {
-          handleTestNavigation('political');
-          onClick?.();
-        }}
-      >
-        정치 검사
-      </button>
-      <button 
-        className="text-xl font-bold text-gray-900 hover:text-accent hover:bg-gray-100 active:bg-gray-200 transition-all duration-200 text-left py-4 px-4 rounded-lg"
-        onClick={() => {
-          handleTestNavigation('economic');
-          onClick?.();
-        }}
-      >
-        경제 검사
-      </button>
-      <Link 
-        href="/types" 
-        className="text-xl font-bold text-gray-900 hover:text-accent hover:bg-gray-100 active:bg-gray-200 transition-all duration-200 py-4 px-4 rounded-lg" 
-        onClick={onClick}
-      >
-        유형 종류
-      </Link>
-      <Link 
-        href="/about" 
-        className="text-xl font-bold text-gray-900 hover:text-accent hover:bg-gray-100 active:bg-gray-200 transition-all duration-200 py-4 px-4 rounded-lg" 
-        onClick={onClick}
-      >
-        서비스
-      </Link>
-    </>
-  );
+  const NavLinks = ({ onClick }: { onClick?: () => void }) => {
+    // PC 버전 스타일 (onClick이 없을 때)
+    const isMobile = !!onClick;
+    const baseClasses = isMobile 
+      ? "text-xl font-bold text-gray-900 hover:text-accent hover:bg-gray-100 active:bg-gray-200 transition-all duration-200 text-left py-4 px-4 rounded-lg"
+      : "text-black font-bold hover:text-accent transition-colors";
+    
+    return (
+      <>
+        <button 
+          className={baseClasses}
+          onClick={() => {
+            handleTestNavigation('political');
+            onClick?.();
+          }}
+        >
+          정치 검사
+        </button>
+        <button 
+          className={baseClasses}
+          onClick={() => {
+            handleTestNavigation('economic');
+            onClick?.();
+          }}
+        >
+          경제 검사
+        </button>
+        <Link 
+          href="/types" 
+          className={baseClasses} 
+          onClick={onClick}
+        >
+          유형 종류
+        </Link>
+        <Link 
+          href="/about" 
+          className={baseClasses} 
+          onClick={onClick}
+        >
+          서비스
+        </Link>
+      </>
+    );
+  };
 
   return (
     <nav className="fixed top-0 left-0 right-0 bg-white/80 backdrop-blur-sm border-b border-gray-200 z-50">
