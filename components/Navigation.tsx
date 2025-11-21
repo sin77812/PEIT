@@ -37,7 +37,7 @@ export default function Navigation() {
   const NavLinks = ({ onClick }: { onClick?: () => void }) => (
     <>
       <button 
-        className="text-xl font-bold text-gray-800 hover:text-accent hover:bg-purple-100/50 active:bg-purple-100/70 transition-all duration-200 text-left py-4 px-4 rounded-lg"
+        className="text-xl font-bold text-gray-900 hover:text-accent hover:bg-gray-100 active:bg-gray-200 transition-all duration-200 text-left py-4 px-4 rounded-lg"
         onClick={() => {
           handleTestNavigation('political');
           onClick?.();
@@ -46,7 +46,7 @@ export default function Navigation() {
         정치 검사
       </button>
       <button 
-        className="text-xl font-bold text-gray-800 hover:text-accent hover:bg-purple-100/50 active:bg-purple-100/70 transition-all duration-200 text-left py-4 px-4 rounded-lg"
+        className="text-xl font-bold text-gray-900 hover:text-accent hover:bg-gray-100 active:bg-gray-200 transition-all duration-200 text-left py-4 px-4 rounded-lg"
         onClick={() => {
           handleTestNavigation('economic');
           onClick?.();
@@ -56,14 +56,14 @@ export default function Navigation() {
       </button>
       <Link 
         href="/types" 
-        className="text-xl font-bold text-gray-800 hover:text-accent hover:bg-purple-100/50 active:bg-purple-100/70 transition-all duration-200 py-4 px-4 rounded-lg" 
+        className="text-xl font-bold text-gray-900 hover:text-accent hover:bg-gray-100 active:bg-gray-200 transition-all duration-200 py-4 px-4 rounded-lg" 
         onClick={onClick}
       >
         유형 종류
       </Link>
       <Link 
         href="/about" 
-        className="text-xl font-bold text-gray-800 hover:text-accent hover:bg-purple-100/50 active:bg-purple-100/70 transition-all duration-200 py-4 px-4 rounded-lg" 
+        className="text-xl font-bold text-gray-900 hover:text-accent hover:bg-gray-100 active:bg-gray-200 transition-all duration-200 py-4 px-4 rounded-lg" 
         onClick={onClick}
       >
         서비스
@@ -106,17 +106,17 @@ export default function Navigation() {
         />
       )}
 
-      {/* Right drawer: Glassmorphism 스타일의 오른쪽 슬라이드 메뉴 */}
+      {/* Right drawer: 완전 불투명한 오른쪽 슬라이드 메뉴 */}
       <div
-        className={`fixed top-0 right-0 z-50 h-screen w-[40vw] max-w-[240px] min-w-[200px] bg-[#FAF7FF] shadow-2xl md:hidden transition-transform duration-300 ease-in-out ${open ? 'translate-x-0' : 'translate-x-full'}`}
+        className={`fixed top-0 right-0 z-50 h-screen w-[40vw] max-w-[240px] min-w-[200px] bg-white shadow-2xl md:hidden transition-transform duration-300 ease-in-out ${open ? 'translate-x-0' : 'translate-x-full'}`}
         role="dialog"
         aria-modal="true"
       >
         {/* 메뉴 헤더 */}
-        <div className="flex items-center justify-between p-6 border-b border-purple-200/30">
-          <span className="text-xl font-bold text-accent">메뉴</span>
+        <div className="flex items-center justify-between p-6 border-b border-gray-200">
+          <span className="text-xl font-bold text-gray-900">메뉴</span>
           <button
-            className="inline-flex items-center justify-center w-10 h-10 rounded-md text-gray-700 hover:bg-purple-100/50 hover:text-accent transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/60"
+            className="inline-flex items-center justify-center w-10 h-10 rounded-md text-gray-700 hover:bg-gray-100 hover:text-gray-900 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/60"
             aria-label="메뉴 닫기"
             onClick={() => setOpen(false)}
           >
