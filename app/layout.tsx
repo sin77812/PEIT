@@ -28,12 +28,22 @@ export const metadata: Metadata = {
       { url: '/images/pabicon.jpg', sizes: '32x32', type: 'image/jpeg' },
       { url: '/images/pabicon.jpg', sizes: '48x48', type: 'image/jpeg' },
       { url: '/images/pabicon.jpg', sizes: '96x96', type: 'image/jpeg' },
+      { url: '/images/pabicon.jpg', sizes: '144x144', type: 'image/jpeg' },
       { url: '/images/pabicon.jpg', sizes: '192x192', type: 'image/jpeg' },
+      { url: '/images/pabicon.jpg', sizes: '512x512', type: 'image/jpeg' },
     ],
     apple: [
       { url: '/images/pabicon.jpg', sizes: '180x180', type: 'image/jpeg' },
     ],
     shortcut: '/images/pabicon.jpg',
+    other: [
+      {
+        rel: 'icon',
+        type: 'image/jpeg',
+        url: '/images/pabicon.jpg',
+        sizes: 'any',
+      },
+    ],
   },
   openGraph: {
     title: 'PEIT - 정치테스트, 정치유형테스트, 정치성향테스트 모음 | 정치mbti',
