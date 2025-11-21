@@ -108,7 +108,7 @@ export default function Navigation() {
 
       {/* Right drawer: Glassmorphism 스타일의 오른쪽 슬라이드 메뉴 */}
       <div
-        className={`fixed top-0 right-0 z-50 h-screen w-[40vw] max-w-[240px] min-w-[200px] bg-[#FAF7FF]/70 backdrop-blur-md shadow-2xl md:hidden transition-transform duration-300 ease-in-out ${open ? 'translate-x-0' : 'translate-x-full'}`}
+        className={`fixed top-0 right-0 z-50 h-screen w-[40vw] max-w-[240px] min-w-[200px] bg-[#FAF7FF] shadow-2xl md:hidden transition-transform duration-300 ease-in-out ${open ? 'translate-x-0' : 'translate-x-full'}`}
         role="dialog"
         aria-modal="true"
       >
