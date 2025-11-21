@@ -32,7 +32,7 @@ export default function Home() {
         </p>
         
         {/* 프로모션 텍스트 */}
-        <div className="text-center max-w-3xl md:max-w-4xl lg:max-w-5xl mx-auto px-2 sm:px-4">
+        <div className="text-center max-w-full md:max-w-4xl lg:max-w-5xl mx-auto px-4 sm:px-4 md:px-4">
           <p className="text-[0.9em] sm:text-lg md:text-xl text-white leading-tight md:leading-tight text-pretty break-keep">
             스스로를 얼마나 깊이 알고 있나요?<br />
             PEIT24에서 고정관념을 깨고,<br />
@@ -41,7 +41,7 @@ export default function Home() {
         </div>
         
         {/* 두 개의 테스트 버튼 */}
-        <div className="flex flex-col sm:flex-row gap-4 mt-2">
+        <div className="flex flex-col sm:flex-row gap-4 mt-8">
           <Button href="/test?type=political" size="lg">
             정치성향 테스트 시작하기
           </Button>
