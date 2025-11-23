@@ -50,7 +50,7 @@ export default function ResultCard({
   return (
     <div className={`bg-white rounded-3xl border-4 border-accent shadow-xl ${isCompact ? 'p-4' : 'p-8'}`}>
       <div className={`text-center ${isCompact ? 'mb-4' : 'mb-8'}`}>
-        <div className={`relative mx-auto mb-4 ${isCompact ? 'w-48 h-32' : 'w-full'}`}>
+        <div className={`relative mx-auto mb-4 ${isCompact ? 'w-48 h-32' : 'w-full'} rounded-2xl overflow-hidden isolation-isolate`}>
           <Image
             src={image}
             alt={type}

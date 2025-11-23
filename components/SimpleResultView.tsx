@@ -54,7 +54,7 @@ export default function SimpleResultView({ type, name, category }: SimpleResultV
           ref={cardRef}
           className="bg-white rounded-3xl border-4 border-accent shadow-xl p-8 text-center mb-8"
         >
-          <div className="relative mx-auto mb-6 w-full h-64">
+          <div className="relative mx-auto mb-6 w-full h-64 rounded-2xl overflow-hidden isolation-isolate">
             <Image
               src={imagePath}
               alt={type}

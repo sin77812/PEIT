@@ -71,7 +71,7 @@ export default function SimpleResultCard({ type }: SimpleResultCardProps) {
 
         {/* 심플한 카드 - 심볼, 이름, 간단 설명만 */}
         <div className="bg-white rounded-3xl border-4 border-accent shadow-xl p-8 text-center">
-          <div className="relative mx-auto mb-8 w-full h-80">
+          <div className="relative mx-auto mb-8 w-full h-80 rounded-2xl overflow-hidden isolation-isolate">
             <Image
               src={imagePath}
               alt={type}
