@@ -100,7 +100,7 @@ export default function TypesPage() {
                           src={`/images/political/${code}.${code === 'IPUE' ? 'png' : 'jpg'}`}
                           alt={name}
                           fill
-                          className="object-contain rounded-lg"
+                          className="object-contain rounded-2xl"
                           quality={95}
                           sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 200px"
                         />
@@ -151,7 +151,7 @@ export default function TypesPage() {
                           src={`/images/economic/${code}.jpg`}
                           alt={name}
                           fill
-                          className="object-contain rounded-lg"
+                          className="object-contain rounded-2xl"
                           quality={95}
                           sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 200px"
                         />

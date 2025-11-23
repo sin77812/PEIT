@@ -100,7 +100,7 @@ export default function AdminPage() {
                           src={`/images/political/${code}.${code === 'IPUE' ? 'png' : 'jpg'}`}
                           alt={name}
                           fill
-                          className="object-contain rounded-lg"
+                          className="object-contain rounded-2xl"
                         />
                       </div>
                       <h4 className="font-bold text-accent text-center text-sm mb-1">{code}</h4>
@@ -149,7 +149,7 @@ export default function AdminPage() {
                           src={`/images/economic/${code}.jpg`}
                           alt={name}
                           fill
-                          className="object-contain rounded-lg"
+                          className="object-contain rounded-2xl"
                         />
                       </div>
                       <h4 className="font-bold text-accent text-center text-sm mb-1">{code}</h4>

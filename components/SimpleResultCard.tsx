@@ -76,7 +76,7 @@ export default function SimpleResultCard({ type }: SimpleResultCardProps) {
               src={imagePath}
               alt={type}
               fill
-              className="object-contain rounded-xl"
+              className="object-contain rounded-2xl"
               quality={95}
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
               priority

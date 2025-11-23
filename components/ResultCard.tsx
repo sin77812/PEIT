@@ -56,7 +56,7 @@ export default function ResultCard({
             alt={type}
             width={isCompact ? 192 : 800}
             height={isCompact ? 128 : 533}
-            className="w-full h-auto object-cover rounded-xl"
+            className="w-full h-auto object-cover rounded-2xl"
             style={{ maxHeight: isCompact ? '128px' : '400px' }}
             quality={95}
             sizes={isCompact ? '192px' : '(max-width: 768px) 100vw, (max-width: 1200px) 800px, 800px'}

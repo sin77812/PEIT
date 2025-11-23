@@ -2,6 +2,7 @@ import './globals.css'
 import type { Metadata } from 'next'
 import Navigation from '@/components/Navigation'
 import Footer from '@/components/Footer'
+import DisableTextSelection from '@/components/DisableTextSelection'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.peit24.co.kr'),
@@ -125,6 +126,7 @@ export default function RootLayout({
         />
       </head>
       <body>
+        <DisableTextSelection />
         <Navigation />
         <div className="pt-16 min-h-screen flex flex-col">
           <main className="flex-1">

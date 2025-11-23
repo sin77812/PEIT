@@ -59,7 +59,7 @@ export default function SimpleResultView({ type, name, category }: SimpleResultV
               src={imagePath}
               alt={type}
               fill
-              className="object-contain rounded-xl"
+              className="object-contain rounded-2xl"
               quality={95}
               sizes="(max-width: 768px) 100vw, 512px"
               priority
