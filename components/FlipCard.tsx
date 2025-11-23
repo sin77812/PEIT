@@ -46,13 +46,13 @@ export default function FlipCard({ type, data, category, title }: FlipCardProps)
           <div className="bg-white rounded-2xl shadow-lg border-2 border-accent h-full flex flex-col items-center justify-center p-8 hover:shadow-xl transition-shadow">
             <div className="relative w-full sm:w-64 h-64 sm:h-64 mb-8 px-4 sm:px-0">
               {/* 실제 이미지 표시 */}
-              <div className="w-full h-full rounded-[32px] overflow-hidden isolation-isolate border border-gray-100 flex items-center justify-center">
+              <div className="w-full h-full overflow-hidden isolation-isolate flex items-center justify-center">
                 <Image
                   src={imagePath}
                   alt={type}
                   width={320}
                   height={320}
-                  className="object-contain w-full h-full rounded-[32px]"
+                  className="object-contain w-full h-full"
                   quality={95}
                   sizes="(max-width: 640px) 100vw, 320px"
                   priority

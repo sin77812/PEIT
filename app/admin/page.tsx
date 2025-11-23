@@ -95,12 +95,12 @@ export default function AdminPage() {
                       href={`/result/${code}`}
                       className="bg-white p-4 rounded-xl shadow-md hover:shadow-xl transition-all hover:scale-105 border-2 border-transparent hover:border-accent/50"
                     >
-                      <div className="relative w-full h-24 sm:h-28 mb-3 rounded-[32px] overflow-hidden isolation-isolate border border-gray-100">
+                      <div className="relative w-full h-24 sm:h-28 mb-3 overflow-hidden isolation-isolate">
                         <Image
                           src={`/images/political/${code}.${code === 'IPUE' ? 'png' : 'jpg'}`}
                           alt={name}
                           fill
-                          className="object-contain rounded-[32px]"
+                          className="object-contain"
                         />
                       </div>
                       <h4 className="font-bold text-accent text-center text-sm mb-1">{code}</h4>
@@ -144,12 +144,12 @@ export default function AdminPage() {
                       href={`/result/${code}`}
                       className="bg-white p-4 rounded-xl shadow-md hover:shadow-xl transition-all hover:scale-105 border-2 border-transparent hover:border-accent/50"
                     >
-                      <div className="relative w-full h-24 sm:h-28 mb-3 rounded-[32px] overflow-hidden isolation-isolate border border-gray-100">
+                      <div className="relative w-full h-24 sm:h-28 mb-3 overflow-hidden isolation-isolate">
                         <Image
                           src={`/images/economic/${code}.jpg`}
                           alt={name}
                           fill
-                          className="object-contain rounded-[32px]"
+                          className="object-contain"
                         />
                       </div>
                       <h4 className="font-bold text-accent text-center text-sm mb-1">{code}</h4>

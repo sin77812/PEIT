@@ -71,12 +71,12 @@ export default function SimpleResultCard({ type }: SimpleResultCardProps) {
 
         {/* 심플한 카드 - 심볼, 이름, 간단 설명만 */}
         <div className="bg-white rounded-3xl border-4 border-accent shadow-xl p-8 text-center">
-          <div className="relative mx-auto mb-8 w-full h-80 rounded-[32px] overflow-hidden isolation-isolate border border-gray-100">
+          <div className="relative mx-auto mb-8 w-full h-80 overflow-hidden isolation-isolate">
             <Image
               src={imagePath}
               alt={type}
               fill
-              className="object-contain rounded-[32px]"
+              className="object-contain"
               quality={95}
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
               priority
