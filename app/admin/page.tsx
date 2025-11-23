@@ -95,12 +95,12 @@ export default function AdminPage() {
                       href={`/result/${code}`}
                       className="bg-white p-4 rounded-xl shadow-md hover:shadow-xl transition-all hover:scale-105 border-2 border-transparent hover:border-accent/50"
                     >
-                      <div className="relative w-full h-24 sm:h-28 mb-3 rounded-2xl overflow-hidden isolation-isolate">
+                      <div className="relative w-full h-24 sm:h-28 mb-3 rounded-[32px] overflow-hidden isolation-isolate border border-gray-100">
                         <Image
                           src={`/images/political/${code}.${code === 'IPUE' ? 'png' : 'jpg'}`}
                           alt={name}
                           fill
-                          className="object-contain rounded-2xl"
+                          className="object-contain rounded-[32px]"
                         />
                       </div>
                       <h4 className="font-bold text-accent text-center text-sm mb-1">{code}</h4>
@@ -144,12 +144,12 @@ export default function AdminPage() {
                       href={`/result/${code}`}
                       className="bg-white p-4 rounded-xl shadow-md hover:shadow-xl transition-all hover:scale-105 border-2 border-transparent hover:border-accent/50"
                     >
-                      <div className="relative w-full h-24 sm:h-28 mb-3 rounded-2xl overflow-hidden isolation-isolate">
+                      <div className="relative w-full h-24 sm:h-28 mb-3 rounded-[32px] overflow-hidden isolation-isolate border border-gray-100">
                         <Image
                           src={`/images/economic/${code}.jpg`}
                           alt={name}
                           fill
-                          className="object-contain rounded-2xl"
+                          className="object-contain rounded-[32px]"
                         />
                       </div>
                       <h4 className="font-bold text-accent text-center text-sm mb-1">{code}</h4>

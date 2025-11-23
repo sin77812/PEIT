@@ -50,13 +50,13 @@ export default function ResultCard({
   return (
     <div className={`bg-white rounded-3xl border-4 border-accent shadow-xl ${isCompact ? 'p-4' : 'p-8'}`}>
       <div className={`text-center ${isCompact ? 'mb-4' : 'mb-8'}`}>
-        <div className={`relative mx-auto mb-4 ${isCompact ? 'w-48 h-32' : 'w-full'} rounded-2xl overflow-hidden isolation-isolate`}>
+        <div className={`relative mx-auto mb-4 ${isCompact ? 'w-48 h-32' : 'w-full'} rounded-[32px] overflow-hidden isolation-isolate border border-gray-100`}>
           <Image
             src={image}
             alt={type}
             width={isCompact ? 192 : 800}
             height={isCompact ? 128 : 533}
-            className="w-full h-auto object-cover rounded-2xl"
+            className="w-full h-auto object-cover rounded-[32px]"
             style={{ maxHeight: isCompact ? '128px' : '400px' }}
             quality={95}
             sizes={isCompact ? '192px' : '(max-width: 768px) 100vw, (max-width: 1200px) 800px, 800px'}
