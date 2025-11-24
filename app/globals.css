@@ -77,6 +77,10 @@ body {
   user-select: none;
   /* 드래그 방지 */
   -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
 }
 
 /* 스크롤바 숨김 (모바일 가로 스크롤용) */
@@ -87,11 +91,6 @@ body {
 
 .scrollbar-hide::-webkit-scrollbar {
   display: none;  /* Chrome, Safari and Opera */
-}
-  -khtml-user-drag: none;
-  -moz-user-drag: none;
-  -o-user-drag: none;
-  user-drag: none;
 }
 
 /* 입력 필드와 버튼은 선택 가능하도록 예외 처리 */
