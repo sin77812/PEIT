@@ -69,6 +69,13 @@ export default function Navigation() {
           유형 종류
         </Link>
         <Link 
+          href="/peitshop" 
+          className={baseClasses} 
+          onClick={onClick}
+        >
+          도서추천
+        </Link>
+        <Link 
           href="/about" 
           className={baseClasses} 
           onClick={onClick}
@@ -90,6 +97,21 @@ export default function Navigation() {
           {/* Desktop links */}
           <div className="hidden md:flex items-center space-x-8">
             <NavLinks />
+            <a
+              href="https://www.instagram.com/peit24__purples"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+              className="text-gray-700 hover:text-accent transition-colors"
+              title="Instagram: @peit24__purples"
+            >
+              {/* Instagram Icon */}
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
+                <path d="M7.5 2h9A5.5 5.5 0 0 1 22 7.5v9A5.5 5.5 0 0 1 16.5 22h-9A5.5 5.5 0 0 1 2 16.5v-9A5.5 5.5 0 0 1 7.5 2zm0 2A3.5 3.5 0 0 0 4 7.5v9A3.5 3.5 0 0 0 7.5 20h9a3.5 3.5 0 0 0 3.5-3.5v-9A3.5 3.5 0 0 0 16.5 4h-9z" />
+                <path d="M12 7.5a4.5 4.5 0 1 1 0 9 4.5 4.5 0 0 1 0-9zm0 2a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5z" />
+                <circle cx="17.5" cy="6.5" r="1.2" />
+              </svg>
+            </a>
           </div>
 
           {/* Mobile hamburger */}
@@ -136,6 +158,22 @@ export default function Navigation() {
         {/* 메뉴 리스트 */}
         <div className="flex flex-col p-6 gap-1">
           <NavLinks onClick={() => setOpen(false)} />
+          <a
+            href="https://www.instagram.com/peit24__purples"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Instagram"
+            className="text-xl font-bold text-gray-900 hover:text-accent hover:bg-gray-100 active:bg-gray-200 transition-all duration-200 text-left py-4 px-4 rounded-lg flex items-center gap-3"
+            onClick={() => setOpen(false)}
+          >
+            {/* Instagram Icon */}
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
+              <path d="M7.5 2h9A5.5 5.5 0 0 1 22 7.5v9A5.5 5.5 0 0 1 16.5 22h-9A5.5 5.5 0 0 1 2 16.5v-9A5.5 5.5 0 0 1 7.5 2zm0 2A3.5 3.5 0 0 0 4 7.5v9A3.5 3.5 0 0 0 7.5 20h9a3.5 3.5 0 0 0 3.5-3.5v-9A3.5 3.5 0 0 0 16.5 4h-9z" />
+              <path d="M12 7.5a4.5 4.5 0 1 1 0 9 4.5 4.5 0 0 1 0-9zm0 2a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5z" />
+              <circle cx="17.5" cy="6.5" r="1.2" />
+            </svg>
+            <span>인스타그램</span>
+          </a>
         </div>
       </div>
     </nav>
