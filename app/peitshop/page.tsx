@@ -37,7 +37,7 @@ export default function PeitShopPage() {
                 onClick={() => setSelectedType(null)}
                 className={`px-6 py-3 rounded-xl font-bold text-base transition-all shadow-md ${
                   selectedType === null
-                    ? 'bg-accent text-white shadow-lg scale-105'
+                    ? 'bg-[#7C3AED] text-white shadow-lg scale-105 border-2 border-[#7C3AED]'
                     : 'bg-white text-gray-700 hover:bg-gray-50 hover:shadow-lg border-2 border-gray-200'
                 }`}
               >
@@ -55,8 +55,8 @@ export default function PeitShopPage() {
                     onClick={() => setSelectedType(type)}
                     className={`px-4 py-2 rounded-lg font-semibold text-sm transition-all shadow-sm ${
                       selectedType === type
-                        ? 'bg-accent text-white shadow-lg scale-105 border-2 border-accent'
-                        : 'bg-white text-gray-700 hover:bg-gray-50 hover:shadow-md border-2 border-gray-200 hover:border-accent/50'
+                        ? 'bg-[#7C3AED] text-white shadow-lg scale-105 border-2 border-[#7C3AED]'
+                        : 'bg-white text-gray-700 hover:bg-gray-50 hover:shadow-md border-2 border-gray-200 hover:border-[#7C3AED]/50'
                     }`}
                   >
                     {type}
@@ -75,8 +75,8 @@ export default function PeitShopPage() {
                     onClick={() => setSelectedType(type)}
                     className={`px-4 py-2 rounded-lg font-semibold text-sm transition-all shadow-sm ${
                       selectedType === type
-                        ? 'bg-accent text-white shadow-lg scale-105 border-2 border-accent'
-                        : 'bg-white text-gray-700 hover:bg-gray-50 hover:shadow-md border-2 border-gray-200 hover:border-accent/50'
+                        ? 'bg-[#7C3AED] text-white shadow-lg scale-105 border-2 border-[#7C3AED]'
+                        : 'bg-white text-gray-700 hover:bg-gray-50 hover:shadow-md border-2 border-gray-200 hover:border-[#7C3AED]/50'
                     }`}
                   >
                     {type}
