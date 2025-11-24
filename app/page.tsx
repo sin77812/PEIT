@@ -20,7 +20,7 @@ export default function Home() {
       </div>
       
       {/* 중앙 콘텐츠 */}
-      <div className="relative z-10 flex flex-col items-center justify-center md:justify-start h-full px-8 sm:px-12 md:px-4 pt-[28vh] md:pt-[calc(25vh+4rem)] gap-2">
+      <div className="relative z-10 flex flex-col items-center justify-center md:justify-start h-full px-8 sm:px-12 md:px-4 pt-[23vh] md:pt-[calc(25vh+4rem)] gap-2">
         {/* 제목 */}
         <h1 className="text-6xl md:text-8xl font-bold text-white leading-none">
           PEIT24

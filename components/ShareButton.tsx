@@ -95,7 +95,7 @@ ${shareUrl}`;
             // Canvas를 Blob으로 변환
             canvas.toBlob(async (blob) => {
               if (!blob) {
-                // Blob 변환 실패 시 텍스트 공유로 폴백
+                // Blob 변환 실패 시 텍스트 공유로 폴백 (공유 창 열기)
                 await shareAsText();
                 return;
               }
@@ -103,7 +103,7 @@ ${shareUrl}`;
               // File 객체 생성
               const file = new File([blob], `PEIT-${type || 'result'}-결과.png`, { type: 'image/png' });
 
-              // navigator.share로 이미지 공유
+              // navigator.share로 이미지 공유 시도
               if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
                 try {
                   await navigator.share({
@@ -114,15 +114,19 @@ ${shareUrl}`;
                     files: [file],
                     url: shareUrl,
                   });
+                  // 이미지 공유 성공 시 완료
+                  return;
                 } catch (shareError: any) {
-                  // 파일 공유 실패 시 텍스트 공유로 폴백
-                  if (shareError.name !== 'AbortError') {
-                    console.error('이미지 공유 실패:', shareError);
-                    await shareAsText();
+                  // 사용자가 공유를 취소한 경우는 에러로 처리하지 않음
+                  if (shareError.name === 'AbortError') {
+                    return;
                   }
+                  // 파일 공유 실패 시 텍스트 공유로 폴백 (공유 창 열기)
+                  console.error('이미지 공유 실패:', shareError);
+                  await shareAsText();
                 }
               } else {
-                // 파일 공유를 지원하지 않는 경우 텍스트 공유
+                // 파일 공유를 지원하지 않는 경우 텍스트 공유 (공유 창 열기)
                 await shareAsText();
               }
             }, 'image/png');
@@ -149,44 +153,38 @@ ${shareUrl}`;
 
   const shareAsText = async () => {
     const shareContent = createShareContent();
+    const shareTextOnly = shareContent.replace(shareUrl, '').trim();
     
+    // navigator.share를 항상 먼저 시도 (아이폰, 갤럭시 모두 지원)
     if (navigator.share) {
       try {
-        const shareTextOnly = shareContent.replace(shareUrl, '').trim();
         await navigator.share({
           title: 'PEIT 성향 테스트 결과',
           text: shareTextOnly,
           url: shareUrl,
         });
+        // 공유 성공 시 아무것도 하지 않음 (공유 창이 닫힘)
+        return;
       } catch (shareError: any) {
         // 사용자가 공유를 취소한 경우는 에러로 처리하지 않음
         if (shareError.name === 'AbortError') {
           return;
         }
-        // 공유 실패 시 클립보드로 폴백
-        if (navigator.clipboard) {
-          try {
-            await navigator.clipboard.writeText(shareContent);
-            alert('📋 결과가 클립보드에 복사되었습니다!\n\nSNS나 메신저에 붙여넣기 하세요.');
-          } catch {
-            prompt('아래 텍스트를 복사해서 공유하세요:', shareContent);
-          }
-        } else {
-          prompt('아래 텍스트를 복사해서 공유하세요:', shareContent);
-        }
+        // 공유 실패 시에만 클립보드로 폴백 (navigator.share가 지원되지 않는 경우는 거의 없음)
+        console.error('공유 실패:', shareError);
       }
-    } else {
-      // navigator.share를 지원하지 않는 경우 클립보드에 복사
-      if (navigator.clipboard) {
-        try {
-          await navigator.clipboard.writeText(shareContent);
-          alert('📋 결과가 클립보드에 복사되었습니다!\n\nSNS나 메신저에 붙여넣기 하세요.');
-        } catch {
-          prompt('아래 텍스트를 복사해서 공유하세요:', shareContent);
-        }
-      } else {
+    }
+    
+    // navigator.share를 지원하지 않는 경우에만 클립보드에 복사 (구형 브라우저)
+    if (navigator.clipboard) {
+      try {
+        await navigator.clipboard.writeText(shareContent);
+        alert('📋 결과가 클립보드에 복사되었습니다!\n\nSNS나 메신저에 붙여넣기 하세요.');
+      } catch {
         prompt('아래 텍스트를 복사해서 공유하세요:', shareContent);
       }
+    } else {
+      prompt('아래 텍스트를 복사해서 공유하세요:', shareContent);
     }
   };
 
