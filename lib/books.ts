@@ -10,22 +10,19 @@ export interface Book {
 }
 
 /**
- * 도서 제목으로 이미지 파일 경로를 찾습니다.
- * 파일명은 제목에서 특수문자와 공백을 제거한 형태로 매칭합니다.
+ * 도서 제목으로 이미지 파일 경로를 생성합니다.
+ * 파일명은 제목에서 특수문자, 쉼표, 공백을 제거한 형태입니다.
  */
-export function getBookImagePath(title: string): string | null {
-  // 제목에서 특수문자 제거 (『』, 공백 등)
-  const normalizedTitle = title
+export function getBookImagePath(title: string): string {
+  // 제목에서 특수문자, 쉼표, 공백 모두 제거
+  const fileName = title
     .replace(/[『』]/g, '')
-    .replace(/\s+/g, '')
+    .replace(/[,，]/g, '') // 쉼표 제거
+    .replace(/\s+/g, '') // 공백 제거
     .trim();
   
-  // 가능한 파일 확장자들 (우선순위 순)
-  const extensions = ['.jpg', '.jpeg', '.webp', '.png'];
-  
-  // 각 확장자로 시도 (첫 번째로 찾은 경로 반환)
-  // 실제 파일 존재 여부는 Next.js Image 컴포넌트가 처리
-  return `/images/for shop/${normalizedTitle}${extensions[0]}`;
+  // .jpg 확장자로 고정
+  return `/images/for shop/${fileName}.jpg`;
 }
 
 /**
@@ -56,7 +53,7 @@ function parseRecommendedContent(content: string): Book[] {
         author,
         link,
         relatedTypes: [], // 나중에 채워짐
-        imagePath: getBookImagePath(title) ?? undefined
+        imagePath: getBookImagePath(title)
       });
     }
   }

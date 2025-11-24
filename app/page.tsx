@@ -32,11 +32,11 @@ export default function Home() {
         </p>
         
         {/* 프로모션 텍스트 */}
-        <div className="text-center max-w-full md:max-w-4xl lg:max-w-5xl mx-auto px-4 sm:px-4 md:px-4">
-          <p className="text-[0.9em] sm:text-lg md:text-xl text-white leading-tight md:leading-tight text-pretty break-keep">
+        <div className="text-center w-full md:max-w-4xl lg:max-w-5xl mx-auto px-2 sm:px-4 md:px-4">
+          <p className="text-[0.9em] sm:text-lg md:text-xl text-white leading-tight md:leading-tight">
             스스로를 얼마나 깊이 알고 있나요?<br />
             PEIT24에서 고정관념을 깨고,<br />
-            정교한 정치경제 DNA를 확인하세요.
+            <span className="whitespace-nowrap">정교한 정치경제 DNA를 확인하세요.</span>
           </p>
         </div>
         

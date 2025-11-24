@@ -145,59 +145,9 @@ interface BookCardProps {
 }
 
 function BookCard({ book }: BookCardProps) {
-  // 이미지 경로 생성 - 여러 패턴 시도
-  const getImagePath = () => {
-    const baseTitle = book.title.replace(/[『』]/g, '').trim();
-    
-    // 패턴 1: 공백 제거
-    const noSpace = baseTitle.replace(/\s+/g, '');
-    // 패턴 2: 공백 유지
-    const withSpace = baseTitle;
-    
-    const extensions = ['.jpg', '.jpeg', '.webp', '.png'];
-    
-    // book.imagePath가 있으면 우선 사용
-    if (book.imagePath) {
-      return book.imagePath;
-    }
-    
-    // 공백 제거 버전 우선 시도
-    for (const ext of extensions) {
-      return `/images/for shop/${noSpace}${ext}`;
-    }
-    
-    // 기본값: 공백 제거 + jpg
-    return `/images/for shop/${noSpace}.jpg`;
-  };
-  
-  const imagePath = getImagePath();
+  // 이미지 경로 (book.imagePath 사용, 없으면 기본 경로)
+  const imagePath = book.imagePath || `/images/for shop/${book.title.replace(/[『』,，\s]/g, '')}.jpg`;
   const [imageError, setImageError] = useState(false);
-  const [currentPathIndex, setCurrentPathIndex] = useState(0);
-  
-  // 여러 패턴 시도
-  const tryImagePaths = () => {
-    const baseTitle = book.title.replace(/[『』]/g, '').trim();
-    const noSpace = baseTitle.replace(/\s+/g, '');
-    const withSpace = baseTitle;
-    const extensions = ['.jpg', '.jpeg', '.webp', '.png'];
-    
-    const paths: string[] = [];
-    
-    // 공백 제거 버전
-    extensions.forEach(ext => {
-      paths.push(`/images/for shop/${noSpace}${ext}`);
-    });
-    
-    // 공백 유지 버전
-    extensions.forEach(ext => {
-      paths.push(`/images/for shop/${withSpace}${ext}`);
-    });
-    
-    return paths;
-  };
-  
-  const allPaths = tryImagePaths();
-  const currentPath = allPaths[currentPathIndex] || imagePath;
   
   return (
     <Link
@@ -208,20 +158,15 @@ function BookCard({ book }: BookCardProps) {
     >
       {/* 도서 이미지 */}
       <div className="w-full aspect-[3/4] bg-gray-100 rounded mb-3 flex items-center justify-center overflow-hidden relative">
-        {!imageError && currentPathIndex < allPaths.length ? (
+        {!imageError ? (
           <Image
-            src={currentPath}
+            src={imagePath}
             alt={book.title}
             fill
             className="object-cover"
             sizes="(max-width: 640px) 33vw, (max-width: 1024px) 25vw, 20vw"
             onError={() => {
-              // 다음 경로 시도
-              if (currentPathIndex < allPaths.length - 1) {
-                setCurrentPathIndex(currentPathIndex + 1);
-              } else {
-                setImageError(true);
-              }
+              setImageError(true);
             }}
           />
         ) : (
