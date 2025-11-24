@@ -145,8 +145,10 @@ interface BookCardProps {
 }
 
 function BookCard({ book }: BookCardProps) {
-  // 이미지 경로 (book.imagePath 사용, 없으면 기본 경로)
-  const imagePath = book.imagePath || `/images/for shop/${book.title.replace(/[『』,，\s]/g, '')}.jpg`;
+  // 이미지 경로 (실제 파일명 사용)
+  const imagePath = book.imageFileName 
+    ? `/images/for shop/${book.imageFileName}`
+    : null;
   const [imageError, setImageError] = useState(false);
   
   return (
@@ -158,7 +160,7 @@ function BookCard({ book }: BookCardProps) {
     >
       {/* 도서 이미지 */}
       <div className="w-full aspect-[3/4] bg-gray-100 rounded mb-3 flex items-center justify-center overflow-hidden relative">
-        {!imageError ? (
+        {imagePath && !imageError ? (
           <Image
             src={imagePath}
             alt={book.title}

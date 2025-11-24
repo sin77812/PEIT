@@ -129,9 +129,9 @@ function ResultPageContent({ type, showExpanded = false }: ResultPageClientProps
     ? `/images/political/${type}.${imageExtension}`
     : `/images/economic/${type}.jpg`;
 
-  // 해당 유형의 링크 생성 (types 페이지의 카드 링크와 동일한 형태)
+  // 공유할 URL 생성 (types 페이지로 이동하여 해당 유형 강조)
   const baseUrl = typeof window !== 'undefined' ? window.location.origin : 'https://peit.kr';
-  const shareUrl = `${baseUrl}/result/${type}?explore=true`;
+  const shareUrl = `${baseUrl}/types?code=${type}`;
   const shareText = `나의 ${data.category === 'political' ? '정치' : '경제'} 성향은 ${data.name}입니다! 당신도 PEIT 테스트를 해보세요.`;
 
   // localStorage에서 다른 성향 결과 가져오기
@@ -671,7 +671,6 @@ function ResultPageContent({ type, showExpanded = false }: ResultPageClientProps
             name={data.name}
             category={data.category}
             className="no-glass btn-purple"
-            resultContainerSelector=".result-container-for-share"
           />
         </div>
       </div>

@@ -6,24 +6,61 @@ export interface Book {
   author: string;
   link: string;
   relatedTypes: string[]; // 연관된 유형 코드들
-  imagePath?: string; // 이미지 경로
+  imageFileName?: string; // 실제 이미지 파일명 (예: "국가는 왜 실패하는가.jpg")
 }
 
 /**
- * 도서 제목으로 이미지 파일 경로를 생성합니다.
- * 파일명은 제목에서 특수문자, 쉼표, 공백을 제거한 형태입니다.
+ * 도서 제목과 실제 파일명 매핑
+ * 실제 파일명을 직접 명시하여 1:1 매칭
  */
-export function getBookImagePath(title: string): string {
-  // 제목에서 특수문자, 쉼표, 공백 모두 제거
-  const fileName = title
-    .replace(/[『』]/g, '')
-    .replace(/[,，]/g, '') // 쉼표 제거
-    .replace(/\s+/g, '') // 공백 제거
-    .trim();
-  
-  // .jpg 확장자로 고정
-  return `/images/for shop/${fileName}.jpg`;
-}
+/**
+ * 도서 제목과 실제 파일명 매핑
+ * 실제 파일명을 직접 명시하여 1:1 매칭
+ * 파일명은 /public/images/for shop/ 폴더에 있는 실제 파일명과 정확히 일치해야 함
+ */
+const bookImageFileNameMap: Record<string, string> = {
+  '권력의 법칙': '권력의법칙.jpg',
+  '어떻게 원하는 것을 얻는가': '어떻게원하는것을얻는가.jpeg',
+  '린 스타트업': '린 스타트업.jpg',
+  '팩트풀니스': '팩트풀니스.jpg',
+  '인간관계론': '인간관계론.jpg',
+  '생각에 관한 생각': '생각에관한생각.jpg',
+  '나 홀로 볼링': '나홀로볼링.jpg',
+  '총, 균, 쇠': '총균쇠.webp',
+  '리더십 불변의 법칙': '리더십불변의법칙.jpeg',
+  '블랙 스완': '블랙스완.jpg',
+  '정의란 무엇인가': '정의란무엇인가.jpg',
+  '돈의 심리학': '돈의심리학.jpeg',
+  '성공하는 사람들의 7가지 습관': '성공하는사람들의7가지습관.jpg',
+  '안티프래질': '안티프래질.jpg',
+  '사피엔스': '사피엔스.jpg',
+  '지리의 힘': '지리의힘.jpg',
+  '바른 마음': '바른마음.jpg',
+  '설득의 심리학': '설득의심리학.jpg',
+  '아주 작은 습관의 힘': '아주작은습관의힘.jpg',
+  '군주론': '군주론.jpg',
+  '국가는 왜 실패하는가': '국가는 왜 실패하는가.jpg',
+  '정치와 비전': '정치와비전.jpeg',
+  '감시와 처벌': '감시와처벌.jpeg',
+  '좋은 기업을 넘어 위대한 기업으로': '좋은기업을넘어위대한기업으로.jpg',
+  '원칙': '원칙.jpg',
+  '코스모스': '코스모스.jpg',
+  '딥워크': '딥워크.jpg',
+  '정리하는 뇌': '정리하는뇌.jpg',
+  '기브 앤 테이크': '기브 앤 테이크.jpg',
+  '나쁜 사마리아인들': '나쁜사마리아인들.jpeg',
+  '더 골': '더 골.jpg',
+  '데이터는 어떻게 세상을 지배하는가': '데이터는어떻게세상을지배하는가.jpg',
+  '경영의 모험': '경영의모험.jpg',
+  '스타트업 바이블': '스타트업 바이블.jpg',
+  '변화의 시작 5초의 법칙': '변화의시작5초의법칙.jpg',
+  '부자의 그릿': '부자의그릿.jpg',
+  '그릿': '그릿.jpg',
+  '제로투원': '제로투원.jpg',
+  '생각의 탄생': '생각의탄생.jpg',
+  '한국형 장사의 신': '한국형 장사의 신.jpeg',
+  '아이디어 불패의 법칙': '아이디어불패의법칙.jpg',
+};
 
 /**
  * recommended_content에서 도서 정보를 추출합니다.
@@ -53,7 +90,7 @@ function parseRecommendedContent(content: string): Book[] {
         author,
         link,
         relatedTypes: [], // 나중에 채워짐
-        imagePath: getBookImagePath(title)
+        imageFileName: bookImageFileNameMap[title] // 실제 파일명 매핑
       });
     }
   }

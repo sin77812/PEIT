@@ -1,8 +1,14 @@
+'use client';
+
+import { Suspense, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useSearchParams } from 'next/navigation';
 import { results } from '@/lib/results';
 
-export default function TypesPage() {
+function TypesPageContent() {
+  const searchParams = useSearchParams();
+  const highlightedCode = searchParams.get('code');
   const politicalTypes = Object.entries(results)
     .filter(([_, data]) => data.category === 'political')
     .map(([code, data]) => ({ code, ...data }))
@@ -65,6 +71,19 @@ export default function TypesPage() {
 
   const economicGroups = groupEconomicTypes();
 
+  // 강조된 유형이 있으면 해당 카드로 스크롤
+  useEffect(() => {
+    if (highlightedCode) {
+      const element = document.getElementById(`highlighted-${highlightedCode}`);
+      if (element) {
+        // 약간의 지연 후 스크롤 (렌더링 완료 대기)
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 100);
+      }
+    }
+  }, [highlightedCode]);
+
   return (
     <div className="min-h-screen bg-bg-light-purple py-12">
       <div className="max-w-7xl mx-auto px-4">
@@ -89,11 +108,18 @@ export default function TypesPage() {
                   {category} ({types.length}개)
                 </h3>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                  {types.map(({ code, name, keywords }) => (
+                  {types.map(({ code, name, keywords }) => {
+                    const isHighlighted = highlightedCode === code;
+                    return (
                     <Link
                       key={code}
                       href={`/result/${code}?explore=true`}
-                      className="bg-white p-4 rounded-xl shadow-md hover:shadow-xl transition-all hover:scale-105 border-2 border-transparent hover:border-accent/50"
+                      className={`bg-white p-4 rounded-xl shadow-md hover:shadow-xl transition-all hover:scale-105 border-2 ${
+                        isHighlighted 
+                          ? 'border-accent shadow-lg scale-105 ring-2 ring-accent/50' 
+                          : 'border-transparent hover:border-accent/50'
+                      }`}
+                      id={isHighlighted ? `highlighted-${code}` : undefined}
                     >
                       <div className="relative w-full h-24 sm:h-28 mb-3 overflow-hidden isolation-isolate">
                         <Image
@@ -119,7 +145,8 @@ export default function TypesPage() {
                         </div>
                       )}
                     </Link>
-                  ))}
+                    );
+                  })}
                 </div>
               </div>
             ))}
@@ -140,11 +167,18 @@ export default function TypesPage() {
                   {category} ({types.length}개)
                 </h3>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                  {types.map(({ code, name, keywords }) => (
+                  {types.map(({ code, name, keywords }) => {
+                    const isHighlighted = highlightedCode === code;
+                    return (
                     <Link
                       key={code}
                       href={`/result/${code}?explore=true`}
-                      className="bg-white p-4 rounded-xl shadow-md hover:shadow-xl transition-all hover:scale-105 border-2 border-transparent hover:border-accent/50"
+                      className={`bg-white p-4 rounded-xl shadow-md hover:shadow-xl transition-all hover:scale-105 border-2 ${
+                        isHighlighted 
+                          ? 'border-accent shadow-lg scale-105 ring-2 ring-accent/50' 
+                          : 'border-transparent hover:border-accent/50'
+                      }`}
+                      id={isHighlighted ? `highlighted-${code}` : undefined}
                     >
                       <div className="relative w-full h-24 sm:h-28 mb-3 overflow-hidden isolation-isolate">
                         <Image
@@ -170,7 +204,8 @@ export default function TypesPage() {
                         </div>
                       )}
                     </Link>
-                  ))}
+                    );
+                  })}
                 </div>
               </div>
             ))}
@@ -178,5 +213,17 @@ export default function TypesPage() {
         </section>
       </div>
     </div>
+  );
+}
+
+export default function TypesPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-bg-light-purple flex items-center justify-center">
+        <div className="text-xl">로딩 중...</div>
+      </div>
+    }>
+      <TypesPageContent />
+    </Suspense>
   );
 }
