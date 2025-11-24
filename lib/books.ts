@@ -56,7 +56,7 @@ function parseRecommendedContent(content: string): Book[] {
         author,
         link,
         relatedTypes: [], // 나중에 채워짐
-        imagePath: getBookImagePath(title)
+        imagePath: getBookImagePath(title) ?? undefined
       });
     }
   }

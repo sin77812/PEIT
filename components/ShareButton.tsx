@@ -82,8 +82,7 @@ ${shareUrl}`;
           try {
             // html2canvas로 캡처
             const canvas = await html2canvas(container, {
-              backgroundColor: '#FAF7FF',
-              scale: 2,
+              background: 'transparent',
               logging: false,
               useCORS: true,
             });
