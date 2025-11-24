@@ -1,13 +1,14 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-import { getAllBooks, getBooksByType, getAllPoliticalTypes, Book } from '@/lib/books';
+import { getAllBooks, getBooksByType, getAllPoliticalTypes, getAllEconomicTypes, Book } from '@/lib/books';
 import Image from 'next/image';
 import Link from 'next/link';
 
 export default function PeitShopPage() {
   const [selectedType, setSelectedType] = useState<string | null>(null);
-  const allTypes = getAllPoliticalTypes();
+  const politicalTypes = getAllPoliticalTypes();
+  const economicTypes = getAllEconomicTypes();
   const allBooks = getAllBooks();
 
   // 선택된 유형에 따라 도서 필터링
@@ -29,30 +30,60 @@ export default function PeitShopPage() {
 
         {/* 유형 태그 필터 */}
         <div className="mb-8">
-          <div className="flex flex-wrap gap-2 justify-center">
-            <button
-              onClick={() => setSelectedType(null)}
-              className={`px-4 py-2 rounded-full font-semibold transition-all ${
-                selectedType === null
-                  ? 'bg-accent text-white shadow-lg'
-                  : 'bg-white text-gray-700 hover:bg-gray-100'
-              }`}
-            >
-              전체
-            </button>
-            {allTypes.map((type) => (
+          <div className="space-y-4">
+            {/* 전체 버튼 */}
+            <div className="flex justify-center">
               <button
-                key={type}
-                onClick={() => setSelectedType(type)}
-                className={`px-4 py-2 rounded-full font-semibold transition-all ${
-                  selectedType === type
-                    ? 'bg-accent text-white shadow-lg'
-                    : 'bg-white text-gray-700 hover:bg-gray-100'
+                onClick={() => setSelectedType(null)}
+                className={`px-6 py-3 rounded-xl font-bold text-base transition-all shadow-md ${
+                  selectedType === null
+                    ? 'bg-accent text-white shadow-lg scale-105'
+                    : 'bg-white text-gray-700 hover:bg-gray-50 hover:shadow-lg border-2 border-gray-200'
                 }`}
               >
-                {type}
+                전체
               </button>
-            ))}
+            </div>
+
+            {/* 정치 유형 */}
+            <div>
+              <h3 className="text-sm font-semibold text-gray-600 mb-3 text-center">정치 유형</h3>
+              <div className="flex flex-wrap gap-2 justify-center">
+                {politicalTypes.map((type) => (
+                  <button
+                    key={type}
+                    onClick={() => setSelectedType(type)}
+                    className={`px-4 py-2 rounded-lg font-semibold text-sm transition-all shadow-sm ${
+                      selectedType === type
+                        ? 'bg-accent text-white shadow-lg scale-105 border-2 border-accent'
+                        : 'bg-white text-gray-700 hover:bg-gray-50 hover:shadow-md border-2 border-gray-200 hover:border-accent/50'
+                    }`}
+                  >
+                    {type}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* 경제 유형 */}
+            <div>
+              <h3 className="text-sm font-semibold text-gray-600 mb-3 text-center">경제 유형</h3>
+              <div className="flex flex-wrap gap-2 justify-center">
+                {economicTypes.map((type) => (
+                  <button
+                    key={type}
+                    onClick={() => setSelectedType(type)}
+                    className={`px-4 py-2 rounded-lg font-semibold text-sm transition-all shadow-sm ${
+                      selectedType === type
+                        ? 'bg-accent text-white shadow-lg scale-105 border-2 border-accent'
+                        : 'bg-white text-gray-700 hover:bg-gray-50 hover:shadow-md border-2 border-gray-200 hover:border-accent/50'
+                    }`}
+                  >
+                    {type}
+                  </button>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
 

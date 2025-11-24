@@ -1,4 +1,5 @@
 import { politicalDetails } from './political_details';
+import { results } from './results';
 
 export interface Book {
   title: string;
@@ -48,13 +49,33 @@ function parseRecommendedContent(content: string): Book[] {
 export function getAllBooks(): Book[] {
   const bookMap = new Map<string, Book>();
   
-  // 모든 유형을 순회하며 도서 정보 수집
+  // 정치 유형 도서 수집
   Object.entries(politicalDetails).forEach(([typeCode, details]) => {
     if (details.recommended_content) {
       const books = parseRecommendedContent(details.recommended_content);
       
       books.forEach(book => {
         // 같은 도서(제목+저자)가 이미 있으면 유형만 추가
+        const key = `${book.title}|${book.author}`;
+        if (bookMap.has(key)) {
+          const existingBook = bookMap.get(key)!;
+          if (!existingBook.relatedTypes.includes(typeCode)) {
+            existingBook.relatedTypes.push(typeCode);
+          }
+        } else {
+          book.relatedTypes = [typeCode];
+          bookMap.set(key, book);
+        }
+      });
+    }
+  });
+  
+  // 경제 유형 도서 수집
+  Object.entries(results).forEach(([typeCode, data]) => {
+    if (data.category === 'economic' && data.recommended_content) {
+      const books = parseRecommendedContent(data.recommended_content);
+      
+      books.forEach(book => {
         const key = `${book.title}|${book.author}`;
         if (bookMap.has(key)) {
           const existingBook = bookMap.get(key)!;
@@ -86,6 +107,15 @@ export function getBooksByType(typeCode: string): Book[] {
 export function getAllPoliticalTypes(): string[] {
   return Object.keys(politicalDetails).filter(code => 
     politicalDetails[code].category === 'political'
+  ).sort();
+}
+
+/**
+ * 모든 경제 유형 코드를 반환합니다.
+ */
+export function getAllEconomicTypes(): string[] {
+  return Object.keys(results).filter(code => 
+    results[code].category === 'economic'
   ).sort();
 }
 
