@@ -77,6 +77,17 @@ body {
   user-select: none;
   /* 드래그 방지 */
   -webkit-user-drag: none;
+}
+
+/* 스크롤바 숨김 (모바일 가로 스크롤용) */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;  /* Chrome, Safari and Opera */
+}
   -khtml-user-drag: none;
   -moz-user-drag: none;
   -o-user-drag: none;

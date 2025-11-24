@@ -48,40 +48,44 @@ export default function PeitShopPage() {
             {/* 정치 유형 */}
             <div>
               <h3 className="text-sm font-semibold text-gray-600 mb-3 text-center">정치 유형</h3>
-              <div className="flex flex-wrap gap-2 justify-center">
-                {politicalTypes.map((type) => (
-                  <button
-                    key={type}
-                    onClick={() => setSelectedType(type)}
-                    className={`px-4 py-2 rounded-lg font-semibold text-sm transition-all shadow-sm ${
-                      selectedType === type
-                        ? 'bg-[#7C3AED] text-white shadow-lg scale-105 border-2 border-[#7C3AED]'
-                        : 'bg-white text-gray-700 hover:bg-gray-50 hover:shadow-md border-2 border-gray-200 hover:border-[#7C3AED]/50'
-                    }`}
-                  >
-                    {type}
-                  </button>
-                ))}
+              <div className="overflow-x-auto -mx-4 px-4 md:mx-0 md:px-0 scrollbar-hide" style={{ WebkitOverflowScrolling: 'touch' }}>
+                <div className="flex gap-2 justify-start md:justify-center min-w-max md:min-w-0 md:flex-wrap pb-1">
+                  {politicalTypes.map((type) => (
+                    <button
+                      key={type}
+                      onClick={() => setSelectedType(type)}
+                      className={`px-3 py-1.5 md:px-4 md:py-2 rounded-lg font-semibold text-xs md:text-sm transition-all shadow-sm whitespace-nowrap flex-shrink-0 ${
+                        selectedType === type
+                          ? 'bg-[#7C3AED] text-white shadow-lg scale-105 border-2 border-[#7C3AED]'
+                          : 'bg-white text-gray-700 hover:bg-gray-50 hover:shadow-md border-2 border-gray-200 hover:border-[#7C3AED]/50'
+                      }`}
+                    >
+                      {type}
+                    </button>
+                  ))}
+                </div>
               </div>
             </div>
 
             {/* 경제 유형 */}
             <div>
               <h3 className="text-sm font-semibold text-gray-600 mb-3 text-center">경제 유형</h3>
-              <div className="flex flex-wrap gap-2 justify-center">
-                {economicTypes.map((type) => (
-                  <button
-                    key={type}
-                    onClick={() => setSelectedType(type)}
-                    className={`px-4 py-2 rounded-lg font-semibold text-sm transition-all shadow-sm ${
-                      selectedType === type
-                        ? 'bg-[#7C3AED] text-white shadow-lg scale-105 border-2 border-[#7C3AED]'
-                        : 'bg-white text-gray-700 hover:bg-gray-50 hover:shadow-md border-2 border-gray-200 hover:border-[#7C3AED]/50'
-                    }`}
-                  >
-                    {type}
-                  </button>
-                ))}
+              <div className="overflow-x-auto -mx-4 px-4 md:mx-0 md:px-0 scrollbar-hide" style={{ WebkitOverflowScrolling: 'touch' }}>
+                <div className="flex gap-2 justify-start md:justify-center min-w-max md:min-w-0 md:flex-wrap pb-1">
+                  {economicTypes.map((type) => (
+                    <button
+                      key={type}
+                      onClick={() => setSelectedType(type)}
+                      className={`px-3 py-1.5 md:px-4 md:py-2 rounded-lg font-semibold text-xs md:text-sm transition-all shadow-sm whitespace-nowrap flex-shrink-0 ${
+                        selectedType === type
+                          ? 'bg-[#7C3AED] text-white shadow-lg scale-105 border-2 border-[#7C3AED]'
+                          : 'bg-white text-gray-700 hover:bg-gray-50 hover:shadow-md border-2 border-gray-200 hover:border-[#7C3AED]/50'
+                      }`}
+                    >
+                      {type}
+                    </button>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
@@ -141,6 +145,16 @@ interface BookCardProps {
 }
 
 function BookCard({ book }: BookCardProps) {
+  // 이미지 경로 생성 (제목에서 공백과 특수문자 제거)
+  const normalizedTitle = book.title
+    .replace(/[『』]/g, '')
+    .replace(/\s+/g, '')
+    .trim();
+  
+  // 가능한 확장자들 (우선순위: jpg > jpeg > webp > png)
+  const extensions = ['.jpg', '.jpeg', '.webp', '.png'];
+  const imagePath = book.imagePath || `/images/for shop/${normalizedTitle}${extensions[0]}`;
+  
   return (
     <Link
       href={book.link}
@@ -148,11 +162,26 @@ function BookCard({ book }: BookCardProps) {
       rel="noopener noreferrer"
       className="bg-white rounded-lg shadow-md hover:shadow-xl transition-all hover:scale-105 p-4 flex flex-col"
     >
-      {/* 도서 이미지 (추후 추가 예정) */}
-      <div className="w-full aspect-[3/4] bg-gray-100 rounded mb-3 flex items-center justify-center overflow-hidden">
-        <div className="text-gray-400 text-xs text-center px-2">
-          이미지 준비중
-        </div>
+      {/* 도서 이미지 */}
+      <div className="w-full aspect-[3/4] bg-gray-100 rounded mb-3 flex items-center justify-center overflow-hidden relative">
+        <Image
+          src={imagePath}
+          alt={book.title}
+          fill
+          className="object-cover"
+          sizes="(max-width: 640px) 33vw, (max-width: 1024px) 25vw, 20vw"
+          onError={(e) => {
+            // 이미지 로드 실패 시 플레이스홀더 표시
+            e.currentTarget.style.display = 'none';
+            const parent = e.currentTarget.parentElement;
+            if (parent && !parent.querySelector('.placeholder')) {
+              const placeholder = document.createElement('div');
+              placeholder.className = 'placeholder text-gray-400 text-xs text-center px-2';
+              placeholder.textContent = '이미지 준비중';
+              parent.appendChild(placeholder);
+            }
+          }}
+        />
       </div>
 
       {/* 도서 정보 */}

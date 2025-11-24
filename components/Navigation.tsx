@@ -172,7 +172,6 @@ export default function Navigation() {
               <path d="M12 7.5a4.5 4.5 0 1 1 0 9 4.5 4.5 0 0 1 0-9zm0 2a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5z" />
               <circle cx="17.5" cy="6.5" r="1.2" />
             </svg>
-            <span>인스타그램</span>
           </a>
         </div>
       </div>

@@ -156,20 +156,22 @@ function ResultPageContent({ type, showExpanded = false }: ResultPageClientProps
   return (
     <div className="min-h-screen bg-bg-light-purple">
       <div className="max-w-4xl mx-auto px-4 py-12">
-        <h1 className="text-4xl font-bold text-center mb-12">
-          당신의 {data.category === 'political' ? '정치' : '경제'} 성향은
-        </h1>
+        {/* 결과지 전체 캡처용 컨테이너 */}
+        <div className="result-container-for-share">
+          <h1 className="text-4xl font-bold text-center mb-12">
+            당신의 {data.category === 'political' ? '정치' : '경제'} 성향은
+          </h1>
 
-        <ResultCard
-            type={type}
-            name={data.name}
-            image={imagePath}
-            scores={data.scores}
-            description={data.description}
-            category={data.category}
-            hideDetailButton={true}
-            showChart={hasTestResult}
-          />
+          <ResultCard
+              type={type}
+              name={data.name}
+              image={imagePath}
+              scores={data.scores}
+              description={data.description}
+              category={data.category}
+              hideDetailButton={true}
+              showChart={hasTestResult}
+            />
 
         {/* 정치 유형 상세 정보 - 확장 가능한 섹션들 */}
         {data.category === 'political' && (
@@ -641,6 +643,7 @@ function ResultPageContent({ type, showExpanded = false }: ResultPageClientProps
               )}
           </div>
         )}
+        </div> {/* result-container-for-share 닫기 */}
         
         {/* 강점과 약점 하단 통합 섹션 제거: 강점/약점은 '핵심 키워드' 섹션 내부에서 노출 */}
 
@@ -668,6 +671,7 @@ function ResultPageContent({ type, showExpanded = false }: ResultPageClientProps
             name={data.name}
             category={data.category}
             className="no-glass btn-purple"
+            resultContainerSelector=".result-container-for-share"
           />
         </div>
       </div>
