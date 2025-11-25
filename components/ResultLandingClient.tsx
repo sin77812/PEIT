@@ -143,10 +143,10 @@ export default function ResultLandingClient() {
   const baseUrl = typeof window !== 'undefined' ? window.location.origin : 'https://peit.kr';
   
   const politicalShareUrl = resultData?.political 
-    ? `${baseUrl}/result/${resultData.political}?explore=true`
+    ? `${baseUrl}/result/${resultData.political}?from=types`
     : null;
   const economicShareUrl = resultData?.economic 
-    ? `${baseUrl}/result/${resultData.economic}?explore=true`
+    ? `${baseUrl}/result/${resultData.economic}?from=types`
     : null;
   
   // 기본 공유 URL (정치 우선, 없으면 경제)
