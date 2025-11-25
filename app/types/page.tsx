@@ -113,7 +113,7 @@ function TypesPageContent() {
                     return (
                     <Link
                       key={code}
-                      href={`/result/${code}?explore=true`}
+                      href={`/result/${code}?from=types`}
                       className={`bg-white p-4 rounded-xl shadow-md hover:shadow-xl transition-all hover:scale-105 border-2 ${
                         isHighlighted 
                           ? 'border-accent shadow-lg scale-105 ring-2 ring-accent/50' 
@@ -172,7 +172,7 @@ function TypesPageContent() {
                     return (
                     <Link
                       key={code}
-                      href={`/result/${code}?explore=true`}
+                      href={`/result/${code}?from=types`}
                       className={`bg-white p-4 rounded-xl shadow-md hover:shadow-xl transition-all hover:scale-105 border-2 ${
                         isHighlighted 
                           ? 'border-accent shadow-lg scale-105 ring-2 ring-accent/50' 

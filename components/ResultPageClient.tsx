@@ -85,11 +85,11 @@ function ResultPageContent({ type, showExpanded = false }: ResultPageClientProps
     
     const originalData = { ...results[type] };
     
-    // /admin 페이지에서 접근한 경우 유형 코드 기반으로 100% 점수 설정
-    // URL 쿼리 파라미터 ?from=admin 또는 referrer 체크
-    const isFromAdmin = from === 'admin' || 
+    // /types 페이지에서 접근한 경우 유형 코드 기반으로 100% 점수 설정
+    // URL 쿼리 파라미터 ?from=types 또는 ?from=admin 또는 referrer 체크
+    const isFromAdmin = from === 'admin' || from === 'types' ||
       (typeof window !== 'undefined' && 
-       (document.referrer.includes('/admin') || window.location.pathname.includes('/admin')));
+       (document.referrer.includes('/admin') || document.referrer.includes('/types') || window.location.pathname.includes('/admin')));
     
     if (isFromAdmin) {
       // 유형 코드를 파싱해서 각 축을 100%로 설정
