@@ -104,6 +104,9 @@ export default function SimpleResultCard({ type }: SimpleResultCardProps) {
           <Button href="/test?type=economic" variant="primary" className="btn-purple">
             경제 성향 테스트
           </Button>
+          <Button href="/types" variant="outline" className="btn-purple-outline">
+            유형 더보기
+          </Button>
           <Button href="/" variant="outline" className="btn-purple-outline">
             메인으로 가기
           </Button>

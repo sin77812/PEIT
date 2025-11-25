@@ -69,6 +69,7 @@ function ResultPageContent({ type, showExpanded = false }: ResultPageClientProps
   const searchParams = useSearchParams();
   const explore = searchParams.get('explore');
   const detailed = searchParams.get('detailed');
+  const from = searchParams.get('from');
   
   const [data, setData] = useState(results[type]);
   
@@ -84,12 +85,40 @@ function ResultPageContent({ type, showExpanded = false }: ResultPageClientProps
     
     const originalData = { ...results[type] };
     
-    // /admin 페이지에서 접근한 경우 그래프 숨김
-    const isFromAdmin = typeof window !== 'undefined' && 
-      (document.referrer.includes('/admin') || window.location.pathname.includes('/admin'));
+    // /admin 페이지에서 접근한 경우 유형 코드 기반으로 100% 점수 설정
+    // URL 쿼리 파라미터 ?from=admin 또는 referrer 체크
+    const isFromAdmin = from === 'admin' || 
+      (typeof window !== 'undefined' && 
+       (document.referrer.includes('/admin') || window.location.pathname.includes('/admin')));
     
     if (isFromAdmin) {
-      setHasTestResult(false);
+      // 유형 코드를 파싱해서 각 축을 100%로 설정
+      if (originalData.category === 'political') {
+        // 정치 유형: 4자리 코드 (예: ITAE)
+        const axis1 = type[0]; // I 또는 C
+        const axis2 = type[1]; // P 또는 T
+        const axis3 = type[2]; // A 또는 U
+        const axis4 = type[3]; // E 또는 S
+        
+        originalData.scores = {
+          '개인주의 vs 공동체주의': axis1 === 'I' ? 100 : 0,
+          '진보주의 vs 전통주의': axis2 === 'P' ? 100 : 0,
+          '적극적 평등 vs 보편적 평등': axis3 === 'A' ? 100 : 0,
+          '협력 우선 vs 안보 우선': axis4 === 'E' ? 100 : 0,
+        };
+      } else {
+        // 경제 유형: 3자리 코드 (예: GVE)
+        const axis1 = type[0]; // G 또는 S
+        const axis2 = type[1]; // V 또는 A
+        const axis3 = type[2]; // E 또는 W
+        
+        originalData.scores = {
+          '성장 중시 vs 안정 중시': axis1 === 'G' ? 100 : 0,
+          '비전 투자 vs 데이터 투자': axis2 === 'V' ? 100 : 0,
+          '기업가 기질 vs 안정가 기질': axis3 === 'E' ? 100 : 0,
+        };
+      }
+      setHasTestResult(true); // 그래프 표시
       setData(originalData);
       return;
     }
@@ -129,9 +158,9 @@ function ResultPageContent({ type, showExpanded = false }: ResultPageClientProps
     ? `/images/political/${type}.${imageExtension}`
     : `/images/economic/${type}.jpg`;
 
-  // 공유할 URL 생성 (해당 유형의 결과 페이지로 이동)
+  // 공유할 URL 생성 (유형 종류 페이지로 이동)
   const baseUrl = typeof window !== 'undefined' ? window.location.origin : 'https://peit.kr';
-  const shareUrl = `${baseUrl}/result/${type}?explore=true`;
+  const shareUrl = `${baseUrl}/types`;
   const shareText = `나의 ${data.category === 'political' ? '정치' : '경제'} 성향은 ${data.name}입니다! 당신도 PEIT 테스트를 해보세요.`;
 
   // localStorage에서 다른 성향 결과 가져오기
