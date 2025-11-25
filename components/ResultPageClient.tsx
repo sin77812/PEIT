@@ -85,39 +85,7 @@ function ResultPageContent({ type, showExpanded = false }: ResultPageClientProps
     
     const originalData = { ...results[type] };
     
-    // 1. 먼저 실제 테스트 결과 확인 (우선순위 최우선)
-    const answers = localStorage.getItem('answers');
-    const politicalAnswers = localStorage.getItem('political_answers');
-    const economicAnswers = localStorage.getItem('economic_answers');
-    
-    // 실제 테스트 결과가 있는지 확인 (카테고리별로 정확히 매칭)
-    const hasActualTestResult = !!(
-      answers || 
-      (politicalAnswers && originalData.category === 'political') || 
-      (economicAnswers && originalData.category === 'economic')
-    );
-    
-    // 2. 실제 테스트 결과가 있으면 그것을 우선 사용
-    if (hasActualTestResult) {
-      if (answers) {
-        const parsedAnswers = JSON.parse(answers);
-        const calculatedResult = calculateResult(parsedAnswers);
-        originalData.scores = calculateRelativeScores(calculatedResult.scores, originalData.category);
-      } else if (politicalAnswers && originalData.category === 'political') {
-        const parsedAnswers = JSON.parse(politicalAnswers);
-        const calculatedResult = calculateResult(parsedAnswers);
-        originalData.scores = calculateRelativeScores(calculatedResult.scores, originalData.category);
-      } else if (economicAnswers && originalData.category === 'economic') {
-        const parsedAnswers = JSON.parse(economicAnswers);
-        const calculatedResult = calculateResult(parsedAnswers);
-        originalData.scores = calculateRelativeScores(calculatedResult.scores, originalData.category);
-      }
-      setHasTestResult(true);
-      setData(originalData);
-      return;
-    }
-    
-    // 3. 실제 테스트 결과가 없고, from=types 또는 from=admin일 때만 100% 점수 설정
+    // 1. from=types 또는 from=admin일 때는 실제 테스트 결과를 무시하고 항상 100% 점수 표시
     // referrer 체크 제거: 쿼리 파라미터만으로 판단
     const isFromAdmin = from === 'admin' || from === 'types';
     
@@ -153,7 +121,38 @@ function ResultPageContent({ type, showExpanded = false }: ResultPageClientProps
       return;
     }
     
-    // 4. 둘 다 없으면 그래프 숨김
+    // 2. from=types가 아닐 때만 실제 테스트 결과 확인 및 사용
+    const answers = localStorage.getItem('answers');
+    const politicalAnswers = localStorage.getItem('political_answers');
+    const economicAnswers = localStorage.getItem('economic_answers');
+    
+    // 실제 테스트 결과가 있는지 확인 (카테고리별로 정확히 매칭)
+    const hasActualTestResult = !!(
+      answers || 
+      (politicalAnswers && originalData.category === 'political') || 
+      (economicAnswers && originalData.category === 'economic')
+    );
+    
+    if (hasActualTestResult) {
+      if (answers) {
+        const parsedAnswers = JSON.parse(answers);
+        const calculatedResult = calculateResult(parsedAnswers);
+        originalData.scores = calculateRelativeScores(calculatedResult.scores, originalData.category);
+      } else if (politicalAnswers && originalData.category === 'political') {
+        const parsedAnswers = JSON.parse(politicalAnswers);
+        const calculatedResult = calculateResult(parsedAnswers);
+        originalData.scores = calculateRelativeScores(calculatedResult.scores, originalData.category);
+      } else if (economicAnswers && originalData.category === 'economic') {
+        const parsedAnswers = JSON.parse(economicAnswers);
+        const calculatedResult = calculateResult(parsedAnswers);
+        originalData.scores = calculateRelativeScores(calculatedResult.scores, originalData.category);
+      }
+      setHasTestResult(true);
+      setData(originalData);
+      return;
+    }
+    
+    // 3. 둘 다 없으면 그래프 숨김
     setHasTestResult(false);
     setData(originalData);
   }, [type, from]);
