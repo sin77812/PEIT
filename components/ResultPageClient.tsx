@@ -687,29 +687,61 @@ function ResultPageContent({ type, showExpanded = false }: ResultPageClientProps
 
         {/* 액션 버튼들 */}
         <div className="flex flex-col md:flex-row gap-4 justify-center mt-12">
-          {otherType && (
-            <Button href={`/result/${otherType}`} variant="primary" className="no-glass btn-purple">
-              {data.category === 'political' ? '경제' : '정치'} 성향 보기
-            </Button>
+          {from === 'types' ? (
+            // 유형종류 페이지에서 접근한 경우
+            <>
+              <Button 
+                href="/test?type=political" 
+                variant="primary" 
+                className="no-glass btn-purple"
+              >
+                정치 테스트하기
+              </Button>
+              <Button 
+                href="/test?type=economic" 
+                variant="primary" 
+                className="no-glass btn-purple"
+              >
+                경제 테스트하기
+              </Button>
+              <Button href="/types" variant="outline" className="no-glass btn-purple">
+                다른 유형 보기
+              </Button>
+              <Button href="/peitshop" variant="outline" className="no-glass btn-purple">
+                추천도서 보기
+              </Button>
+            </>
+          ) : (
+            // 결과 페이지 (테스트 완료 후)
+            <>
+              {otherType && (
+                <Button href={`/result/${otherType}`} variant="primary" className="no-glass btn-purple">
+                  {data.category === 'political' ? '경제' : '정치'} 성향 보기
+                </Button>
+              )}
+              <Button 
+                href={data.category === 'political' ? '/test?type=economic' : '/test?type=political'} 
+                variant="primary" 
+                className="no-glass btn-purple"
+              >
+                {data.category === 'political' ? '경제 테스트하기' : '정치 테스트하기'}
+              </Button>
+              <Button href="/types" variant="outline" className="no-glass btn-purple">
+                다른 유형 보기
+              </Button>
+              <ShareButton 
+                shareUrl={shareUrl} 
+                shareText={shareText}
+                type={type}
+                name={data.name}
+                category={data.category}
+                className="no-glass btn-purple"
+              />
+              <Button href="/peitshop" variant="outline" className="no-glass btn-purple">
+                추천도서 보기
+              </Button>
+            </>
           )}
-          <Button 
-            href={data.category === 'political' ? '/test?type=economic' : '/test?type=political'} 
-            variant="primary" 
-            className="no-glass btn-purple"
-          >
-            {data.category === 'political' ? '경제 테스트하기' : '정치 테스트하기'}
-          </Button>
-          <Button href="/types" variant="outline" className="no-glass btn-purple">
-            다른 유형 보기
-          </Button>
-          <ShareButton 
-            shareUrl={shareUrl} 
-            shareText={shareText}
-            type={type}
-            name={data.name}
-            category={data.category}
-            className="no-glass btn-purple"
-          />
         </div>
       </div>
     </div>
