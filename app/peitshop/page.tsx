@@ -105,6 +105,13 @@ export default function PeitShopPage() {
           </div>
         </div>
 
+        {/* 쿠팡 파트너스 고지 */}
+        <div className="mb-6 text-center">
+          <p className="text-xs md:text-sm text-gray-500 italic">
+            이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.
+          </p>
+        </div>
+
         {/* 도서 그리드 */}
         <div className="mb-8">
           {displayedBooks.length === 0 ? (
