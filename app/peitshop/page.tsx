@@ -91,17 +91,16 @@ export default function PeitShopPage() {
           </div>
         </div>
 
-        {/* 배너 광고 공간 (플레이스홀더) */}
+        {/* 배너 광고 모집 공고 */}
         <div className="mb-8">
-          <div className="bg-gray-200 border-2 border-dashed border-gray-300 rounded-lg flex items-center justify-center w-full"
+          <div className="bg-gradient-to-r from-accent/10 to-purple-100 border-2 border-accent rounded-lg flex items-center justify-center w-full"
                style={{ 
-                 height: '100px',
-                 minHeight: '100px'
+                 height: '90px',
+                 minHeight: '90px'
                }}>
-            <div className="text-center text-gray-500">
-              <p className="text-sm font-semibold mb-1">배너 광고 공간</p>
-              <p className="text-xs hidden md:block">728 x 90 (PC 리더보드)</p>
-              <p className="text-xs md:hidden">320 x 100 (모바일)</p>
+            <div className="text-center">
+              <p className="text-lg md:text-xl font-bold text-accent mb-1">📢 배너 광고 모집</p>
+              <p className="text-xs md:text-sm text-gray-700">728 x 90 (PC) / 320 x 100 (모바일) 광고 문의 환영</p>
             </div>
           </div>
         </div>
@@ -121,17 +120,16 @@ export default function PeitShopPage() {
           )}
         </div>
 
-        {/* 하단 배너 광고 공간 (선택사항) */}
+        {/* 하단 배너 광고 모집 공고 */}
         <div className="mt-12">
-          <div className="bg-gray-200 border-2 border-dashed border-gray-300 rounded-lg flex items-center justify-center w-full"
+          <div className="bg-gradient-to-r from-accent/10 to-purple-100 border-2 border-accent rounded-lg flex items-center justify-center w-full"
                style={{ 
-                 height: '100px',
-                 minHeight: '100px'
+                 height: '90px',
+                 minHeight: '90px'
                }}>
-            <div className="text-center text-gray-500">
-              <p className="text-sm font-semibold mb-1">배너 광고 공간</p>
-              <p className="text-xs hidden md:block">728 x 90 (PC 리더보드)</p>
-              <p className="text-xs md:hidden">320 x 100 (모바일)</p>
+            <div className="text-center">
+              <p className="text-lg md:text-xl font-bold text-accent mb-1">📢 배너 광고 모집</p>
+              <p className="text-xs md:text-sm text-gray-700">728 x 90 (PC) / 320 x 100 (모바일) 광고 문의 환영</p>
             </div>
           </div>
         </div>
