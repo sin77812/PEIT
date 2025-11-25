@@ -80,17 +80,17 @@ export default function TestPageContent() {
           // 정치 테스트만 완료한 경우
           localStorage.setItem('political_answers', JSON.stringify(newAnswers));
           const politicalType = calculatePoliticalType(newAnswers);
-          router.push(`/result/${politicalType}`);
+          router.push(`/result/${politicalType}?from=test`);
         } else if (testType === 'economic') {
           // 경제 테스트만 완료한 경우
           localStorage.setItem('economic_answers', JSON.stringify(newAnswers));
           const economicType = calculateEconomicType(newAnswers);
-          router.push(`/result/${economicType}`);
+          router.push(`/result/${economicType}?from=test`);
         } else {
           // 전체 테스트 완료
           const result = calculateResult(newAnswers);
           // 정치 유형으로 리다이렉트 (전체 테스트의 경우)
-          router.push(`/result/${result.political}`);
+          router.push(`/result/${result.political}?from=test`);
         }
       }
     }, 300);
