@@ -25,26 +25,14 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: '/images/pabicon.jpg', sizes: '16x16', type: 'image/jpeg' },
-      { url: '/images/pabicon.jpg', sizes: '32x32', type: 'image/jpeg' },
-      { url: '/images/pabicon.jpg', sizes: '48x48', type: 'image/jpeg' },
-      { url: '/images/pabicon.jpg', sizes: '96x96', type: 'image/jpeg' },
-      { url: '/images/pabicon.jpg', sizes: '144x144', type: 'image/jpeg' },
-      { url: '/images/pabicon.jpg', sizes: '192x192', type: 'image/jpeg' },
-      { url: '/images/pabicon.jpg', sizes: '512x512', type: 'image/jpeg' },
+      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/favicon.png', sizes: '192x192', type: 'image/png' },
     ],
     apple: [
-      { url: '/images/pabicon.jpg', sizes: '180x180', type: 'image/jpeg' },
+      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
     ],
-    shortcut: '/images/pabicon.jpg',
-    other: [
-      {
-        rel: 'icon',
-        type: 'image/jpeg',
-        url: '/images/pabicon.jpg',
-        sizes: 'any',
-      },
-    ],
+    shortcut: '/favicon.png',
   },
   openGraph: {
     title: 'PEIT - 정치테스트, 정치유형테스트, 정치성향테스트 모음 | 정치mbti',
@@ -117,9 +105,10 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <head>
-        <link rel="icon" href="/images/pabicon.jpg" type="image/jpeg" />
-        <link rel="shortcut icon" href="/images/pabicon.jpg" type="image/jpeg" />
-        <link rel="apple-touch-icon" href="/images/pabicon.jpg" />
+        <link rel="icon" href="/favicon.png" type="image/png" />
+        <link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png" />
+        <link rel="icon" href="/favicon-16x16.png" sizes="16x16" type="image/png" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
