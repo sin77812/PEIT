@@ -38,7 +38,7 @@ export default function Footer() {
         
         <div className="mt-6 pt-6 border-t border-gray-200 text-center">
           <p className="text-sm text-gray-500">
-            © 2024 PEIT24. All rights reserved.
+            © 2024 PEIT24 . All rights reserved.
           </p>
         </div>
       </div>
