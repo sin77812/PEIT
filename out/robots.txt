@@ -1,0 +1,9 @@
+User-Agent: *
+Allow: /
+Disallow: /admin
+
+User-Agent: Yeti
+Allow: /
+Disallow: /admin
+
+Sitemap: https://www.peit24.co.kr/sitemap.xml
