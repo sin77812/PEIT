@@ -85,7 +85,7 @@ export default function RootLayout({
     name: 'PEIT24 - 정치성향테스트',
     applicationCategory: 'LifestyleApplication',
     description: '나의 정치성향 DNA는? 69개 질문으로 알아보는 나의 정치성향 경제성향. 진보보수, 좌파우파 쉽게 이해하고, 나의 가치관과 투자성향까지 확인해볼 수 있는 성향종합테스트.',
-    url: 'https://peit24.com',
+    url: 'https://www.peit24.co.kr',
     offers: {
       '@type': 'Offer',
       price: '0',
