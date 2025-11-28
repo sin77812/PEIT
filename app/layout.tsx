@@ -105,6 +105,11 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <head>
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7637419448849595"
+          crossOrigin="anonymous"
+        />
         <link rel="icon" href="/favicon.png" type="image/png" />
         <link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png" />
         <link rel="icon" href="/favicon-16x16.png" sizes="16x16" type="image/png" />
