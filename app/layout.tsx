@@ -25,14 +25,14 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
-      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
-      { url: '/favicon.png', sizes: '192x192', type: 'image/png' },
+      { url: 'https://www.peit24.co.kr/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: 'https://www.peit24.co.kr/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: 'https://www.peit24.co.kr/favicon.png', sizes: '192x192', type: 'image/png' },
     ],
     apple: [
-      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+      { url: 'https://www.peit24.co.kr/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
     ],
-    shortcut: '/favicon.png',
+    shortcut: 'https://www.peit24.co.kr/favicon.png',
   },
   openGraph: {
     title: '정치성향테스트 정치유형테스트 사상검증테스트 / 정치mbti',
@@ -110,10 +110,10 @@ export default function RootLayout({
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7637419448849595"
           crossOrigin="anonymous"
         />
-        <link rel="icon" href="/favicon.png" type="image/png" />
-        <link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png" />
-        <link rel="icon" href="/favicon-16x16.png" sizes="16x16" type="image/png" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="icon" href="https://www.peit24.co.kr/favicon.png" type="image/png" />
+        <link rel="icon" href="https://www.peit24.co.kr/favicon-32x32.png" sizes="32x32" type="image/png" />
+        <link rel="icon" href="https://www.peit24.co.kr/favicon-16x16.png" sizes="16x16" type="image/png" />
+        <link rel="apple-touch-icon" href="https://www.peit24.co.kr/apple-touch-icon.png" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
