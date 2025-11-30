@@ -33,8 +33,8 @@ export default function Home() {
         </h1>
         
         {/* 부제목 */}
-        <p className="subtitle-custom text-white whitespace-nowrap md:leading-tight subtitle-underline -mt-1 md:mt-0">
-          가장 완벽한 <span className="font-bold">정치 / 경제</span> 성향 테스트
+        <p className="subtitle-custom text-white md:leading-tight -mt-1 md:mt-0 px-4 text-center">
+          나의 정치성향 DNA는? 69개 질문으로 알아보는 나의 정치성향 경제성향. 진보보수, 좌파우파 쉽게 이해하고, 나의 가치관과 투자성향까지 확인해볼 수 있는 성향종합테스트.
         </p>
         
         {/* 프로모션 텍스트 */}

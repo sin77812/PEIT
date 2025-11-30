@@ -41,9 +41,7 @@ export const metadata: Metadata = {
     siteName: 'PEIT24 - 정치경제성향테스트',
     images: [
       {
-        url: 'https://www.peit24.co.kr/images/forshare.jpg',
-        width: 1200,
-        height: 630,
+        url: 'https://www.peit24.co.kr/favicon.png',
         alt: 'PEIT24 정치성향테스트 - 정치mbti로 나의정치성향 알아보기',
       }
     ],
@@ -54,7 +52,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: '정치성향테스트 정치유형테스트 사상검증테스트 / 정치mbti',
     description: '나의 정치성향 DNA는? 69개 질문으로 알아보는 나의 정치성향 경제성향. 진보보수, 좌파우파 쉽게 이해하고, 나의 가치관과 투자성향까지 확인해볼 수 있는 성향종합테스트.',
-    images: ['https://www.peit24.co.kr/images/forshare.jpg'],
+    images: ['https://www.peit24.co.kr/favicon.png'],
     creator: '@peit24',
     site: '@peit24',
   },
