@@ -34,7 +34,7 @@ export default function Home() {
         
         {/* 부제목 */}
         <p className="subtitle-custom text-white md:leading-tight -mt-1 md:mt-0 px-4 text-center">
-          가장 정확한 경제 / 정치 테스트
+          가장 완벽한 <strong>정치 / 경제</strong> 성향 테스트
         </p>
         
         {/* 프로모션 텍스트 */}
