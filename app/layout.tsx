@@ -7,7 +7,7 @@ import DisableTextSelection from '@/components/DisableTextSelection'
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.peit24.co.kr'),
   title: '정치성향테스트 정치유형테스트 사상검증테스트 / 정치mbti',
-  description: '나의 정치성향 DNA는? 69개 질문으로 알아보는 나의 정치성향 경제성향. 진보보수, 좌파우파 쉽게 이해하고, 나의 가치관과 투자성향까지 확인해볼 수 있는 성향종합테스트.',
+  description: '가장 정교한 정치/경제 테스트',
   keywords: '정치테스트, 정치유형테스트, 정치 성향테스트 모음, 정치테스트 모음, 정치성향테스트, PEIT24, 정치mbti, 진보보수차이, 좌파우파차이, 나의정치성향, 정치성향알아보기, 경제성향테스트, 폴리티컬컴퍼스, 정치좌표테스트, 정치잘모르는데, 나는진보일까보수일까, 나랑맞는정당, 투표전테스트, 재미있는정치테스트, 정치처음, 정치색깔, 성향테스트, 정치유형, 좌파우파뜻, 진보뜻, 보수뜻, 정치스펙트럼, 정치이념, 중도성향, 정치입문, 청년정치, 친구랑할테스트, 심심풀이테스트, mbti말고',
   authors: [{ name: 'PEIT Team' }],
   creator: 'PEIT24',
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: '정치성향테스트 정치유형테스트 사상검증테스트 / 정치mbti',
-    description: '나의 정치성향 DNA는? 69개 질문으로 알아보는 나의 정치성향 경제성향. 진보보수, 좌파우파 쉽게 이해하고, 나의 가치관과 투자성향까지 확인해볼 수 있는 성향종합테스트.',
+    description: '가장 정교한 정치/경제 테스트',
     url: 'https://www.peit24.co.kr',
     siteName: 'PEIT24 - 정치경제성향테스트',
     images: [
@@ -51,7 +51,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: '정치성향테스트 정치유형테스트 사상검증테스트 / 정치mbti',
-    description: '나의 정치성향 DNA는? 69개 질문으로 알아보는 나의 정치성향 경제성향. 진보보수, 좌파우파 쉽게 이해하고, 나의 가치관과 투자성향까지 확인해볼 수 있는 성향종합테스트.',
+    description: '가장 정교한 정치/경제 테스트',
     images: ['https://www.peit24.co.kr/favicon.png'],
     creator: '@peit24',
     site: '@peit24',
